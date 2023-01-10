@@ -29,7 +29,7 @@ void Board::readFen(std::string fen) {
 
                     switch (c) {
                         case 'p':
-                            p = 
+                            p = makePiece(PAWN, WHITE);
                     }
                 }
             }
