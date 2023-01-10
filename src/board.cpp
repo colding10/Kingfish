@@ -15,6 +15,7 @@ void Board::readFen(std::string fen) {
         if (reading_board) {
             if (c == '/') {
                 row++;
+                col = 0;
                 continue;
             } else {
                 if (isdigit(c)) {
@@ -23,16 +24,31 @@ void Board::readFen(std::string fen) {
                         col++;
                     }
                 } else {
-                    bool is_white = isupper(c);
-                    c = tolower(c);
+                    piece_color color = isupper(c) ? WHITE : BLACK;
                     piece p;
+
+                    c = tolower(c);
 
                     switch (c) {
                         case 'p':
-                            p = makePiece(PAWN, WHITE);
+                            p = makePiece(PAWN, color);
+                        case 'r':
+                            p = makePiece(ROOK, color);
+                        case 'n':
+                            p = makePiece(KNIGHT, color);
+                        case 'b':
+                            p = makePiece(BISHOP, color);
+                        case 'q':
+                            p = makePiece(QUEEN, color);
+                        case 'k':
+                            p = makePiece(KING, color);
                     }
+
+                    this->board[row][col] = p;
+                    col++;
                 }
             }
         }
     }
 }
+
