@@ -1,4 +1,4 @@
-#include "pieces.h"
+#include "pieces.hpp"
 
 
 piece_color getPieceColor(piece p) {

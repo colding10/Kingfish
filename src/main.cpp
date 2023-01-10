@@ -1,12 +1,12 @@
-#include "main.h"
+#include "main.hpp"
 
 #include <SDL2/SDL.h>
 
 #include <fstream>
 #include <iostream>
 
-#include "board.h"
-#include "pieces.h"
+#include "board.hpp"
+#include "pieces.hpp"
 
 int main() {
     SDL_Init(SDL_INIT_VIDEO);
