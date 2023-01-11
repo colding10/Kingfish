@@ -47,7 +47,7 @@ int main() {
 
 void drawChessboard(SDL_Renderer& renderer) {
     SDL_SetRenderDrawColor(&renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    Piece p;
+    // Piece p;
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -60,8 +60,7 @@ void drawChessboard(SDL_Renderer& renderer) {
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
 
-            SDL_Surface* image = SDL_LoadBMP("./black_bishop.png");
-            std::cout << (bool) image << std::endl;
+            SDL_Surface* image = SDL_LoadBMP("../data/png/black_bishop.png");
             SDL_Texture* texture = SDL_CreateTextureFromSurface(&renderer, image);
             
 
