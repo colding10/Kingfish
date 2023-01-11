@@ -1,7 +1,7 @@
 #include "pieces.hpp"
 
 
-piece_color getPieceColor(piece p) {
+piece_color getPieceColor(Piece p) {
     int color = p >> 3;
 
     if (color == 1) {
@@ -13,12 +13,12 @@ piece_color getPieceColor(piece p) {
     }
 }
 
-piece_class getPieceClass(piece p) {
+piece_class getPieceClass(Piece p) {
     int pc = p & 7;
 
     return static_cast<Pieces>(pc);
 }
 
-piece makePiece(piece_class c, piece_color pc) {
+Piece makePiece(piece_class c, piece_color pc) {
     return c | pc;
 }

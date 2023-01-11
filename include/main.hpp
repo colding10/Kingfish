@@ -8,7 +8,7 @@ const int WINDOW_HEIGHT = 640;
 
 const int TILE_SIZE = 80;
 
-void drawChessboard(SDL_Renderer& renderer);
+void drawChessboard(SDL_Renderer& renderer, int board[8][8]);
 
 
 #endif // !MAIN_H_INCLUDED

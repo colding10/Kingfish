@@ -1,24 +1,26 @@
 # ========== PROJECT PROPERTIES ==========
-BIN = bin
-INCLUDE = include
-SOURCE = src
-LIBS = libs
+BIN_DIR = ./bin
+INCLUDE_DIR = ./include
+SRC_DIR := ./src
+OBJ_DIR := ./obj
+LIB_DIR := ./libs
 
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-CPP = g++
-CPPFLAGS = -Wall -Wextra -std=c++11
+LDFLAGS := -lSDL2 -lSDL2_image -L$(LIB_DIR)
+CPPFLAGS := -I $(INCLUDE_DIR) -Wall -Wextra -std=c++11
+
+CPP := g++
 # ========== PROJECT PROPERTIES ==========
 
 
-all: $(BIN)/prog
+$(BIN_DIR)/main: $(OBJ_FILES)
+	$(CPP) $(LDFLAGS) -o $@ ./$^
 
-$(BIN)/prog: $(SOURCE)/main.cpp $(SOURCE)/piece.cpp
-	$(CPP) $(CPPFLAGS) -L $(LIBS) -I $(INCLUDE) -lSDL2 -o $(@) $(SOURCE)/*
-
-$(BIN)/main: $(SOURCE)/main.cpp
-	$(CPP) $(CPPFLAGS) -L $(LIBS) -I $(INCLUDE) -lSDL2 -o $(@) $(<)
-
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 clean: 
-	rm -R $(BIN)
-	mkdir $(BIN)
+	find $(BIN_DIR) -name '*' -delete
+	find  $(OBJ_DIR) -name '*' -delete
