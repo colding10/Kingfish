@@ -10,7 +10,7 @@
 #include "pieces.hpp"
 
 int main() {
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_EVERYTHING);
 
     SDL_Window* window = SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                           WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
@@ -60,9 +60,10 @@ void drawChessboard(SDL_Renderer& renderer) {
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
 
-            // SDL_Surface* image = SDL_LoadBMP("../data/png/black_pawn.png");
-            // SDL_Texture* texture = SDL_CreateTextureFromSurface(&renderer, image);
-            // SDL_RenderCopy(&renderer, texture, nullptr, &tile);
+            SDL_Surface* image = SDL_LoadBMP("./black_bishop.png");
+            std::cout << (bool) image << std::endl;
+            SDL_Texture* texture = SDL_CreateTextureFromSurface(&renderer, image);
+            
 
             if ((i + j) % 2 == 0) {
                 SDL_SetRenderDrawColor(&renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -70,6 +71,12 @@ void drawChessboard(SDL_Renderer& renderer) {
                 SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, 0xFF);
             }
             SDL_RenderFillRect(&renderer, &tile);
+
+
+            SDL_RenderCopy(&renderer, texture, NULL, &tile);
+
+            SDL_FreeSurface(image);
+            SDL_DestroyTexture(texture);
         }
     }
 }
