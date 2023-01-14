@@ -6,6 +6,8 @@
 
 #include "pieces.hpp"
 
+// TODO: fix fen reading
+// FIXME: fix fen reading
 void Board::readFen(std::string fen) {
     int row = 0;
     int col = 0;

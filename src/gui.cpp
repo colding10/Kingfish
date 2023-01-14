@@ -9,6 +9,11 @@
 #include "board.hpp"
 #include "pieces.hpp"
 
+// TODO: add board moving
+// TODO: add move validation
+
+
+
 int main() {
     SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -67,9 +72,9 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
 
             p = board->board[j][i];
 
-            std::cout << "class: " << getPieceClass(p) << std::endl;
-            std::cout << "color: " << getPieceColor(p) << std::endl;
-            std::cout << "file: " << getPieceFilename(p) << std::endl;
+            // std::cout << "class: " << getPieceClass(p) << std::endl;
+            // std::cout << "color: " << getPieceColor(p) << std::endl;
+            // std::cout << "file: " << getPieceFilename(p) << std::endl;
 
             if (p != 0) {
                 std::string filepath = "../data/bmp/" + getPieceFilename(p);
