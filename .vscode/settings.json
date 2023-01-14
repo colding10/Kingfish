@@ -77,6 +77,10 @@
         "numbers": "cpp",
         "semaphore": "cpp",
         "stop_token": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "codecvt": "cpp",
+        "iomanip": "cpp",
+        "source_location": "cpp",
+        "cfenv": "cpp"
     }
 }

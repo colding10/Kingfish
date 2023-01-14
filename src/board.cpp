@@ -17,7 +17,7 @@ void Board::readFen(std::string fen) {
             continue;
         } else {
             if (isdigit(c)) {
-                for (int _ = 0; _ < static_cast<int>(c); _++) {
+                for (int _ = 0; _ < static_cast<int>(c - '0'); _++) {
                     this->board[row][col] = 0x00;
                     col++;
                 }
@@ -26,10 +26,9 @@ void Board::readFen(std::string fen) {
                 Piece p;
 
                 c = tolower(c);
-                std::cout << c << std::endl;
+
                 switch (c) {
                     case 'p':
-                        std::cout << "joe" << std::endl;
                         p = makePiece(PAWN, color);
                     case 'r':
                         p = makePiece(ROOK, color);

@@ -1,8 +1,8 @@
 # ========== PROJECT PROPERTIES ==========
-BIN_DIR = ./bin
+BIN_DIR = bin
 INCLUDE_DIR = ./include
 SRC_DIR := ./src
-OBJ_DIR := ./obj
+OBJ_DIR := obj
 LIB_DIR := ./libs
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
@@ -22,5 +22,5 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 clean: 
-	find $(BIN_DIR) -name '*' -delete
-	find  $(OBJ_DIR) -name '*' -delete
+	rm $(OBJ_DIR)/*.o
+	rm $(BIN_DIR)/main
