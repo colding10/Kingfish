@@ -60,7 +60,10 @@ void drawChessboard(SDL_Renderer& renderer) {
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
 
-            SDL_Surface* image = SDL_LoadBMP("../data/png/black_bishop.png");
+            SDL_Surface* image = SDL_LoadBMP("/Users/colinding/Documents/Coding/Projects/Chess/C++ Chess/data/png/white_queen.png");
+            if (image == NULL) {
+                std::cerr << "joe" << std::endl;
+            }
             SDL_Texture* texture = SDL_CreateTextureFromSurface(&renderer, image);
             
 
