@@ -10,6 +10,7 @@
 #include "pieces.hpp"
 
 // TODO: add move validation (include check)
+// TODO: add check/checkmate detection
 // TODO: add special moves like castle
 
 int main() {
