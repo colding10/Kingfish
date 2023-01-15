@@ -3,6 +3,8 @@
 
 #include <string>
 
+const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
 class Board {
    private:
     int color;
@@ -10,7 +12,7 @@ class Board {
 
    public:
     int board[8][8];
-    std::string starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    std::pair<int, int> selected_piece;
 
     void readFen(std::string fen);
 

@@ -6,7 +6,6 @@
 
 #include "pieces.hpp"
 
-// TODO: fix fen reading
 // FIXME: fix fen reading
 void Board::readFen(std::string fen) {
     int row = 0;
@@ -32,16 +31,22 @@ void Board::readFen(std::string fen) {
                 switch (c) {
                     case 'p':
                         p = makePiece(PAWN, color);
+                        break;
                     case 'r':
                         p = makePiece(ROOK, color);
+                        break;
                     case 'n':
                         p = makePiece(KNIGHT, color);
+                        break;
                     case 'b':
                         p = makePiece(BISHOP, color);
+                        break;
                     case 'q':
                         p = makePiece(QUEEN, color);
+                        break;
                     case 'k':
                         p = makePiece(KING, color);
+                        break;
                     default:
                         p = makePiece(PAWN, color);
                 }

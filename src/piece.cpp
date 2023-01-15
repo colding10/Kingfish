@@ -1,6 +1,7 @@
-#include "pieces.hpp"
-#include <string>
 #include <iostream>
+#include <string>
+
+#include "pieces.hpp"
 
 piece_color getPieceColor(Piece p) {
     int color = p >> 3;
@@ -60,6 +61,7 @@ std::string getPieceFilename(Piece p) {
 
     return filename;
 }
+
 Piece makePiece(piece_class c, piece_color pc) {
     return c | pc;
 }

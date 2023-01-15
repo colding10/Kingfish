@@ -5,12 +5,11 @@
 
 #include "board.hpp"
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 640;
+const int WINDOW_WIDTH = 1200;
+const int WINDOW_HEIGHT = 1200;
 
-const int TILE_SIZE = 80;
+const int TILE_SIZE = 150;
 
-void drawChessboard(SDL_Renderer& renderer);
 void drawChessboard(SDL_Renderer& renderer, Board* board);
 
 #endif  // !GUI_H_INCLUDED
