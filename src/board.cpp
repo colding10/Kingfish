@@ -6,7 +6,7 @@
 
 #include "pieces.hpp"
 
-// FIXME: fix fen reading
+// TODO: add other FEN fields
 void Board::readFen(std::string fen) {
     int row = 0;
     int col = 0;
@@ -66,4 +66,18 @@ void Board::printBoard() {
         std::cout << std::endl;
     }
     std::cout << std::endl;
+}
+
+std::pair<int, int> Board::getSelectedPiece() {
+    return this->selected_piece;
+}
+void Board::setSelectedPiece(int i, int j) {
+    this->selected_piece = std::make_pair(i, j);
+}
+void Board::clearSelectedPiece() {
+    this->selected_piece = std::make_pair(-1, -1);
+}
+
+bool Board::hasSelectedPiece() {
+    return (this->selected_piece.first != -1 && this->selected_piece.second != -1);
 }

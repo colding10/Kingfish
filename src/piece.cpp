@@ -7,9 +7,9 @@ piece_color getPieceColor(Piece p) {
     int color = p >> 3;
 
     if (color == 1) {
-        return WHITE;
-    } else if (color == 2) {
         return BLACK;
+    } else if (color == 2) {
+        return WHITE;
     } else {
         return NOCOLOR;
     }
