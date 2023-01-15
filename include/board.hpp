@@ -11,18 +11,24 @@ class Board {
     int move_number;
 
     
-    std::pair<int, int> selected_piece = {1, 1};
+    std::pair<int, int> selected_piece = {-1, -1};
 
    public:
     int board[8][8];
 
     std::pair<int, int> getSelectedPiece();
 
+    int getPieceAt(std::pair<int, int> location);
+    
     void setSelectedPiece(int i, int j);
 
     bool hasSelectedPiece();
 
     void clearSelectedPiece();
+
+
+    void movePiece(std::pair<int, int> starting, std::pair<int, int> ending);
+
 
     void readFen(std::string fen);
 

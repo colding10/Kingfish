@@ -9,11 +9,12 @@
 #include "board.hpp"
 #include "pieces.hpp"
 
-// TODO: add board moving
-// TODO: add move validation
+// TODO: add move validation (include check)
+// TODO: add special moves like castle
 
 int main() {
     SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
     SDL_Window* window = SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                           WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
@@ -36,10 +37,10 @@ int main() {
             }
         }
 
-        SDL_RenderClear(renderer);        
-        drawChessboard(*renderer, &board); 
+        SDL_RenderClear(renderer);
+        drawChessboard(*renderer, &board);
 
-        SDL_RenderPresent(renderer);  
+        SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyRenderer(renderer);
@@ -118,13 +119,18 @@ void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
 
     std::pair<int, int> board_indices = getBoardIndices(event.x, event.y);
 
-    std::cout << "Mouse clicked: (" << event.x << ", " << event.y << ")";
-    std::cout << " Board indices: (" << board_indices.first << ", " << board_indices.second << ")" << std::endl;
-
-    if (board->getSelectedPiece() == board_indices) {
+    if (board->getSelectedPiece() == board_indices) {  // de-select a piece
         board->clearSelectedPiece();
-    } else if (!board->hasSelectedPiece()) {
-        board->setSelectedPiece(board_indices.first, board_indices.second);
+    } else if (!board->hasSelectedPiece()) {  // select a piece
+        if (board->getPieceAt(board_indices) != 0) {
+            board->setSelectedPiece(board_indices.first, board_indices.second);
+        }
+    } else if (board->hasSelectedPiece()) {  // move a piece
+        if (getPieceColor(board->getPieceAt(board_indices)) == getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
+            board->setSelectedPiece(board_indices.first, board_indices.second);
+        } else {
+            board->movePiece(board->getSelectedPiece(), board_indices);
+        }
     }
 }
 

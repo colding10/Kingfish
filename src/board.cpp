@@ -68,12 +68,33 @@ void Board::printBoard() {
     std::cout << std::endl;
 }
 
+void Board::movePiece(std::pair<int, int> starting, std::pair<int, int> ending) {
+    int r1, c1, r2, c2;
+
+    r1 = starting.first;
+    c1 = starting.second;
+
+    r2 = ending.first;
+    c2 = ending.second;
+
+    this->board[r2][c2] = this->board[r1][c1];
+    this->board[r1][c1] = 0x00;
+
+    this->clearSelectedPiece();
+}
+
+int Board::getPieceAt(std::pair<int, int> location) {
+    return this->board[location.first][location.second];
+}
+
 std::pair<int, int> Board::getSelectedPiece() {
     return this->selected_piece;
 }
+
 void Board::setSelectedPiece(int i, int j) {
     this->selected_piece = std::make_pair(i, j);
 }
+
 void Board::clearSelectedPiece() {
     this->selected_piece = std::make_pair(-1, -1);
 }
