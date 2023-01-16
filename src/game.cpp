@@ -19,7 +19,7 @@ bool isValidMove(Board* board, Location starting, Location ending) {
         case PAWN:
             return isValidPawnMove(board, starting, ending, starting_color);
         case KNIGHT:
-            return isValidKnightMove(board, starting, ending, starting_color);
+            return isValidKnightMove(starting, ending);
         case BISHOP:
             return isValidBishopMove(board, starting, ending, starting_color);
         case ROOK:
@@ -27,14 +27,13 @@ bool isValidMove(Board* board, Location starting, Location ending) {
         case QUEEN:
             return isValidQueenMove(board, starting, ending, starting_color);
         case KING:
-            return isValidKingMove(board, starting, ending, starting_color);
+            return isValidKingMove(starting, ending);
     }
 
     throw "bad excaped";
 }
 
 bool isValidPawnMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
-    Piece starting_piece = board->getPieceAt(starting);
     Piece ending_piece = board->getPieceAt(ending);
 
     if (ending_piece == 0) {  // open piece
@@ -74,11 +73,10 @@ bool isValidPawnMove(Board* board, Location starting, Location ending, PieceColo
 
         return false;
     }
+    return false;
 }
-bool isValidKnightMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
-    Piece starting_piece = board->getPieceAt(starting);
-    Piece ending_piece = board->getPieceAt(ending);
 
+bool isValidKnightMove(Location starting, Location ending) {
     int x_diff = abs(ending.first - starting.first);
     int y_diff = abs(ending.second - starting.second);
 
@@ -91,10 +89,8 @@ bool isValidKnightMove(Board* board, Location starting, Location ending, PieceCo
 
     return false;
 }
-bool isValidBishopMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
-    Piece starting_piece = board->getPieceAt(starting);
-    Piece ending_piece = board->getPieceAt(ending);
 
+bool isValidBishopMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
     if (starting.first + starting.second != ending.first + ending.second && starting.first - starting.second != ending.first - ending.second) {
         return false;
     }
@@ -123,9 +119,8 @@ bool isValidBishopMove(Board* board, Location starting, Location ending, PieceCo
 
     return false;
 }
+
 bool isValidRookMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
-    Piece starting_piece = board->getPieceAt(starting);
-    Piece ending_piece = board->getPieceAt(ending);
     if (
         starting.first != ending.first && starting.second != ending.second) {
         return false;
@@ -160,12 +155,14 @@ bool isValidRookMove(Board* board, Location starting, Location ending, PieceColo
 
     return false;
 }
+
 bool isValidQueenMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
     return isValidBishopMove(
                board, starting, ending, starting_color) ||
            isValidRookMove(board, starting, ending, starting_color);
 }
-bool isValidKingMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
+
+bool isValidKingMove(Location starting, Location ending) {
     int x_diff = abs(starting.first - ending.first);
     int y_diff = abs(starting.second - ending.second);
 
