@@ -10,7 +10,7 @@ const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 class Board {
    private:
     PieceColor active_color = WHITE;
-    float move_number = 1.5f;
+    float move_number = 1.0f;
 
     bool is_reversed = false;
 
