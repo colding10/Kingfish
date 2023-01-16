@@ -4,8 +4,9 @@
 
 #include "board.hpp"
 #include "pieces.hpp"
+#include "defines.hpp"
 
-bool isValidMove(Board* board, Location starting, Location ending) {
+bool isValidMove(Board* board, Location starting, Location ending, bool check_king) {
     Piece starting_piece = board->getPieceAt(starting);
     Piece ending_piece = board->getPieceAt(ending);
 
@@ -15,29 +16,57 @@ bool isValidMove(Board* board, Location starting, Location ending) {
         return false;  // can't capture your own piece
     }
 
+    bool result = true;
     switch (getPieceClass(starting_piece)) {
         case PAWN:
-            return isValidPawnMove(board, starting, ending, starting_color);
+            result =  isValidPawnMove(board, starting, ending, starting_color);
+            break;
         case KNIGHT:
-            return isValidKnightMove(starting, ending);
+            result =  isValidKnightMove(starting, ending);
+            break;
         case BISHOP:
-            return isValidBishopMove(board, starting, ending, starting_color);
+            result = isValidBishopMove(board, starting, ending, starting_color);
+            break;
         case ROOK:
-            return isValidRookMove(board, starting, ending, starting_color);
+            result = isValidRookMove(board, starting, ending, starting_color);
+            break;
         case QUEEN:
-            return isValidQueenMove(board, starting, ending, starting_color);
+            result = isValidQueenMove(board, starting, ending, starting_color);
+            break;
         case KING:
-            return isValidKingMove(starting, ending);
+            result = isValidKingMove(starting, ending);
+            break;
     }
 
-    throw "bad excaped";
+    if (!check_king) {
+        return result;
+    } else if (result == false) {
+        return result;
+    }
+
+    board->makeMove(starting, ending);
+    
+    if (isInCheck(board, starting_color)) {
+        board->makeMove(ending, starting);
+        board->board[ending.first][ending.second] = ending_piece;
+        return false;
+    }
+
+    board->makeMove(ending, starting);
+    board->board[ending.first][ending.second] = ending_piece;
+    return true;
 }
 
 bool isValidPawnMove(Board* board, Location starting, Location ending, PieceColor starting_color) {
     Piece ending_piece = board->getPieceAt(ending);
 
+    PieceColor opposite_color = starting_color == WHITE ? BLACK : WHITE;
+
+    if (!board->isReversed()) {
+        opposite_color = starting_color;
+    }
     if (ending_piece == 0) {  // open piece
-        if (starting_color == WHITE) {
+        if (opposite_color == WHITE) {
             if (
                 starting.first == 6 && starting.first - ending.first == 2 && starting.second == ending.second) {
                 return true;
@@ -46,7 +75,7 @@ bool isValidPawnMove(Board* board, Location starting, Location ending, PieceColo
                 starting.first - ending.first == 1 && starting.second == ending.second) {
                 return true;
             }
-        } else if (starting_color == BLACK) {
+        } else if (opposite_color == BLACK) {
             if (
                 starting.first == 1 && ending.first - starting.first == 2 && starting.second == ending.second) {
                 return true;
@@ -176,5 +205,36 @@ bool isValidKingMove(Location starting, Location ending) {
         return true;
     }
 
+    return false;
+}
+
+bool isInCheck(Board* board, PieceColor color) {
+    Location king_location;
+    Piece piece;
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            piece = board->getPieceAt(makeLocation(i, j));
+            if (getPieceClass(piece) == KING && getPieceColor(piece) == color) {
+                king_location = makeLocation(i, j);
+                break;
+            }
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            piece = board->getPieceAt(makeLocation(i, j));
+            if (piece == 0x00) {
+                continue;
+            }
+
+            if (getPieceColor(piece) != color) {
+                if (isValidMove(board, makeLocation(i, j), king_location, false)) {
+                    return true;
+                }
+            }
+        }
+    }
     return false;
 }

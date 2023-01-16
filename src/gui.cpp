@@ -74,7 +74,7 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
                 SDL_DestroyTexture(texture);
             }
 
-            if (board->hasSelectedPiece() && isValidMove(board, board->getSelectedPiece(), std::make_pair(i, j))) {
+            if (board->hasSelectedPiece() && isValidMove(board, board->getSelectedPiece(), makeLocation(i, j), true)) {
                 SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, 0xFF);
 
                 int centerX = tile.x + tile.w / 2;
@@ -143,9 +143,16 @@ void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
         if (getPieceColor(board->getPieceAt(board_indices)) == getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         } else {
-            board->movePiece(board->getSelectedPiece(), board_indices);
+            board->tryMove(board->getSelectedPiece(), board_indices);
         }
     }
+}
+
+void handleKeyPressed(SDL_KeyboardEvent event, Board* board) {
+    if (event.keysym.sym == SDL_GetKeyFromName("r") || event.keysym.sym == SDL_GetKeyFromName("f")) {
+        std::cout << "r/f pressed, reversing board" << std::endl;
+        board->reverse();
+    } 
 }
 
 Location getBoardIndices(int x, int y) {

@@ -26,6 +26,8 @@ int main() {
                 quit = true;
             } else if (event.type == SDL_MOUSEBUTTONUP) {
                 handleMouseClicked(event.button, &board);
+            } else if (event.type == SDL_KEYUP) {
+                handleKeyPressed(event.key, &board);
             }
         }
 

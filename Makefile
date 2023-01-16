@@ -9,7 +9,7 @@ SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 LDFLAGS := -lSDL2 -lSDL2_image -L$(LIB_DIR)
-CPPFLAGS := -I $(INCLUDE_DIR) -Wall -Wextra -std=c++11
+CPPFLAGS := -I $(INCLUDE_DIR) -Wall -Wextra -std=c++11 
 
 CPP := g++
 # ========== PROJECT PROPERTIES ==========

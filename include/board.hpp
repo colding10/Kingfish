@@ -11,6 +11,8 @@ class Board {
     int color;
     int move_number;
 
+    bool is_reversed = false;
+
     
     Location selected_piece = {-1, -1};
 
@@ -18,22 +20,22 @@ class Board {
     int board[8][8];
 
     Location getSelectedPiece();
-
     int getPieceAt(Location location);
 
     void setSelectedPiece(int i, int j);
-
     bool hasSelectedPiece();
-
     void clearSelectedPiece();
 
 
-    void movePiece(Location starting, Location ending);
+    void tryMove(Location starting, Location ending);
+    void makeMove(Location starting, Location ending);
 
 
     void readFen(std::string fen);
-
     void printBoard();
+
+    void reverse();
+    bool isReversed();
 };
 
 #endif  // !BOARD_H_INCLUDED

@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 
+#include "defines.hpp"
 #include "game.hpp"
 #include "pieces.hpp"
-#include "defines.hpp"
 
 // TODO: add other FEN fields
 void Board::readFen(std::string fen) {
@@ -70,21 +70,46 @@ void Board::printBoard() {
     std::cout << std::endl;
 }
 
-void Board::movePiece(Location starting, Location ending) {
-    if (isValidMove(this, starting, ending)) {
-        int r1, c1, r2, c2;
+void Board::reverse() {
+    int board[8][8];
 
-        r1 = starting.first;
-        c1 = starting.second;
+    for (int i = 7; i >= 0; i--) {
+        for (int j = 0; j < 8; j++) {
+            board[7 - i][j] = this->board[i][j];
+        }
+    }
 
-        r2 = ending.first;
-        c2 = ending.second;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            this->board[i][j] = board[i][j];
+        }
+    }
 
-        this->board[r2][c2] = this->board[r1][c1];
-        this->board[r1][c1] = 0x00;
+    this->is_reversed = !this->is_reversed;
+}
 
+bool Board::isReversed() {
+    return this->is_reversed;
+}
+
+void Board::tryMove(Location starting, Location ending) {
+    if (isValidMove(this, starting, ending, true)) {
+        this->makeMove(starting, ending);
         this->clearSelectedPiece();
     }
+}
+
+void Board::makeMove(Location starting, Location ending) {
+    int r1, c1, r2, c2;
+
+    r1 = starting.first;
+    c1 = starting.second;
+
+    r2 = ending.first;
+    c2 = ending.second;
+
+    this->board[r2][c2] = this->board[r1][c1];
+    this->board[r1][c1] = 0x00;
 }
 
 int Board::getPieceAt(Location location) {
@@ -96,11 +121,11 @@ Location Board::getSelectedPiece() {
 }
 
 void Board::setSelectedPiece(int i, int j) {
-    this->selected_piece = std::make_pair(i, j);
+    this->selected_piece = makeLocation(i, j);
 }
 
 void Board::clearSelectedPiece() {
-    this->selected_piece = std::make_pair(-1, -1);
+    this->selected_piece = makeLocation(-1, -1);
 }
 
 bool Board::hasSelectedPiece() {
