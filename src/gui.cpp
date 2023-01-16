@@ -7,8 +7,9 @@
 #include <string>
 
 #include "board.hpp"
-#include "pieces.hpp"
 #include "defines.hpp"
+#include "game.hpp"
+#include "pieces.hpp"
 
 // TODO: add move validation (include check)
 // TODO: add check/checkmate detection
@@ -110,8 +111,57 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
                 SDL_FreeSurface(image);
                 SDL_DestroyTexture(texture);
             }
+
+            if (board->hasSelectedPiece() && isValidMove(board, board->getSelectedPiece(), std::make_pair(i, j))) {
+                SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, 0xFF);
+
+                int centerX = tile.x + tile.w / 2;
+                int centerY = tile.y + tile.h / 2;
+                int radius = 15;
+                SDL_RenderFillCircle(&renderer, centerX, centerY, radius);
+            }
         }
     }
+}
+
+int SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) {
+    int offsetx, offsety, d;
+    int status;
+
+    offsetx = 0;
+    offsety = radius;
+    d = radius - 1;
+    status = 0;
+
+    while (offsety >= offsetx) {
+        status += SDL_RenderDrawLine(renderer, x - offsety, y + offsetx,
+                                     x + offsety, y + offsetx);
+        status += SDL_RenderDrawLine(renderer, x - offsetx, y + offsety,
+                                     x + offsetx, y + offsety);
+        status += SDL_RenderDrawLine(renderer, x - offsetx, y - offsety,
+                                     x + offsetx, y - offsety);
+        status += SDL_RenderDrawLine(renderer, x - offsety, y - offsetx,
+                                     x + offsety, y - offsetx);
+
+        if (status < 0) {
+            status = -1;
+            break;
+        }
+
+        if (d >= 2 * offsetx) {
+            d -= 2 * offsetx + 1;
+            offsetx += 1;
+        } else if (d < 2 * (radius - offsety)) {
+            d += 2 * offsety - 1;
+            offsety -= 1;
+        } else {
+            d += 2 * (offsety - offsetx - 1);
+            offsety -= 1;
+            offsetx += 1;
+        }
+    }
+
+    return status;
 }
 
 void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {

@@ -1,0 +1,6 @@
+#ifndef MAIN_HPP_INCLUDED
+#define MAIN_HPP_INCLUDED
+
+
+
+#endif // !MAIN_HPP_INCLUDED
