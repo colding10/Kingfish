@@ -13,7 +13,7 @@ enum PieceColors {
     NOCOLOR = 0
 };
 
-enum Pieces {
+enum PieceEnum {
     PAWN,
     KNIGHT,
     BISHOP,
@@ -22,10 +22,11 @@ enum Pieces {
     KING
 };
 
+namespace Pieces {
+    PieceColor getPieceColor(Piece p);
+    PieceClass getPieceClass(Piece p);
+    Piece makePiece(PieceClass c, PieceColor pc);
+    std::string getPieceFilename(Piece p);
+}  // namespace Pieces
 
-PieceColor getPieceColor(Piece p);
-PieceClass getPieceClass(Piece p);
-Piece makePiece(PieceClass c, PieceColor pc);
-std::string getPieceFilename(Piece p);
-
-#endif // !PIECES_H_INCLUDED
+#endif  // !PIECES_H_INCLUDED

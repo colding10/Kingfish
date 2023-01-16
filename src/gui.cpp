@@ -79,7 +79,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board) {
             p = board->board[i][j];
 
             if (p != 0) {
-                std::string filepath = "../data/bmp/" + getPieceFilename(p);
+                std::string filepath = "../data/bmp/" + Pieces::getPieceFilename(p);
 
                 SDL_Surface* image = SDL_LoadBMP(filepath.c_str());
                 if (image == NULL) {
@@ -145,7 +145,6 @@ int GUI::SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) 
     return status;
 }
 
-
 void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (event.button == SDL_BUTTON_RIGHT) {
         return;
@@ -156,11 +155,11 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (board->getSelectedPiece() == board_indices) {  // de-select a piece
         board->clearSelectedPiece();
     } else if (!board->hasSelectedPiece()) {  // select a piece
-        if (board->getPieceAt(board_indices) != 0 && getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
+        if (board->getPieceAt(board_indices) != 0 && Pieces::getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
-        if (getPieceColor(board->getPieceAt(board_indices)) == getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
+        if (Pieces::getPieceColor(board->getPieceAt(board_indices)) == Pieces::getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         } else {
             board->tryMove(board->getSelectedPiece(), board_indices);

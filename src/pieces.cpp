@@ -4,7 +4,7 @@
 #include <string>
 
 // TODO: organize into a namespace
-PieceColor getPieceColor(Piece p) {
+PieceColor Pieces::getPieceColor(Piece p) {
     int color = p >> 3;
 
     if (color == 1) {
@@ -16,13 +16,13 @@ PieceColor getPieceColor(Piece p) {
     }
 }
 
-PieceClass getPieceClass(Piece p) {
+PieceClass Pieces::getPieceClass(Piece p) {
     int pc = p & 7;
 
-    return static_cast<Pieces>(pc);
+    return static_cast<PieceEnum>(pc);
 }
 
-std::string getPieceFilename(Piece p) {
+std::string Pieces::getPieceFilename(Piece p) {
     PieceColor color = getPieceColor(p);
     PieceClass pc = getPieceClass(p);
 
@@ -63,6 +63,6 @@ std::string getPieceFilename(Piece p) {
     return filename;
 }
 
-Piece makePiece(PieceClass c, PieceColor pc) {
+Piece Pieces::makePiece(PieceClass c, PieceColor pc) {
     return c | pc;
 }

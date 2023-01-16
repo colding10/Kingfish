@@ -32,25 +32,25 @@ void Board::readFen(std::string fen) {
 
                 switch (c) {
                     case 'p':
-                        p = makePiece(PAWN, color);
+                        p = Pieces::makePiece(PAWN, color);
                         break;
                     case 'r':
-                        p = makePiece(ROOK, color);
+                        p = Pieces::makePiece(ROOK, color);
                         break;
                     case 'n':
-                        p = makePiece(KNIGHT, color);
+                        p = Pieces::makePiece(KNIGHT, color);
                         break;
                     case 'b':
-                        p = makePiece(BISHOP, color);
+                        p = Pieces::makePiece(BISHOP, color);
                         break;
                     case 'q':
-                        p = makePiece(QUEEN, color);
+                        p = Pieces::makePiece(QUEEN, color);
                         break;
                     case 'k':
-                        p = makePiece(KING, color);
+                        p = Pieces::makePiece(KING, color);
                         break;
                     default:
-                        p = makePiece(PAWN, color);
+                        p = Pieces::makePiece(PAWN, color);
                 }
 
                 this->board[row][col] = p;
@@ -59,8 +59,12 @@ void Board::readFen(std::string fen) {
         }
     }
 }
-
+// TODO: add other info to board printing
 void Board::printBoard() {
+    std::cout << "CHESSBOARD INFO" << std::endl;
+    std::cout << "Turn: " << (this->getActiveColor() == WHITE ? "white" : "black") << std::endl;
+    std::cout << "Move: " << this->getMoveNumber() << std::endl;
+
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             std::cout << this->board[i][j] << std::string((board[i][j] >= 10 ? 1 : 2), ' ');
@@ -109,10 +113,10 @@ bool Board::isReversed() {
 }
 
 void Board::tryMove(Location starting, Location ending) {
-    if (this->getActiveColor() != getPieceColor(this->getPieceAt(starting))) { // out of turn
+    if (this->getActiveColor() != Pieces::getPieceColor(this->getPieceAt(starting))) { // out of turn
         return;
     }
-    
+
     if (Game::isValidMove(this, starting, ending, true)) {
         this->makeMove(starting, ending);
         this->clearSelectedPiece();

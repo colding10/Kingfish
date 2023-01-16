@@ -11,14 +11,14 @@ bool Game::isValidMove(Board* board, Location starting, Location ending, bool ch
     Piece starting_piece = board->getPieceAt(starting);
     Piece ending_piece = board->getPieceAt(ending);
 
-    PieceColor starting_color = getPieceColor(starting_piece);
+    PieceColor starting_color = Pieces::getPieceColor(starting_piece);
 
-    if (ending_piece != 0x00 && starting_color == getPieceColor(ending_piece)) {
+    if (ending_piece != 0x00 && starting_color == Pieces::getPieceColor(ending_piece)) {
         return false;  // can't capture your own piece
     }
 
     bool result = true;
-    switch (getPieceClass(starting_piece)) {
+    switch (Pieces::getPieceClass(starting_piece)) {
         case PAWN:
             result = isValidPawnMove(board, starting, ending, starting_color);
             break;
@@ -135,7 +135,7 @@ bool Game::isValidBishopMove(Board* board, Location starting, Location ending, P
         indices.first += y_change;
 
         if (board->getPieceAt(indices)) {
-            if (getPieceColor(board->getPieceAt(indices)) == starting_color) {
+            if (Pieces::getPieceColor(board->getPieceAt(indices)) == starting_color) {
                 indices.second -= x_change;
                 indices.first -= y_change;
             }
@@ -171,7 +171,7 @@ bool Game::isValidRookMove(Board* board, Location starting, Location ending, Pie
         indices.first += y_change;
 
         if (board->getPieceAt(indices)) {
-            if (getPieceColor(board->getPieceAt(indices)) == starting_color) {
+            if (Pieces::getPieceColor(board->getPieceAt(indices)) == starting_color) {
                 indices.second -= x_change;
                 indices.first -= y_change;
             }
@@ -216,7 +216,7 @@ bool Game::isInCheck(Board* board, PieceColor color) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             piece = board->getPieceAt(makeLocation(i, j));
-            if (getPieceClass(piece) == KING && getPieceColor(piece) == color) {
+            if (Pieces::getPieceClass(piece) == KING && Pieces::getPieceColor(piece) == color) {
                 king_location = makeLocation(i, j);
                 break;
             }
@@ -230,7 +230,7 @@ bool Game::isInCheck(Board* board, PieceColor color) {
                 continue;
             }
 
-            if (getPieceColor(piece) != color) {
+            if (Pieces::getPieceColor(piece) != color) {
                 if (Game::isValidMove(board, makeLocation(i, j), king_location, false)) {
                     return true;
                 }
@@ -251,7 +251,7 @@ bool Game::isInCheckMate(Board* board, PieceColor color) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             piece = board->getPieceAt(makeLocation(i, j));
-            if (getPieceClass(piece) == KING && getPieceColor(piece) == color) {
+            if (Pieces::getPieceClass(piece) == KING && Pieces::getPieceColor(piece) == color) {
                 king_location = makeLocation(i, j);
                 break;
             }
@@ -265,7 +265,7 @@ bool Game::isInCheckMate(Board* board, PieceColor color) {
                 continue;
             }
 
-            if (getPieceColor(piece) == color) {
+            if (Pieces::getPieceColor(piece) == color) {
                 Location starting_location = makeLocation(i, j);
                 Location ending_location;
 
