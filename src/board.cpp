@@ -70,7 +70,21 @@ void Board::printBoard() {
     std::cout << std::endl;
 }
 
+PieceColor Board::getActiveColor() {
+    return this->active_color;
+}
 
+float Board::getMoveNumber() {
+    return this->move_number;
+}
+
+void Board::incrementMoveNumber() {
+    this->move_number += 0.5f;
+}
+
+void Board::toggleActiveColor() {
+    this->active_color = this->getActiveColor() == WHITE ? BLACK : WHITE;
+}
 
 void Board::reverse() {
     int board[8][8];
@@ -95,9 +109,16 @@ bool Board::isReversed() {
 }
 
 void Board::tryMove(Location starting, Location ending) {
+    if (this->getActiveColor() != getPieceColor(this->getPieceAt(starting))) { // out of turn
+        return;
+    }
+    
     if (Game::isValidMove(this, starting, ending, true)) {
         this->makeMove(starting, ending);
         this->clearSelectedPiece();
+
+        this->incrementMoveNumber();
+        this->toggleActiveColor();
     }
 }
 
@@ -117,6 +138,7 @@ void Board::makeMove(Location starting, Location ending) {
 int Board::getPieceAt(Location location) {
     return this->board[location.first][location.second];
 }
+
 
 Location Board::getSelectedPiece() {
     return this->selected_piece;

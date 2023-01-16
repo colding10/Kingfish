@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+// TODO: organize into a namespace
 PieceColor getPieceColor(Piece p) {
     int color = p >> 3;
 

@@ -9,8 +9,8 @@ const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 class Board {
    private:
-    PieceColor color;
-    int move_number;
+    PieceColor active_color = WHITE;
+    float move_number = 1.5f;
 
     bool is_reversed = false;
 
@@ -19,8 +19,11 @@ class Board {
    public:
     int board[8][8];
 
-    int getMoveNumber();
-    int getActiveColor();
+    float getMoveNumber();
+    void incrementMoveNumber();
+
+    PieceColor getActiveColor();
+    void toggleActiveColor();
 
     Location getSelectedPiece();
     int getPieceAt(Location location);

@@ -11,9 +11,8 @@
 #include "game.hpp"
 #include "pieces.hpp"
 
-// TODO: add move validation (include check)
-// TODO: add check/checkmate detection
 // TODO: add special moves like castle
+// TODO: add showing checkmate
 
 void GUI::initSDL() {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -66,7 +65,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board) {
                 SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
                 SDL_RenderFillRect(renderer, &tile);
 
-                if ((i + j) % 2 == 0) {
+                if ((i + j) % 2 == (board->isReversed() ? 1 : 0)) {
                     SDL_SetRenderDrawColor(renderer, 0xEE, 0xEE, 0xEE, 0xFF);
                 } else {
                     SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x99, 0xFF);
@@ -146,6 +145,7 @@ int GUI::SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) 
     return status;
 }
 
+
 void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (event.button == SDL_BUTTON_RIGHT) {
         return;
@@ -156,7 +156,7 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (board->getSelectedPiece() == board_indices) {  // de-select a piece
         board->clearSelectedPiece();
     } else if (!board->hasSelectedPiece()) {  // select a piece
-        if (board->getPieceAt(board_indices) != 0) {
+        if (board->getPieceAt(board_indices) != 0 && getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
