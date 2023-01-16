@@ -8,6 +8,7 @@
 
 #include "board.hpp"
 #include "pieces.hpp"
+#include "defines.hpp"
 
 // TODO: add move validation (include check)
 // TODO: add check/checkmate detection
@@ -53,7 +54,7 @@ int main() {
 
 void drawChessboard(SDL_Renderer& renderer, Board* board) {
     Piece p;
-    std::pair<int, int> selected_piece = board->getSelectedPiece();
+    Location selected_piece = board->getSelectedPiece();
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -118,7 +119,7 @@ void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
         return;
     }
 
-    std::pair<int, int> board_indices = getBoardIndices(event.x, event.y);
+    Location board_indices = getBoardIndices(event.x, event.y);
 
     if (board->getSelectedPiece() == board_indices) {  // de-select a piece
         board->clearSelectedPiece();
@@ -135,7 +136,7 @@ void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     }
 }
 
-std::pair<int, int> getBoardIndices(int x, int y) {
+Location getBoardIndices(int x, int y) {
     /**
      * Gets board indices from a x, y coordinate of a mouse click.
      *
@@ -145,7 +146,7 @@ std::pair<int, int> getBoardIndices(int x, int y) {
      * @returns std::pair with integer values from 0-7 in first and second
      */
 
-    std::pair<int, int> out;
+    Location out;
 
     out.second = x / TILE_SIZE;
     out.first = y / TILE_SIZE;

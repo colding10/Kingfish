@@ -2,6 +2,7 @@
 #define BOARD_H_INCLUDED
 
 #include <string>
+#include "defines.hpp"
 
 const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
@@ -11,15 +12,15 @@ class Board {
     int move_number;
 
     
-    std::pair<int, int> selected_piece = {-1, -1};
+    Location selected_piece = {-1, -1};
 
    public:
     int board[8][8];
 
-    std::pair<int, int> getSelectedPiece();
+    Location getSelectedPiece();
 
-    int getPieceAt(std::pair<int, int> location);
-    
+    int getPieceAt(Location location);
+
     void setSelectedPiece(int i, int j);
 
     bool hasSelectedPiece();
@@ -27,7 +28,7 @@ class Board {
     void clearSelectedPiece();
 
 
-    void movePiece(std::pair<int, int> starting, std::pair<int, int> ending);
+    void movePiece(Location starting, Location ending);
 
 
     void readFen(std::string fen);

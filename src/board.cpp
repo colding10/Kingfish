@@ -4,7 +4,9 @@
 #include <iostream>
 #include <string>
 
+#include "game.hpp"
 #include "pieces.hpp"
+#include "defines.hpp"
 
 // TODO: add other FEN fields
 void Board::readFen(std::string fen) {
@@ -23,7 +25,7 @@ void Board::readFen(std::string fen) {
                     col++;
                 }
             } else {
-                piece_color color = isupper(c) ? WHITE : BLACK;
+                PieceColor color = isupper(c) ? WHITE : BLACK;
                 Piece p;
 
                 c = tolower(c);
@@ -68,26 +70,28 @@ void Board::printBoard() {
     std::cout << std::endl;
 }
 
-void Board::movePiece(std::pair<int, int> starting, std::pair<int, int> ending) {
-    int r1, c1, r2, c2;
+void Board::movePiece(Location starting, Location ending) {
+    if (isValidMove(this, starting, ending)) {
+        int r1, c1, r2, c2;
 
-    r1 = starting.first;
-    c1 = starting.second;
+        r1 = starting.first;
+        c1 = starting.second;
 
-    r2 = ending.first;
-    c2 = ending.second;
+        r2 = ending.first;
+        c2 = ending.second;
 
-    this->board[r2][c2] = this->board[r1][c1];
-    this->board[r1][c1] = 0x00;
+        this->board[r2][c2] = this->board[r1][c1];
+        this->board[r1][c1] = 0x00;
 
-    this->clearSelectedPiece();
+        this->clearSelectedPiece();
+    }
 }
 
-int Board::getPieceAt(std::pair<int, int> location) {
+int Board::getPieceAt(Location location) {
     return this->board[location.first][location.second];
 }
 
-std::pair<int, int> Board::getSelectedPiece() {
+Location Board::getSelectedPiece() {
     return this->selected_piece;
 }
 

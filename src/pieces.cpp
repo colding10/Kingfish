@@ -1,9 +1,9 @@
+#include "pieces.hpp"
+
 #include <iostream>
 #include <string>
 
-#include "pieces.hpp"
-
-piece_color getPieceColor(Piece p) {
+PieceColor getPieceColor(Piece p) {
     int color = p >> 3;
 
     if (color == 1) {
@@ -15,15 +15,15 @@ piece_color getPieceColor(Piece p) {
     }
 }
 
-piece_class getPieceClass(Piece p) {
+PieceClass getPieceClass(Piece p) {
     int pc = p & 7;
 
     return static_cast<Pieces>(pc);
 }
 
 std::string getPieceFilename(Piece p) {
-    piece_color color = getPieceColor(p);
-    piece_class pc = getPieceClass(p);
+    PieceColor color = getPieceColor(p);
+    PieceClass pc = getPieceClass(p);
 
     std::string filename;
 
@@ -62,6 +62,6 @@ std::string getPieceFilename(Piece p) {
     return filename;
 }
 
-Piece makePiece(piece_class c, piece_color pc) {
+Piece makePiece(PieceClass c, PieceColor pc) {
     return c | pc;
 }

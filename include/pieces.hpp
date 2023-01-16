@@ -4,10 +4,10 @@
 #include <string>
 
 typedef unsigned int Piece;
-typedef unsigned int piece_color;
-typedef unsigned int piece_class;
+typedef unsigned int PieceColor;
+typedef unsigned int PieceClass;
 
-enum PieceColor {
+enum PieceColors {
     WHITE = 16,
     BLACK = 8,
     NOCOLOR = 0
@@ -23,9 +23,9 @@ enum Pieces {
 };
 
 
-piece_color getPieceColor(Piece p);
-piece_class getPieceClass(Piece p);
-Piece makePiece(piece_class c, piece_color pc);
+PieceColor getPieceColor(Piece p);
+PieceClass getPieceClass(Piece p);
+Piece makePiece(PieceClass c, PieceColor pc);
 std::string getPieceFilename(Piece p);
 
 #endif // !PIECES_H_INCLUDED
