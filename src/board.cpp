@@ -70,6 +70,8 @@ void Board::printBoard() {
     std::cout << std::endl;
 }
 
+
+
 void Board::reverse() {
     int board[8][8];
 
@@ -93,7 +95,7 @@ bool Board::isReversed() {
 }
 
 void Board::tryMove(Location starting, Location ending) {
-    if (isValidMove(this, starting, ending, true)) {
+    if (Game::isValidMove(this, starting, ending, true)) {
         this->makeMove(starting, ending);
         this->clearSelectedPiece();
     }

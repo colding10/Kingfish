@@ -1,45 +1,49 @@
-#include <SDL2/SDL.h>
-#include <iostream>
-#include "gui.hpp"
-#include "board.hpp"
 #include "main.hpp"
 
-int main() {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+#include <SDL2/SDL.h>
 
-    SDL_Window* window = SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                          WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+#include <iostream>
+
+#include "board.hpp"
+#include "game.hpp"
+#include "gui.hpp"
+
+int main() {
+    SDL_Window* window = GUI::createSDLWindow();
+    SDL_Renderer* renderer = GUI::createSDLRenderer(window);
+
+    SDL_Event event;
 
     Board board;
 
     board.readFen(STARTING_FEN);
     board.printBoard();
 
-    bool quit = false;
-    SDL_Event event;
-
-    while (!quit) {
+    bool running = true;
+    while (running) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                quit = true;
+                running = false;
             } else if (event.type == SDL_MOUSEBUTTONUP) {
-                handleMouseClicked(event.button, &board);
+                GUI::handleMouseClicked(event.button, &board);
             } else if (event.type == SDL_KEYUP) {
-                handleKeyPressed(event.key, &board);
+                GUI::handleKeyPressed(event.key, &board);
             }
+        }
+        if (Game::isInCheckMate(&board, WHITE)) {
+            std::cout << "WHITE IS MATED" << std::endl;
+        }
+        if (Game::isInCheckMate(&board, BLACK)) {
+            std::cout << "BLACK IS MATED" << std::endl;
         }
 
         SDL_RenderClear(renderer);
-        drawChessboard(*renderer, &board);
+        GUI::drawChessboard(renderer, &board);
 
         SDL_RenderPresent(renderer);
     }
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    GUI::cleanupSDL(renderer, window);
 
     return 0;
 }

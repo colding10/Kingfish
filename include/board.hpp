@@ -3,21 +3,24 @@
 
 #include <string>
 #include "defines.hpp"
+#include "pieces.hpp"
 
 const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 class Board {
    private:
-    int color;
+    PieceColor color;
     int move_number;
 
     bool is_reversed = false;
 
-    
     Location selected_piece = {-1, -1};
 
    public:
     int board[8][8];
+
+    int getMoveNumber();
+    int getActiveColor();
 
     Location getSelectedPiece();
     int getPieceAt(Location location);

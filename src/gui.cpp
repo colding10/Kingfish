@@ -15,7 +15,27 @@
 // TODO: add check/checkmate detection
 // TODO: add special moves like castle
 
-void drawChessboard(SDL_Renderer& renderer, Board* board) {
+void GUI::initSDL() {
+    SDL_Init(SDL_INIT_EVERYTHING);
+}
+
+void GUI::cleanupSDL(SDL_Renderer* renderer, SDL_Window* window) {
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
+
+SDL_Window* GUI::createSDLWindow() {
+    return SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                            WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+}
+
+SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+    return SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+}
+
+void GUI::drawChessboard(SDL_Renderer* renderer, Board* board) {
     Piece p;
     Location selected_piece = board->getSelectedPiece();
 
@@ -28,14 +48,14 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
 
-            if ((i + j) % 2 == 0) {
-                SDL_SetRenderDrawColor(&renderer, 0xEE, 0xEE, 0xEE, 0xFF);
+            if ((i + j) % 2 == (board->isReversed() ? 1 : 0)) {
+                SDL_SetRenderDrawColor(renderer, 0xEE, 0xEE, 0xEE, 0xFF);
             } else {
-                SDL_SetRenderDrawColor(&renderer, 0x99, 0x99, 0x99, 0xFF);
+                SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x99, 0xFF);
             }
 
             if (selected_piece.first == i && selected_piece.second == j) {
-                SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, 0xFF);
+                SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
                 SDL_Rect highlight;
                 highlight.x = tile.x + 5;
@@ -43,18 +63,18 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
                 highlight.w = tile.w - 10;
                 highlight.h = tile.h - 10;
 
-                SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, 0xFF);
-                SDL_RenderFillRect(&renderer, &tile);
+                SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+                SDL_RenderFillRect(renderer, &tile);
 
                 if ((i + j) % 2 == 0) {
-                    SDL_SetRenderDrawColor(&renderer, 0xEE, 0xEE, 0xEE, 0xFF);
+                    SDL_SetRenderDrawColor(renderer, 0xEE, 0xEE, 0xEE, 0xFF);
                 } else {
-                    SDL_SetRenderDrawColor(&renderer, 0x99, 0x99, 0x99, 0xFF);
+                    SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x99, 0xFF);
                 }
 
-                SDL_RenderFillRect(&renderer, &highlight);
+                SDL_RenderFillRect(renderer, &highlight);
             } else {
-                SDL_RenderFillRect(&renderer, &tile);
+                SDL_RenderFillRect(renderer, &tile);
             }
 
             p = board->board[i][j];
@@ -66,27 +86,27 @@ void drawChessboard(SDL_Renderer& renderer, Board* board) {
                 if (image == NULL) {
                     std::cerr << "image=" << image << " Reason: " << SDL_GetError() << " " << SDL_GetBasePath() << std::endl;
                 }
-                SDL_Texture* texture = SDL_CreateTextureFromSurface(&renderer, image);
+                SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
 
-                SDL_RenderCopy(&renderer, texture, NULL, &tile);
+                SDL_RenderCopy(renderer, texture, NULL, &tile);
 
                 SDL_FreeSurface(image);
                 SDL_DestroyTexture(texture);
             }
 
-            if (board->hasSelectedPiece() && isValidMove(board, board->getSelectedPiece(), makeLocation(i, j), true)) {
-                SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, 0xFF);
+            if (board->hasSelectedPiece() && Game::isValidMove(board, board->getSelectedPiece(), makeLocation(i, j), true)) {
+                SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
                 int centerX = tile.x + tile.w / 2;
                 int centerY = tile.y + tile.h / 2;
                 int radius = 15;
-                SDL_RenderFillCircle(&renderer, centerX, centerY, radius);
+                SDL_RenderFillCircle(renderer, centerX, centerY, radius);
             }
         }
     }
 }
 
-int SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) {
+int GUI::SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) {
     int offsetx, offsety, d;
     int status;
 
@@ -126,7 +146,7 @@ int SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) {
     return status;
 }
 
-void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
+void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (event.button == SDL_BUTTON_RIGHT) {
         return;
     }
@@ -148,14 +168,14 @@ void handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     }
 }
 
-void handleKeyPressed(SDL_KeyboardEvent event, Board* board) {
+void GUI::handleKeyPressed(SDL_KeyboardEvent event, Board* board) {
     if (event.keysym.sym == SDL_GetKeyFromName("r") || event.keysym.sym == SDL_GetKeyFromName("f")) {
         std::cout << "r/f pressed, reversing board" << std::endl;
         board->reverse();
-    } 
+    }
 }
 
-Location getBoardIndices(int x, int y) {
+Location GUI::getBoardIndices(int x, int y) {
     /**
      * Gets board indices from a x, y coordinate of a mouse click.
      *
