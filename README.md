@@ -4,6 +4,11 @@
 - pull request for comments, concerns, anything
 - may keep working
 
+## Dependecies
+- SDL2
+- SDL2_image
+- SDL2_ttf
+
 ## Compiling
 - run the `make` command.
 - this will create object files in `./obj`.
