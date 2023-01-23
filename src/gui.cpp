@@ -1,9 +1,11 @@
 #include "gui.hpp"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <string>
 
 #include "board.hpp"
@@ -11,22 +13,25 @@
 #include "game.hpp"
 #include "pieces.hpp"
 
-// TODO: add special moves like castle
+// TODO: add special moves like castle, en passant
 // TODO: add showing checkmate
 
 void GUI::initSDL() {
     SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
 }
 
-void GUI::cleanupSDL(SDL_Renderer* renderer, SDL_Window* window) {
+void GUI::cleanupSDL(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font) {
+    TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    TTF_Quit();
 }
 
 SDL_Window* GUI::createSDLWindow() {
-    return SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                            WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+    return SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT,
+                            SDL_WINDOW_SHOWN);
 }
 
 SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
@@ -34,7 +39,11 @@ SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
     return SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 }
 
-void GUI::drawChessboard(SDL_Renderer* renderer, Board* board) {
+TTF_Font* GUI::createTTFFont() {
+    return TTF_OpenFont("/Users/colinding/Library/Fonts/MesloLGS NF Regular.ttf", 50);
+}
+
+void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
     Piece p;
     Location selected_piece = board->getSelectedPiece();
 
@@ -103,6 +112,23 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board) {
             }
         }
     }
+
+    if (board->checkmated_color != NOCOLOR) {        
+        SDL_Color color = {0, 0, 0, 255};
+        SDL_Surface* surface = TTF_RenderText_Solid(font, (std::string(board->checkmated_color == WHITE ? "White" : "Black") + std::string(" wins!")).c_str(),
+                                                    color);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+        int texW = 0;
+        int texH = 0;
+
+        SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+        SDL_Rect dstrect = {WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 75, texW, texH};
+        SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surface);
+    }
 }
 
 int GUI::SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) {
@@ -115,14 +141,10 @@ int GUI::SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius) 
     status = 0;
 
     while (offsety >= offsetx) {
-        status += SDL_RenderDrawLine(renderer, x - offsety, y + offsetx,
-                                     x + offsety, y + offsetx);
-        status += SDL_RenderDrawLine(renderer, x - offsetx, y + offsety,
-                                     x + offsetx, y + offsety);
-        status += SDL_RenderDrawLine(renderer, x - offsetx, y - offsety,
-                                     x + offsetx, y - offsety);
-        status += SDL_RenderDrawLine(renderer, x - offsety, y - offsetx,
-                                     x + offsety, y - offsetx);
+        status += SDL_RenderDrawLine(renderer, x - offsety, y + offsetx, x + offsety, y + offsetx);
+        status += SDL_RenderDrawLine(renderer, x - offsetx, y + offsety, x + offsetx, y + offsety);
+        status += SDL_RenderDrawLine(renderer, x - offsetx, y - offsety, x + offsetx, y - offsety);
+        status += SDL_RenderDrawLine(renderer, x - offsety, y - offsetx, x + offsety, y - offsetx);
 
         if (status < 0) {
             status = -1;
@@ -155,11 +177,13 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
     if (board->getSelectedPiece() == board_indices) {  // de-select a piece
         board->clearSelectedPiece();
     } else if (!board->hasSelectedPiece()) {  // select a piece
-        if (board->getPieceAt(board_indices) != 0 && Pieces::getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
+        if (board->getPieceAt(board_indices) != 0 &&
+            Pieces::getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
-        if (Pieces::getPieceColor(board->getPieceAt(board_indices)) == Pieces::getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
+        if (Pieces::getPieceColor(board->getPieceAt(board_indices)) ==
+            Pieces::getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
             board->setSelectedPiece(board_indices.first, board_indices.second);
         } else {
             board->tryMove(board->getSelectedPiece(), board_indices);

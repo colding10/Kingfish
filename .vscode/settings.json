@@ -81,7 +81,9 @@
         "codecvt": "cpp",
         "iomanip": "cpp",
         "source_location": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "__tree": "cpp",
+        "map": "cpp"
     }
 
     

@@ -2,7 +2,10 @@
 #define BOARD_H_INCLUDED
 
 #include <string>
+#include <vector>
+
 #include "defines.hpp"
+#include "move.hpp"
 #include "pieces.hpp"
 
 const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
@@ -10,6 +13,7 @@ const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 class Board {
    private:
     PieceColor active_color = WHITE;
+
     float move_number = 1.0f;
 
     bool is_reversed = false;
@@ -18,6 +22,10 @@ class Board {
 
    public:
     int board[8][8];
+    PieceColor checkmated_color = NOCOLOR;
+
+    float evaluateBoard(int color);
+    std::vector<Move> getAllMoves(PieceColor color);
 
     float getMoveNumber();
     void incrementMoveNumber();
@@ -32,10 +40,9 @@ class Board {
     bool hasSelectedPiece();
     void clearSelectedPiece();
 
-
     void tryMove(Location starting, Location ending);
     void makeMove(Location starting, Location ending);
-
+    void makeMove(Move move);
 
     void readFen(std::string fen);
     void printBoard();

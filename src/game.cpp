@@ -6,7 +6,6 @@
 #include "defines.hpp"
 #include "pieces.hpp"
 
-
 bool Game::isValidMove(Board* board, Location starting, Location ending, bool check_king) {
     Piece starting_piece = board->getPieceAt(starting);
     Piece ending_piece = board->getPieceAt(ending);
@@ -130,7 +129,9 @@ bool Game::isValidBishopMove(Board* board, Location starting, Location ending, P
 
     Location indices = starting;
 
-    while (0 <= indices.first <= 7 && 0 <= indices.second <= 7 && indices != ending) {
+    while (0 <= indices.first && indices.first <= 7 &&
+           0 <= indices.second && indices.second <= 7 &&
+           indices != ending) {
         indices.second += x_change;
         indices.first += y_change;
 
@@ -166,7 +167,9 @@ bool Game::isValidRookMove(Board* board, Location starting, Location ending, Pie
 
     Location indices = (starting);
 
-    while (0 <= indices.first <= 7 && 0 <= indices.second <= 7 && indices != ending) {
+    while (0 <= indices.first && indices.first <= 7 &&
+           0 <= indices.second && indices.second <= 7 &&
+           indices != ending) {
         indices.second += x_change;
         indices.first += y_change;
 

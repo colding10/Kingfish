@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 
-// TODO: organize into a namespace
 PieceColor Pieces::getPieceColor(Piece p) {
     int color = p >> 3;
 
@@ -63,6 +62,4 @@ std::string Pieces::getPieceFilename(Piece p) {
     return filename;
 }
 
-Piece Pieces::makePiece(PieceClass c, PieceColor pc) {
-    return c | pc;
-}
+Piece Pieces::makePiece(PieceClass c, PieceColor pc) { return c | pc; }

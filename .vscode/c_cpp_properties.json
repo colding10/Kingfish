@@ -4,6 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${default}",
+                "${workspaceFolder}/include",
                 "${workspaceFolder}/include"
             ],
             "defines": [],
