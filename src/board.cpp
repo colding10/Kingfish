@@ -1,5 +1,6 @@
 #include "board.hpp"
 
+#include <array>
 #include <cctype>
 #include <iostream>
 #include <map>
@@ -139,28 +140,105 @@ void Board::makeMove(Location starting, Location ending) {
     r2 = ending.first;
     c2 = ending.second;
 
+    Move m;
+    m.startX = r1;
+    m.startY = c1;
+    m.endX = r2;
+    m.endY = c2;
+    m.captured = this->board[r2][c2];
+
+    this->last_move = m;
+
     this->board[r2][c2] = this->board[r1][c1];
     this->board[r1][c1] = 0x00;
 }
 
 void Board::makeMove(Move move) {
+    move.captured = this->board[move.endX][move.endY];
     this->board[move.endX][move.endY] = this->board[move.startX][move.startY];
     this->board[move.startX][move.startY] = 0x00;
+
+    this->last_move = move;
+}
+
+void Board::undoMove() {
+    this->board[this->last_move.startX][this->last_move.startY] = this->board[this->last_move.endX][this->last_move.endY];
+    this->board[this->last_move.endX][this->last_move.endY] = this->last_move.captured;
 }
 
 int Board::getPieceAt(Location location) {
     return this->board[location.first][location.second];
 }
 
-
 float Board::evaluateBoard(int color) {
+    if (Game::isInCheckMate(this, color == WHITE ? BLACK : WHITE)) {
+        return INT_MAX;
+    } else if (Game::isInCheckMate(this, color)) {
+        return INT_MIN;
+    }
+
     std::map<Piece, float> piece_values = {
         {PAWN, 100},
         {KNIGHT, 320},
         {BISHOP, 330},
         {ROOK, 500},
-        {QUEEN, 900},
-        {KING, 10000}};
+        {QUEEN, 15000},
+        {KING, 100000}};
+
+    int pawn_table[8][8] = {
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {5, 5, 5, -10, -10, 5, 5, 5},
+        {5, 0, 0, 10, 10, 0, 0, 5},
+        {5, 5, 5, 25, 25, 5, 5, 5},
+        {10, 10, 15, 25, 25, 15, 10, 10},
+        {20, 20, 20, 30, 30, 30, 20, 20},
+        {30, 30, 30, 40, 40, 30, 30, 30},
+        {0, 0, 0, 0, 0, 0, 0, 0}};
+    int knight_table[8][8] = {
+        {-5, -10, -5, -5, -5, -5, -10, -5},
+        {-5, 0, 0, 5, 5, 0, 0, -5},
+        {-5, 5, 10, 10, 10, 10, 5, -5},
+        {-5, 5, 10, 15, 15, 10, 5, -5},
+        {-5, 5, 10, 15, 15, 10, 5, -5},
+        {-5, 5, 10, 10, 10, 10, 5, -5},
+        {-5, 0, 0, 10, 10, 0, 0, -5},
+        {-5, -5, -5, -5, -5, -5, -5, -5}};
+    int bishop_table[8][8] = {
+        {0, 0, -10, 0, 0, -10, 0, 0},
+        {0, 10, 0, 10, 10, 0, 10, 0},
+        {0, 10, 0, 10, 10, 0, 10, 0},
+        {5, 0, 10, 0, 0, 10, 0, 5},
+        {0, 10, 0, 0, 0, 0, 10, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0}};
+    int rook_table[8][8] = {
+        {0, 0, 0, 10, 10, 5, 0, 0},
+        {0, 0, 0, 10, 10, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {10, 10, 10, 10, 10, 10, 10, 10},
+        {10, 10, 10, 10, 10, 10, 10, 10}};
+    int queen_table[8][8] = {
+        {-20, -10, -10, 0, 0, -10, -10, -20},
+        {-10, 0, 5, 0, 0, 0, 0, -10},
+        {-10, 5, 5, 5, 5, 5, 0, -10},
+        {-5, 0, 5, 5, 5, 5, 0, -5},
+        {-5, 0, 5, 5, 5, 5, 0, -5},
+        {-10, 0, 5, 0, 0, 0, 0, -10},
+        {-20, -10, -10, -5, -5, -10, -10, -20},
+    };
+    int king_table[8][8] = {
+        {0, 0, 10, -5, -5, -5, 10, 0},
+        {0, 0, 0, -5, -5, -5, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0}};
 
     float white = 0.0f;
     float black = 0.0f;
@@ -168,7 +246,7 @@ float Board::evaluateBoard(int color) {
     int white_pieces = 0;
     int black_pieces = 0;
 
-    int mobility = this->getAllMoves(color == 1 ? WHITE : BLACK).size();
+    float mobility = this->getAllMoves(color).size();
 
     Piece p;
     for (int i = 0; i < 8; i++) {
@@ -178,16 +256,58 @@ float Board::evaluateBoard(int color) {
             if (!p) {
                 continue;
             } else if (Pieces::getPieceColor(p) == WHITE) {
-                white += piece_values[Pieces::getPieceClass(p)];
+                int bonus;
+                switch (Pieces::getPieceClass(p)) {
+                    case PAWN:
+                        bonus = pawn_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case KNIGHT:
+                        bonus = knight_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case BISHOP:
+                        bonus = bishop_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case ROOK:
+                        bonus = rook_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case QUEEN:
+                        bonus = queen_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case KING:
+                        bonus = king_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                }
+                white += piece_values[Pieces::getPieceClass(p)] + bonus / 3;
                 white_pieces++;
             } else {
-                black += piece_values[Pieces::getPieceClass(p)];
+                int bonus;
+                switch (Pieces::getPieceClass(p)) {
+                    case PAWN:
+                        bonus = pawn_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case KNIGHT:
+                        bonus = knight_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case BISHOP:
+                        bonus = bishop_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case ROOK:
+                        bonus = rook_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case QUEEN:
+                        bonus = queen_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                    case KING:
+                        bonus = king_table[color == BLACK ? i : 7 - i][j];
+                        break;
+                }
+                black += piece_values[Pieces::getPieceClass(p)] + bonus / 3;
                 black_pieces++;
             }
         }
     }
 
-    return (color == WHITE ? white : black) * (white_pieces - black_pieces) * color + mobility;
+    return (color == WHITE ? white : black) + (white_pieces - black_pieces) * (color == WHITE ? 1 : -1) + mobility * 50;
 }
 
 std::vector<Move> Board::getAllMoves(PieceColor color) {

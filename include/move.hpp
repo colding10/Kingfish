@@ -3,6 +3,7 @@
 
 struct Move {
     int startX, startY, endX, endY;
+    int captured;
     int value;
 };
 

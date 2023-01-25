@@ -22,6 +22,8 @@ class Board {
 
    public:
     int board[8][8];
+    Move last_move;
+    
     PieceColor checkmated_color = NOCOLOR;
 
     float evaluateBoard(int color);
@@ -43,6 +45,7 @@ class Board {
     void tryMove(Location starting, Location ending);
     void makeMove(Location starting, Location ending);
     void makeMove(Move move);
+    void undoMove();
 
     void readFen(std::string fen);
     void printBoard();

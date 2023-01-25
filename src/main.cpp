@@ -11,13 +11,22 @@
 #include "gui.hpp"
 
 void blackMove(Board* board) {
-    Move bm = AI::findBestMove(board, 3, BLACK);
+    Move bm = AI::findBestMove(board, 2, BLACK);
     board->makeMove(bm);
     board->toggleActiveColor();
     std::cout << "best move for black: "
               << "(" << bm.startX << ", " << bm.startY << ") -> (" << bm.endX
               << ", " << bm.endY << ")" << std::endl;
 }
+
+void whiteMove(Board* board) {
+    Move bm = AI::findBestMove(board, 3, SDL_WINDOWEVENT_HIT_TEST);
+    board->makeMove(bm);
+    board->toggleActiveColor();
+    std::cout << "best move for white: "
+              << "(" << bm.startX << ", " << bm.startY << ") -> (" << bm.endX
+              << ", " << bm.endY << ")" << std::endl;
+} 
 
 int main() {
     GUI::initSDL();
@@ -59,14 +68,18 @@ int main() {
             gameover = true;
         }
 
-        if (board.getActiveColor() == BLACK) {
-            blackMove(&board);
-        }
+        std::cout << "white score: " << board.evaluateBoard(WHITE) << std::endl;
+        std::cout << "black score: " << board.evaluateBoard(BLACK) << std::endl;
 
         SDL_RenderClear(renderer);
         GUI::drawChessboard(renderer, &board, font);
 
         SDL_RenderPresent(renderer);
+        if (board.getActiveColor() == BLACK) {
+            blackMove(&board);
+        } else {
+            // whiteMove(&board);
+        }
     }
 
     GUI::cleanupSDL(renderer, window, font);

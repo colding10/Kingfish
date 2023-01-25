@@ -7,6 +7,7 @@
 
 namespace AI {
     int negamax(Board* node, int depth, PieceColor color, int alpha, int beta);
+    void orderMoves(std::vector<Move>& moves, Board* node);
     Move findBestMove(Board* node, int depth, PieceColor color);
 }  // namespace AI
 
