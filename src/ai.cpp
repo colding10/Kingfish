@@ -28,8 +28,57 @@ void AI::orderMoves(std::vector<Move>& moves, Board* node) {
     });
 }
 
+int AI::quiesce(Board* node, PieceColor color, int alpha, int beta) {
+    int stand_pat = node->evaluateBoard(color);
+    int score;
+
+    if (stand_pat >= beta) {
+        return beta;
+    }
+    if (alpha < stand_pat) {
+        alpha = stand_pat;
+    }
+
+    std::vector<Move> moves = node->getAllMoves(color);
+
+    for (Move move : moves) {
+        if (!isCaptureMove(move, node)) {
+            continue;
+        }
+
+        int b[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                b[i][j] = node->board[i][j];
+            }
+        }
+        node->makeMove(move);
+
+        score = -AI::quiesce(node, color, -beta, -alpha);
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                node->board[i][j] = b[i][j];
+            }
+        }
+
+        if (score >= beta) {
+            return beta;
+        }
+        if (score > alpha) {
+            alpha = score;
+        }
+    }
+
+    return alpha;
+}
+
 int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta) {
-    if (depth == 0 || Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
+    if (depth == 0) {
+        // return AI::quiesce(node, color, alpha, beta);
+        return node->evaluateBoard(color);
+    }
+    if (Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
         return node->evaluateBoard(color);
     }
 

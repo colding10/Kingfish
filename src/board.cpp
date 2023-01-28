@@ -170,7 +170,7 @@ void Board::makeMove(Location starting, Location ending) {
 
 void Board::makeMove(Move move) {
     if (Pieces::getPieceClass(this->getPieceAt({move.startX, move.startY})) == KING) {
-        if (abs(move.startY - move.endY) == 2) {            
+        if (abs(move.startY - move.endY) == 2) {
             if (move.endY > move.startY) {
                 this->board[move.startX][7] = 0x00;
                 this->board[move.startX][move.endY - 1] = Pieces::makePiece(ROOK, this->getActiveColor());
@@ -258,7 +258,7 @@ float Board::evaluateBoard(int color) {
         {-20, -10, -10, -5, -5, -10, -10, -20},
     };
     int king_table[8][8] = {
-        {0, 0, 10, -5, -5, -5, 10, 0},
+        {0, 0, 20, -5, -5, -5, 20, 0},
         {0, 0, 0, -5, -5, -5, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},

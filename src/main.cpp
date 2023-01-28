@@ -11,7 +11,7 @@
 #include "gui.hpp"
 
 void blackMove(Board* board) {
-    Move bm = AI::findBestMove(board, 3, BLACK);
+    Move bm = AI::findBestMove(board, 4, BLACK);
     board->makeMove(bm);
     board->toggleActiveColor();
 }
@@ -46,11 +46,9 @@ int main() {
     float black_score;
 
     while (running) {
-        if (board.evaluateBoard(WHITE) != white_score) {
+        if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
             std::cout << "white score: " << board.evaluateBoard(WHITE) << std::endl;
             white_score = board.evaluateBoard(WHITE);
-        }
-        if (board.evaluateBoard(BLACK) != black_score) {
             std::cout << "black score: " << board.evaluateBoard(BLACK) << std::endl;
             black_score = board.evaluateBoard(BLACK);
         }
