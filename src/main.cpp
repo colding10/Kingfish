@@ -11,22 +11,16 @@
 #include "gui.hpp"
 
 void blackMove(Board* board) {
-    Move bm = AI::findBestMove(board, 2, BLACK);
+    Move bm = AI::findBestMove(board, 3, BLACK);
     board->makeMove(bm);
     board->toggleActiveColor();
-    std::cout << "best move for black: "
-              << "(" << bm.startX << ", " << bm.startY << ") -> (" << bm.endX
-              << ", " << bm.endY << ")" << std::endl;
 }
 
 void whiteMove(Board* board) {
-    Move bm = AI::findBestMove(board, 3, SDL_WINDOWEVENT_HIT_TEST);
+    Move bm = AI::findBestMove(board, 2, SDL_WINDOWEVENT_HIT_TEST);
     board->makeMove(bm);
     board->toggleActiveColor();
-    std::cout << "best move for white: "
-              << "(" << bm.startX << ", " << bm.startY << ") -> (" << bm.endX
-              << ", " << bm.endY << ")" << std::endl;
-} 
+}
 
 int main() {
     GUI::initSDL();
@@ -48,7 +42,24 @@ int main() {
     bool running = true;
     bool gameover = false;
 
+    float white_score;
+    float black_score;
+
     while (running) {
+        if (board.evaluateBoard(WHITE) != white_score) {
+            std::cout << "white score: " << board.evaluateBoard(WHITE) << std::endl;
+            white_score = board.evaluateBoard(WHITE);
+        }
+        if (board.evaluateBoard(BLACK) != black_score) {
+            std::cout << "black score: " << board.evaluateBoard(BLACK) << std::endl;
+            black_score = board.evaluateBoard(BLACK);
+        }
+
+        SDL_RenderClear(renderer);
+        GUI::drawChessboard(renderer, &board, font);
+
+        SDL_RenderPresent(renderer);
+
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
@@ -68,17 +79,16 @@ int main() {
             gameover = true;
         }
 
-        std::cout << "white score: " << board.evaluateBoard(WHITE) << std::endl;
-        std::cout << "black score: " << board.evaluateBoard(BLACK) << std::endl;
+        if (!gameover) {
+            SDL_RenderClear(renderer);
+            GUI::drawChessboard(renderer, &board, font);
 
-        SDL_RenderClear(renderer);
-        GUI::drawChessboard(renderer, &board, font);
-
-        SDL_RenderPresent(renderer);
-        if (board.getActiveColor() == BLACK) {
-            blackMove(&board);
-        } else {
-            // whiteMove(&board);
+            SDL_RenderPresent(renderer);
+            if (board.getActiveColor() == BLACK) {
+                blackMove(&board);
+            } else {
+                // whiteMove(&board);
+            }
         }
     }
 

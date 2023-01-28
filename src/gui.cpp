@@ -115,7 +115,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
 
     if (board->checkmated_color != NOCOLOR) {        
         SDL_Color color = {0, 0, 0, 255};
-        SDL_Surface* surface = TTF_RenderText_Solid(font, (std::string(board->checkmated_color == WHITE ? "White" : "Black") + std::string(" wins!")).c_str(),
+        SDL_Surface* surface = TTF_RenderText_Solid(font, (std::string(board->checkmated_color == BLACK ? "White" : "Black") + std::string(" wins!")).c_str(),
                                                     color);
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 

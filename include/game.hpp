@@ -12,7 +12,8 @@ bool isValidKnightMove(Location starting, Location ending);
 bool isValidBishopMove(Board* board, Location starting, Location ending, PieceColor starting_color);
 bool isValidRookMove(Board* board, Location starting, Location ending, PieceColor starting_color);
 bool isValidQueenMove(Board* board, Location starting, Location ending, PieceColor starting_color);
-bool isValidKingMove(Location starting, Location ending);
+bool isValidKingMove(Board* board, Location starting, Location ending);
+float getPieceValue(PieceClass p);
 
 bool isInCheck(Board* board, PieceColor color);
 bool isInCheckMate(Board* board, PieceColor color);

@@ -1,6 +1,7 @@
 #include "game.hpp"
 
 #include <iostream>
+#include <map>
 
 #include "board.hpp"
 #include "defines.hpp"
@@ -34,7 +35,7 @@ bool Game::isValidMove(Board* board, Location starting, Location ending, bool ch
             result = isValidQueenMove(board, starting, ending, starting_color);
             break;
         case KING:
-            result = isValidKingMove(starting, ending);
+            result = isValidKingMove(board, starting, ending);
             break;
     }
 
@@ -195,7 +196,7 @@ bool Game::isValidQueenMove(Board* board, Location starting, Location ending, Pi
            isValidRookMove(board, starting, ending, starting_color);
 }
 
-bool Game::isValidKingMove(Location starting, Location ending) {
+bool Game::isValidKingMove(Board* board, Location starting, Location ending) {
     int x_diff = abs(starting.first - ending.first);
     int y_diff = abs(starting.second - ending.second);
 
@@ -207,6 +208,23 @@ bool Game::isValidKingMove(Location starting, Location ending) {
     }
     if (x_diff == 0 and y_diff == 1) {
         return true;
+    }
+
+    if (starting.first == 0 && starting.second == 4) {
+        if (ending.first == 0 && ending.second == 6 && !board->getPieceAt({0, 5}) && Pieces::getPieceClass(board->getPieceAt({0, 7})) == ROOK) {
+            return true;
+        }
+        if (ending.first == 0 && ending.second == 2 && !board->getPieceAt({0, 3}) && Pieces::getPieceClass(board->getPieceAt({0, 0})) == ROOK) {
+            return true;
+        }
+    }
+    if (starting.first == 7 && starting.second == 4) {
+        if (ending.first == 7 && ending.second == 6 && !board->getPieceAt({7, 5}) && Pieces::getPieceClass(board->getPieceAt({7, 7})) == ROOK) {
+            return true;
+        }
+        if (ending.first == 7 && ending.second == 2 && !board->getPieceAt({7, 3}) && Pieces::getPieceClass(board->getPieceAt({7, 0})) == ROOK) {
+            return true;
+        }
     }
 
     return false;
@@ -285,4 +303,16 @@ bool Game::isInCheckMate(Board* board, PieceColor color) {
         }
     }
     return true;
+}
+
+float Game::getPieceValue(PieceClass p) {
+    std::map<Piece, float> piece_values = {
+        {PAWN, 100},
+        {KNIGHT, 320},
+        {BISHOP, 330},
+        {ROOK, 500},
+        {QUEEN, 15000},
+        {KING, 0}};
+
+    return piece_values[Pieces::getPieceClass(p)];
 }

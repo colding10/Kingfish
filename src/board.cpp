@@ -122,8 +122,23 @@ void Board::tryMove(Location starting, Location ending) {
         return;
     }
 
+    int r1, c1, r2, c2;
+
+    r1 = starting.first;
+    c1 = starting.second;
+
+    r2 = ending.first;
+    c2 = ending.second;
+
+    Move m;
+    m.startX = r1;
+    m.startY = c1;
+    m.endX = r2;
+    m.endY = c2;
+    m.captured = this->board[r2][c2];
+
     if (Game::isValidMove(this, starting, ending, true)) {
-        this->makeMove(starting, ending);
+        this->makeMove(m);
         this->clearSelectedPiece();
 
         this->incrementMoveNumber();
@@ -154,6 +169,18 @@ void Board::makeMove(Location starting, Location ending) {
 }
 
 void Board::makeMove(Move move) {
+    if (Pieces::getPieceClass(this->getPieceAt({move.startX, move.startY})) == KING) {
+        if (abs(move.startY - move.endY) == 2) {            
+            if (move.endY > move.startY) {
+                this->board[move.startX][7] = 0x00;
+                this->board[move.startX][move.endY - 1] = Pieces::makePiece(ROOK, this->getActiveColor());
+            } else {
+                this->board[move.startX][0] = 0x00;
+                this->board[move.startX][move.endY + 1] = Pieces::makePiece(ROOK, this->getActiveColor());
+            }
+        }
+    }
+
     move.captured = this->board[move.endX][move.endY];
     this->board[move.endX][move.endY] = this->board[move.startX][move.startY];
     this->board[move.startX][move.startY] = 0x00;
@@ -183,7 +210,7 @@ float Board::evaluateBoard(int color) {
         {BISHOP, 330},
         {ROOK, 500},
         {QUEEN, 15000},
-        {KING, 100000}};
+        {KING, 0}};
 
     int pawn_table[8][8] = {
         {0, 0, 0, 0, 0, 0, 0, 0},
@@ -307,7 +334,7 @@ float Board::evaluateBoard(int color) {
         }
     }
 
-    return (color == WHITE ? white : black) + (white_pieces - black_pieces) * (color == WHITE ? 1 : -1) + mobility * 50;
+    return (white - black) * (color == WHITE ? 1 : -1) + (white_pieces - black_pieces) * (color == WHITE ? 1 : -1) + mobility / 2 + 93;
 }
 
 std::vector<Move> Board::getAllMoves(PieceColor color) {
@@ -325,10 +352,19 @@ std::vector<Move> Board::getAllMoves(PieceColor color) {
 
                     if (Game::isValidMove(this, {i, j}, {a, b}, true)) {
                         Move m;
+
                         m.startX = i;
                         m.startY = j;
                         m.endX = a;
                         m.endY = b;
+
+                        m.captured = this->getPieceAt(makeLocation(a, b));
+
+                        if (this->getPieceAt({a, b})) {
+                            m.is_capture = true;
+                        } else {
+                            m.is_capture = false;
+                        }
 
                         out.push_back(m);
                     }

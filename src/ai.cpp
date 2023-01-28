@@ -17,6 +17,7 @@ function negamax(node, depth, color) is
         value := max(value, −negamax(child, depth − 1, −color))
     return value
  */
+
 bool isCaptureMove(Move move, Board* node) {
     return node->getPieceAt({move.endX, move.endY});
 }
@@ -26,7 +27,6 @@ void AI::orderMoves(std::vector<Move>& moves, Board* node) {
         return isCaptureMove(m1, node) && !isCaptureMove(m2, node);
     });
 }
-
 
 int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta) {
     if (depth == 0 || Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
@@ -39,10 +39,20 @@ int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta) {
     int bestValue = INT_MIN;
 
     for (Move move : moves) {
+        int b[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                b[i][j] = node->board[i][j];
+            }
+        }
         node->makeMove(move);
 
         int value = -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, -beta, -alpha);
-        node->undoMove();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                node->board[i][j] = b[i][j];
+            }
+        }
 
         bestValue = std::max(bestValue, value);
         alpha = std::max(alpha, value);
@@ -70,7 +80,7 @@ Move AI::findBestMove(Board* node, int depth, PieceColor color) {
         }
         node->makeMove(move);
 
-        move.value = -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, INT_MIN, INT_MAX);
+        move.value += -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, INT_MIN, INT_MAX);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 node->board[i][j] = b[i][j];
