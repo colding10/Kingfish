@@ -9,6 +9,7 @@
 #include "pieces.hpp"
 
 const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+// const std::string STARTING_FEN = "4k3/8/3q4/8/8/6q1/q7/4K3";
 
 class Board {
    private:

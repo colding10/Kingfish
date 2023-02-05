@@ -28,12 +28,12 @@ void AI::orderMoves(std::vector<Move>& moves, Board* node) {
     });
 }
 
-int AI::quiesce(Board* node, PieceColor color, int alpha, int beta) {
+int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkmate) {
     int stand_pat = node->evaluateBoard(color);
     int score;
 
-    if (stand_pat >= beta) {
-        return beta;
+    if (checkmate || stand_pat >= beta) {
+        return stand_pat;
     }
     if (alpha < stand_pat) {
         alpha = stand_pat;
@@ -53,9 +53,10 @@ int AI::quiesce(Board* node, PieceColor color, int alpha, int beta) {
             }
         }
         node->makeMove(move);
-
-        score = -AI::quiesce(node, color, -beta, -alpha);
-
+        if (Game::isInCheckMate(node, color)) {
+            checkmate = true;
+        }
+        score = -AI::quiesce(node, color == WHITE ? BLACK : WHITE, -beta, -alpha, checkmate);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 node->board[i][j] = b[i][j];
@@ -73,12 +74,13 @@ int AI::quiesce(Board* node, PieceColor color, int alpha, int beta) {
     return alpha;
 }
 
-int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta) {
+int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta, bool checkmate) {
     if (depth == 0) {
-        // return AI::quiesce(node, color, alpha, beta);
+        std::cout << "qui: " << AI::quiesce(node, color, alpha, beta, checkmate) << " eval: " << node->evaluateBoard(color) << std::endl;
+        // return AI::quiesce(node, color, alpha, beta, checkmate);
         return node->evaluateBoard(color);
     }
-    if (Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
+    if (checkmate) {
         return node->evaluateBoard(color);
     }
 
@@ -95,8 +97,12 @@ int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta) {
             }
         }
         node->makeMove(move);
+        if (Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
+            checkmate = true;
+        }
 
-        int value = -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, -beta, -alpha);
+        int value = -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, -beta, -alpha, checkmate);
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 node->board[i][j] = b[i][j];
@@ -128,8 +134,16 @@ Move AI::findBestMove(Board* node, int depth, PieceColor color) {
             }
         }
         node->makeMove(move);
-
-        move.value += -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, INT_MIN, INT_MAX);
+        if (Game::isInCheckMate(node, color == WHITE ? BLACK : WHITE)) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    node->board[i][j] = b[i][j];
+                }
+            }
+            std::cout << "found mate" << std::endl;
+            return move;
+        }
+        move.value += -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, INT_MIN, INT_MAX, false);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 node->board[i][j] = b[i][j];

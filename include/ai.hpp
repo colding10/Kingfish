@@ -6,8 +6,8 @@
 #include "pieces.hpp"
 
 namespace AI {
-    int negamax(Board* node, int depth, PieceColor color, int alpha, int beta);
-    int quiesce(Board* node, PieceColor color, int alpha, int beta);
+    int negamax(Board* node, int depth, PieceColor color, int alpha, int beta, bool checkmate);
+    int quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkmate);
 
     void orderMoves(std::vector<Move>& moves, Board* node);
     Move findBestMove(Board* node, int depth, PieceColor color);

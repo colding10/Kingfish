@@ -3,6 +3,7 @@
 #include <array>
 #include <cctype>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <string>
 #include <vector>
@@ -186,6 +187,14 @@ void Board::makeMove(Move move) {
     this->board[move.startX][move.startY] = 0x00;
 
     this->last_move = move;
+
+    if (Pieces::getPieceClass(this->getPieceAt({move.endX, move.endY})) == PAWN) {
+        if (move.endX == 0 && Pieces::getPieceColor(this->getPieceAt({move.endX, move.endY})) == WHITE) {
+            this->board[move.endX][move.endY] = Pieces::makePiece(QUEEN, WHITE);
+        } else if (move.endX == 7 && Pieces::getPieceColor(this->getPieceAt({move.endX, move.endY})) == BLACK) {
+            this->board[move.endX][move.endY] = Pieces::makePiece(QUEEN, BLACK);
+        }
+    }
 }
 
 void Board::undoMove() {
@@ -199,9 +208,9 @@ int Board::getPieceAt(Location location) {
 
 float Board::evaluateBoard(int color) {
     if (Game::isInCheckMate(this, color == WHITE ? BLACK : WHITE)) {
-        return INT_MAX;
+        return std::numeric_limits<float>::max();
     } else if (Game::isInCheckMate(this, color)) {
-        return INT_MIN;
+        return -std::numeric_limits<float>::max();
     }
 
     std::map<Piece, float> piece_values = {
@@ -270,10 +279,17 @@ float Board::evaluateBoard(int color) {
     float white = 0.0f;
     float black = 0.0f;
 
+    float white_bonuses = 0.0f;
+    float black_bonuses = 0.0f;
+
     int white_pieces = 0;
     int black_pieces = 0;
 
     float mobility = this->getAllMoves(color).size();
+
+    if (mobility == 0) {
+        return 0.0f;
+    }
 
     Piece p;
     for (int i = 0; i < 8; i++) {
@@ -304,7 +320,8 @@ float Board::evaluateBoard(int color) {
                         bonus = king_table[color == BLACK ? i : 7 - i][j];
                         break;
                 }
-                white += piece_values[Pieces::getPieceClass(p)] + bonus / 3;
+                white += piece_values[Pieces::getPieceClass(p)];
+                white_bonuses += bonus / 3;
                 white_pieces++;
             } else {
                 int bonus;
@@ -328,13 +345,19 @@ float Board::evaluateBoard(int color) {
                         bonus = king_table[color == BLACK ? i : 7 - i][j];
                         break;
                 }
-                black += piece_values[Pieces::getPieceClass(p)] + bonus / 3;
+                black += piece_values[Pieces::getPieceClass(p)];
+                black_bonuses += bonus / 3;
                 black_pieces++;
             }
         }
     }
 
-    return (white - black) * (color == WHITE ? 1 : -1) + (white_pieces - black_pieces) * (color == WHITE ? 1 : -1) + mobility / 2 + 93;
+    // if (black_pieces + white_pieces > 10) {
+    //     white += white_bonuses;
+    //     black += black_bonuses;
+    // }
+
+    return (white - black) * (color == WHITE ? 1 : -1) + mobility / 2 - 10;
 }
 
 std::vector<Move> Board::getAllMoves(PieceColor color) {

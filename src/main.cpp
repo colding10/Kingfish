@@ -10,19 +10,25 @@
 #include "game.hpp"
 #include "gui.hpp"
 
-void blackMove(Board* board) {
-    Move bm = AI::findBestMove(board, 4, BLACK);
+void blackMove(Board* board, int depth) {
+    Move bm = AI::findBestMove(board, depth, BLACK);
     board->makeMove(bm);
     board->toggleActiveColor();
 }
 
-void whiteMove(Board* board) {
-    Move bm = AI::findBestMove(board, 2, SDL_WINDOWEVENT_HIT_TEST);
+void whiteMove(Board* board, int depth) {
+    Move bm = AI::findBestMove(board, depth, SDL_WINDOWEVENT_HIT_TEST);
     board->makeMove(bm);
     board->toggleActiveColor();
 }
 
 int main() {
+    int depth = 1;
+    std::cout << "enter negamax depth: ";
+    std::cin >> depth;
+
+    std::cout << "negamax depth: " << depth << std::endl;
+
     GUI::initSDL();
 
     SDL_Window* window = GUI::createSDLWindow();
@@ -37,7 +43,6 @@ int main() {
     Board board;
 
     board.readFen(STARTING_FEN);
-    board.printBoard();
 
     bool running = true;
     bool gameover = false;
@@ -83,9 +88,9 @@ int main() {
 
             SDL_RenderPresent(renderer);
             if (board.getActiveColor() == BLACK) {
-                blackMove(&board);
+                blackMove(&board, depth);
             } else {
-                // whiteMove(&board);
+                // whiteMove(&board, 2);
             }
         }
     }

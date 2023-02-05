@@ -9,12 +9,12 @@ SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 LDFLAGS := -pthread -D_THREAD_SAFE -lSDL2 -lSDL2_image -lSDL2_ttf -L$(LIB_DIR)
-CPPFLAGS := -I $(INCLUDE_DIR) -Wall -Wextra -std=c++11 -flto -O3
+CPPFLAGS := -g -I $(INCLUDE_DIR) -Wall -Wextra -std=c++11 -flto -O3
 
 CPP := g++
-# ========== PROJECT PROPERTIES ==========
 
 
+# ========== TARGETS ==========
 $(BIN_DIR)/main: $(OBJ_FILES)
 	$(CPP) $(LDFLAGS) -o $@ ./$^
 
