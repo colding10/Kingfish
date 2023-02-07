@@ -28,33 +28,33 @@ std::string Pieces::getPieceFilename(Piece p) {
     std::string filename;
 
     switch (color) {
-        case WHITE:
-            filename += "white_";
-            break;
-        case BLACK:
-            filename += "black_";
-            break;
+    case WHITE:
+        filename += "white_";
+        break;
+    case BLACK:
+        filename += "black_";
+        break;
     }
 
     switch (pc) {
-        case PAWN:
-            filename += "pawn";
-            break;
-        case KNIGHT:
-            filename += "knight";
-            break;
-        case BISHOP:
-            filename += "bishop";
-            break;
-        case ROOK:
-            filename += "rook";
-            break;
-        case QUEEN:
-            filename += "queen";
-            break;
-        case KING:
-            filename += "king";
-            break;
+    case PAWN:
+        filename += "pawn";
+        break;
+    case KNIGHT:
+        filename += "knight";
+        break;
+    case BISHOP:
+        filename += "bishop";
+        break;
+    case ROOK:
+        filename += "rook";
+        break;
+    case QUEEN:
+        filename += "queen";
+        break;
+    case KING:
+        filename += "king";
+        break;
     }
 
     filename += ".bmp";
@@ -62,4 +62,6 @@ std::string Pieces::getPieceFilename(Piece p) {
     return filename;
 }
 
-Piece Pieces::makePiece(PieceClass c, PieceColor pc) { return c | pc; }
+Piece Pieces::makePiece(PieceClass c, PieceColor pc) {
+    return c | pc;
+}

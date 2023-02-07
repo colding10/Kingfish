@@ -36,26 +36,26 @@ void Board::readFen(std::string fen) {
                 c = tolower(c);
 
                 switch (c) {
-                    case 'p':
-                        p = Pieces::makePiece(PAWN, color);
-                        break;
-                    case 'r':
-                        p = Pieces::makePiece(ROOK, color);
-                        break;
-                    case 'n':
-                        p = Pieces::makePiece(KNIGHT, color);
-                        break;
-                    case 'b':
-                        p = Pieces::makePiece(BISHOP, color);
-                        break;
-                    case 'q':
-                        p = Pieces::makePiece(QUEEN, color);
-                        break;
-                    case 'k':
-                        p = Pieces::makePiece(KING, color);
-                        break;
-                    default:
-                        p = Pieces::makePiece(PAWN, color);
+                case 'p':
+                    p = Pieces::makePiece(PAWN, color);
+                    break;
+                case 'r':
+                    p = Pieces::makePiece(ROOK, color);
+                    break;
+                case 'n':
+                    p = Pieces::makePiece(KNIGHT, color);
+                    break;
+                case 'b':
+                    p = Pieces::makePiece(BISHOP, color);
+                    break;
+                case 'q':
+                    p = Pieces::makePiece(QUEEN, color);
+                    break;
+                case 'k':
+                    p = Pieces::makePiece(KING, color);
+                    break;
+                default:
+                    p = Pieces::makePiece(PAWN, color);
                 }
 
                 this->board[row][col] = p;
@@ -219,7 +219,8 @@ float Board::evaluateBoard(int color) {
         {BISHOP, 330},
         {ROOK, 500},
         {QUEEN, 15000},
-        {KING, 0}};
+        {KING, 0}
+    };
 
     int pawn_table[8][8] = {
         {0, 0, 0, 0, 0, 0, 0, 0},
@@ -229,7 +230,8 @@ float Board::evaluateBoard(int color) {
         {10, 10, 15, 25, 25, 15, 10, 10},
         {20, 20, 20, 30, 30, 30, 20, 20},
         {30, 30, 30, 40, 40, 30, 30, 30},
-        {0, 0, 0, 0, 0, 0, 0, 0}};
+        {0, 0, 0, 0, 0, 0, 0, 0}
+    };
     int knight_table[8][8] = {
         {-5, -10, -5, -5, -5, -5, -10, -5},
         {-5, 0, 0, 5, 5, 0, 0, -5},
@@ -238,7 +240,8 @@ float Board::evaluateBoard(int color) {
         {-5, 5, 10, 15, 15, 10, 5, -5},
         {-5, 5, 10, 10, 10, 10, 5, -5},
         {-5, 0, 0, 10, 10, 0, 0, -5},
-        {-5, -5, -5, -5, -5, -5, -5, -5}};
+        {-5, -5, -5, -5, -5, -5, -5, -5}
+    };
     int bishop_table[8][8] = {
         {0, 0, -10, 0, 0, -10, 0, 0},
         {0, 10, 0, 10, 10, 0, 10, 0},
@@ -247,7 +250,8 @@ float Board::evaluateBoard(int color) {
         {0, 10, 0, 0, 0, 0, 10, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0}};
+        {0, 0, 0, 0, 0, 0, 0, 0}
+    };
     int rook_table[8][8] = {
         {0, 0, 0, 10, 10, 5, 0, 0},
         {0, 0, 0, 10, 10, 0, 0, 0},
@@ -256,7 +260,8 @@ float Board::evaluateBoard(int color) {
         {0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
         {10, 10, 10, 10, 10, 10, 10, 10},
-        {10, 10, 10, 10, 10, 10, 10, 10}};
+        {10, 10, 10, 10, 10, 10, 10, 10}
+    };
     int queen_table[8][8] = {
         {-20, -10, -10, 0, 0, -10, -10, -20},
         {-10, 0, 5, 0, 0, 0, 0, -10},
@@ -274,7 +279,8 @@ float Board::evaluateBoard(int color) {
         {0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0}};
+        {0, 0, 0, 0, 0, 0, 0, 0}
+    };
 
     float white = 0.0f;
     float black = 0.0f;
@@ -301,24 +307,24 @@ float Board::evaluateBoard(int color) {
             } else if (Pieces::getPieceColor(p) == WHITE) {
                 int bonus;
                 switch (Pieces::getPieceClass(p)) {
-                    case PAWN:
-                        bonus = pawn_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case KNIGHT:
-                        bonus = knight_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case BISHOP:
-                        bonus = bishop_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case ROOK:
-                        bonus = rook_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case QUEEN:
-                        bonus = queen_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case KING:
-                        bonus = king_table[color == BLACK ? i : 7 - i][j];
-                        break;
+                case PAWN:
+                    bonus = pawn_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case KNIGHT:
+                    bonus = knight_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case BISHOP:
+                    bonus = bishop_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case ROOK:
+                    bonus = rook_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case QUEEN:
+                    bonus = queen_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case KING:
+                    bonus = king_table[color == BLACK ? i : 7 - i][j];
+                    break;
                 }
                 white += piece_values[Pieces::getPieceClass(p)];
                 white_bonuses += bonus / 3;
@@ -326,24 +332,24 @@ float Board::evaluateBoard(int color) {
             } else {
                 int bonus;
                 switch (Pieces::getPieceClass(p)) {
-                    case PAWN:
-                        bonus = pawn_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case KNIGHT:
-                        bonus = knight_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case BISHOP:
-                        bonus = bishop_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case ROOK:
-                        bonus = rook_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case QUEEN:
-                        bonus = queen_table[color == BLACK ? i : 7 - i][j];
-                        break;
-                    case KING:
-                        bonus = king_table[color == BLACK ? i : 7 - i][j];
-                        break;
+                case PAWN:
+                    bonus = pawn_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case KNIGHT:
+                    bonus = knight_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case BISHOP:
+                    bonus = bishop_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case ROOK:
+                    bonus = rook_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case QUEEN:
+                    bonus = queen_table[color == BLACK ? i : 7 - i][j];
+                    break;
+                case KING:
+                    bonus = king_table[color == BLACK ? i : 7 - i][j];
+                    break;
                 }
                 black += piece_values[Pieces::getPieceClass(p)];
                 black_bonuses += bonus / 3;

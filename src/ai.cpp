@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <climits>
 
 #include "board.hpp"
 #include "game.hpp"

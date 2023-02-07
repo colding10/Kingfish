@@ -47,8 +47,8 @@ int main() {
     bool running = true;
     bool gameover = false;
 
-    float white_score;
-    float black_score;
+    float white_score = 0.0f;
+    float black_score = 0.0f;
 
     while (running) {
         if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
