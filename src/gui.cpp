@@ -36,7 +36,7 @@ SDL_Window* GUI::createSDLWindow() {
 
 SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
-    return SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+    return SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_GL_DOUBLEBUFFER);
 }
 
 TTF_Font* GUI::createTTFFont() {
@@ -51,8 +51,8 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
         for (int j = 0; j < 8; j++) {
             SDL_Rect tile;
 
-            tile.x = j * TILE_SIZE;
-            tile.y = i * TILE_SIZE;
+            tile.x = 50 + (j * TILE_SIZE);
+            tile.y = (i * TILE_SIZE);
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
 

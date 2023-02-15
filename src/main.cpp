@@ -58,6 +58,7 @@ int main() {
             black_score = board.evaluateBoard(BLACK);
         }
 
+        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
         SDL_RenderClear(renderer);
         GUI::drawChessboard(renderer, &board, font);
 

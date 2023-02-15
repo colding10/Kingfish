@@ -6,8 +6,8 @@
 
 #include "board.hpp"
 
-const int WINDOW_WIDTH = 1200;
-const int WINDOW_HEIGHT = 1200;
+const int WINDOW_WIDTH = 2000;
+const int WINDOW_HEIGHT = 1250;
 
 const int TILE_SIZE = 150;
 
