@@ -12,9 +12,9 @@
 ## Project Structure
 
 bin     - the output binary <br/>
-src     - the source files (.cpp)
-include - the header files (.hpp)
-libs    - the libraries (.a, .dylib) *not included*
+src     - the source files (.cpp) <br/>
+include - the header files (.hpp) <br/>
+libs    - the libraries (.a, .dylib) *not included* <br/>
 
 ## Dependecies
 - SDL2
