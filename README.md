@@ -11,7 +11,7 @@
 
 ## Project Structure
 
-bin     - the output binary
+bin     - the output binary <br/>
 src     - the source files (.cpp)
 include - the header files (.hpp)
 libs    - the libraries (.a, .dylib) *not included*
