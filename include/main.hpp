@@ -1,6 +1,6 @@
 #ifndef MAIN_HPP_INCLUDED
 #define MAIN_HPP_INCLUDED
 
-
+const int TIME_LIMIT_SECONDS = 5;
 
 #endif // !MAIN_HPP_INCLUDED

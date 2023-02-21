@@ -24,7 +24,9 @@ enum PieceEnum {
 
 namespace Pieces {
     PieceColor getPieceColor(Piece p);
+    PieceColor oppositeColor(PieceColor c);
     PieceClass getPieceClass(Piece p);
+    
     Piece makePiece(PieceClass c, PieceColor pc);
     std::string getPieceFilename(Piece p);
 }  // namespace Pieces

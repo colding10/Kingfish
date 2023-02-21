@@ -10,14 +10,14 @@
 #include "game.hpp"
 #include "gui.hpp"
 
-void blackMove(Board* board, int depth) {
-    Move bm = AI::findBestMove(board, depth, BLACK);
+void blackMove(Board* board, int depth, TranspositionTable& transpositionTable) {
+    Move bm = AI::findBestMove(board, BLACK, depth, TIME_LIMIT_SECONDS, transpositionTable);
     board->makeMove(bm);
     board->toggleActiveColor();
 }
 
-void whiteMove(Board* board, int depth) {
-    Move bm = AI::findBestMove(board, depth, SDL_WINDOWEVENT_HIT_TEST);
+void whiteMove(Board* board, int depth, TranspositionTable& transpositionTable) {
+    Move bm = AI::findBestMove(board, WHITE, depth, TIME_LIMIT_SECONDS, transpositionTable);
     board->makeMove(bm);
     board->toggleActiveColor();
 }
@@ -43,12 +43,15 @@ int main() {
     Board board;
 
     board.readFen(STARTING_FEN);
+    std::cout << board.getLegalMoves(WHITE).size() << std::endl;
 
     bool running = true;
     bool gameover = false;
 
     float white_score = 0.0f;
     float black_score = 0.0f;
+
+    TranspositionTable transtable;
 
     while (running) {
         if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
@@ -84,14 +87,10 @@ int main() {
         }
 
         if (!gameover) {
-            SDL_RenderClear(renderer);
-            GUI::drawChessboard(renderer, &board, font);
-
-            SDL_RenderPresent(renderer);
             if (board.getActiveColor() == BLACK) {
-                blackMove(&board, depth);
+                blackMove(&board, depth, transtable);
             } else {
-                // whiteMove(&board, 2);
+                // whiteMove(&board, 4, transtable);
             }
         }
     }

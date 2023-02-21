@@ -9,7 +9,7 @@
 #include <string>
 
 #include "board.hpp"
-#include "defines.hpp"
+#include "location.hpp"
 #include "game.hpp"
 #include "pieces.hpp"
 
@@ -45,13 +45,13 @@ TTF_Font* GUI::createTTFFont() {
 
 void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
     Piece p;
-    Location selected_piece = board->getSelectedPiece();
+    Location selected_piece = board->getSelectedLocation();
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             SDL_Rect tile;
 
-            tile.x = 50 + (j * TILE_SIZE);
+            tile.x = (j * TILE_SIZE);
             tile.y = (i * TILE_SIZE);
             tile.w = TILE_SIZE;
             tile.h = TILE_SIZE;
@@ -62,9 +62,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
                 SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x99, 0xFF);
             }
 
-            if (selected_piece.first == i && selected_piece.second == j) {
-                SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
-
+            if (selected_piece.X == i && selected_piece.Y == j) {
                 SDL_Rect highlight;
                 highlight.x = tile.x + 5;
                 highlight.y = tile.y + 3;
@@ -102,7 +100,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
                 SDL_DestroyTexture(texture);
             }
 
-            if (board->hasSelectedPiece() && Game::isValidMove(board, board->getSelectedPiece(), makeLocation(i, j), true)) {
+            if (board->hasSelectedPiece() && Game::isValidMove(board, board->getSelectedLocation(), Location(i, j), true)) {
                 SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
                 int centerX = tile.x + tile.w / 2;
@@ -172,21 +170,21 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
         return;
     }
 
-    Location board_indices = getBoardIndices(event.x, event.y);
+    Location board_location = getBoardIndices(event.x, event.y);
 
-    if (board->getSelectedPiece() == board_indices) {  // de-select a piece
+    if (board->getSelectedLocation() == board_location) {  // de-select a piece
         board->clearSelectedPiece();
     } else if (!board->hasSelectedPiece()) {  // select a piece
-        if (board->getPieceAt(board_indices) != 0 &&
-            Pieces::getPieceColor(board->getPieceAt(board_indices)) == board->getActiveColor()) {
-            board->setSelectedPiece(board_indices.first, board_indices.second);
+        if (board->getPieceAt(board_location) != 0 &&
+            Pieces::getPieceColor(board->getPieceAt(board_location)) == board->getActiveColor()) {
+            board->setSelectedPiece(board_location.X, board_location.Y);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
-        if (Pieces::getPieceColor(board->getPieceAt(board_indices)) ==
-            Pieces::getPieceColor(board->getPieceAt(board->getSelectedPiece()))) {
-            board->setSelectedPiece(board_indices.first, board_indices.second);
+        if (Pieces::getPieceColor(board->getPieceAt(board_location)) ==
+            Pieces::getPieceColor(board->getPieceAt(board->getSelectedLocation()))) {
+            board->setSelectedPiece(board_location.X, board_location.Y);
         } else {
-            board->tryMove(board->getSelectedPiece(), board_indices);
+            board->tryMove(Move(board->getSelectedLocation(), board_location, 0, 0)); // TODO: check args
         }
     }
 }
@@ -205,13 +203,11 @@ Location GUI::getBoardIndices(int x, int y) {
      * @param x: integer value of x coordiate of mouse click
      * @param y: integer value of y coordiate of mouse click
      *
-     * @returns std::pair with integer values from 0-7 in first and second
+     * @returns std::pair with integer values from 0-7 in X and Y
      */
 
-    Location out;
+    Location out = Location(y / TILE_SIZE, x / TILE_SIZE);
 
-    out.second = x / TILE_SIZE;
-    out.first = y / TILE_SIZE;
 
     return out;
 }

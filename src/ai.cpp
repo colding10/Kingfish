@@ -1,27 +1,20 @@
 #include "ai.hpp"
 
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <chrono>
 #include <climits>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
 
 #include "board.hpp"
 #include "game.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
-
-/*
-function negamax(node, depth, color) is
-    if depth = 0 or node is a terminal node then
-        return color × the heuristic value of node
-    value := −∞
-    for each child of node do
-        value := max(value, −negamax(child, depth − 1, −color))
-    return value
- */
+#include "transtable.hpp"
 
 bool isCaptureMove(Move move, Board* node) {
-    return node->getPieceAt({move.endX, move.endY});
+    return node->getPieceAt(move.getEnding());
 }
 
 void AI::orderMoves(std::vector<Move>& moves, Board* node) {
@@ -29,45 +22,37 @@ void AI::orderMoves(std::vector<Move>& moves, Board* node) {
         return isCaptureMove(m1, node) && !isCaptureMove(m2, node);
     });
 }
-
-int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkmate) {
+int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkmate, TranspositionTable& transpositionTable, int depth) {
     int stand_pat = node->evaluateBoard(color);
     int score;
 
-    if (checkmate || stand_pat >= beta) {
+    if (depth <= 0 || checkmate || stand_pat >= beta) {
         return stand_pat;
     }
+
     if (alpha < stand_pat) {
         alpha = stand_pat;
     }
 
-    std::vector<Move> moves = node->getAllMoves(color);
+    std::vector<Move> moves = node->getLegalMoves(color);
+
+    orderMoves(moves, node);
 
     for (Move move : moves) {
-        if (!isCaptureMove(move, node)) {
-            continue;
+        node->makeMove(move);
+
+        if (node->isCheckmate(color)) {
+            node->undoLastMove();
+            return INT_MAX - depth;
         }
 
-        int b[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                b[i][j] = node->board[i][j];
-            }
-        }
-        node->makeMove(move);
-        if (Game::isInCheckMate(node, color)) {
-            checkmate = true;
-        }
-        score = -AI::quiesce(node, color == WHITE ? BLACK : WHITE, -beta, -alpha, checkmate);
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                node->board[i][j] = b[i][j];
-            }
-        }
+        score = -quiesce(node, Pieces::oppositeColor(color), -beta, -alpha, false, transpositionTable, depth - 1);
+        node->undoLastMove();
 
         if (score >= beta) {
             return beta;
         }
+
         if (score > alpha) {
             alpha = score;
         }
@@ -76,84 +61,120 @@ int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkma
     return alpha;
 }
 
-int AI::negamax(Board* node, int depth, PieceColor color, int alpha, int beta, bool checkmate) {
-    if (depth == 0) {
-        std::cout << "qui: " << AI::quiesce(node, color, alpha, beta, checkmate) << " eval: " << node->evaluateBoard(color) << std::endl;
-        // return AI::quiesce(node, color, alpha, beta, checkmate);
-        return node->evaluateBoard(color);
-    }
+int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, TranspositionTable& transpositionTable, bool allowNullMove) {
+    bool checkmate = node->isCheckmate(color);
     if (checkmate) {
-        return node->evaluateBoard(color);
+        return INT_MIN + depth;
     }
 
-    std::vector<Move> moves = node->getAllMoves(color);
-    AI::orderMoves(moves, node);
+    int hashValue;
+    if (transpositionTable.get(node->hash(), depth, alpha, beta, hashValue)) {
+        return hashValue;
+    }
+
+    if (depth <= 0) {
+        return node->evaluateBoard(color);
+        // return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable, depth);
+    }
 
     int bestValue = INT_MIN;
+    bool foundPV = false;
+    int bestMoveIndex = -1;
+    std::vector<Move> moves = node->getLegalMoves(color);
+    orderMoves(moves, node);
 
-    for (Move move : moves) {
-        int b[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                b[i][j] = node->board[i][j];
-            }
-        }
+    // Null move pruning
+    // if (!allowNullMove && moves.size() > 0 && !isCaptureMove(moves[0], node)) {
+    //     node->makeNullMove();
+    //     int value = -negamax(node, Pieces::oppositeColor(color), depth - 1 - NULL_MOVE_DEPTH, -beta, -beta + 1, transpositionTable, false);
+    //     node->undoLastMove();
+
+    //     if (value >= beta) {
+    //         return beta;
+    //     }
+    // }
+
+    // Iterative deepening
+    int numMovesSearched = 0;
+    for (int i = 0; i < (int)moves.size(); i++) {
+        Move move = moves[i];
+
         node->makeMove(move);
-        if (Game::isInCheckMate(node, WHITE) || Game::isInCheckMate(node, BLACK)) {
-            checkmate = true;
-        }
 
-        int value = -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, -beta, -alpha, checkmate);
-
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                node->board[i][j] = b[i][j];
+        if (!node->isInCheck(color)) {
+            int value;
+            if (!foundPV) {
+                value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta, -alpha, transpositionTable, true);
+            } else {
+                value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -alpha - 1, -alpha, transpositionTable, true);
+                if (value > alpha && value < beta) {
+                    value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta, -alpha, transpositionTable, true);
+                }
             }
+
+            node->undoLastMove();
+
+            if (value > bestValue) {
+                bestValue = value;
+                bestMoveIndex = i;
+            }
+
+            if (value > alpha) {
+                foundPV = true;
+                alpha = value;
+                if (alpha >= beta) {
+                    break;
+                }
+            }
+        } else {
+            node->undoLastMove();
         }
 
-        bestValue = std::max(bestValue, value);
-        alpha = std::max(alpha, value);
+        ++numMovesSearched;
+    }
 
-        if (alpha >= beta) {
-            break;
-        }
+    // Store the best move in the transposition table
+    if (bestMoveIndex != -1) {
+        transpositionTable.put(node->hash(), depth, bestValue, alpha, beta);
     }
 
     return bestValue;
 }
 
-Move AI::findBestMove(Board* node, int depth, PieceColor color) {
-    std::vector<Move> moves = node->getAllMoves(color);
+Move AI::findBestMove(Board* node, PieceColor color, int depth, int timeLimit, TranspositionTable& transpositionTable) {
+    auto start_time = std::chrono::high_resolution_clock::now();
+    auto end_time = start_time + std::chrono::milliseconds(timeLimit);
+    int alpha = INT_MIN;
+    int beta = INT_MAX;
+    int value;
 
-    Move bestMove;
-    bestMove.value = INT_MIN;
+    std::cout << color << " " << Pieces::oppositeColor(color) << std::endl;
+    std::vector<Move> moves = node->getLegalMoves(color);
+    orderMoves(moves, node);
 
-    for (Move move : moves) {
-        int b[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                b[i][j] = node->board[i][j];
-            }
-        }
-        node->makeMove(move);
-        if (Game::isInCheckMate(node, color == WHITE ? BLACK : WHITE)) {
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    node->board[i][j] = b[i][j];
-                }
-            }
-            std::cout << "found mate" << std::endl;
-            return move;
-        }
-        move.value += -negamax(node, depth - 1, color == WHITE ? BLACK : WHITE, INT_MIN, INT_MAX, false);
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                node->board[i][j] = b[i][j];
-            }
-        }
+    Move bestMove = moves[0];
 
-        if (move.value > bestMove.value) {
-            bestMove = move;
+    for (int current_depth = 1; current_depth <= depth; current_depth++) {
+        for (auto move : moves) {
+            node->makeMove(move);
+
+            value = -negamax(node, Pieces::oppositeColor(color), current_depth - 1, -beta, -alpha, transpositionTable, false);  // TODO: check if null should be ok
+
+            node->undoLastMove();
+
+            if (value >= beta) {
+                bestMove = move;
+                return bestMove;
+            }
+
+            if (value > alpha) {
+                alpha = value;
+                bestMove = move;
+            }
+
+            if (std::chrono::high_resolution_clock::now() >= end_time) {
+                return bestMove;
+            }
         }
     }
 

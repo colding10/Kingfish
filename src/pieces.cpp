@@ -15,6 +15,10 @@ PieceColor Pieces::getPieceColor(Piece p) {
     }
 }
 
+PieceColor Pieces::oppositeColor(PieceColor c) {
+    return c == WHITE ? BLACK : WHITE;
+}
+
 PieceClass Pieces::getPieceClass(Piece p) {
     int pc = p & 7;
 

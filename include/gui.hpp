@@ -6,10 +6,10 @@
 
 #include "board.hpp"
 
-const int WINDOW_WIDTH = 2000;
-const int WINDOW_HEIGHT = 1250;
+const int WINDOW_WIDTH = 1200;
+const int WINDOW_HEIGHT = 1200;
 
-const int TILE_SIZE = 150;
+const int TILE_SIZE = WINDOW_HEIGHT / 8;
 
 namespace GUI {
     void initSDL();
@@ -25,7 +25,7 @@ namespace GUI {
     void handleMouseClicked(SDL_MouseButtonEvent event, Board* board);
     void handleKeyPressed(SDL_KeyboardEvent event, Board* board);
 
-    std::pair<int, int> getBoardIndices(int x, int y);
+    Location getBoardIndices(int x, int y);
 
 }  // namespace GUI
 
