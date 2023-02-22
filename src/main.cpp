@@ -95,8 +95,6 @@ int main() {
 
     TranspositionTable transtable;
 
-    bool bot_turn = false;
-
     while (running) {
         if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
             white_score = board.evaluateBoard(WHITE);
