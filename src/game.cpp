@@ -49,12 +49,12 @@ bool Game::isValidMove(Board* board, Location starting, Location ending, bool ch
 
     if (isInCheck(board, starting_color)) {
         board->makeMove(Move(ending, starting, 0, 0), false);
-        board->board[ending.X][ending.Y] = ending_piece;
+        *board[ending.X][ending.Y] = ending_piece;
         return false;
     }
 
     board->makeMove(Move(ending, starting, 0, 0), false); // TODO: fix move number, check up
-    board->board[ending.X][ending.Y] = ending_piece;
+    *board[ending.X][ending.Y] = ending_piece;
     return true;
 }
 
@@ -233,7 +233,7 @@ bool Game::isValidKingMove(Board* board, Location starting, Location ending) {
 bool Game::isInCheck(Board* board, PieceColor color) {
     Piece piece;
 
-    auto king_location = Location(-1, -1);
+    Location king_location = Location(-1, -1);
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {

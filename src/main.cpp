@@ -11,6 +11,61 @@
 #include "game.hpp"
 #include "gui.hpp"
 
+int main() {
+    int depth_limit, time_limit_ms;
+    std::tie(depth_limit, time_limit_ms) = getDepthAndTime();
+
+    GUI::initSDL();
+
+    SDL_Window* window; 
+    SDL_Renderer* renderer;
+    TTF_Font* font;
+
+    std::tie(window, renderer, font) = GUI::createObjects();
+
+    Board board(STARTING_FEN);
+
+    bool running = true;
+    bool gameover = false;
+
+    float white_score = 0.0f;
+    float black_score = 0.0f;
+
+    TranspositionTable transtable;
+
+    while (running) {
+        if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
+            white_score = board.evaluateBoard(WHITE);
+            black_score = board.evaluateBoard(BLACK);
+
+            board.printBoard();
+        }
+
+        running = handleEvents(gameover, &board);
+
+        GUI::drawChessboard(renderer, &board, font);
+
+        SDL_RenderPresent(renderer);
+
+        if (board.checkCheckmates()) {
+            gameover = true;
+        }
+
+        if (!gameover) {
+            if (board.getActiveColor() == BLACK) {
+                blackMove(&board, depth_limit, time_limit_ms, transtable);
+            } else {
+                // whiteMove(&board, 4, time_limit_ms, transtable);
+            }
+        }
+    }
+
+    GUI::cleanupSDL(renderer, window, font);
+
+    return 0;
+}
+
+
 /*
  * Handles a singular `SDL_Event` and returns a boolean value
  *
@@ -70,61 +125,3 @@ std::tuple<int, int> getDepthAndTime() {
 }
 
 
-int main() {
-    int depth_limit, time_limit_ms;
-    std::tie(depth_limit, time_limit_ms) = getDepthAndTime();
-
-    GUI::initSDL();
-
-    SDL_Window* window; 
-    SDL_Renderer* renderer;
-    TTF_Font* font;
-
-    std::tie(window, renderer, font) = GUI::createObjects();
-
-    Board board(STARTING_FEN);
-
-    bool running = true;
-    bool gameover = false;
-
-    float white_score = 0.0f;
-    float black_score = 0.0f;
-
-    TranspositionTable transtable;
-
-    while (running) {
-        if (board.evaluateBoard(WHITE) != white_score || board.evaluateBoard(BLACK) != black_score) {
-            white_score = board.evaluateBoard(WHITE);
-            black_score = board.evaluateBoard(BLACK);
-
-            board.printBoard();
-        }
-
-        running = handleEvents(gameover, &board);
-
-        GUI::drawChessboard(renderer, &board, font);
-
-        SDL_RenderPresent(renderer);
-
-        if (Game::isInCheckMate(&board, WHITE)) {
-            board.checkmated_color = WHITE;
-            gameover = true;
-        }
-        if (Game::isInCheckMate(&board, BLACK)) {
-            board.checkmated_color = BLACK;
-            gameover = true;
-        }
-
-        if (!gameover) {
-            if (board.getActiveColor() == BLACK) {
-                blackMove(&board, depth_limit, time_limit_ms, transtable);
-            } else {
-                // whiteMove(&board, 4, time_limit_ms, transtable);
-            }
-        }
-    }
-
-    GUI::cleanupSDL(renderer, window, font);
-
-    return 0;
-}

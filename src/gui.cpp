@@ -218,16 +218,15 @@ void GUI::handleKeyPressed(SDL_KeyboardEvent event, Board* board) {
     }
 }
 
+/**
+ * Gets board indices from a x, y coordinate of a mouse click.
+ *
+ * @param x: integer value of x coordiate of mouse click
+ * @param y: integer value of y coordiate of mouse click
+ *
+ * @returns std::pair with integer values from 0-7 in X and Y
+ */
 Location GUI::getBoardIndices(int x, int y) {
-    /**
-     * Gets board indices from a x, y coordinate of a mouse click.
-     *
-     * @param x: integer value of x coordiate of mouse click
-     * @param y: integer value of y coordiate of mouse click
-     *
-     * @returns std::pair with integer values from 0-7 in X and Y
-     */
-
     Location out = Location(y / TILE_SIZE, x / TILE_SIZE);
 
     return out;

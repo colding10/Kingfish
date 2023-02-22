@@ -184,7 +184,7 @@ void Board::makeMove(Move move, bool push_to_stack) {
     this->board[move.getStarting().X][move.getStarting().Y] = 0x00;
 
     if (push_to_stack) {
-        this->moveStack.push(move);
+        this->move_stack.push(move);
         this->clearSelectedPiece();
 
         this->incrementMoveNumber();
@@ -201,9 +201,9 @@ void Board::makeMove(Move move, bool push_to_stack) {
 }
 
 void Board::undoLastMove() {
-    Move last_move = this->moveStack.top();
+    Move last_move = this->move_stack.top();
 
-    this->moveStack.pop();
+    this->move_stack.pop();
 
     this->board[last_move.getStarting().X][last_move.getStarting().Y] = this->board[last_move.getEnding().X][last_move.getEnding().Y];
     this->board[last_move.getEnding().X][last_move.getEnding().Y] = last_move.getCaptured();
@@ -428,6 +428,32 @@ bool Board::isInCheck(PieceColor c) {
 
 bool Board::isCheckmate(PieceColor c) {
     return Game::isInCheck(this, c);
+}
+
+bool Board::checkCheckmates() {
+    if (this->isCheckmate(WHITE)) {
+        this->setCheckmate(WHITE);
+        this->setGameOver();
+        return true;
+    } else if (this->isCheckmate(BLACK)) {
+        this->setCheckmate(BLACK);
+        this->setGameOver();
+        return true;
+    }
+    return false;
+}
+
+bool Board::isGameOver() {
+    return this->is_game_over;
+}
+
+void Board::setGameOver() {
+    this->is_game_over = true;
+}
+
+void Board::setCheckmate(PieceColor c) {
+    this->clearSelectedPiece();
+    this->checkmated_color = c;
 }
 
 int Board::hash() {

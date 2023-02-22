@@ -15,20 +15,29 @@ const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 class Board {
    private:
     PieceColor active_color = WHITE;
-    std::stack<Move> moveStack;
+    PieceColor checkmated_color = NOCOLOR;
+    std::stack<Move> move_stack;
 
     float move_number = 1.0f;
 
     bool is_reversed = false;
+    bool is_game_over = false;
 
-    Location selected_indices = {-1, -1};
-
-   public:
-    Board(const std::string& fen) { this->readFen(fen);}
+    Location selected_indices = Location(-1, -1);
 
     int board[8][8];
 
-    PieceColor checkmated_color = NOCOLOR;
+   public:
+    Board() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = 0;
+            }
+        }
+    };
+    Board(const std::string& fen) { this->readFen(fen); }
+    const int* operator[](int row) const { return board[row]; }
+    int* operator[](int row) { return board[row]; }
 
     float evaluateBoard(int color);
     std::vector<Move> getLegalMoves(PieceColor color);
@@ -64,6 +73,11 @@ class Board {
 
     bool isInCheck(PieceColor c);
     bool isCheckmate(PieceColor c);
+    bool checkCheckmates();
+    void setCheckmate(PieceColor c);
+
+    bool isGameOver();
+    void setGameOver();
 
     int hash();
 };
