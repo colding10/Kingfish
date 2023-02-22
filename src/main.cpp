@@ -35,7 +35,7 @@ bool handleEvent(SDL_Event& event, bool gameover, Board* board) {
 bool handleEvents(bool gameover, Board* board) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (handleEvent(event, gameover, board)) {
+        if (!handleEvent(event, gameover, board)) {
             return false;
         }
     }
