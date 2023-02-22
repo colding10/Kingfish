@@ -17,7 +17,7 @@ int main() {
 
     GUI::initSDL();
 
-    SDL_Window* window; 
+    SDL_Window* window;
     SDL_Renderer* renderer;
     TTF_Font* font;
 
@@ -47,17 +47,17 @@ int main() {
 
         SDL_RenderPresent(renderer);
 
-        if (board.checkCheckmates()) {
-            gameover = true;
-        }
+        // if (board.checkCheckmates()) {
+        //     gameover = true;
+        // }
 
-        if (!gameover) {
-            if (board.getActiveColor() == BLACK) {
-                blackMove(&board, depth_limit, time_limit_ms, transtable);
-            } else {
-                // whiteMove(&board, 4, time_limit_ms, transtable);
-            }
-        }
+        // if (board.isGameOver()) {
+        //     if (board.getActiveColor() == BLACK) {
+        //         // blackMove(&board, depth_limit, time_limit_ms, transtable);
+        //     } else {
+        //         // whiteMove(&board, 4, time_limit_ms, transtable);
+        //     }
+        // }
     }
 
     GUI::cleanupSDL(renderer, window, font);
@@ -65,13 +65,12 @@ int main() {
     return 0;
 }
 
-
 /*
  * Handles a singular `SDL_Event` and returns a boolean value
  *
  * @return `false` if the game loop should end, `true` otherwise
  */
-bool handleEvent(SDL_Event& event, bool gameover, Board* board) {
+bool handleEvent(SDL_Event& event, bool &gameover, Board* board) {
     if (event.type == SDL_QUIT) {
         return false;
     } else if (event.type == SDL_MOUSEBUTTONUP && !gameover) {
@@ -87,7 +86,7 @@ bool handleEvent(SDL_Event& event, bool gameover, Board* board) {
  *
  * @return `false` if the game loop should end, `true` otherwise
  */
-bool handleEvents(bool gameover, Board* board) {
+bool handleEvents(bool& gameover, Board* board) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (!handleEvent(event, gameover, board)) {
@@ -123,5 +122,3 @@ std::tuple<int, int> getDepthAndTime() {
 
     return std::make_tuple(depth_limit, time_limit_ms);
 }
-
-

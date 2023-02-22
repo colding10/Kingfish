@@ -105,7 +105,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
             p = board->getPieceAt(Location(i, j));
 
             if (p != 0) {
-                std::string filepath = "../data/bmp/" + Pieces::getPieceFilename(p);
+                std::string filepath = "../assets/bmp/" + Pieces::getPieceFilename(p);
 
                 SDL_Surface* image = SDL_LoadBMP(filepath.c_str());
                 if (image == NULL) {
