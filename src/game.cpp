@@ -270,22 +270,10 @@ bool Game::isInCheck(Board *board, PieceColor color) {
 }
 
 bool Game::isInCheckMate(Board *board, PieceColor color) {
-    Location king_location = Location(-1, -1);
     Piece piece;
 
     if (!isInCheck(board, color)) {
         return false;  // can't be in mate if ur not checked
-    }
-
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            piece = board->getPieceAt(Location(i, j));
-            if (Pieces::getPieceClass(piece) == KING &&
-                Pieces::getPieceColor(piece) == color) {
-                king_location = Location(i, j);
-                break;
-            }
-        }
     }
 
     for (int i = 0; i < 8; i++) {

@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "board.hpp"
-#include "game.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "transtable.hpp"
@@ -72,13 +71,16 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
         return INT_MIN + depth;
     }
 
-    int hashValue;
-    if (transpositionTable.get(node->hash(), depth, alpha, beta, hashValue)) {
-        return hashValue;
-    }
+    // TODO: turn transtable back on
+    // int hashValue;
+    // if (transpositionTable.get(node->hash(), depth, alpha, beta, hashValue)) {
+    //     std::cout << "yay transtable used!!" << std::endl;
+    //     return hashValue;
+    // }
 
     if (depth <= 0) {
-        // return node->evaluateBoard(color);
+        // TODO: return to quise
+        return node->evaluateBoard(color);
         return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable,
                            depth);
     }
@@ -89,18 +91,18 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
     std::vector<Move> moves = node->getLegalMoves(color);
     orderMoves(moves, node);
 
-    // Null move pruning
-    if (!allowNullMove && moves.size() > 0 && !isCaptureMove(moves[0], node)) {
-        node->makeNullMove();
-        int value =
-            -negamax(node, Pieces::oppositeColor(color), depth - 1 - NULL_MOVE_DEPTH,
-                     -beta, -beta + 1, transpositionTable, false);
-        node->undoLastMove();
+    // TODO: turn back on
+    // if (!allowNullMove && moves.size() > 0 && !isCaptureMove(moves[0], node)) {
+    //     node->makeNullMove();
+    //     int value =
+    //         -negamax(node, Pieces::oppositeColor(color), depth - 1 - NULL_MOVE_DEPTH,
+    //                  -beta, -beta + 1, transpositionTable, false);
+    //     node->undoLastMove();
 
-        if (value >= beta) {
-            return beta;
-        }
-    }
+    //     if (value >= beta) {
+    //         return beta;
+    //     }
+    // }
 
     // Iterative deepening
     int numMovesSearched = 0;

@@ -383,11 +383,10 @@ float Board::evaluateBoard(PieceColor color) {
         }
     }
 
-    // TODO: see if need to turn it on
-    // if (black_pieces + white_pieces > 10) {
-    //     white += white_bonuses;
-    //     black += black_bonuses;
-    // }
+    if (black_pieces + white_pieces > 10) {
+        white += white_bonuses;
+        black += black_bonuses;
+    }
 
     return (white - black) * (color == WHITE ? 1 : -1) + mobility / 2 - 10;
 }
@@ -446,7 +445,7 @@ bool Board::isInCheck(PieceColor c) {
 }
 
 bool Board::isCheckmate(PieceColor c) {
-    return Game::isInCheck(this, c);
+    return Game::isInCheckMate(this, c);
 }
 
 bool Board::checkCheckmates() {

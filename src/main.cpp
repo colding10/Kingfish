@@ -42,7 +42,6 @@ int main() {
 
             board.printBoard();
         }
-        std::cout << "selected piece: " << board.getSelectedLocation().to_string() << std::endl;
 
         running = handleEvents(gameover, &board);
 
@@ -54,9 +53,9 @@ int main() {
             gameover = true;
         }
 
-        if (board.isGameOver()) {
+        if (!board.isGameOver()) {
             if (board.getActiveColor() == BLACK) {
-                // blackMove(&board, depth_limit, time_limit_ms, transtable);
+                blackMove(&board, depth_limit, time_limit_ms, transtable);
             } else {
                 // whiteMove(&board, 4, time_limit_ms, transtable);
             }

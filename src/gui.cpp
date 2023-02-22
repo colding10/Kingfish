@@ -213,7 +213,6 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board *board) {
         if (board->getPieceAt(board_location) != 0 &&
             Pieces::getPieceColor(board->getPieceAt(board_location)) ==
                 board->getActiveColor()) {
-                    std::cout << "joe" << std::endl;
                         board->setSelectedPiece(board_location);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
