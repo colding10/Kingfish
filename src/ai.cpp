@@ -93,7 +93,7 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
     if (!allowNullMove && moves.size() > 0 && !isCaptureMove(moves[0], node)) {
         node->makeNullMove();
         int value =
-            -negamax(node, color.oppositeColor(), depth - 1 - NULL_MOVE_DEPTH,
+            -negamax(node, Pieces::oppositeColor(color), depth - 1 - NULL_MOVE_DEPTH,
                      -beta, -beta + 1, transpositionTable, false);
         node->undoLastMove();
 
