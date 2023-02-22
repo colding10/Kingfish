@@ -18,7 +18,7 @@ bool Game::isValidMove(Board *board, Location starting, Location ending,
       starting_color == Pieces::getPieceColor(ending_piece)) {
     return false; // can't capture your own piece
   }
-
+// joe
   bool result = true;
   switch (Pieces::getPieceClass(starting_piece)) {
   case PAWN:
