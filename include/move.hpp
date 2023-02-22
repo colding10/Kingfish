@@ -10,10 +10,8 @@
 class Move {
    public:
     // Constructor
-    Move(Location starting, Location ending, Piece captured, int number) : m_starting(starting),
-                                                                           m_ending(ending),
-                                                                           m_captured(captured),
-                                                                           m_number(number) {}
+    Move(Location starting, Location ending, Piece captured, int number)
+        : m_starting(starting), m_ending(ending), m_captured(captured), m_number(number) {}
 
     // Getters
     Location getStarting() const { return m_starting; }
@@ -26,8 +24,9 @@ class Move {
     void setNumber(int n) { m_number = n; }
 
     // Operators
-    friend std::ostream& operator<<(std::ostream& os, const Move& obj) {
-        os << "Move(" << obj.m_starting.to_string() << ", " << obj.m_ending.to_string() << " " << obj.m_captured << ")";
+    friend std::ostream &operator<<(std::ostream &os, const Move &obj) {
+        os << "Move(" << obj.m_starting.to_string() << ", "
+           << obj.m_ending.to_string() << " " << obj.m_captured << ")";
         return os;
     }
 

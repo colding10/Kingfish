@@ -5,18 +5,23 @@
 #include "pieces.hpp"
 
 namespace Game {
-bool isValidMove(Board* board, Location starting, Location ending, bool check_king);
+bool isValidMove(Board *board, Location starting, Location ending,
+                 bool check_king);
 
-bool isValidPawnMove(Board* board, Location starting, Location ending, PieceColor starting_color);
+bool isValidPawnMove(Board *board, Location starting, Location ending,
+                     PieceColor starting_color);
 bool isValidKnightMove(Location starting, Location ending);
-bool isValidBishopMove(Board* board, Location starting, Location ending, PieceColor starting_color);
-bool isValidRookMove(Board* board, Location starting, Location ending, PieceColor starting_color);
-bool isValidQueenMove(Board* board, Location starting, Location ending, PieceColor starting_color);
-bool isValidKingMove(Board* board, Location starting, Location ending);
+bool isValidBishopMove(Board *board, Location starting, Location ending,
+                       PieceColor starting_color);
+bool isValidRookMove(Board *board, Location starting, Location ending,
+                     PieceColor starting_color);
+bool isValidQueenMove(Board *board, Location starting, Location ending,
+                      PieceColor starting_color);
+bool isValidKingMove(Board *board, Location starting, Location ending);
 float getPieceValue(PieceClass p);
 
-bool isInCheck(Board* board, PieceColor color);
-bool isInCheckMate(Board* board, PieceColor color);
-}  // namespace Game
+bool isInCheck(Board *board, PieceColor color);
+bool isInCheckMate(Board *board, PieceColor color);
+} // namespace Game
 
-#endif  // !GAME_HPP_INCLUDED
+#endif // !GAME_HPP_INCLUDED

@@ -15,16 +15,16 @@ const int TILE_SIZE = WINDOW_HEIGHT / 8;
 
 namespace GUI {
     void initSDL();
-    void cleanupSDL(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font);
+    void cleanupSDL(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font);
 
-    std::tuple<SDL_Window*, SDL_Renderer*, TTF_Font*> createObjects();
-    SDL_Renderer* createSDLRenderer(SDL_Window* window);
+    std::tuple<SDL_Window *, SDL_Renderer *, TTF_Font *> createObjects();
+    SDL_Renderer *createSDLRenderer(SDL_Window *window);
 
-    void drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font);
-    int SDL_RenderFillCircle(SDL_Renderer* renderer, int x, int y, int radius);
+    void drawChessboard(SDL_Renderer *renderer, Board *board, TTF_Font *font);
+    int SDL_RenderFillCircle(SDL_Renderer *renderer, int x, int y, int radius);
 
-    void handleMouseClicked(SDL_MouseButtonEvent event, Board* board);
-    void handleKeyPressed(SDL_KeyboardEvent event, Board* board);
+    void handleMouseClicked(SDL_MouseButtonEvent event, Board *board);
+    void handleKeyPressed(SDL_KeyboardEvent event, Board *board);
 
     Location getBoardIndices(int x, int y);
 

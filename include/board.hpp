@@ -14,8 +14,9 @@ const std::string STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 class Board {
    private:
-    PieceColor active_color = WHITE;
-    PieceColor checkmated_color = NOCOLOR;
+    PieceColor active_color = PieceColor(WHITE);
+    PieceColor checkmated_color = PieceColor(NOCOLOR);
+
     std::stack<Move> move_stack;
 
     float move_number = 1.0f;
@@ -25,21 +26,21 @@ class Board {
 
     Location selected_indices = Location(-1, -1);
 
-    int board[8][8];
+    Piece board[8][8];
 
    public:
     Board() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                board[i][j] = 0;
+                board[i][j] = Piece(NOCOLOR, EMPTY);
             }
         }
     };
-    Board(const std::string& fen) { this->readFen(fen); }
-    const int* operator[](int row) const { return board[row]; }
-    int* operator[](int row) { return board[row]; }
+    Board(const std::string &fen) { this->readFen(fen); }
+    const Piece *operator[](int row) const { return board[row]; }
+    Piece *operator[](int row) { return board[row]; }
 
-    float evaluateBoard(int color);
+    float evaluateBoard(PieceColor color);
     std::vector<Move> getLegalMoves(PieceColor color);
 
     float getMoveNumber();
@@ -50,7 +51,7 @@ class Board {
     void toggleActiveColor();
 
     Location getSelectedLocation();
-    int getPieceAt(Location location);
+    Piece getPieceAt(Location location);
 
     void setSelectedPiece(int i, int j);
     bool hasSelectedPiece();

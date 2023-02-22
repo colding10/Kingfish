@@ -13,17 +13,19 @@
 #include "pieces.hpp"
 #include "transtable.hpp"
 
-bool isCaptureMove(Move move, Board* node) {
+bool isCaptureMove(Move move, Board *node) {
     return node->getPieceAt(move.getEnding());
 }
 
-void AI::orderMoves(std::vector<Move>& moves, Board* node) {
-    std::sort(moves.begin(), moves.end(), [=](const Move& m1, const Move& m2) {
+void AI::orderMoves(std::vector<Move> &moves, Board *node) {
+    std::sort(moves.begin(), moves.end(), [=](const Move &m1, const Move &m2) {
         return isCaptureMove(m1, node) && !isCaptureMove(m2, node);
     });
 }
 
-int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkmate, TranspositionTable& transpositionTable, int depth) {
+int AI::quiesce(Board *node, PieceColor color, int alpha, int beta,
+                bool checkmate, TranspositionTable &transpositionTable,
+                int depth) {
     int stand_pat = node->evaluateBoard(color);
     int score;
 
@@ -47,7 +49,8 @@ int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkma
             return INT_MAX - depth;
         }
 
-        score = -quiesce(node, Pieces::oppositeColor(color), -beta, -alpha, false, transpositionTable, depth - 1);
+        score = -quiesce(node, Pieces::oppositeColor(color), -beta, -alpha, false,
+                         transpositionTable, depth - 1);
         node->undoLastMove();
 
         if (score >= beta) {
@@ -62,7 +65,8 @@ int AI::quiesce(Board* node, PieceColor color, int alpha, int beta, bool checkma
     return alpha;
 }
 
-int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, TranspositionTable& transpositionTable, bool allowNullMove) {
+int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
+                TranspositionTable &transpositionTable, bool allowNullMove) {
     bool checkmate = node->isCheckmate(color);
     if (checkmate) {
         return INT_MIN + depth;
@@ -75,7 +79,8 @@ int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, T
 
     if (depth <= 0) {
         // return node->evaluateBoard(color);
-        return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable, depth);
+        return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable,
+                           depth);
     }
 
     int bestValue = INT_MIN;
@@ -87,7 +92,9 @@ int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, T
     // Null move pruning
     if (!allowNullMove && moves.size() > 0 && !isCaptureMove(moves[0], node)) {
         node->makeNullMove();
-        int value = -negamax(node, Pieces::oppositeColor(color), depth - 1 - NULL_MOVE_DEPTH, -beta, -beta + 1, transpositionTable, false);
+        int value =
+            -negamax(node, color.oppositeColor(), depth - 1 - NULL_MOVE_DEPTH,
+                     -beta, -beta + 1, transpositionTable, false);
         node->undoLastMove();
 
         if (value >= beta) {
@@ -105,11 +112,14 @@ int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, T
         if (!node->isInCheck(color)) {
             int value;
             if (!foundPV) {
-                value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta, -alpha, transpositionTable, true);
+                value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta,
+                                 -alpha, transpositionTable, true);
             } else {
-                value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -alpha - 1, -alpha, transpositionTable, true);
+                value = -negamax(node, Pieces::oppositeColor(color), depth - 1,
+                                 -alpha - 1, -alpha, transpositionTable, true);
                 if (value > alpha && value < beta) {
-                    value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta, -alpha, transpositionTable, true);
+                    value = -negamax(node, Pieces::oppositeColor(color), depth - 1, -beta,
+                                     -alpha, transpositionTable, true);
                 }
             }
 
@@ -142,7 +152,9 @@ int AI::negamax(Board* node, PieceColor color, int depth, int alpha, int beta, T
     return bestValue;
 }
 
-Move AI::findBestMove(Board* node, PieceColor color, int depth, int time_limit_ms, TranspositionTable& transpositionTable) {
+Move AI::findBestMove(Board *node, PieceColor color, int depth,
+                      int time_limit_ms,
+                      TranspositionTable &transpositionTable) {
     auto start_time = std::chrono::high_resolution_clock::now();
     auto end_time = start_time + std::chrono::milliseconds(time_limit_ms);
     int alpha = INT_MIN;
@@ -157,7 +169,9 @@ Move AI::findBestMove(Board* node, PieceColor color, int depth, int time_limit_m
     for (int current_depth = 1; current_depth <= depth; current_depth++) {
         for (auto move : moves) {
             node->makeMove(move);
-            value = -negamax(node, Pieces::oppositeColor(color), current_depth - 1, -beta, -alpha, transpositionTable, false);  // TODO: check if null should be ok
+            value = -negamax(node, Pieces::oppositeColor(color), current_depth - 1,
+                             -beta, -alpha, transpositionTable,
+                             false);  // TODO: check if null should be ok
             node->undoLastMove();
 
             if (value >= beta) {
