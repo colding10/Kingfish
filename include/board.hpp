@@ -24,6 +24,8 @@ class Board {
     Location selected_indices = {-1, -1};
 
    public:
+    Board(const std::string& fen) { this->readFen(fen);}
+
     int board[8][8];
 
     PieceColor checkmated_color = NOCOLOR;
