@@ -82,10 +82,7 @@ int main() {
 
     std::tie(window, renderer, font) = GUI::createObjects();
 
-    Board board;
-
-    board.readFen(STARTING_FEN);
-    std::cout << board.getLegalMoves(WHITE).size() << std::endl;
+    Board board(STARTING_FEN);
 
     bool running = true;
     bool gameover = false;
