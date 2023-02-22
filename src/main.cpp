@@ -24,6 +24,15 @@ int main() {
     std::tie(window, renderer, font) = GUI::createObjects();
 
     Board board(STARTING_FEN);
+    std::cout << board[0][0] << std::endl;
+    std::cout << board[0][1] << std::endl;
+    std::cout << board[0][2] << std::endl;
+    std::cout << board[0][3] << std::endl;
+    std::cout << board[0][4] << std::endl;
+    std::cout << board[0][5] << std::endl;
+    std::cout << board[0][6] << std::endl;
+
+    board[0][0] = Pieces::makePiece(PAWN, WHITE);
 
     bool running = true;
     bool gameover = false;

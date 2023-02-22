@@ -109,7 +109,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
 
                 SDL_Surface* image = SDL_LoadBMP(filepath.c_str());
                 if (image == NULL) {
-                    std::cerr << "image=" << image << " Reason: " << SDL_GetError() << " " << SDL_GetBasePath() << std::endl;
+                    std::cerr << "image=" << image << " Reason: " << SDL_GetError() << std::endl;
                 }
                 SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
 

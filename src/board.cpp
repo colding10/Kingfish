@@ -69,28 +69,47 @@ void Board::readFen(std::string fen) {
 std::string Board::getFen() {
     std::string fen = "";
     char c = ' ';
+    int empty_count = 0;
 
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {
-            if (this->board[row][col] == PAWN) {
+            Piece piece = this->board[row][col];
+            PieceClass piece_class = Pieces::getPieceClass(piece);
+
+            if (piece == 0) {
+                c = ' ';
+            } else if (piece_class == PAWN) {
                 c = 'p';
-            } else if (this->board[row][col] == ROOK) {
+            } else if (piece_class == ROOK) {
                 c = 'r';
-            } else if (this->board[row][col] == KNIGHT) {
+            } else if (piece_class == KNIGHT) {
                 c = 'n';
-            } else if (this->board[row][col] == BISHOP) {
+            } else if (piece_class == BISHOP) {
                 c = 'b';
-            } else if (this->board[row][col] == QUEEN) {
+            } else if (piece_class == QUEEN) {
                 c = 'q';
-            } else if (this->board[row][col] == KING) {
+            } else if (piece_class == KING) {
                 c = 'k';
             }
+            if (c == ' ') {
+                empty_count++;
+                continue;
+            } else {
+                if (empty_count > 0) {
+                    fen += std::to_string(empty_count);
+                }
+                empty_count = 0;
+            }
 
-            if (Pieces::getPieceColor(c) == WHITE) {
-                c += 32;
+            if (Pieces::getPieceColor(piece) == WHITE) {
+                c = toupper(c);
             }
             fen += c;
         }
+        if (empty_count > 0) {
+            fen += std::to_string(empty_count);
+        }
+        empty_count = 0;
         fen += "/";
     }
 
