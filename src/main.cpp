@@ -116,7 +116,7 @@ std::tuple<int, int> getDepthAndTime() {
     std::cout << "enter negamax depth limit: ";
     std::cin >> depth_limit;
     std::cout << "enter negamax time limit: ";
-    std::cin >> depth_limit;
+    std::cin >> time_limit_ms;
 
     std::cout << "negamax depth limit: " << depth_limit << std::endl;
     std::cout << "negamax time limit: " << time_limit_ms << std::endl;
