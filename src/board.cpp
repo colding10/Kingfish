@@ -383,10 +383,10 @@ float Board::evaluateBoard(PieceColor color) {
         }
     }
 
-    // if (black_pieces + white_pieces > 10) {
-    //     white += white_bonuses;
-    //     black += black_bonuses;
-    // }
+    if (black_pieces + white_pieces > 10) {
+        white += white_bonuses;
+        black += black_bonuses;
+    }
 
     return (white - black) * (color == WHITE ? 1 : -1) + mobility / 2 - 10;
 }
