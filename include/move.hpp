@@ -1,6 +1,9 @@
 #ifndef MOVE_HPP_INCLUDED
 #define MOVE_HPP_INCLUDED
 
+#include <ostream>
+#include <string>
+
 #include "location.hpp"
 #include "pieces.hpp"
 
@@ -21,6 +24,12 @@ class Move {
     // Setters
     void setCaptured(Piece p) { m_captured = p; }
     void setNumber(int n) { m_number = n; }
+
+    // Operators
+    friend std::ostream& operator<<(std::ostream& os, const Move& obj) {
+        os << "Move(" << obj.m_starting.to_string() << ", " << obj.m_ending.to_string() << " " << obj.m_captured << ")";
+        return os;
+    }
 
    private:
     Location m_starting;  // Starting location of the move

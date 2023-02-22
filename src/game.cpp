@@ -45,15 +45,15 @@ bool Game::isValidMove(Board* board, Location starting, Location ending, bool ch
         return result;
     }
 
-    board->makeMove(Move(starting, ending, 0, 0));
+    board->makeMove(Move(starting, ending, 0, 0), false);
 
     if (isInCheck(board, starting_color)) {
-        board->makeMove(Move(ending, starting, 0, 0));
+        board->makeMove(Move(ending, starting, 0, 0), false);
         board->board[ending.X][ending.Y] = ending_piece;
         return false;
     }
 
-    board->makeMove(Move(ending, starting, 0, 0)); // TODO: fix move number, check up
+    board->makeMove(Move(ending, starting, 0, 0), false); // TODO: fix move number, check up
     board->board[ending.X][ending.Y] = ending_piece;
     return true;
 }

@@ -7,10 +7,11 @@
 #include <iostream>
 #include <ostream>
 #include <string>
+#include <tuple>
 
 #include "board.hpp"
-#include "location.hpp"
 #include "game.hpp"
+#include "location.hpp"
 #include "pieces.hpp"
 
 // TODO: add special moves like castle, en passant
@@ -18,9 +19,9 @@
 
 void GUI::initSDL() {
     SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
     TTF_Init();
 }
-
 void GUI::cleanupSDL(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font) {
     TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
@@ -29,9 +30,28 @@ void GUI::cleanupSDL(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     TTF_Quit();
 }
 
-SDL_Window* GUI::createSDLWindow() {
-    return SDL_CreateWindow("C++ Chess", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT,
-                            SDL_WINDOW_SHOWN);
+std::tuple<SDL_Window*, SDL_Renderer*, TTF_Font*> GUI::createObjects() {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    TTF_Font* font;
+
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+
+    SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
+
+    SDL_SetWindowTitle(window, "C++ Chess");
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+
+    font = TTF_OpenFont("assets/OpenSans-Regular.MesloLGS NF Regular.ttf", 50);
+    if (font == nullptr) {
+        std::cerr << "Failed to load font. Error: " << TTF_GetError() << std::endl;
+        exit(1);
+    }
+
+    return {window, renderer, font};
 }
 
 SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
@@ -39,13 +59,12 @@ SDL_Renderer* GUI::createSDLRenderer(SDL_Window* window) {
     return SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_GL_DOUBLEBUFFER);
 }
 
-TTF_Font* GUI::createTTFFont() {
-    return TTF_OpenFont("/Users/colinding/Library/Fonts/MesloLGS NF Regular.ttf", 50);
-}
-
 void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
     Piece p;
     Location selected_piece = board->getSelectedLocation();
+
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
+    SDL_RenderClear(renderer);
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -184,7 +203,7 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board* board) {
             Pieces::getPieceColor(board->getPieceAt(board->getSelectedLocation()))) {
             board->setSelectedPiece(board_location.X, board_location.Y);
         } else {
-            board->tryMove(Move(board->getSelectedLocation(), board_location, 0, 0)); // TODO: check args
+            board->tryMove(Move(board->getSelectedLocation(), board_location, 0, 0));  // TODO: check args
         }
     }
 }
@@ -193,6 +212,9 @@ void GUI::handleKeyPressed(SDL_KeyboardEvent event, Board* board) {
     if (event.keysym.sym == SDL_GetKeyFromName("r") || event.keysym.sym == SDL_GetKeyFromName("f")) {
         std::cout << "r/f pressed, reversing board" << std::endl;
         board->reverse();
+    } else if (event.keysym.sym == SDL_GetKeyFromName("u")) {
+        std::cout << "u pressed, undoing move" << std::endl;
+        board->undoLastMove();
     }
 }
 
@@ -207,7 +229,6 @@ Location GUI::getBoardIndices(int x, int y) {
      */
 
     Location out = Location(y / TILE_SIZE, x / TILE_SIZE);
-
 
     return out;
 }

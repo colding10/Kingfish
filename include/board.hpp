@@ -35,6 +35,7 @@ class Board {
     void incrementMoveNumber();
 
     PieceColor getActiveColor();
+    void setActiveColor(PieceColor color);
     void toggleActiveColor();
 
     Location getSelectedLocation();
@@ -45,13 +46,16 @@ class Board {
     void clearSelectedPiece();
 
     void tryMove(Move move);
-    void makeMove(Move move);
+    void makeMove(Move move, bool push_to_stack = true);
     void undoLastMove();
 
     void makeNullMove();
 
     void readFen(std::string fen);
+    std::string getFen();
+
     void printBoard();
+    void printEvaluation();
 
     void reverse();
     bool isReversed();

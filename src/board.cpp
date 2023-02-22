@@ -65,12 +65,48 @@ void Board::readFen(std::string fen) {
         }
     }
 }
+
+std::string Board::getFen() {
+    std::string fen = "";
+    char c;
+
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            if (this->board[row][col] == PAWN) {
+                c = 'p';
+            } else if (this->board[row][col] == ROOK) {
+                c = 'r';
+            } else if (this->board[row][col] == KNIGHT) {
+                c = 'n';
+            } else if (this->board[row][col] == BISHOP) {
+                c = 'b';
+            } else if (this->board[row][col] == QUEEN) {
+                c = 'q';
+            } else if (this->board[row][col] == KING) {
+                c = 'k';
+            }
+
+            if (Pieces::getPieceColor(c) == WHITE) {
+                c += 32;
+            }
+            fen += c;
+        }
+        fen += "/";
+    } 
+
+    return fen;
+}
+
 // TODO: add other info to board printing
 void Board::printBoard() {
     std::cout << "CHESSBOARD INFO" << std::endl;
     std::cout << "Turn: " << (this->getActiveColor() == WHITE ? "white" : "black") << std::endl;
     std::cout << "Move: " << this->getMoveNumber() << std::endl;
-    std::cout << "White value: " << this->evaluateBoard(WHITE) << std::endl;
+    std::cout << "FEN: " << this->getFen() << std::endl;
+    std::cout << "Hash: " << this->hash() << std::endl;
+
+    this->printEvaluation();
+
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -97,6 +133,10 @@ void Board::toggleActiveColor() {
     this->active_color = this->getActiveColor() == WHITE ? BLACK : WHITE;
 }
 
+void Board::setActiveColor(PieceColor color) {
+    this->active_color = color;
+}
+
 void Board::reverse() {
     int board[8][8];
 
@@ -120,20 +160,12 @@ bool Board::isReversed() {
 }
 
 void Board::tryMove(Move move) {
-    if (this->getActiveColor() != Pieces::getPieceColor(this->getPieceAt(move.getStarting()))) {  // out of turn
-        return;
-    }
-
     if (Game::isValidMove(this, move.getStarting(), move.getEnding(), true)) {
-        this->makeMove(move);
-        this->clearSelectedPiece();
-
-        this->incrementMoveNumber();
-        this->toggleActiveColor();
+        this->makeMove(move, true);
     }
 }
 
-void Board::makeMove(Move move) {
+void Board::makeMove(Move move, bool push_to_stack) {
     // if (Pieces::getPieceClass(this->getPieceAt(move.getStarting())) == KING) {
     //     if (abs(move.getEnding().X - move.getEnding().Y) == 2) {
     //         if (move.getEnding().Y > move.getStarting().Y) {
@@ -151,7 +183,13 @@ void Board::makeMove(Move move) {
     this->board[move.getEnding().X][move.getEnding().Y] = this->board[move.getStarting().X][move.getStarting().Y];
     this->board[move.getStarting().X][move.getStarting().Y] = 0x00;
 
-    this->moveStack.push(move);
+    if (push_to_stack) {
+        this->moveStack.push(move);
+        this->clearSelectedPiece();
+
+        this->incrementMoveNumber();
+        this->toggleActiveColor();
+    }
 
     // if (Pieces::getPieceClass(this->getPieceAt({move.getEnding().X, move.getEnding().Y})) == PAWN) {
     //     if (move.getEnding().X == 0 && Pieces::getPieceColor(this->getPieceAt({move.getEnding().X, move.getEnding().Y})) == WHITE) {
@@ -164,14 +202,17 @@ void Board::makeMove(Move move) {
 
 void Board::undoLastMove() {
     Move last_move = this->moveStack.top();
+
     this->moveStack.pop();
 
     this->board[last_move.getStarting().X][last_move.getStarting().Y] = this->board[last_move.getEnding().X][last_move.getEnding().Y];
     this->board[last_move.getEnding().X][last_move.getEnding().Y] = last_move.getCaptured();
+
+    this->toggleActiveColor();
 }
 
 void Board::makeNullMove() {
-    this->makeMove(Move(Location(0, 0), Location(0, 0), 0, -1));
+    this->makeMove(Move(Location(0, 0), Location(0, 0), 0, -1), true);
 }
 
 int Board::getPieceAt(Location location) {
@@ -330,6 +371,15 @@ float Board::evaluateBoard(int color) {
     // }
 
     return (white - black) * (color == WHITE ? 1 : -1) + mobility / 2 - 10;
+}
+
+void Board::printEvaluation() {
+    float white = this->evaluateBoard(WHITE);
+    float black = this->evaluateBoard(BLACK);
+
+    std::cout << (white >= black ? "WHITE" : "BLACK") << " is winning!" << std::endl;
+    std::cout << "White: " << white << std::endl;
+    std::cout << "Black: " << black << std::endl;
 }
 
 std::vector<Move> Board::getLegalMoves(PieceColor color) {
