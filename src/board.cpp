@@ -92,7 +92,7 @@ std::string Board::getFen() {
             fen += c;
         }
         fen += "/";
-    } 
+    }
 
     return fen;
 }
@@ -106,7 +106,6 @@ void Board::printBoard() {
     std::cout << "Hash: " << this->hash() << std::endl;
 
     this->printEvaluation();
-
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -441,6 +440,10 @@ bool Board::checkCheckmates() {
         return true;
     }
     return false;
+}
+
+PieceColor Board::getCheckmatedColor() {
+    return this->checkmated_color;
 }
 
 bool Board::isGameOver() {

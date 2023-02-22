@@ -75,6 +75,7 @@ class Board {
     bool isCheckmate(PieceColor c);
     bool checkCheckmates();
     void setCheckmate(PieceColor c);
+    PieceColor getCheckmatedColor();
 
     bool isGameOver();
     void setGameOver();

@@ -102,7 +102,7 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
                 SDL_RenderFillRect(renderer, &tile);
             }
 
-            p = board->board[i][j];
+            p = board->getPieceAt(Location(i, j));
 
             if (p != 0) {
                 std::string filepath = "../data/bmp/" + Pieces::getPieceFilename(p);
@@ -130,9 +130,9 @@ void GUI::drawChessboard(SDL_Renderer* renderer, Board* board, TTF_Font* font) {
         }
     }
 
-    if (board->checkmated_color != NOCOLOR) {
+    if (board->isGameOver()) {
         SDL_Color color = {0, 0, 0, 255};
-        SDL_Surface* surface = TTF_RenderText_Solid(font, (std::string(board->checkmated_color == BLACK ? "White" : "Black") + std::string(" wins!")).c_str(),
+        SDL_Surface* surface = TTF_RenderText_Solid(font, (std::string(board->getCheckmatedColor() == BLACK ? "White" : "Black") + std::string(" wins!")).c_str(),
                                                     color);
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
