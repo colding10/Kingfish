@@ -45,7 +45,7 @@ std::tuple<SDL_Window*, SDL_Renderer*, TTF_Font*> GUI::createObjects() {
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
-    font = TTF_OpenFont("assets/OpenSans-Regular.MesloLGS NF Regular.ttf", 50);
+    font = TTF_OpenFont("assets/MesloLGS NF Regular.ttf", 50);
     if (font == nullptr) {
         std::cerr << "Failed to load font. Error: " << TTF_GetError() << std::endl;
         exit(1);
