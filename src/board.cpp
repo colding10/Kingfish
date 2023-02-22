@@ -128,7 +128,7 @@ void Board::printBoard() {
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            std::cout << this->board[i][j] << std::string((board[i][j] >= 10 ? 1 : 2), ' ');
+            std::cout << this->board[i][j] << std::string((this->board[i][j] >= 10 ? 1 : 2), ' ');
         }
         std::cout << std::endl;
     }
@@ -156,17 +156,17 @@ void Board::setActiveColor(PieceColor color) {
 }
 
 void Board::reverse() {
-    int board[8][8];
+    Piece new_board[8][8];
 
     for (int i = 7; i >= 0; i--) {
         for (int j = 0; j < 8; j++) {
-            board[7 - i][j] = this->board[i][j];
+            new_board[7 - i][j] = this->board[i][j];
         }
     }
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            this->board[i][j] = board[i][j];
+            this->board[i][j] = new_board[i][j];
         }
     }
 
@@ -180,10 +180,11 @@ bool Board::isReversed() {
 void Board::tryMove(Move move) {
     if (Game::isValidMove(this, move.getStarting(), move.getEnding(), true)) {
         this->makeMove(move, true);
+        this->clearSelectedPiece();
     }
 }
 
-void Board::makeMove(Move move, bool push_to_stack) {
+void Board::makeMove(Move move, bool push_to_stack) { // TODO: fix castling and promoting
     // if (Pieces::getPieceClass(this->getPieceAt(move.getStarting())) == KING) {
     //     if (abs(move.getEnding().X - move.getEnding().Y) == 2) {
     //         if (move.getEnding().Y > move.getStarting().Y) {
@@ -203,7 +204,6 @@ void Board::makeMove(Move move, bool push_to_stack) {
 
     if (push_to_stack) {
         this->move_stack.push(move);
-        this->clearSelectedPiece();
 
         this->incrementMoveNumber();
         this->toggleActiveColor();
@@ -330,7 +330,7 @@ float Board::evaluateBoard(PieceColor color) {
             if (!p) {
                 continue;
             } else if (Pieces::getPieceColor(p) == WHITE) {
-                int bonus;
+                int bonus = 0;
                 switch (Pieces::getPieceClass(p)) {
                     case PAWN:
                         bonus = pawn_table[color == BLACK ? i : 7 - i][j];
@@ -355,7 +355,7 @@ float Board::evaluateBoard(PieceColor color) {
                 white_bonuses += bonus / 3;
                 white_pieces++;
             } else {
-                int bonus;
+                int bonus = 0;
                 switch (Pieces::getPieceClass(p)) {
                     case PAWN:
                         bonus = pawn_table[color == BLACK ? i : 7 - i][j];
@@ -383,10 +383,11 @@ float Board::evaluateBoard(PieceColor color) {
         }
     }
 
-    if (black_pieces + white_pieces > 10) {
-        white += white_bonuses;
-        black += black_bonuses;
-    }
+    // TODO: see if need to turn it on
+    // if (black_pieces + white_pieces > 10) {
+    //     white += white_bonuses;
+    //     black += black_bonuses;
+    // }
 
     return (white - black) * (color == WHITE ? 1 : -1) + mobility / 2 - 10;
 }
@@ -428,8 +429,8 @@ Location Board::getSelectedLocation() {
     return this->selected_indices;
 }
 
-void Board::setSelectedPiece(int i, int j) {
-    this->selected_indices = Location(i, j);
+void Board::setSelectedPiece(Location loc) {
+    this->selected_indices = loc;
 }
 
 void Board::clearSelectedPiece() {

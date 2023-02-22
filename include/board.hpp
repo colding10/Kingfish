@@ -53,7 +53,7 @@ class Board {
     Location getSelectedLocation();
     Piece getPieceAt(Location location);
 
-    void setSelectedPiece(int i, int j);
+    void setSelectedPiece(Location loc);
     bool hasSelectedPiece();
     void clearSelectedPiece();
 

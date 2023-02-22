@@ -41,23 +41,23 @@ bool Game::isValidMove(Board *board, Location starting, Location ending,
             break;
     }
 
+    // TODO: remove this later
+    // return result;
+    
     if (!check_king) {
         return result;
     } else if (result == false) {
         return result;
     }
 
-    board->makeMove(Move(starting, ending, 0, 0), false);
+    board->makeMove(Move(starting, ending, board->getPieceAt(ending), 0), true);
 
     if (isInCheck(board, starting_color)) {
-        board->makeMove(Move(ending, starting, 0, 0), false);
-        *board[ending.X][ending.Y] = ending_piece;
+        board->undoLastMove();
         return false;
     }
 
-    board->makeMove(Move(ending, starting, 0, 0),
-                    false);  // TODO: fix move number, check up
-    *board[ending.X][ending.Y] = ending_piece;
+    board->undoLastMove();
     return true;
 }
 

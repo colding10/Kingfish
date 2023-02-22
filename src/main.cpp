@@ -25,15 +25,6 @@ int main() {
     std::tie(window, renderer, font) = GUI::createObjects();
 
     Board board(STARTING_FEN);
-    std::cout << board[0][0] << std::endl;
-    std::cout << board[0][1] << std::endl;
-    std::cout << board[0][2] << std::endl;
-    std::cout << board[0][3] << std::endl;
-    std::cout << board[0][4] << std::endl;
-    std::cout << board[0][5] << std::endl;
-    std::cout << board[0][6] << std::endl;
-
-    board[0][0] = Pieces::makePiece(PAWN, WHITE);
 
     bool running = true;
     bool gameover = false;
@@ -51,6 +42,7 @@ int main() {
 
             board.printBoard();
         }
+        std::cout << "selected piece: " << board.getSelectedLocation().to_string() << std::endl;
 
         running = handleEvents(gameover, &board);
 
@@ -58,17 +50,17 @@ int main() {
 
         SDL_RenderPresent(renderer);
 
-        // if (board.checkCheckmates()) {
-        //     gameover = true;
-        // }
+        if (board.checkCheckmates()) {
+            gameover = true;
+        }
 
-        // if (board.isGameOver()) {
-        //     if (board.getActiveColor() == BLACK) {
-        //         // blackMove(&board, depth_limit, time_limit_ms, transtable);
-        //     } else {
-        //         // whiteMove(&board, 4, time_limit_ms, transtable);
-        //     }
-        // }
+        if (board.isGameOver()) {
+            if (board.getActiveColor() == BLACK) {
+                // blackMove(&board, depth_limit, time_limit_ms, transtable);
+            } else {
+                // whiteMove(&board, 4, time_limit_ms, transtable);
+            }
+        }
     }
 
     GUI::cleanupSDL(renderer, window, font);

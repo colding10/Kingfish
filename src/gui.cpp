@@ -110,7 +110,7 @@ void GUI::drawChessboard(SDL_Renderer *renderer, Board *board, TTF_Font *font) {
             if (p != 0) {
                 std::string filepath = "../assets/icons/" + Pieces::getPieceFilename(p);
 
-                SDL_Surface *image = SDL_LoadBMP(filepath.c_str());
+                SDL_Surface *image = SDL_LoadBMP_RW(SDL_RWFromFile(filepath.c_str(), "rb"), 1);
                 if (image == NULL) {
                     std::cerr << "image=" << image << " Reason: " << SDL_GetError()
                               << std::endl;
@@ -213,15 +213,16 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board *board) {
         if (board->getPieceAt(board_location) != 0 &&
             Pieces::getPieceColor(board->getPieceAt(board_location)) ==
                 board->getActiveColor()) {
-            board->setSelectedPiece(board_location.X, board_location.Y);
+                    std::cout << "joe" << std::endl;
+                        board->setSelectedPiece(board_location);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
         if (Pieces::getPieceColor(board->getPieceAt(board_location)) ==
             Pieces::getPieceColor(
                 board->getPieceAt(board->getSelectedLocation()))) {
-            board->setSelectedPiece(board_location.X, board_location.Y);
+            board->setSelectedPiece(board_location);
         } else {
-            board->tryMove(Move(board->getSelectedLocation(), board_location, 0,
+            board->tryMove(Move(board->getSelectedLocation(), board_location, board->getPieceAt(board_location),
                                 0));  // TODO: check args
         }
     }
