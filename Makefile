@@ -14,7 +14,7 @@ CPP := g++-12
 
 
 # ========== TARGETS ==========
-$(BIN_DIR)/main: $(OBJ_FILES)
+$(BIN_DIR)/kingfish: $(OBJ_FILES)
 	$(CPP) $(LDFLAGS) -o $@ ./$^
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -22,4 +22,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 clean: 
 	rm $(OBJ_DIR)/*.o
-	rm $(BIN_DIR)/main
+	rm $(BIN_DIR)/kingfish
