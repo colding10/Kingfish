@@ -41,6 +41,10 @@ int AI::quiesce(Board *node, PieceColor color, int alpha, int beta,
     orderMoves(moves, node);
 
     for (Move move : moves) {
+        if (!move.getCaptured()) {
+            continue;
+        }
+
         node->makeMove(move);
 
         if (node->isCheckmate(color)) {
@@ -86,10 +90,9 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
     // }
 
     if (depth <= 0) {
-        return node->evaluateBoard(color);
-        // TODO: turn quise back on
-        // return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable,
-                        //    depth);
+        std::cout << "eval: " << node->evaluateBoard(color) << " qui: " << AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable, depth) << std::endl;
+        // return node->evaluateBoard(color);
+        return AI::quiesce(node, color, alpha, beta, checkmate, transpositionTable, depth);
     }
     if (checkmate) {
         return node->evaluateBoard(color);
@@ -145,7 +148,7 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
     Move bestMove = Move(Location(0, 0), Location(0, 0), 0, 0);
     bestMove.value = INT_MIN;
 
-    for (int d = depth; d <= depth; d++) { // TODO: start from 1 again
+    for (int d = depth; d <= depth; d++) {  // TODO: start from 1 again
         bool checkmate = false;
 
         std::cout << "[BOT]   "
@@ -166,7 +169,6 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
             if (move.value > bestMove.value) {
                 bestMove = move;
             }
-
 
             // Stop the search if we've exceeded the time limit
             // auto current_time = std::chrono::high_resolution_clock::now();
