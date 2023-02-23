@@ -16,20 +16,32 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
+
+<div align="center">
+
+  a href="https://github.com/colding10/CXX-Chess">
+    <img src="images/logo.jpeg" alt="Logo" width="160" height="160">
+  </a>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+    [![Stargazers][stars-shield]][stars-url]
+    [![Issues][issues-shield]][issues-url]
+    [![MIT License][license-shield]][license-url]
+    [![LinkedIn][linkedin-shield]][linkedin-url]
+
+</div>
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/colding10/CXX-Chess">
-    <img src="images/logo.jpeg" alt="Logo" width="80" height="80">
-  </a>
-
+  
 <h3 align="center">Kingfish</h3>
 
   <p align="center">
@@ -76,8 +88,6 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `colding10`, `CXX-Chess`, `twitter_handle`, `linkedin_username`, `email_client`, `colinding10@gmail.com`, `CXX-Chess`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -228,6 +238,7 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 
 [product-screenshot]: images/screenshot.png
+
 
 <!-- Built With -->
 [C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
