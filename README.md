@@ -30,10 +30,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">CXX-Chess (changing to engine name soon)</h3>
 
   <p align="center">
-    project_description
+    A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
     <br />
     <a href="https://github.com/colding10/CXX-Chess"><strong>Explore the docs »</strong></a>
     <br />
