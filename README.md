@@ -202,7 +202,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Colin Ding - [@twitter_handle](https://twitter.com/twitter_handle) - colinding10@gmail.com
+Colin Ding - colinding10@gmail.com
 
 Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/colding10/CXX-Chess)
 
