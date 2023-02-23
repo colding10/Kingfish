@@ -148,34 +148,35 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
     Move bestMove = Move(Location(0, 0), Location(0, 0), 0, 0);
     bestMove.value = INT_MIN;
 
-    for (int d = depth; d <= depth; d++) {  // TODO: start from 1 again
-        bool checkmate = false;
+    bool checkmate = false;
 
-        std::cout << "[BOT]   "
-                  << "searched to depth " << d << std::endl;
 
-        int move_number = 1;
-        for (auto move : moves) {
-            std::cout << "[BOT]   "
-                      << "searching move #" << move_number << " at depth " << d << std::endl;
-            move_number++;
+    int move_number = 1;
+    for (auto move : moves) {
+        std::cout << "[BOT]   " << "searching move #" << move_number << " at depth " << depth << std::endl;
+        move_number++;
 
-            node->makeMove(move);
-            move.value += -negamax(node, Pieces::oppositeColor(color), d - 1,
-                                   INT_MIN, INT_MAX, transpositionTable, checkmate);
-
+        node->makeMove(move);
+        if (node->isCheckmate(Pieces::oppositeColor(color))) {
             node->undoLastMove();
 
-            if (move.value > bestMove.value) {
-                bestMove = move;
-            }
-
-            // Stop the search if we've exceeded the time limit
-            // auto current_time = std::chrono::high_resolution_clock::now();
-            // if (current_time > end_time) {
-            //     break;
-            // }
+            std::cout << "found mate" << std::endl;
+            return move;
         }
+        move.value += -negamax(node, Pieces::oppositeColor(color), depth - 1,
+                               INT_MIN, INT_MAX, transpositionTable, checkmate);
+
+        node->undoLastMove();
+
+        if (move.value > bestMove.value) {
+            bestMove = move;
+        }
+
+        // Stop the search if we've exceeded the time limit
+        // auto current_time = std::chrono::high_resolution_clock::now();
+        // if (current_time > end_time) {
+        //     break;
+        // }
     }
 
     return bestMove;
