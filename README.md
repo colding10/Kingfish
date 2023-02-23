@@ -87,6 +87,8 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
+Write project details here.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
