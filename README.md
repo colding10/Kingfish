@@ -16,6 +16,22 @@
 6. Implement engine interfaces and advanced improvements
 7. Play engine against other programs to rank ELO
 
+## GUI Features
+
+*italics: done*
+**bold: todo**
+
+- **Sidebar menu**
+    1. Board flipping available
+    2. Undo moves
+    3. View move history
+    4. Have a clock
+- Show engine evaluation of game (left bar, like `chess.com`)
+- Show engine running status
+- Improved highlighting (check, checkmate, pins)
+- Keyboard shortcuts for everything
+- Help menu
+
 ## Implementation
 
 - SDL2 for GUI
@@ -27,13 +43,14 @@
 bin     - the output binary <br/>
 src     - the source files (.cpp) <br/>
 include - the header files (.hpp) <br/>
-libs    - the libraries (.a, .dylib) *not included* <br/>
 
 ## Dependecies
 
 - SDL2
 - SDL2_image
 - SDL2_ttf
+
+this project uses the `C++11` standard and compiles with `g++-12`
 
 ## Compiling
 
