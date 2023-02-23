@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <map>
+#include <string>
 #include <tuple>
 
 #include "board.hpp"
@@ -11,9 +13,15 @@
 bool handleEvent(SDL_Event &event, bool &gameover, Board *board);
 bool handleEvents(bool &gameover, Board *board);
 void blackMove(Board *board, int depth, int time_limit_ms,
-               TranspositionTable &transpositionTable);
+               TranspositionTable &transpositionTable,
+               std::map<std::string, bool> settings);
 void whiteMove(Board *board, int depth, int time_limit_ms,
-               TranspositionTable &transpositionTable);
-std::tuple<int, int> getDepthAndTime();
+               TranspositionTable &transpositionTable,
+               std::map<std::string, bool> settings);
+
+std::pair<int, int> getDepthAndTime();
+std::pair<bool, bool> getPlayerSettings();
+
+std::map<std::string, bool> getSearchSettings();
 
 #endif  // !MAIN_HPP_INCLUDED

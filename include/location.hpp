@@ -23,7 +23,7 @@ struct Location {
     bool operator<=(const Location &rhs) const { return !(*this > rhs); }
     bool operator>=(const Location &rhs) const { return !(*this < rhs); }
     bool operator[](const int &x) const { return x == 0 ? X : Y; }
-    
+
     std::string to_string() const {
         return "(" + std::to_string(X) + ", " + std::to_string(Y) + ")";
     }

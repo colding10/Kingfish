@@ -13,6 +13,7 @@
 #include "location.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
+#include "zobrist.hpp"
 
 // TODO: add other FEN fields
 void Board::readFen(std::string fen) {
@@ -184,7 +185,7 @@ void Board::tryMove(Move move) {
     }
 }
 
-void Board::makeMove(Move move, bool push_to_stack) { // TODO: fix castling and promoting
+void Board::makeMove(Move move, bool push_to_stack) {  // TODO: fix castling and promoting
     // if (Pieces::getPieceClass(this->getPieceAt(move.getStarting())) == KING) {
     //     if (abs(move.getEnding().X - move.getEnding().Y) == 2) {
     //         if (move.getEnding().Y > move.getStarting().Y) {
@@ -478,12 +479,28 @@ void Board::setCheckmate(PieceColor c) {
     this->checkmated_color = c;
 }
 
-int Board::hash() {
-    int hash_value = 0;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            hash_value ^= (this->board[i][j] + 0x9e3779b9 + (hash_value << 6) + (hash_value >> 2));
+std::uint64_t Board::hash() {
+    std::uint64_t h = 0;
+
+    // xor random values for each piece and player color
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            Piece piece = this->board[row][col];
+
+            if (piece != 0) {
+                PieceColor color = Pieces::getPieceColor(piece);
+                PieceClass piece_class = Pieces::getPieceClass(piece);
+                std::uint64_t piece_key = zobrist::piece_keys[piece_class][color];
+                std::uint64_t position_key = zobrist::position_keys[row][col];
+                h ^= piece_key ^ position_key;
+            }
         }
     }
-    return hash_value;
+
+    // xor random value for active color
+    if (this->getActiveColor() == BLACK) {
+        h ^= zobrist::black_to_move_key;
+    }
+
+    return h;
 }

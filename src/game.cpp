@@ -15,35 +15,35 @@ bool Game::isValidMove(Board *board, Location starting, Location ending,
     PieceColor starting_color = Pieces::getPieceColor(starting_piece);
 
     if (ending_piece != 0x00 &&
-        starting_color == Pieces::getPieceColor(ending_piece)) {
+            starting_color == Pieces::getPieceColor(ending_piece)) {
         return false;  // can't capture your own piece
     }
 
     bool result = true;
     switch (Pieces::getPieceClass(starting_piece)) {
-        case PAWN:
-            result = isValidPawnMove(board, starting, ending, starting_color);
-            break;
-        case KNIGHT:
-            result = isValidKnightMove(starting, ending);
-            break;
-        case BISHOP:
-            result = isValidBishopMove(board, starting, ending, starting_color);
-            break;
-        case ROOK:
-            result = isValidRookMove(board, starting, ending, starting_color);
-            break;
-        case QUEEN:
-            result = isValidQueenMove(board, starting, ending, starting_color);
-            break;
-        case KING:
-            result = isValidKingMove(board, starting, ending);
-            break;
+    case PAWN:
+        result = isValidPawnMove(board, starting, ending, starting_color);
+        break;
+    case KNIGHT:
+        result = isValidKnightMove(starting, ending);
+        break;
+    case BISHOP:
+        result = isValidBishopMove(board, starting, ending, starting_color);
+        break;
+    case ROOK:
+        result = isValidRookMove(board, starting, ending, starting_color);
+        break;
+    case QUEEN:
+        result = isValidQueenMove(board, starting, ending, starting_color);
+        break;
+    case KING:
+        result = isValidKingMove(board, starting, ending);
+        break;
     }
 
     // TODO: remove this later
     // return result;
-    
+
     if (!check_king) {
         return result;
     } else if (result == false) {
@@ -73,7 +73,7 @@ bool Game::isValidPawnMove(Board *board, Location starting, Location ending,
     if (ending_piece == 0) {  // open piece
         if (opposite_color == WHITE) {
             if (starting.X == 6 && starting.X - ending.X == 2 &&
-                starting.Y == ending.Y && !board->getPieceAt({5, starting.Y})) {
+                    starting.Y == ending.Y && !board->getPieceAt({5, starting.Y})) {
                 return true;
             }
             if (starting.X - ending.X == 1 && starting.Y == ending.Y) {
@@ -81,7 +81,7 @@ bool Game::isValidPawnMove(Board *board, Location starting, Location ending,
             }
         } else if (opposite_color == BLACK) {
             if (starting.X == 1 && ending.X - starting.X == 2 &&
-                starting.Y == ending.Y && !board->getPieceAt({2, starting.Y})) {
+                    starting.Y == ending.Y && !board->getPieceAt({2, starting.Y})) {
                 return true;
             }
             if (ending.X - starting.X == 1 && starting.Y == ending.Y) {
@@ -125,7 +125,7 @@ bool Game::isValidKnightMove(Location starting, Location ending) {
 bool Game::isValidBishopMove(Board *board, Location starting, Location ending,
                              PieceColor starting_color) {
     if (starting.X + starting.Y != ending.X + ending.Y &&
-        starting.X - starting.Y != ending.X - ending.Y) {
+            starting.X - starting.Y != ending.X - ending.Y) {
         return false;
     }
 
@@ -135,7 +135,7 @@ bool Game::isValidBishopMove(Board *board, Location starting, Location ending,
     Location indices = starting;
 
     while (0 <= indices.X && indices.X <= 7 && 0 <= indices.Y && indices.Y <= 7 &&
-           indices != ending) {
+            indices != ending) {
         indices.Y += x_change;
         indices.X += y_change;
 
@@ -172,7 +172,7 @@ bool Game::isValidRookMove(Board *board, Location starting, Location ending,
     Location indices = (starting);
 
     while (0 <= indices.X && indices.X <= 7 && 0 <= indices.Y && indices.Y <= 7 &&
-           indices != ending) {
+            indices != ending) {
         indices.Y += x_change;
         indices.X += y_change;
 
@@ -214,21 +214,21 @@ bool Game::isValidKingMove(Board *board, Location starting, Location ending) {
 
     if (starting.X == 0 && starting.Y == 4) {
         if (ending.X == 0 && ending.Y == 6 && !board->getPieceAt({0, 5}) &&
-            Pieces::getPieceClass(board->getPieceAt({0, 7})) == ROOK) {
+                Pieces::getPieceClass(board->getPieceAt({0, 7})) == ROOK) {
             return true;
         }
         if (ending.X == 0 && ending.Y == 2 && !board->getPieceAt({0, 3}) &&
-            Pieces::getPieceClass(board->getPieceAt({0, 0})) == ROOK) {
+                Pieces::getPieceClass(board->getPieceAt({0, 0})) == ROOK) {
             return true;
         }
     }
     if (starting.X == 7 && starting.Y == 4) {
         if (ending.X == 7 && ending.Y == 6 && !board->getPieceAt({7, 5}) &&
-            Pieces::getPieceClass(board->getPieceAt({7, 7})) == ROOK) {
+                Pieces::getPieceClass(board->getPieceAt({7, 7})) == ROOK) {
             return true;
         }
         if (ending.X == 7 && ending.Y == 2 && !board->getPieceAt({7, 3}) &&
-            Pieces::getPieceClass(board->getPieceAt({7, 0})) == ROOK) {
+                Pieces::getPieceClass(board->getPieceAt({7, 0})) == ROOK) {
             return true;
         }
     }
@@ -245,7 +245,7 @@ bool Game::isInCheck(Board *board, PieceColor color) {
         for (int j = 0; j < 8; j++) {
             piece = board->getPieceAt(Location(i, j));
             if (Pieces::getPieceClass(piece) == KING &&
-                Pieces::getPieceColor(piece) == color) {
+                    Pieces::getPieceColor(piece) == color) {
                 king_location = Location(i, j);
                 break;
             }

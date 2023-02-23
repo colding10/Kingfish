@@ -36,7 +36,6 @@ class Move {
     Location m_starting;  // Starting location of the move
     Location m_ending;    // Ending location of the move
 
-
     Piece m_captured;  // Piece that was captured (0 if none)
     int m_number;      // Move number
 };

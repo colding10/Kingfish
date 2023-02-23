@@ -32,6 +32,8 @@ void GUI::cleanupSDL(SDL_Renderer *renderer, SDL_Window *window,
 }
 
 std::tuple<SDL_Window *, SDL_Renderer *, TTF_Font *> GUI::createObjects() {
+    initSDL();
+
     SDL_Window *window;
     SDL_Renderer *renderer;
     TTF_Font *font;
@@ -124,8 +126,8 @@ void GUI::drawChessboard(SDL_Renderer *renderer, Board *board, TTF_Font *font) {
             }
 
             if (board->hasSelectedPiece() &&
-                Game::isValidMove(board, board->getSelectedLocation(), Location(i, j),
-                                  true)) {
+                    Game::isValidMove(board, board->getSelectedLocation(), Location(i, j),
+                                      true)) {
                 SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
                 int centerX = tile.x + tile.w / 2;
@@ -139,11 +141,11 @@ void GUI::drawChessboard(SDL_Renderer *renderer, Board *board, TTF_Font *font) {
     if (board->isGameOver()) {
         SDL_Color color = {0, 0, 0, 255};
         SDL_Surface *surface = TTF_RenderText_Solid(
-            font,
-            (std::string(board->getCheckmatedColor() == BLACK ? "White" : "Black") +
-             std::string(" wins!"))
-                .c_str(),
-            color);
+                                   font,
+                                   (std::string(board->getCheckmatedColor() == BLACK ? "White" : "Black") +
+                                    std::string(" wins!"))
+                                   .c_str(),
+                                   color);
         SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
         int texW = 0;
@@ -151,7 +153,8 @@ void GUI::drawChessboard(SDL_Renderer *renderer, Board *board, TTF_Font *font) {
 
         SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
         SDL_Rect dstrect = {WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 75, texW,
-                            texH};
+                            texH
+                           };
         SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
         SDL_DestroyTexture(texture);
@@ -211,14 +214,14 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board *board) {
         board->clearSelectedPiece();
     } else if (!board->hasSelectedPiece()) {  // select a piece
         if (board->getPieceAt(board_location) != 0 &&
-            Pieces::getPieceColor(board->getPieceAt(board_location)) ==
+                Pieces::getPieceColor(board->getPieceAt(board_location)) ==
                 board->getActiveColor()) {
-                        board->setSelectedPiece(board_location);
+            board->setSelectedPiece(board_location);
         }
     } else if (board->hasSelectedPiece()) {  // move a piece
         if (Pieces::getPieceColor(board->getPieceAt(board_location)) ==
-            Pieces::getPieceColor(
-                board->getPieceAt(board->getSelectedLocation()))) {
+                Pieces::getPieceColor(
+                    board->getPieceAt(board->getSelectedLocation()))) {
             board->setSelectedPiece(board_location);
         } else {
             board->tryMove(Move(board->getSelectedLocation(), board_location, board->getPieceAt(board_location),
@@ -229,7 +232,7 @@ void GUI::handleMouseClicked(SDL_MouseButtonEvent event, Board *board) {
 
 void GUI::handleKeyPressed(SDL_KeyboardEvent event, Board *board) {
     if (event.keysym.sym == SDL_GetKeyFromName("r") ||
-        event.keysym.sym == SDL_GetKeyFromName("f")) {
+            event.keysym.sym == SDL_GetKeyFromName("f")) {
         std::cout << "r/f pressed, reversing board" << std::endl;
         board->reverse();
     } else if (event.keysym.sym == SDL_GetKeyFromName("u")) {

@@ -16,7 +16,7 @@ class TranspositionTable {
     };
 
     void put(long long hash, Entry entry);
-    bool get(long long hash, Entry& entry);
+    bool get(long long hash, Entry &entry);
 
    private:
     std::unordered_map<int, Entry> table;

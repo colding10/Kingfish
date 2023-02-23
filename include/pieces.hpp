@@ -9,20 +9,16 @@ typedef unsigned int PieceClass;
 
 const int NULL_PIECE = 0x00;
 
-enum PieceColors {
-    WHITE = 16,
-    BLACK = 8,
-    NOCOLOR = 0
-};
+enum PieceColors { WHITE = 16,
+                   BLACK = 8,
+                   NOCOLOR = 0 };
 
-enum PieceEnum {
-    PAWN,
-    KNIGHT,
-    BISHOP,
-    ROOK,
-    QUEEN,
-    KING
-};
+enum PieceEnum { PAWN,
+                 KNIGHT,
+                 BISHOP,
+                 ROOK,
+                 QUEEN,
+                 KING };
 
 namespace Pieces {
     PieceColor getPieceColor(Piece p);

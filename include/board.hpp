@@ -81,7 +81,7 @@ class Board {
     bool isGameOver();
     void setGameOver();
 
-    int hash();
+    std::uint64_t hash();
 };
 
 #endif  // !BOARD_HPP_INCLUDED
