@@ -83,6 +83,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
+* [![C++][C++]][C++-url]
 * [![SDL2][SDL2]][SDL-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -224,5 +225,8 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 [product-screenshot]: images/screenshot.png
 
 <!-- Built With -->
-[SDL2]: https://img.shields.io/badge/SDL2-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[C++]: https://img.shields.io/badge/C++-000000?style=for-the-badge&logo=cplusplus&logoColor=white
+[C++-url]: https://isocpp.org/
+
+[SDL2]: https://img.shields.io/badge/SDL2-000000?style=for-the-badge&logo=none&logoColor=white
 [SDL-url]: https://www.libsdl.org/
