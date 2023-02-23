@@ -106,7 +106,7 @@ To get a local copy up and running follow these simple example steps.
 
 This installation assumes MacOS X 10.14. Support for other operating systems or versions is not tested.
 
-* Homebrew (if not installed)
+* [Homebrew](https://brew.sh) (if not installed)
 
   ```bash
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
