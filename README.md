@@ -24,6 +24,11 @@
 [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <div align="center">
+  
+<h3 align="center">Kingfish</h3>
+<br />
+
+<div align="center">
 
   <a href="https://github.com/colding10/CXX-Chess">
     <img src="images/logo.jpeg" alt="Logo" width="160" height="160">
@@ -37,12 +42,6 @@
   [![LinkedIn][linkedin-shield]][linkedin-url]
 
 </div>
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  
-<h3 align="center">Kingfish</h3>
 
   <p align="center">
     A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
