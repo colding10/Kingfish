@@ -227,8 +227,6 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 ## Acknowledgments
 
 * []()
-* []()
-* []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
