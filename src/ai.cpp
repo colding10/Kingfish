@@ -169,10 +169,10 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
 
 
             // Stop the search if we've exceeded the time limit
-            auto current_time = std::chrono::high_resolution_clock::now();
-            if (current_time > end_time) {
-                break;
-            }
+            // auto current_time = std::chrono::high_resolution_clock::now();
+            // if (current_time > end_time) {
+            //     break;
+            // }
         }
     }
 
