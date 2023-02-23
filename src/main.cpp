@@ -106,13 +106,13 @@ void blackMove(Board *board, int depth, int time_limit_ms,
     board->setActiveColor(WHITE);
 }
 
-void whiteMove(Board *board, int depth, int time_limit_ms,
-               TranspositionTable &transpositionTable) {
-    Move bm =
-        AI::findBestMove(board, WHITE, depth, time_limit_ms, transpositionTable);
-    board->makeMove(bm);
-    board->toggleActiveColor();
-}
+// void whiteMove(Board *board, int depth, int time_limit_ms,
+//                TranspositionTable &transpositionTable) {
+//     Move bm =
+//         AI::findBestMove(board, WHITE, depth, time_limit_ms, transpositionTable);
+//     board->makeMove(bm);
+//     board->toggleActiveColor();
+// }
 
 std::tuple<int, int> getDepthAndTime() {
     int depth_limit = 1;
