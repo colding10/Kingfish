@@ -225,8 +225,8 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 [product-screenshot]: images/screenshot.png
 
 <!-- Built With -->
-[C++]: https://img.shields.io/badge/C++-000000?style=for-the-badge&logo=cplusplus&logoColor=white
+[C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
 [C++-url]: https://isocpp.org/
 
-[SDL2]: https://img.shields.io/badge/SDL2-000000?style=for-the-badge&logo=none&logoColor=white
+[SDL2]: https://img.shields.io/badge/SDL2-0769AD?style=for-the-badge&logo=none&logoColor=white
 [SDL-url]: https://www.libsdl.org/
