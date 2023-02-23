@@ -138,11 +138,13 @@ This installation assumes MacOS X 10.14. Support for other operating systems or 
    git clone https://github.com/colding10/CXX-Chess.git
    ```
 
-2. Install NPM packages
+2. Compile
 
    ```sh
-   npm install
+   make
    ```
+
+The binary should be created into the folder bin.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
