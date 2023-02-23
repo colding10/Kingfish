@@ -48,11 +48,31 @@ bool getBestMove(Book* book, int hash, Move& move) {
                 best_move = move;
             }
         }
-        // best_move.move is the best move in the opening book for the current position
-    } else {
-        // The position is not in the opening book, generate all possible moves and choose the one with the highest weight
+        move = parseMove(&best_move.move);
+        return true;
     }
-
-    std::cout << best_move.move << std::endl;
     return false;
+}
+
+// Parse a 16-byte move from a Polyglot opening book
+Move parseMove(std::uint16_t* move_bytes) {
+    // Extract the starting and ending squares
+    int starting_square = move_bytes[0];
+    int ending_square = move_bytes[1];
+
+    // Extract the captured piece and promotion piece
+    Piece captured_piece = static_cast<Piece>(move_bytes[2]);
+    Piece promotion_piece = static_cast<Piece>(move_bytes[3]);
+
+    // Compute the move number
+    int move_number = (move_bytes[4] << 24) | (move_bytes[5] << 16) |
+                      (move_bytes[6] << 8) | move_bytes[7];
+
+    // Compute the move value
+    int move_value = (move_bytes[8] << 24) | (move_bytes[9] << 16) |
+                     (move_bytes[10] << 8) | move_bytes[11];
+
+    // Return the move as a Move object
+    return Move(Location(starting_square), Location(ending_square),
+                captured_piece, move_number);
 }

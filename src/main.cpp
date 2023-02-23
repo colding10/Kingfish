@@ -5,7 +5,6 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <thread>
 #include <tuple>
 
 #include "ai.hpp"
@@ -14,6 +13,7 @@
 #include "gui.hpp"
 #include "location.hpp"
 #include "move.hpp"
+#include "bonustables.hpp"
 #include "openingbook.hpp"
 #include "pieces.hpp"
 
@@ -34,16 +34,25 @@ int main() {
 
     std::map<std::string, bool> search_settings = getSearchSettings();
 
-    // std::tie(window, renderer, font) = GUI::createObjects();
+    std::tie(window, renderer, font) = GUI::createObjects();
 
     Board board(STARTING_FEN);
+    readTables("./assets/");
     TranspositionTable transtable;
 
-    Move m = Move(Location(0, 0), Location(0, 0), 0, 0);
-    Book book = readBook("./assets/Human.bin");
-    bool r = getBestMove(&book, board.hash(), m);
+    // Move m = Move(Location(0, 0), Location(0, 0), 0, 0);
+    // Book book = readBook("./assets/Human.bin");
+    // bool r = getBestMove(&book, board.hash(), m);
 
-    return 0;
+    // for (auto i : book) {
+    //     std::cout << i.first << std::endl;
+    // }
+
+    // if (r) {std::cout << m << std::endl;}
+    // else {std::cout << "pos not found, hash: " << board.hash() << std::endl;}
+    
+
+    // return 0;
     bool running = true;
     bool gameover = false;
 
@@ -153,7 +162,7 @@ void whiteMove(Board *board, int depth, int time_limit_ms,
     Move bm =
         AI::findBestMove(board, WHITE, depth, time_limit_ms, transpositionTable, settings);
     board->makeMove(bm);
-    board->setActiveColor(BLACK);
+    board->setActiveColor(BLACK); // TODO: fix this, toggle should be working but it doesnt
 }
 
 std::pair<int, int> getDepthAndTime() {

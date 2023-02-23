@@ -15,7 +15,7 @@
 #include "pieces.hpp"
 
 // TODO: add special moves like castle, en passant
-// TODO: add showing checkmate
+// TODO: add showing checkmate/check
 
 void GUI::initSDL() {
     SDL_Init(SDL_INIT_EVERYTHING);

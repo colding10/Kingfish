@@ -30,6 +30,19 @@ class Move {
         return os;
     }
 
+    unsigned int hash() {
+        unsigned int hashValue = 0;
+
+        // Hash the starting and ending locations
+        hashValue ^= std::hash<Location>()(this->getStarting());
+        hashValue ^= std::hash<Location>()(this->getEnding());
+
+        // Hash the captured piece (if any)
+        hashValue ^= std::hash<Piece>()(this->getCaptured());
+
+        return hashValue;
+    }
+    
     int value = 0;
 
    private:
