@@ -25,12 +25,12 @@
 
 <div align="center">
 
-  a href="https://github.com/colding10/CXX-Chess">
+  <a href="https://github.com/colding10/CXX-Chess">
     <img src="images/logo.jpeg" alt="Logo" width="160" height="160">
   </a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+  [![Contributors][contributors-shield]][contributors-url]
+[Forks][forks-shield]][forks-url]
     [![Stargazers][stars-shield]][stars-url]
     [![Issues][issues-shield]][issues-url]
     [![MIT License][license-shield]][license-url]
@@ -238,7 +238,6 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 
 [product-screenshot]: images/screenshot.png
-
 
 <!-- Built With -->
 [C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
