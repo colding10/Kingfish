@@ -77,7 +77,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `colding10`, `CXX-Chess`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `colding10`, `CXX-Chess`, `twitter_handle`, `linkedin_username`, `email_client`, `colinding10@gmail.com`, `CXX-Chess`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -180,7 +180,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - colinding10@gmail.com@colinding10@gmail.com_client.com
 
 Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/colding10/CXX-Chess)
 
