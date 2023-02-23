@@ -136,8 +136,6 @@ This installation assumes MacOS X 10.14. Support for other operating systems or 
    npm install
    ```
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
@@ -152,10 +150,17 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-* [ ] Feature 1
-* [ ] Feature 2
-* [ ] Feature 3
-  * [ ] Nested Feature
+* [x] Complete negamax implementation solidly
+* [x] Complete basic GUI and features
+* [ ] Add improvements until bot can consistently beat me (ELO ~1000-1200)
+  * [x] Alpha-Beta pruning
+  * [ ] Iterative deepening
+  * [x] Transposition table
+  * [ ] Quiescence search
+* [ ] Complete GUI and features (make feature rich, nice UX)
+* [ ] Convert program (GUI) into library (while still maintaining interface)
+* [ ] Implement engine interfaces (UCI) and advanced improvements
+* [ ] Play engine against other programs to rank ELO
 
 See the [open issues](https://github.com/colding10/CXX-Chess/issues) for a full list of proposed features (and known issues).
 
