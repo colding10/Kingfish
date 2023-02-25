@@ -40,19 +40,6 @@ int main() {
     readTables("./assets/");
     TranspositionTable transtable;
 
-    // Move m = Move(Location(0, 0), Location(0, 0), 0, 0);
-    // Book book = readBook("./assets/Human.bin");
-    // bool r = getBestMove(&book, board.hash(), m);
-
-    // for (auto i : book) {
-    //     std::cout << i.first << std::endl;
-    // }
-
-    // if (r) {std::cout << m << std::endl;}
-    // else {std::cout << "pos not found, hash: " << board.hash() << std::endl;}
-    
-
-    // return 0;
     bool running = true;
     bool gameover = false;
 
