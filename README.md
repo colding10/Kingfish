@@ -64,7 +64,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-**Disclamer: this is a work in project. The bot sucks. There is definitely an implementation bug i have not yet found. This may or may not get worked on in the future. Community contributions are surely needed for this to go anywhere.**
+**Disclamer: this is a work in progress. The bot sucks. There is definitely an implementation bug i have not yet found. This may or may not get worked on in the future. Community contributions are surely needed for this to go anywhere.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
