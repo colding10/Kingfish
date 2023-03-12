@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
+
 
 struct Location {
     int X;
@@ -10,7 +12,19 @@ struct Location {
     Location(int square) : X(square / 8), Y(square % 8) {}
     Location(int x, int y) : X(x), Y(y) {}
     Location(const std::pair<int, int> &loc) : X(loc.first), Y(loc.second) {}
-
+    Location(const std::string &algebra) {
+        if (algebra.size() != 2) {
+            throw std::invalid_argument("Invalid algebraic notation");
+        }
+        char file = algebra[0];
+        char rank = algebra[1];
+        if (file < 'a' || file > 'h' || rank < '1' || rank > '8') {
+            throw std::invalid_argument("Invalid algebraic notation");
+        }
+        X = rank - '1';
+        Y = file - 'a';
+    }
+    
     operator std::pair<int, int>() const { return {X, Y}; }
     bool operator==(const Location &rhs) const {
         return X == rhs.X && Y == rhs.Y;

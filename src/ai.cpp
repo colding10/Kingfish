@@ -11,6 +11,7 @@
 #include "move.hpp"
 #include "pieces.hpp"
 #include "transtable.hpp"
+#include "uci.cpp"
 
 bool isCaptureMove(Move move, Board *node) {
     return node->getPieceAt(move.getEnding());
@@ -146,7 +147,7 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
 
 Move AI::findBestMove(Board *node, PieceColor color, int depth,
                       int time_limit_ms,
-                      TranspositionTable &transpositionTable, std::map<std::string, bool> settings) {
+                      TranspositionTable &transpositionTable) {
     auto start_time = std::chrono::high_resolution_clock::now();
     auto end_time = start_time + std::chrono::milliseconds(time_limit_ms);
 
@@ -158,6 +159,10 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
 
     int move_number = 1;
     for (auto move : moves) {
+        if (should_stop) {
+            return bestMove;
+        }
+
         std::cout << "[BOT]   "
                   << "searching move #" << move_number << " at depth " << depth << std::endl;
         move_number++;
@@ -170,7 +175,7 @@ Move AI::findBestMove(Board *node, PieceColor color, int depth,
             return move;
         }
         move.value += -negamax(node, Pieces::oppositeColor(color), depth - 1,
-                               INT_MIN, INT_MAX, transpositionTable, false, settings["quiescence"], settings["transposition"]);
+                               INT_MIN, INT_MAX, transpositionTable, false, true, false);
 
         node->undoLastMove();
 

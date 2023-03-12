@@ -19,9 +19,9 @@ namespace AI {
                 TranspositionTable &transpositionTable, int depth);
 
     void orderMoves(std::vector<Move> &moves, Board *node);
-    Move findBestMove(Board *node, PieceColor color, int depth, int timeLimit,
-                      TranspositionTable &transpositionTable,
-                      std::map<std::string, bool> settings);
+    Move findBestMove(Board *node, PieceColor color, int depth,
+                      int time_limit_ms,
+                      TranspositionTable &transpositionTable);
 
 }  // namespace AI
 
