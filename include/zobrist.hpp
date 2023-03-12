@@ -5,9 +5,9 @@
 
 namespace zobrist {
     // random keys for each piece and player color
-    const unsigned long long piece_keys[7][2] = {{0x1de9ea6670d3da1f, 14354624986284130233},
-                                                     {1672079305790387732, 17386697504169769072},
-                                                     {644274044980223449, 14886566920684039889},
+    const unsigned long long piece_keys[7][2] = {{0x1de9ea6670d3da1f, 0xc735df5ef7697fb9},
+                                                     {0x17346b4501eaf614, 0xf149f542e935b870},
+                                                     {0x8f0ebd4950cddd9, 0xce97b5bdf073eed1},
                                                      {1815566295097997766, 12785206268196001170},
                                                      {6541872259009091638, 321490749937914057},
                                                      {292204220720677448, 18201185361712082272},
