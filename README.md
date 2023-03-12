@@ -141,6 +141,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 * [x] Complete negamax implementation solidly
 * [x] Complete basic GUI and features
+  * [ ] Fix castling
+  * [ ] Add promoting
 * [ ] Add improvements until bot can consistently beat me (ELO ~1000-1200)
   * [x] Alpha-Beta pruning
   * [ ] Iterative deepening
