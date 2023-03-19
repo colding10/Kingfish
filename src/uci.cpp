@@ -96,7 +96,7 @@ std::tuple<int, std::string> handleCommand(const std::string& command, Board& bo
         return {0, ""};
     }
     if (command == "isready") {
-        std::cout << "readyok";
+        std::cout << "readyok\n";
         return {0, ""};
     }
     if (command.substr(0, 8) == "position") {  // Parse FEN string or moves and set up board
