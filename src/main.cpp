@@ -47,14 +47,6 @@ int main() {
     float black_score = 0.0f;
 
     while (running) {
-        if (board.evaluateBoard(WHITE) != white_score ||
-            board.evaluateBoard(BLACK) != black_score) {
-            white_score = board.evaluateBoard(WHITE);
-            black_score = board.evaluateBoard(BLACK);
-
-            board.printBoard();
-        }
-
         running = handleEvents(gameover, &board);
 
         GUI::drawChessboard(renderer, &board, font);
@@ -182,7 +174,7 @@ std::pair<bool, bool> getPlayerSettings() {
 std::map<std::string, bool> getSearchSettings() {
     std::map<std::string, bool> settings;
 
-    std::cout << "\n\ndo you want quiescence search on? ";
+    std::cout << "\ndo you want quiescence search on? ";
     std::cin >> settings["quiescence"];
     std::cout << "do you want to use the transposition table? ";
     std::cin >> settings["transposition"];
