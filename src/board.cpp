@@ -16,7 +16,6 @@
 #include "location.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
-#include "zobrist.hpp"
 
 // TODO: add other FEN fields
 void Board::readFen(std::string fen) {
@@ -24,7 +23,7 @@ void Board::readFen(std::string fen) {
     int col = 0;
 
     // std::string token;
-    // std::stringstream fen(fen);  
+    // std::stringstream fen(fen);
 
     // while (std::getline(fen, token, ' ')) {
 
@@ -125,25 +124,6 @@ std::string Board::getFen() {
     }
 
     return fen;
-}
-
-// TODO: add other info to board printing
-void Board::printBoard() {
-    std::cout << "CHESSBOARD INFO" << std::endl;
-    std::cout << "Turn: " << (this->getActiveColor() == WHITE ? "white" : "black") << std::endl;
-    std::cout << "Move: " << this->getMoveNumber() << std::endl;
-    std::cout << "FEN: " << this->getFen() << std::endl;
-    std::cout << "Hash: " << this->hash() << std::endl;
-
-    this->printEvaluation();
-
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            std::cout << this->board[i][j] << std::string((this->board[i][j] >= 10 ? 1 : 2), ' ');
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
 }
 
 PieceColor Board::getActiveColor() {
@@ -419,28 +399,12 @@ void Board::setCheckmate(PieceColor c) {
     this->checkmated_color = c;
 }
 
-std::uint64_t Board::hash() {
-    std::uint64_t h = 0;
-
-    // xor random values for each piece and player color
-    for (int row = 0; row < 8; row++) {
-        for (int col = 0; col < 8; col++) {
-            Piece piece = this->board[row][col];
-
-            if (piece != 0) {
-                PieceColor color = Pieces::getPieceColor(piece);
-                PieceClass piece_class = Pieces::getPieceClass(piece);
-                std::uint64_t piece_key = zobrist::piece_keys[piece_class][color];
-                std::uint64_t position_key = zobrist::position_keys[row][col];
-                h ^= piece_key ^ position_key;
-            }
+int Board::hash() {
+    int hash_value = 0;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            hash_value ^= (this->board[i][j] + 0x9e3779b9 + (hash_value << 6) + (hash_value >> 2));
         }
     }
-
-    // xor random value for active color
-    if (this->getActiveColor() == BLACK) {
-        h ^= zobrist::black_to_move_key;
-    }
-
-    return h;
+    return hash_value;
 }

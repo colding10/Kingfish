@@ -67,7 +67,6 @@ class Board {
     void readFen(std::string fen);
     std::string getFen();
 
-    void printBoard();
     void printEvaluation();
 
     void reverse();
@@ -82,7 +81,7 @@ class Board {
     bool isGameOver();
     void setGameOver();
 
-    std::uint64_t hash();
+    int hash();
 };
 
 #endif  // !BOARD_HPP_INCLUDED

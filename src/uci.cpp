@@ -1,5 +1,6 @@
 #include <atomic>
 #include <csignal>
+#include <functional>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -13,7 +14,6 @@
 #include "game.hpp"
 #include "location.hpp"
 #include "move.hpp"
-#include "openingbook.hpp"
 #include "pieces.hpp"
 
 std::atomic<bool> should_stop(false);
@@ -118,15 +118,15 @@ std::tuple<int, std::string> handleCommand(const std::string& command, Board& bo
     if (command == "go") {  // Start searching for the best move
         return {2, ""};
     }
-    if (command == "stop") { // Stop searching for the best move
+    if (command == "stop") {  // Stop searching for the best move
         should_stop = true;
     }
     if (command == "quit") {  // Quit the program
         return {10, ""};
     }
+
+    return {-1, ""};
 }
-
-
 
 int uciLoop() {
     readTables("./assets/");
@@ -149,7 +149,9 @@ int uciLoop() {
                 board.readFen(opt);
                 break;
             case 2:
-                std::thread negamax_thread(AI::findBestMove, &board, board.getActiveColor(), 4, 0, transtable);
+                std::thread negamax_thread([&]() {
+                    AI::findBestMove(&board, board.getActiveColor(), 4, 0, std::ref(transtable));
+                });
                 break;
         }
     }

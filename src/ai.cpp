@@ -148,8 +148,8 @@ int AI::negamax(Board *node, PieceColor color, int depth, int alpha, int beta,
 Move AI::findBestMove(Board *node, PieceColor color, int depth,
                       int time_limit_ms,
                       TranspositionTable &transpositionTable) {
-    auto start_time = std::chrono::high_resolution_clock::now();
-    auto end_time = start_time + std::chrono::milliseconds(time_limit_ms);
+    // auto start_time = std::chrono::high_resolution_clock::now();
+    // auto end_time = start_time + std::chrono::milliseconds(time_limit_ms);
 
     std::vector<Move> moves = node->getLegalMoves(color);
     orderMoves(moves, node);
