@@ -13,10 +13,9 @@
 #include "bonustables.hpp"
 #include "game.hpp"
 #include "location.hpp"
+#include "main.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
-
-std::atomic<bool> should_stop(false);
 
 Piece pieceFromChar(const char& c) {
     PieceColor color = isupper(c) ? WHITE : BLACK;

@@ -8,10 +8,10 @@
 #include <vector>
 
 #include "board.hpp"
+#include "main.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "transtable.hpp"
-#include "uci.cpp"
 
 bool isCaptureMove(Move move, Board *node) {
     return node->getPieceAt(move.getEnding());
