@@ -1,13 +1,9 @@
 #ifndef UCI_HPP_INCLUDED
 #define UCI_HPP_INCLUDED
 
-#include "move.hpp"
-#include "pieces.hpp"
+#include <string>
 
-int uciLoop();
-Piece pieceFromChar(const char& c);
-Move parseMove(const std::string& move_str, const PieceColor& current_color);
-std::vector<std::string> split(const std::string& str, const std::string& delimiter);
-std::tuple<int, std::string> handleCommand(const std::string& command, Board& board);
+int parse(std::string c);
+std::string render(int i);
 
-#endif  //! UCI_HPP_INCLUDED
+#endif //! UCI_HPP_INCLUDED
