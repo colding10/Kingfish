@@ -11,8 +11,7 @@
 #include "position.hpp"
 #include "transtable.hpp"
 
-struct Entry
-{
+struct Entry {
     int lower = -MATE_UPPER;
     int upper = MATE_UPPER;
 
@@ -20,28 +19,24 @@ struct Entry
     Entry(int _lower, int _upper) : lower(_lower), upper(_upper) {}
 };
 
-struct Key
-{
+struct Key {
     Position pos;
     int depth;
     bool null_move;
 
     Key() = default;
     Key(Position _pos, int _depth, bool _null_move)
-        : pos(_pos), depth(_depth), null_move(_null_move)
-    {
-    }
+        : pos(_pos), depth(_depth), null_move(_null_move) {}
 };
 
-class Searcher
-{
+class Searcher {
     std::map<PositionHash, Entry> tp_score;
     std::map<PositionHash, Move> tp_move;
 
     std::set<int> history;
     int nodes_searched = 0;
 
-    int bound(Position& pos, int gamma, int depth, bool can_null);
+    int bound(Position &pos, int gamma, int depth, bool can_null);
 };
 
-#endif // !SEARCHER_HPP_INCLUDED
+#endif  // !SEARCHER_HPP_INCLUDED
