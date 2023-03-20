@@ -1,12 +1,10 @@
-#pragma once
-
-#ifndef BONUSTABLES_HPP_INCLUDED
-#define BONUSTABLES_HPP_INCLUDED
+#ifndef PIECES_HPP_INCLUDED
+#define PIECES_HPP_INCLUDED
 
 #include <unordered_map>
 #include <vector>
 
-std::unordered_map<char, std::vector<int>> piece_square_tables = {
+static std::unordered_map<char, std::vector<int>> piece_square_tables = {
     {'P',
      {0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   198, 198, 198, 198, 198, 198, 198, 198, 0,
@@ -69,7 +67,7 @@ std::unordered_map<char, std::vector<int>> piece_square_tables = {
            0, 0,     0,     0,     0,     0,     0,     0,     0,     0,
            0, 0,     0,     0,     0,     0,     0,     0,     0,     0}}};
 
-std::unordered_map<char, int> piece_values = {
+static std::unordered_map<char, int> piece_values = {
     {'P', 100}, {'N', 280}, {'B', 320}, {'R', 429}, {'Q', 929}, {'K', 60000}};
 
-#endif // !BONUSTABLES_HPP_INCLUDED
+#endif // !PIECES_HPP_INCLUDED

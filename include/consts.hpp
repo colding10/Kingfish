@@ -12,7 +12,7 @@ typedef int Direction;
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
 const int N = -10, E = 1, S = 10, W = -1;
 
-std::unordered_map<char, std::vector<Direction>> directions = {
+static std::unordered_map<char, std::vector<Direction>> directions = {
     {'P', {N, N + N, N + W, N + E}},
     {'N',
      {N + N + E, E + N + E, E + S + E, S + S + E, S + S + W, W + S + W,
