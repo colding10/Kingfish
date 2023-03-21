@@ -1,7 +1,6 @@
 #include "searcher.hpp"
 
 #include <algorithm>
-#include <boost/coroutine2/all.hpp>
 #include <chrono>
 #include <climits>
 #include <functional>
@@ -17,7 +16,6 @@
 #include "position.hpp"
 #include "transtable.hpp"
 
-typedef boost::coroutines2::coroutine<const std::string&> coro_t;
 
 int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
@@ -129,52 +127,29 @@ int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     return best;
 }
 
-// std::tuple<int, int, int, Move> Searcher::search_(std::set<Position> history) {
-//     this->nodes_searched = 0;
-//     this->history = history;
-//     this->tp_score.clear();
-
-//     int gamma = 0;
-//     int lower, upper, score;
-//     for (int depth = 1; depth < 1000; depth++) {
-//         lower = -MATE_LOWER, upper = MATE_LOWER;
-//         while (lower < upper - EVAL_ROUGHNESS) {
-//             score = this->bound(*(history.rbegin()), gamma, depth, false);
-//             if (score >= gamma) {
-//                 lower = score;
-//             }
-//             if (score < gamma) {
-//                 upper = score;
-//             }
-
-//             // GENERATOR SCREWING START
-//             // yield depth, gamma, score, self.tp_move.get(history[-1])
-//             // GENERATOR SCREWING END
-//             gamma = (lower + upper + 1) / 2;
-//         }
-//     }
-// }
-
-void Searcher::search(coro_t::push_type& yield, std::set<Position> history) {
+std::vector<std::tuple<int, int, Move>> Searcher::search(std::set<Position> history, int depth) {
     this->nodes_searched = 0;
     this->history = history;
-    this->tp_score.clear();
+    // this->tp_score.clear(); TODO: check if should clear
 
+    std::vector<std::tuple<int, int, Move>> moves;
     int gamma = 0;
     int lower, upper, score;
-    for (int depth = 1; depth < 1000; depth++) {
-        lower = -MATE_LOWER, upper = MATE_LOWER;
-        while (lower < upper - EVAL_ROUGHNESS) {
-            score = this->bound(*(history.rbegin()), gamma, depth, false);
-            if (score >= gamma) {
-                lower = score;
-            }
-            if (score < gamma) {
-                upper = score;
-            }
 
-            yield(std::make_tuple(depth, gamma, score, this->tp_move[(*(history.rbegin())).hash()]));
-            gamma = (lower + upper + 1) / 2;
+    lower = -MATE_LOWER, upper = MATE_LOWER;
+    while (lower < upper - EVAL_ROUGHNESS) {
+        Position last_pos = const_cast<Position&>(*(history.rbegin()));
+        score = this->bound(last_pos, gamma, depth, false);
+        if (score >= gamma) {
+            lower = score;
         }
+        if (score < gamma) {
+            upper = score;
+        }
+
+        moves.push_back(std::make_tuple(gamma, score, this->tp_move[last_pos.hash()]));
+        gamma = (lower + upper + 1) / 2;
     }
+
+    return moves;
 }

@@ -11,13 +11,6 @@
 #include "pieces.hpp"
 #include "position.hpp"
 #include "transtable.hpp"
-
-typedef std::input_iterator_tag iterator_category;
-typedef std::tuple<int, int, int, Move> value_type;
-typedef std::ptrdiff_t difference_type;
-typedef value_type* pointer;
-typedef value_type& reference;
-
 struct Entry {
     int lower = -MATE_UPPER;
     int upper = MATE_UPPER;
@@ -45,9 +38,7 @@ class Searcher {
     int nodes_searched = 0;
 
     int bound(Position& pos, int gamma, int depth, bool can_null);
-    // std::tuple<int, int, int, Move> search(std::set<Position> history);
-    // std::tuple<int, int, int, Move> search(std::set<Position> history);
-    void earch(coro_t::push_type& yield, std::set<Position> history);
+    std::vector<std::tuple<int, int, Move>> search(std::set<Position> history, int depth);
 };
 
 #endif  // !SEARCHER_HPP_INCLUDED

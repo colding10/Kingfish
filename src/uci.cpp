@@ -37,14 +37,16 @@ int main() {
     std::string in_string;
     const char delim = ' ';
 
-    std::vector<Position> hist = {
+    std::set<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
 
     while (true) {
         std::cin >> in_string;
+        in_string.erase(in_string.find_last_not_of(" \n\r\t") + 1);
         std::vector<std::string> args;
         tokenize(in_string, delim, args);
+
 
         if (args[0] == "uci") {
             std::cout << "id name " << VERSION << "\n";
@@ -71,7 +73,7 @@ int main() {
                     i = 119 - i, j = 119 - j;
                 }
 
-                hist.push_back(hist[hist.size() - 1].move(Move(i, j, prom[0])));
+                hist.insert(const_cast<Position &>(*(hist.rbegin())).move(Move(i, j, prom[0])));
             }
         } else if (args[0] == "go") {
             int wtime, btime, winc, binc;
@@ -84,28 +86,38 @@ int main() {
                 wtime = btime;
                 winc = binc;
             }
-            int think = std::min(wtime / 40 + winc, wtime / 2 - 1);
+            float think = std::min(wtime / 40 + winc, wtime / 2 - 1);
             auto start_time = std::chrono::high_resolution_clock::now();
-            auto end_time = start_time + std::chrono::milliseconds((int)think * 0.8);
+            int ms_time = think * 0.8;
+            auto end_time = start_time + std::chrono::milliseconds(ms_time);
 
             std::string move_str = "";
-            for (auto result : searcher.search(hist)) {
-                int depth, gamma, score;
-                Move move;
-                std::tie(depth, gamma, score, move) = result;
-
-                if (score >= gamma) {
-                    int i = move.i, j = move.j;
-                    if (hist.size() % 2 == 0) {
-                        i = 119 - i, j = 119 - j;
-                    }
-                    move_str = render(i) + render(j) + std::to_string(tolower(move.prom));
-                    std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << "\n";
-                }
-                if (move_str.length() && std::chrono::high_resolution_clock::now() > end_time) {
+            int gamma, score;
+            Move move;
+            bool flag = false;
+            for (int depth = 1; depth < 1000; depth++) {
+                if (flag) {
                     break;
                 }
-                std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << "\n";
+
+                std::vector<std::tuple<int, int, Move>> result_moves = searcher.search(hist, depth);
+                for (auto result : result_moves) {
+                    std::tie(gamma, score, move) = result;
+
+                    if (score >= gamma) {
+                        int i = move.i, j = move.j;
+                        if (hist.size() % 2 == 0) {
+                            i = 119 - i, j = 119 - j;
+                        }
+                        move_str = render(i) + render(j) + std::to_string(tolower(move.prom));
+                        std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << "\n";
+                    }
+                    if (move_str.length() && std::chrono::high_resolution_clock::now() > end_time) {
+                        flag = true;
+                        break;
+                    }
+                    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << "\n";
+                }
             }
         }
     }
