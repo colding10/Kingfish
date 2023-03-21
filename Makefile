@@ -22,5 +22,5 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 clean: 
-	rm $(OBJ_DIR)/*.o
-	rm $(BIN_DIR)/kingfish
+	rm -f $(OBJ_DIR)/*.o
+	rm -f $(BIN_DIR)/kingfish
