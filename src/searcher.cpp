@@ -3,17 +3,20 @@
 #include <algorithm>
 #include <chrono>
 #include <climits>
+#include <functional>
 #include <iostream>
 #include <map>
+#include <tuple>
 #include <vector>
 
 #include "consts.hpp"
+#include "generator.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
 #include "transtable.hpp"
 
-int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
+int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
 
     depth = std::max(depth, 0);
@@ -28,7 +31,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     if (entry.upper < gamma)
         return entry.upper;
 
-    if (can_null && depth > 0 && this->history.count(pos.hash())) {
+    if (can_null && depth > 0 && this->history.count(pos)) {
         return 0;
     }
 
@@ -121,4 +124,52 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         }
     }
     return best;
+}
+
+SearchGenerator Searcher::search(std::set<Position> history) {
+    return SearchGenerator(this, history);
+}
+
+bool SearchGenerator::operator==(const SearchGenerator& other) const {
+    return searcher == other.searcher &&
+           history == other.history &&
+           gamma == other.gamma &&
+           depth == other.depth &&
+           lower == other.lower &&
+           upper == other.upper;
+}
+
+bool SearchGenerator::operator!=(const SearchGenerator& other) const {
+    return !(*this == other);
+}
+
+value_type SearchGenerator::operator*() {
+    int score = searcher->bound(*history.rbegin(), gamma, depth, false);
+    if (score >= gamma) {
+        lower = score;
+    }
+    if (score < gamma) {
+        upper = score;
+    }
+    ++searcher->nodes_searched;
+    return std::make_tuple(depth, gamma, score, searcher->tp_move.get(*history.rbegin()));
+}
+
+SearchGenerator& SearchGenerator::operator++() {
+    gamma = (lower + upper + 1) / 2;
+    if (lower < upper - EVAL_ROUGHNESS) {
+        return *this;
+    }
+    if (++depth >= 1000) {
+        depth = 1;
+        lower = -MATE_LOWER;
+        upper = MATE_LOWER;
+        gamma = 0;
+        ++history;
+    } else {
+        lower = -MATE_LOWER;
+        upper = MATE_LOWER;
+        gamma = (lower + upper + 1) / 2;
+    }
+    return *this;
 }

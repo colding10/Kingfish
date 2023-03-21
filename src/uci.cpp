@@ -7,6 +7,7 @@
 
 #include "consts.hpp"
 #include "position.hpp"
+#include "searcher.hpp"
 
 int parse(std::string c) {
     int fil = c[0] - 'a';
@@ -38,6 +39,7 @@ int main() {
 
     std::vector<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
+    Searcher searcher;
 
     while (true) {
         std::cin >> in_string;
