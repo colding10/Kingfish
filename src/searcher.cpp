@@ -1,20 +1,23 @@
 #include "searcher.hpp"
 
 #include <algorithm>
+#include <boost/coroutine2/all.hpp>
 #include <chrono>
 #include <climits>
 #include <functional>
 #include <iostream>
 #include <map>
+#include <string>
 #include <tuple>
 #include <vector>
 
 #include "consts.hpp"
-#include "generator.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
 #include "transtable.hpp"
+
+typedef boost::coroutines2::coroutine<const std::string&> coro_t;
 
 int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
@@ -126,50 +129,52 @@ int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     return best;
 }
 
-SearchGenerator Searcher::search(std::set<Position> history) {
-    return SearchGenerator(this, history);
-}
+// std::tuple<int, int, int, Move> Searcher::search_(std::set<Position> history) {
+//     this->nodes_searched = 0;
+//     this->history = history;
+//     this->tp_score.clear();
 
-bool SearchGenerator::operator==(const SearchGenerator& other) const {
-    return searcher == other.searcher &&
-           history == other.history &&
-           gamma == other.gamma &&
-           depth == other.depth &&
-           lower == other.lower &&
-           upper == other.upper;
-}
+//     int gamma = 0;
+//     int lower, upper, score;
+//     for (int depth = 1; depth < 1000; depth++) {
+//         lower = -MATE_LOWER, upper = MATE_LOWER;
+//         while (lower < upper - EVAL_ROUGHNESS) {
+//             score = this->bound(*(history.rbegin()), gamma, depth, false);
+//             if (score >= gamma) {
+//                 lower = score;
+//             }
+//             if (score < gamma) {
+//                 upper = score;
+//             }
 
-bool SearchGenerator::operator!=(const SearchGenerator& other) const {
-    return !(*this == other);
-}
+//             // GENERATOR SCREWING START
+//             // yield depth, gamma, score, self.tp_move.get(history[-1])
+//             // GENERATOR SCREWING END
+//             gamma = (lower + upper + 1) / 2;
+//         }
+//     }
+// }
 
-value_type SearchGenerator::operator*() {
-    int score = searcher->bound(*history.rbegin(), gamma, depth, false);
-    if (score >= gamma) {
-        lower = score;
-    }
-    if (score < gamma) {
-        upper = score;
-    }
-    ++searcher->nodes_searched;
-    return std::make_tuple(depth, gamma, score, searcher->tp_move.get(*history.rbegin()));
-}
+void Searcher::search(coro_t::push_type& yield, std::set<Position> history) {
+    this->nodes_searched = 0;
+    this->history = history;
+    this->tp_score.clear();
 
-SearchGenerator& SearchGenerator::operator++() {
-    gamma = (lower + upper + 1) / 2;
-    if (lower < upper - EVAL_ROUGHNESS) {
-        return *this;
+    int gamma = 0;
+    int lower, upper, score;
+    for (int depth = 1; depth < 1000; depth++) {
+        lower = -MATE_LOWER, upper = MATE_LOWER;
+        while (lower < upper - EVAL_ROUGHNESS) {
+            score = this->bound(*(history.rbegin()), gamma, depth, false);
+            if (score >= gamma) {
+                lower = score;
+            }
+            if (score < gamma) {
+                upper = score;
+            }
+
+            yield(std::make_tuple(depth, gamma, score, this->tp_move[(*(history.rbegin())).hash()]));
+            gamma = (lower + upper + 1) / 2;
+        }
     }
-    if (++depth >= 1000) {
-        depth = 1;
-        lower = -MATE_LOWER;
-        upper = MATE_LOWER;
-        gamma = 0;
-        ++history;
-    } else {
-        lower = -MATE_LOWER;
-        upper = MATE_LOWER;
-        gamma = (lower + upper + 1) / 2;
-    }
-    return *this;
 }

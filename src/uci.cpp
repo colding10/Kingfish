@@ -86,22 +86,27 @@ int main() {
             }
             int think = std::min(wtime / 40 + winc, wtime / 2 - 1);
             auto start_time = std::chrono::high_resolution_clock::now();
+            auto end_time = start_time + std::chrono::milliseconds((int)think * 0.8);
 
             std::string move_str = "";
-            //         for depth, gamma, score, move in Searcher().search(hist):
-            //             # The only way we can be sure to have the real move
-            //             in tp_move, # is if we have just failed high. if
-            //             score >= gamma:
-            //                 i, j = move.i, move.j
-            //                 if len(hist) % 2 == 0:
-            //                     i, j = 119 - i, 119 - j
-            //                 move_str = render(i) + render(j) +
-            //                 move.prom.lower() print(f"info depth {depth}
-            //                 score cp {score} pv {move_str}")
-            //             if move_str and time.time() - start > think * 0.8:
-            //                 break
+            for (auto result : searcher.search(hist)) {
+                int depth, gamma, score;
+                Move move;
+                std::tie(depth, gamma, score, move) = result;
 
-            //         print("bestmove", move_str or '(none)')
+                if (score >= gamma) {
+                    int i = move.i, j = move.j;
+                    if (hist.size() % 2 == 0) {
+                        i = 119 - i, j = 119 - j;
+                    }
+                    move_str = render(i) + render(j) + std::to_string(tolower(move.prom));
+                    std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << "\n";
+                }
+                if (move_str.length() && std::chrono::high_resolution_clock::now() > end_time) {
+                    break;
+                }
+                std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << "\n";
+            }
         }
     }
 

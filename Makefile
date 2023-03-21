@@ -7,11 +7,11 @@ OBJ_DIR := obj
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-INCLUDE_DIRS = -I /usr/local/include  -I /usr/include -I /Library/Developer/CommandLineTools/usr/include/c++/v1
+INCLUDE_DIRS = -I /usr/local/include  -I /usr/include
 LDFLAGS := -pthread -D_THREAD_SAFE -lSDL2 -lSDL2_image -lSDL2_ttf -L /usr/local/lib
-CPPFLAGS := -g -I $(INCLUDE_DIR) $(INCLUDE_DIRS) -Wall -Wextra -std=c++11 -flto -O3 -march=native -fcoroutines-ts
+CPPFLAGS := -g -I $(INCLUDE_DIR) $(INCLUDE_DIRS) -Wall -Wextra -std=c++11 -flto -O3 -march=native
 
-CPP := clang++
+CPP := g++-12
 
 
 # ========== TARGETS ==========
