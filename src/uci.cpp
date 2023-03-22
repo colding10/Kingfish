@@ -41,7 +41,7 @@ int main() {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
 
-    while (true) {
+    while (true) { // FIXME: problem is with getting words from string, segfaults at arr[10] when no 10 indexg
         std::cin >> in_string;
         in_string.erase(in_string.find_last_not_of(" \n\r\t") + 1);
         std::vector<std::string> args;
@@ -76,7 +76,9 @@ int main() {
                 hist.insert(const_cast<Position &>(*(hist.rbegin())).move(Move(i, j, prom[0])));
             }
         } else if (args[0] == "go") {
+            std::cout << args.size() << std::endl;
             int wtime, btime, winc, binc;
+            std::cout << args[2] << args[4];
             wtime = std::stoi(args[2]);
             btime = std::stoi(args[4]);
             winc = std::stoi(args[6]);
