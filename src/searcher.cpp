@@ -26,7 +26,7 @@ int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
         return -MATE_UPPER;
     }
 
-    auto entry = this->tp_score[pos.hash()];
+    auto entry = this->tp_score.at(pos.hash());
     if (entry.lower >= gamma)
         return entry.lower;
     if (entry.upper < gamma)
@@ -55,10 +55,10 @@ int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
         }
         int val_lower = depth == 0 ? QS : -MATE_LOWER;
         if (tp_move.count(pos.hash())) {
-            Move killer = this->tp_move[pos.hash()];
+            Move killer = this->tp_move.at(pos.hash());
             if (depth > 2) {
                 this->bound(pos, gamma, depth - 3, false);
-                killer = this->tp_move[pos.hash()];
+                killer = this->tp_move.at(pos.hash());
             }
             if (pos.value(killer) >= val_lower) {
                 Position moved_board = pos.move(killer);

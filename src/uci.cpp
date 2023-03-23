@@ -34,18 +34,15 @@ void tokenize(std::string const &str, const char delim,
 }
 
 int main() {
-    std::string in_string;
     const char delim = ' ';
 
     std::set<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
 
-    while (true) { // FIXME: problem is with getting words from string, segfaults at arr[10] when no 10 indexg
-        std::cin >> in_string;
-        in_string.erase(in_string.find_last_not_of(" \n\r\t") + 1);
+    for (std::string line; std::getline(std::cin, line);) {  // FIXME: problem is with getting words from string, segfaults at arr[10] when no 10 indexg
         std::vector<std::string> args;
-        tokenize(in_string, delim, args);
+        tokenize(line, delim, args);
 
 
         if (args[0] == "uci") {
@@ -60,25 +57,26 @@ int main() {
         } else if (args[0] == "position" && args[1] == "startpos") {
             hist = {Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
 
-            for (int ply = 0; ply < args.size() - 3; ply++) {
-                std::string move = args[ply];
+            if (args.size() > 2) {
+                for (int ply = 0; ply < args.size() - 3; ply++) {
+                    std::string move = args[ply];
 
-                int i = parse(move.substr(0, 2));
-                int j = parse(move.substr(2, 2));
+                    int i = parse(move.substr(0, 2));
+                    int j = parse(move.substr(2, 2));
 
-                std::string prom = move.substr(4);
-                std::transform(prom.begin(), prom.end(), prom.begin(), ::toupper);
+                    std::string prom = move.substr(4);
+                    std::transform(prom.begin(), prom.end(), prom.begin(), ::toupper);
 
-                if (ply % 2 == 1) {
-                    i = 119 - i, j = 119 - j;
+                    if (ply % 2 == 1) {
+                        i = 119 - i, j = 119 - j;
+                    }
+
+                    hist.insert(const_cast<Position &>(*(hist.rbegin())).move(Move(i, j, prom[0])));
                 }
-
-                hist.insert(const_cast<Position &>(*(hist.rbegin())).move(Move(i, j, prom[0])));
             }
         } else if (args[0] == "go") {
-            std::cout << args.size() << std::endl;
             int wtime, btime, winc, binc;
-            std::cout << args[2] << args[4];
+
             wtime = std::stoi(args[2]);
             btime = std::stoi(args[4]);
             winc = std::stoi(args[6]);
@@ -112,13 +110,13 @@ int main() {
                             i = 119 - i, j = 119 - j;
                         }
                         move_str = render(i) + render(j) + std::to_string(tolower(move.prom));
-                        std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << "\n";
+                        std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << std::endl;
                     }
                     if (move_str.length() && std::chrono::high_resolution_clock::now() > end_time) {
                         flag = true;
                         break;
                     }
-                    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << "\n";
+                    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << std::endl;
                 }
             }
         }
