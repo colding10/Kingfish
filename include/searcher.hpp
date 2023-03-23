@@ -37,8 +37,9 @@ class Searcher {
     std::set<Position> history;
     int nodes_searched = 0;
 
-    int bound(Position& pos, int gamma, int depth, bool can_null);
-    std::vector<std::tuple<int, int, Move>> search(std::set<Position> history, int depth);
+    int bound(Position &pos, int gamma, int depth, bool can_null);
+    std::vector<std::tuple<int, int, Move>> search(std::set<Position> history,
+                                                   int depth);
 };
 
 #endif  // !SEARCHER_HPP_INCLUDED

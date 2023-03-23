@@ -33,4 +33,4 @@ const std::string INITIAL =
     "                     rnbqkbnr  pppppppp  ........  ........  ........  "
     "........  PPPPPPPP  RNBQKBNR                    ";
 
-#endif  // !CONSTS_HPP_INCLUDED
+#endif // !CONSTS_HPP_INCLUDED

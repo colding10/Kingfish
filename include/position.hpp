@@ -23,9 +23,12 @@ class Position {
     Position(std::string board, int score, std::pair<bool, bool> wc,
              std::pair<bool, bool> bc, int ep, int kp)
         : board(board), score(score), wc(wc), bc(bc), ep(ep), kp(kp) {}
-    inline bool operator==(Position other) const { return board == other.board && score == other.score && wc == other.wc && bc == other.bc && ep == other.ep && kp == other.kp; }
+    inline bool operator==(Position other) const {
+        return board == other.board && score == other.score && wc == other.wc &&
+               bc == other.bc && ep == other.ep && kp == other.kp;
+    }
     inline bool operator>(const Position other) const { return false; }
-    inline bool operator<(const Position& other) const { return false; }
+    inline bool operator<(const Position &other) const { return false; }
     std::vector<Move> genMoves();
 
     Position rotate(bool nullmove = false);

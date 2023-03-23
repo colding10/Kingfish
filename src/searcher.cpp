@@ -16,8 +16,7 @@
 #include "position.hpp"
 #include "transtable.hpp"
 
-
-int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
+int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
 
     depth = std::max(depth, 0);
@@ -127,7 +126,8 @@ int Searcher::bound(Position& pos, int gamma, int depth, bool can_null = true) {
     return best;
 }
 
-std::vector<std::tuple<int, int, Move>> Searcher::search(std::set<Position> history, int depth) {
+std::vector<std::tuple<int, int, Move>>
+Searcher::search(std::set<Position> history, int depth) {
     this->nodes_searched = 0;
     this->history = history;
     // this->tp_score.clear(); TODO: check if should clear
@@ -138,7 +138,7 @@ std::vector<std::tuple<int, int, Move>> Searcher::search(std::set<Position> hist
 
     lower = -MATE_LOWER, upper = MATE_LOWER;
     while (lower < upper - EVAL_ROUGHNESS) {
-        Position last_pos = const_cast<Position&>(*(history.rbegin()));
+        Position last_pos = const_cast<Position &>(*(history.rbegin()));
         score = this->bound(last_pos, gamma, depth, false);
         if (score >= gamma) {
             lower = score;
@@ -147,7 +147,8 @@ std::vector<std::tuple<int, int, Move>> Searcher::search(std::set<Position> hist
             upper = score;
         }
 
-        moves.push_back(std::make_tuple(gamma, score, this->tp_move[last_pos.hash()]));
+        moves.push_back(
+            std::make_tuple(gamma, score, this->tp_move[last_pos.hash()]));
         gamma = (lower + upper + 1) / 2;
     }
 

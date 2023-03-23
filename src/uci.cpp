@@ -40,10 +40,11 @@ int main() {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
 
-    for (std::string line; std::getline(std::cin, line);) {  // FIXME: problem is with getting words from string, segfaults at arr[10] when no 10 indexg
+    for (std::string line; std::getline(
+             std::cin, line);) {  // FIXME: problem is with getting words from
+                                  // string, segfaults at arr[10] when no 10 indexg
         std::vector<std::string> args;
         tokenize(line, delim, args);
-
 
         if (args[0] == "uci") {
             std::cout << "id name " << VERSION << "\n";
@@ -71,7 +72,8 @@ int main() {
                         i = 119 - i, j = 119 - j;
                     }
 
-                    hist.insert(const_cast<Position &>(*(hist.rbegin())).move(Move(i, j, prom[0])));
+                    hist.insert(const_cast<Position &>(*(hist.rbegin()))
+                                    .move(Move(i, j, prom[0])));
                 }
             }
         } else if (args[0] == "go") {
@@ -100,7 +102,8 @@ int main() {
                     break;
                 }
 
-                std::vector<std::tuple<int, int, Move>> result_moves = searcher.search(hist, depth);
+                std::vector<std::tuple<int, int, Move>> result_moves =
+                    searcher.search(hist, depth);
                 for (auto result : result_moves) {
                     std::tie(gamma, score, move) = result;
 
@@ -109,14 +112,18 @@ int main() {
                         if (hist.size() % 2 == 0) {
                             i = 119 - i, j = 119 - j;
                         }
-                        move_str = render(i) + render(j) + std::to_string(tolower(move.prom));
-                        std::cout << "info depth " << depth << " score cp " << score << " pv " << move_str << std::endl;
+                        move_str =
+                            render(i) + render(j) + std::to_string(tolower(move.prom));
+                        std::cout << "info depth " << depth << " score cp " << score
+                                  << " pv " << move_str << std::endl;
                     }
-                    if (move_str.length() && std::chrono::high_resolution_clock::now() > end_time) {
+                    if (move_str.length() &&
+                        std::chrono::high_resolution_clock::now() > end_time) {
                         flag = true;
                         break;
                     }
-                    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)") << std::endl;
+                    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
+                              << std::endl;
                 }
             }
         }
