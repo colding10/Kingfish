@@ -17,7 +17,7 @@ int parse(std::string c) {
 }
 
 std::string render(int i) {
-    int rank = i - A1 / 10;
+    int rank = (i - A1) / 10;
     int file = i % 10;
 
     return (char)(file + 'a') + std::to_string(-rank + 1);
@@ -113,7 +113,7 @@ int main() {
                             i = 119 - i, j = 119 - j;
                         }
                         move_str =
-                            render(i) + render(j) + std::to_string(tolower(move.prom));
+                            render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp " << score
                                   << " pv " << move_str << std::endl;
                     }
