@@ -47,12 +47,13 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             Position rot_board = pos.rotate(true);
             all_moves.push_back(
                 {NULLMOVE, -this->bound(rot_board, 1 - gamma, depth - 3)});
-            return all_moves;
         }
 
         if (depth == 0) {
             all_moves.push_back({NULLMOVE, pos.score});
+            return all_moves;
         }
+
         int val_lower = depth == 0 ? QS : -MATE_LOWER;
         if (tp_move.count(pos.hash())) {
             Move killer = this->tp_move.at(pos.hash());
