@@ -47,6 +47,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             Position rot_board = pos.rotate(true);
             all_moves.push_back(
                 {NULLMOVE, -this->bound(rot_board, 1 - gamma, depth - 3)});
+            return all_moves;
         }
 
         if (depth == 0) {
@@ -70,7 +71,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             rest_moves.push_back({pos.value(m), m});
         }
 
-        std::sort(rest_moves.rend(), rest_moves.rbegin());
+        std::sort(rest_moves.begin(), rest_moves.end(), std::greater<std::pair<int, Move>>());
 
         int val;
         for (std::pair<int, Move> m_pair : rest_moves) {

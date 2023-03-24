@@ -59,7 +59,7 @@ int main() {
             hist = {Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
 
             if (args.size() > 2) {
-                for (int ply = 0; ply < args.size() - 3; ply++) {
+                for (int ply = 0; ply < (int)args.size() - 3; ply++) {
                     std::string move = args[ply];
 
                     int i = parse(move.substr(0, 2));

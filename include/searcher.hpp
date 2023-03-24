@@ -7,6 +7,7 @@
 #include <tuple>
 
 #include "consts.hpp"
+#include "defaultdict.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
@@ -31,7 +32,8 @@ struct Key {
 
 class Searcher {
    public:
-    std::map<PositionHash, Entry> tp_score;
+    Searcher() : tp_score{Entry(-MATE_UPPER, MATE_UPPER)} {}
+    DefaultDict<PositionHash, Entry> tp_score;
     std::map<PositionHash, Move> tp_move;
 
     std::set<Position> history;

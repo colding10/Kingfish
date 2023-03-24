@@ -15,7 +15,7 @@
 
 std::vector<Move> Position::genMoves() {
     std::vector<Move> moves;
-    for (int i = 0; i < board.size(); ++i) {
+    for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
         if (!isupper(p)) {
             continue;
@@ -128,11 +128,8 @@ Position Position::move(Move move) {
 int Position::value(Move move) {
     int i = move.i;
     int j = move.j;
-    std::cout << "i: " << i << " j: " << j << std::endl;
-
     char p = board[i];
     char q = board[j];
-    std::cout << "p: " << p << " q: " << q << std::endl;
     int score = piece_square_tables[p][j] - piece_square_tables[p][i];
 
     // Capture
