@@ -17,6 +17,7 @@
 #include "transtable.hpp"
 
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
+    std::cout << "board is: \n" << pos.board << std::endl;
     this->nodes_searched += 1;
 
     depth = std::max(depth, 0);

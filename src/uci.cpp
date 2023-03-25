@@ -16,13 +16,21 @@ int parse(std::string c) {
     return A1 + fil - 10 * rank;
 }
 
+// std::string render(int i) {
+//     int rank = (i - A1) / 10;
+//     int file = i - rank * 10;`
+
+//     return (char)(file + 'a') + std::to_string(-rank + 1);
+// }
+
 std::string render(int i) {
     int rank = (i - A1) / 10;
-    int file = i % 10;
-
-    return (char)(file + 'a') + std::to_string(-rank + 1);
+    int fil = (i - A1) % 10;
+    char c = 'a' + fil;
+    std::string s(1, c);
+    s += std::to_string(-rank + 1);
+    return s;
 }
-
 void tokenize(std::string const &str, const char delim,
               std::vector<std::string> &out) {
     std::stringstream ss(str);
