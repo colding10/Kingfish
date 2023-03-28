@@ -1,56 +1,31 @@
 #ifndef MOVE_HPP_INCLUDED
 #define MOVE_HPP_INCLUDED
 
-#include <ostream>
-#include <string>
-
-#include "location.hpp"
 #include "pieces.hpp"
 
-class Move {
-   public:
-    // Constructor
-    Move(Location starting, Location ending, Piece captured, int number)
-        : m_starting(starting), m_ending(ending), m_captured(captured), m_number(number) {}
+struct Move {
+    int i;
+    int j;
 
-    // Getters
-    Location getStarting() const { return m_starting; }
-    Location getEnding() const { return m_ending; }
-    Piece getCaptured() const { return m_captured; }
-    int getNumber() const { return m_number; }
+    char prom;
 
-    // Setters
-    void setCaptured(Piece p) { m_captured = p; }
-    void setNumber(int n) { m_number = n; }
+    Move() = default;
+    Move(int _i, int _j, char _prom) : i(_i), j(_j), prom(_prom) {}
 
-    // Operators
-    friend std::ostream &operator<<(std::ostream &os, const Move &obj) {
-        os << "Move(" << obj.m_starting.to_string() << ", "
-           << obj.m_ending.to_string() << " " << obj.m_captured << ")";
-        return os;
+    inline bool operator==(const Move &m) const {
+        return (j == m.j) && (i == m.i) && (prom == m.prom);
     }
-
-    unsigned int hash() {
-        unsigned int hashValue = 0;
-
-        // Hash the starting and ending locations
-        hashValue ^= std::hash<Location>()(this->getStarting());
-        hashValue ^= std::hash<Location>()(this->getEnding());
-
-        // Hash the captured piece (if any)
-        hashValue ^= std::hash<Piece>()(this->getCaptured());
-
-        return hashValue;
+    inline bool operator!=(const Move &m) const {
+        return (j != m.j) || (i != m.i) || (prom != m.prom);
     }
-    
-    int value = 0;
-
-   private:
-    Location m_starting;  // Starting location of the move
-    Location m_ending;    // Ending location of the move
-
-    Piece m_captured;  // Piece that was captured (0 if none)
-    int m_number;      // Move number
+    inline bool operator<(const Move &m) const {
+        return std::tie(i, j, prom) < std::tie(m.i, m.j, m.prom);
+    }
+    inline bool operator>(const Move &m) const {
+        return std::tie(i, j, prom) > std::tie(m.i, m.j, m.prom);
+    }
 };
+
+const Move NULLMOVE = Move(-1, -1, ' ');
 
 #endif  // !MOVE_HPP_INCLUDED

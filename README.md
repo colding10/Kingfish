@@ -139,29 +139,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-* [x] Complete negamax implementation solidly
-* [x] Complete basic GUI and features
-  * [ ] Fix castling
-  * [ ] Add promoting
-* [ ] Add improvements until bot can consistently beat me (ELO ~1000-1200)
-  * [x] Alpha-Beta pruning
-  * [ ] Iterative deepening
-  * [x] Transposition table
-  * [ ] Quiescence search
-* [ ] Complete GUI and features (make feature rich, nice UX)
-  * [ ] Command center
-    * [ ] Reversable board
-    * [ ] Move history
-    * [ ] undo move
-    * [ ] view move
-    * [ ] offer draw, resign
-  * [ ] Sidebar with information
-    * [ ] Clock
-    * [ ] Bot status/evaluation
-  * [ ] Left sidebar
-    * [ ] Swinging color bar to show winning (like chess.com)
-  * [ ] Keyboard shortcuts
-    * [ ] Reverse board
 * [ ] Convert program (GUI) into library (while still maintaining interface)
 * [ ] Implement engine interfaces (UCI) and advanced improvements
 * [ ] Play engine against other programs to rank ELO
