@@ -144,7 +144,6 @@ Searcher::search(std::set<Position> history, int depth) {
     lower = -MATE_LOWER, upper = MATE_LOWER;
     while (lower < upper - EVAL_ROUGHNESS) {
         Position last_pos = const_cast<Position &>(*(history.rbegin()));
-        std::cout << "last pos size: " << last_pos.board.size() << std::endl;
         score = this->bound(last_pos, gamma, depth, false);
         if (score >= gamma) {
             lower = score;

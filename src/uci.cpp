@@ -19,13 +19,11 @@ int parse(std::string c) {
 std::string render(int i) {
     int rank = (i - A1) / 10;
     int fil = (i - A1) % 10;
-    if (fil < 0)
-        fil += 10;
-    char c = fil + 'a';
-    std::string s = "";
-    s += c;
-    s += std::to_string(-rank + 1);
-    return s;
+
+    if (fil < 0) fil += 10;
+    if (rank < 0) rank -= 1;
+
+    return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
 
 void tokenize(std::string const &str, const char delim,

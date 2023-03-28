@@ -28,8 +28,25 @@ class Position {
         return board == other.board && score == other.score && wc == other.wc &&
                bc == other.bc && ep == other.ep && kp == other.kp;
     }
-    inline bool operator>(const Position other) const { return false; }
-    inline bool operator<(const Position &other) const { return false; }
+    inline bool operator>(const Position &other) const {
+        if (score > other.score) {
+            return true;
+        } else if (score == other.score) {
+            return board > other.board;
+        } else {
+            return false;
+        }
+    }
+
+    inline bool operator<(const Position &other) const {
+        if (score < other.score) {
+            return true;
+        } else if (score == other.score) {
+            return board < other.board;
+        } else {
+            return false;
+        }
+    }
     std::vector<Move> genMoves();
 
     Position rotate(bool nullmove = false);
