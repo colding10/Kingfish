@@ -16,14 +16,18 @@ int parse(std::string c) {
     return A1 + fil - 10 * rank;
 }
 
+
 std::string render(int i) {
     int rank = (i - A1) / 10;
     int fil = (i - A1) % 10;
-    char c = 'a' + fil;
-    std::string s(1, c);
+    if (fil < 0) fil += 10;
+    char c = fil + 'a';
+    std::string s = "";
+    s += c;
     s += std::to_string(-rank + 1);
     return s;
 }
+
 
 void tokenize(std::string const &str, const char delim,
               std::vector<std::string> &out) {
@@ -40,11 +44,11 @@ int main() {
 
     std::set<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
+    std::cout << "inital size: " << INITIAL.length() << std::endl;
     Searcher searcher;
 
     for (std::string line; std::getline(
-             std::cin, line);) {  // FIXME: problem is with getting words from
-                                  // string, segfaults at arr[10] when no 10 indexg
+             std::cin, line);) {
         std::vector<std::string> args;
         tokenize(line, delim, args);
 

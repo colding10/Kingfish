@@ -1,5 +1,6 @@
 #include "position.hpp"
 
+#include <assert.h>
 #include <string.h>
 
 #include <algorithm>
@@ -72,16 +73,17 @@ Position Position::rotate(bool nullmove) {
 }
 
 Position Position::move(Move move) {
+    assert(board.size() == 120);
     int i = move.i, j = move.j;
     char prom = move.prom;
     char p = board[i];
 
-    auto put = [](std::string board, int i, char p) -> std::string {
-        board[i] = p;
-        return board;
+    auto put = [](std::string b, int i, char p) -> std::string {
+        b[i] = p;
+        return b;
     };
 
-    std::string new_board = put(board, j, board[i]);
+    std::string new_board = put(std::string(board), j, board[i]);
     new_board = put(new_board, i, '.');
     int new_score = score + value(move);
 
@@ -104,8 +106,8 @@ Position Position::move(Move move) {
 
         if (std::abs(j - i) == 2) {
             new_kp = (i + j) / 2;
-            new_board = put(new_board, j < i ? A1 : H1, '.');
-            new_board = put(new_board, new_kp, 'R');
+            new_board = put(std::string(new_board), j < i ? A1 : H1, '.');
+            new_board = put(std::string(new_board), new_kp, 'R');
         }
     }
 
@@ -117,10 +119,11 @@ Position Position::move(Move move) {
             new_ep = i + N;
         }
         if (j == ep) {
-            new_board = put(new_board, j - S, '.');
+            std::cout << i-S << std::endl;
+            new_board = put(std::string(new_board), j - S, '.');
         }
     }
-
+    assert(new_board.size() == 120);
     Position new_pos(new_board, new_score, new_wc, new_bc, new_ep, new_kp);
     return new_pos.rotate();
 }

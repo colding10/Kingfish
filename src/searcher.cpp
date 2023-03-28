@@ -1,5 +1,7 @@
 #include "searcher.hpp"
 
+#include <assert.h>
+
 #include <algorithm>
 #include <chrono>
 #include <climits>
@@ -17,8 +19,6 @@
 #include "transtable.hpp"
 
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
-    std::cout << "board is: \n"
-              << pos.board << std::endl;
     this->nodes_searched += 1;
 
     depth = std::max(depth, 0);
@@ -143,6 +143,7 @@ Searcher::search(std::set<Position> history, int depth) {
     lower = -MATE_LOWER, upper = MATE_LOWER;
     while (lower < upper - EVAL_ROUGHNESS) {
         Position last_pos = const_cast<Position &>(*(history.rbegin()));
+        std::cout << "last pos size: " << last_pos.board.size() << std::endl;
         score = this->bound(last_pos, gamma, depth, false);
         if (score >= gamma) {
             lower = score;
