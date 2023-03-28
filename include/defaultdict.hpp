@@ -9,9 +9,7 @@ class DefaultDict : public std::unordered_map<K, V> {
     V defaultValue;
 
    public:
-    DefaultDict(V defaultValue)
-        : defaultValue{defaultValue} {
-    }
+    DefaultDict(V defaultValue) : defaultValue{defaultValue} {}
 
     V &operator[](const K &key) {
         if (!this->count(key)) {

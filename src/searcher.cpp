@@ -74,7 +74,8 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             rest_moves.push_back({pos.value(m), m});
         }
 
-        std::sort(rest_moves.begin(), rest_moves.end(), std::greater<std::pair<int, Move>>());
+        std::sort(rest_moves.begin(), rest_moves.end(),
+                  std::greater<std::pair<int, Move>>());
 
         int val;
         for (std::pair<int, Move> m_pair : rest_moves) {
