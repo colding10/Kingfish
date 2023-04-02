@@ -21,6 +21,10 @@ $(BIN_DIR)/kingfish: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
+format: $(SRC_DIR) $(INCLUDE_DIR)
+	clang-format -i $(SRC_DIR)/*.cpp
+	clang-format -i $(INCLUDE_DIR)/*.hpp
+
 clean: 
 	rm -f $(OBJ_DIR)/*.o
 	rm -f $(BIN_DIR)/kingfish
