@@ -8,7 +8,7 @@
 <div align="center">
 
   <a href="https://github.com/colding10/Kingfish">
-    <img src="images/logo.jpeg" alt="Logo" width="160" height="160">
+    <img src="https://raw.githubusercontent.com/colding10/Kingfish/adfcef6b83760c19fe876664bf6e46cd3c141152/images/logo.jpeg" alt="Logo" width="160" height="160">
   </a>
 
   [![Contributors][contributors-shield]][contributors-url]
