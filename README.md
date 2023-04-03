@@ -7,7 +7,7 @@
 
 <div align="center">
 
-  <a href="https://github.com/colding10/CXX-Chess">
+  <a href="https://github.com/colding10/Kingfish">
     <img src="images/logo.jpeg" alt="Logo" width="160" height="160">
   </a>
 
@@ -22,14 +22,14 @@
   <p align="center">
     A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
     <br />
-    <a href="https://github.com/colding10/CXX-Chess"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/colding10/Kingfish"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/colding10/CXX-Chess">View Demo</a>
+    <a href="https://github.com/colding10/Kingfish">View Demo</a>
     ·
-    <a href="https://github.com/colding10/CXX-Chess/issues">Report Bug</a>
+    <a href="https://github.com/colding10/Kingfish/issues">Report Bug</a>
     ·
-    <a href="https://github.com/colding10/CXX-Chess/issues">Request Feature</a>
+    <a href="https://github.com/colding10/Kingfish/issues">Request Feature</a>
   </p>
 </div>
 
@@ -114,7 +114,7 @@ This installation assumes MacOS X 10.14. Support for other operating systems or 
 1. Clone the repo
 
    ```sh
-   git clone https://github.com/colding10/CXX-Chess.git
+   git clone https://github.com/colding10/Kingfish.git
    ```
 
 2. Compile
@@ -143,7 +143,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 * [ ] Implement engine interfaces (UCI) and advanced improvements
 * [ ] Play engine against other programs to rank ELO
 
-See the [open issues](https://github.com/colding10/CXX-Chess/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -175,7 +175,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Colin Ding - colinding10@gmail.com
 
-Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/colding10/CXX-Chess)
+Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding10/Kingfish)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,20 +188,20 @@ Project Link: [https://github.com/colding10/CXX-Chess](https://github.com/coldin
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/colding10/CXX-Chess.svg?style=for-the-badge
-[contributors-url]: https://github.com/colding10/CXX-Chess/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
+[contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/colding10/CXX-Chess.svg?style=for-the-badge
-[forks-url]: https://github.com/colding10/CXX-Chess/network/members
+[forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
+[forks-url]: https://github.com/colding10/Kingfish/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/colding10/CXX-Chess.svg?style=for-the-badge
-[stars-url]: https://github.com/colding10/CXX-Chess/stargazers
+[stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
+[stars-url]: https://github.com/colding10/Kingfish/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/colding10/CXX-Chess.svg?style=for-the-badge
-[issues-url]: https://github.com/colding10/CXX-Chess/issues
+[issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
+[issues-url]: https://github.com/colding10/Kingfish/issues
 
-[license-shield]: https://img.shields.io/github/license/colding10/CXX-Chess.svg?style=for-the-badge
-[license-url]: https://github.com/colding10/CXX-Chess/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
+[license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE.txt
 
 [product-screenshot]: images/screenshot.png
 
