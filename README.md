@@ -62,9 +62,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. My dream is that this engine can eventually play at levels above 1800 ELO, and will eventually create a [LiChess](lichess.org) account for it to get ranked.
 
-**Disclamer: this is a work in progress. The bot sucks. There is definitely an implementation bug i have not yet found. This may or may not get worked on in the future. Community contributions are surely needed for this to go anywhere.**
+The engine supports a few but not all of the common UCI commands. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
+
+As of right now, it sometimes makes illegal moves and is still in beta development.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -77,12 +79,13 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+This is an example of how you may give instructions on setting up Kingfish locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This installation assumes MacOS X 10.14. Support for other operating systems or versions is not tested.
+This installation assumes macOS. Support for other operating systems is not tested.
+Kingfish has been tested on macOS 10.14 and macOS 12.
 
 * [Homebrew](https://brew.sh) (if not installed)
 
@@ -129,17 +132,18 @@ The binary should be created into the folder bin.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+See `engine-interface.txt` for a description of the UCI protocol.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-* [ ] Convert program (GUI) into library (while still maintaining interface)
-* [ ] Implement engine interfaces (UCI) and advanced improvements
+* [x] Convert program (GUI) into library (while still maintaining interface)
+* [x] Implement basic engine interfaces (UCI)
+* [ ] _Play test games and debug_
+* [ ] Implement all engine interfaces (UCI)
+* [ ] Add advanced search features to improve speed
 * [ ] Play engine against other programs to rank ELO
 
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
@@ -181,7 +185,8 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
+* [Stockfish](https://github.com/official-stockfish/Stockfish)
+* [Sunfish](https://github.com/thomasahle/sunfish)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -201,8 +206,6 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 
 [license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
 [license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE.txt
-
-[product-screenshot]: images/screenshot.png
 
 <!-- Built With -->
 [C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
