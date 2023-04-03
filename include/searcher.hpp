@@ -13,35 +13,35 @@
 #include "position.hpp"
 #include "transtable.hpp"
 struct Entry {
-    int lower = -MATE_UPPER;
-    int upper = MATE_UPPER;
+  int lower = -MATE_UPPER;
+  int upper = MATE_UPPER;
 
-    Entry() = default;
-    Entry(int _lower, int _upper) : lower(_lower), upper(_upper) {}
+  Entry() = default;
+  Entry(int _lower, int _upper) : lower(_lower), upper(_upper) {}
 };
 
 struct Key {
-    Position pos;
-    int depth;
-    bool null_move;
+  Position pos;
+  int depth;
+  bool null_move;
 
-    Key() = default;
-    Key(Position _pos, int _depth, bool _null_move)
-        : pos(_pos), depth(_depth), null_move(_null_move) {}
+  Key() = default;
+  Key(Position _pos, int _depth, bool _null_move)
+      : pos(_pos), depth(_depth), null_move(_null_move) {}
 };
 
 class Searcher {
-   public:
-    Searcher() : tp_score{Entry(-MATE_UPPER, MATE_UPPER)} {}
-    DefaultDict<PositionHash, Entry> tp_score;
-    std::map<PositionHash, Move> tp_move;
+public:
+  Searcher() : tp_score{Entry(-MATE_UPPER, MATE_UPPER)} {}
+  DefaultDict<PositionHash, Entry> tp_score;
+  std::map<PositionHash, Move> tp_move;
 
-    std::vector<Position> history;
-    int nodes_searched = 0;
+  std::vector<Position> history;
+  int nodes_searched = 0;
 
-    int bound(Position &pos, int gamma, int depth, bool can_null);
-    std::vector<std::tuple<int, int, Move>> search(std::vector<Position> hist,
-                                                   int depth);
+  int bound(Position &pos, int gamma, int depth, bool can_null);
+  std::vector<std::tuple<int, int, Move>> search(std::vector<Position> hist,
+                                                 int depth);
 };
 
-#endif  // !SEARCHER_HPP_INCLUDED
+#endif // !SEARCHER_HPP_INCLUDED
