@@ -71,7 +71,6 @@
 ### Built With
 
 * [![C++][C++]][C++-url]
-* [![SDL2][SDL2]][SDL-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,6 +207,3 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 <!-- Built With -->
 [C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
 [C++-url]: https://isocpp.org/
-
-[SDL2]: https://img.shields.io/badge/SDL2-0769AD?style=for-the-badge&logo=none&logoColor=white
-[SDL-url]: https://www.libsdl.org/
