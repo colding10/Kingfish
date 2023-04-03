@@ -94,7 +94,7 @@ int main() {
                 wtime = btime;
                 // winc = binc;
             }
-            float think = std::min(wtime / 40, wtime / 2 - 1);
+            float think = wtime / 40;
             // float think = std::min(wtime / 40 + winc, wtime / 2 - 1);
             int ms_time = think * 0.8;
 
