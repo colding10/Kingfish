@@ -28,7 +28,7 @@ const int MATE_UPPER = piece_values['K'] + 10 * piece_values['Q'];
 const int QS = 35;
 const int EVAL_ROUGHNESS = 15;
 
-const std::string VERSION = "Kingfish 0.1";
+const std::string VERSION = "Kingfish 0.3";
 const std::string INITIAL = ("         \n" //   0 -  9
                              "         \n" //  10 - 19
                              " rnbqkbnr\n" //  20 - 29

@@ -15,6 +15,7 @@
 #include "move.hpp"
 
 std::vector<Move> Position::genMoves() {
+    // std::cout << "Generating moves..." << std::endl;
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
@@ -28,8 +29,9 @@ std::vector<Move> Position::genMoves() {
                     break;
                 }
                 if (p == 'P') {
-                    if (d == N && q != '.')
+                    if ((d == N || d == N + N) && q != '.') {
                         break;
+                    }
                     if (d == N + N) {
                         if (i < A1 + N || board[i + N] != '.')
                             break;
@@ -58,6 +60,7 @@ std::vector<Move> Position::genMoves() {
             }
         }
     }
+    // std::cout << "Finished generating moves" << std::endl;
     return moves;
 }
 
