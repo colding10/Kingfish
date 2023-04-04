@@ -18,7 +18,6 @@
   [![MIT License][license-shield]][license-url]
 
 </div>
-
   <p align="center">
     A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
     <br />
@@ -39,20 +38,9 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -68,13 +56,9 @@ The engine supports a few but not all of the common UCI commands. It is tailored
 
 __As of right now, it sometimes makes illegal moves and is still in beta development.__
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Usage
 
 See `engine-interface.txt` for a description of the UCI protocol.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
 
@@ -87,12 +71,11 @@ See `engine-interface.txt` for a description of the UCI protocol.
 
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are __greatly appreciated__.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
@@ -103,13 +86,12 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
 
 Kingfish is free and distributed under the
-[**GNU General Public License version 3**][license-url] (GPL v3). Essentially,
+[__GNU General Public License version 3__][license-url] (GPL v3). Essentially,
 this means you are free to do almost exactly what you want with the program,
 including distributing it among your friends, making it available for download
 from your website, selling it (either by itself or as part of some bigger
@@ -122,27 +104,18 @@ where the source code can be found) to generate the exact binary you are
 distributing. If you make any changes to the source code, these changes must
 also be made available under GPL v3.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
 ## Contact
 
 Colin Ding - colinding10@gmail.com
-
 Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding10/Kingfish)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 * [Stockfish](https://github.com/official-stockfish/Stockfish)
 * [Sunfish](https://github.com/thomasahle/sunfish)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
 [contributors-url]:    https://github.com/colding10/Kingfish/graphs/contributors
 
@@ -159,5 +132,3 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [license-url]:         https://github.com/colding10/Kingfish/blob/master/LICENSE.md
 
 <!-- Built With -->
-[C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
-[C++-url]: https://isocpp.org/
