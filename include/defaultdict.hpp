@@ -5,37 +5,38 @@
 
 template <typename K, typename V>
 class DefaultDict : public std::unordered_map<K, V> {
-private:
-  V defaultValue;
+  private:
+    V defaultValue;
 
-public:
-  DefaultDict(V defaultValue) : defaultValue{defaultValue} {}
+  public:
+    DefaultDict(V defaultValue)
+        : defaultValue{defaultValue} {}
 
-  V &operator[](const K &key) {
-    if (!this->count(key)) {
-      this->insert({key, defaultValue});
+    V &operator[](const K &key) {
+        if (!this->count(key)) {
+            this->insert({key, defaultValue});
+        }
+        return std::unordered_map<K, V>::operator[](key);
     }
-    return std::unordered_map<K, V>::operator[](key);
-  }
-  V operator[](K &&key) {
-    if (!this->count(key)) {
-      this->insert({key, defaultValue});
+    V operator[](K &&key) {
+        if (!this->count(key)) {
+            this->insert({key, defaultValue});
+        }
+        return std::unordered_map<K, V>::operator[](key);
     }
-    return std::unordered_map<K, V>::operator[](key);
-  }
 
-  const V &at(const K &key) const {
-    if (!this->count(key)) {
-      return defaultValue;
+    const V &at(const K &key) const {
+        if (!this->count(key)) {
+            return defaultValue;
+        }
+        return std::unordered_map<K, V>::at(key);
     }
-    return std::unordered_map<K, V>::at(key);
-  }
-  V &at(const K &key) {
-    if (!this->count(key)) {
-      return defaultValue;
+    V &at(const K &key) {
+        if (!this->count(key)) {
+            return defaultValue;
+        }
+        return std::unordered_map<K, V>::at(key);
     }
-    return std::unordered_map<K, V>::at(key);
-  }
 };
 
 #endif
