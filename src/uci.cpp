@@ -52,9 +52,8 @@ int main() {
 
         if (args[0] == "uci") {
             std::cout << "id name " << VERSION << "\n";
-            std::cout << "uciok"
-                      << "\n";
-            std::cout << "id author Colin D" << std::endl;
+            std::cout << "id author Colin D" << "\n";
+            std::cout << "uciok" << "\n";
         } else if (args[0] == "isready") {
             std::cout << "readyok"
                       << "\n";
@@ -66,12 +65,10 @@ int main() {
             if (args.size() > 2) {
                 for (int ply = 0; ply < (int)args.size() - 3; ply++) {
                     std::string move = args[ply + 3];
-                    // std::cout << "move is: " << move << std::endl;
+
                     int i = parse(move.substr(0, 2));
                     int j = parse(move.substr(2, 2));
-                    // std::cout << "parse(" << move.substr(0, 2) << ") = " << i <<
-                    // std::endl; std::cout << "parse(" << move.substr(2, 2) << ") = " <<
-                    // j << std::endl;
+
                     std::string prom = move.substr(4);
                     std::transform(
                         prom.begin(), prom.end(), prom.begin(), ::toupper);
@@ -123,7 +120,7 @@ int main() {
                         move_str =
                             render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp "
-                                  << score << " pv " << move_str << std::endl;
+                                  << score << " pv " << move_str << "\n";
                     }
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {
@@ -134,11 +131,11 @@ int main() {
             }
 
             std::cout << "bestmove "
-                      << (move_str.length() ? move_str : "(none)") << std::endl;
+                      << (move_str.length() ? move_str : "(none)") << "\n";
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
-                    std::cout << "board:\n" << hist.back().board << std::endl;
+                    std::cout << "board:\n" << hist.back().board << "\n";
                 }
             }
         }

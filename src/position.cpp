@@ -15,7 +15,7 @@
 #include "move.hpp"
 
 std::vector<Move> Position::genMoves() {
-    // std::cout << "Generating moves..." << std::endl;
+    // std::cout << "Generating moves..." << "\n";
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
@@ -61,7 +61,7 @@ std::vector<Move> Position::genMoves() {
             }
         }
     }
-    // std::cout << "Finished generating moves" << std::endl;
+    // std::cout << "Finished generating moves" << "\n";
     return moves;
 }
 
@@ -145,7 +145,7 @@ int Position::value(Move move) {
     char q = board[j];
 
     if (piece_square_tables.find(p) == piece_square_tables.end()) {
-        std::cout << "p is: " << p << std::endl;
+        std::cout << "p is: " << p << "\n";
     }
 
     int score =
