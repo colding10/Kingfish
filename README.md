@@ -121,5 +121,5 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [issues-shield]:       https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
 [issues-url]:          https://github.com/colding10/Kingfish/issues
 
-[license-shield]:      https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge?
+[license-shield]:      https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
 [license-url]:         https://github.com/colding10/Kingfish/blob/master/LICENSE
