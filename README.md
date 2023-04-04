@@ -66,77 +66,16 @@
 
 The engine supports a few but not all of the common UCI commands. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
 
-As of right now, it sometimes makes illegal moves and is still in beta development.
+__As of right now, it sometimes makes illegal moves and is still in beta development.__
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
-
-* [![C++][C++]][C++-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up Kingfish locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This installation assumes macOS. Support for other operating systems is not tested.
-Kingfish has been tested on macOS 10.14 and macOS 12.
-
-* [Homebrew](https://brew.sh) (if not installed)
-
-  ```bash
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
-
-* SDL2
-
-  ```bash
-  brew install SDL2
-  ```
-
-* SDL2_image
-  
-  ```bash
-  brew install SDL2_image
-  ```
-
-* SDL2_ttf
-
-  ```bash
-  brew install SDL2_ttf
-  ```
-
-### Installation
-
-1. Clone the repo
-
-   ```sh
-   git clone https://github.com/colding10/Kingfish.git
-   ```
-
-2. Compile
-
-   ```sh
-   make
-   ```
-
-The binary should be created into the folder bin.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 See `engine-interface.txt` for a description of the UCI protocol.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ROADMAP -->
 ## Roadmap
 
 * [x] Convert program (GUI) into library (while still maintaining interface)
