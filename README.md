@@ -169,7 +169,19 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Kingfish is free and distributed under the
+[**GNU General Public License version 3**][license-url] (GPL v3). Essentially,
+this means you are free to do almost exactly what you want with the program,
+including distributing it among your friends, making it available for download
+from your website, selling it (either by itself or as part of some bigger
+software package), or using it as the starting point for a software project of
+your own.
+
+The only real limitation is that whenever you distribute Kingfish in some way,
+you MUST always include the license and the full source code (or a pointer to
+where the source code can be found) to generate the exact binary you are
+distributing. If you make any changes to the source code, these changes must
+also be made available under GPL v3.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -193,19 +205,19 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
-[contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
+[contributors-url]:    https://github.com/colding10/Kingfish/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
-[forks-url]: https://github.com/colding10/Kingfish/network/members
+[forks-shield]:        https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
+[forks-url]:           https://github.com/colding10/Kingfish/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
-[stars-url]: https://github.com/colding10/Kingfish/stargazers
+[stars-shield]:        https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
+[stars-url]:           https://github.com/colding10/Kingfish/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
-[issues-url]: https://github.com/colding10/Kingfish/issues
+[issues-shield]:       https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
+[issues-url]:          https://github.com/colding10/Kingfish/issues
 
-[license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
-[license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE.txt
+[license-shield]:      https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
+[license-url]:         https://github.com/colding10/Kingfish/blob/master/LICENSE.md
 
 <!-- Built With -->
 [C++]: https://img.shields.io/badge/C++-20232A?style=for-the-badge&logo=nextdotjs&logoColor=white
