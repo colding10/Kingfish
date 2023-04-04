@@ -1,6 +1,3 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a name="readme-top"></a>
-
 <div align="center">
   
 <h3 align="center">Kingfish</h3>
@@ -15,7 +12,7 @@
   [![Forks][forks-shield]][forks-url]
   [![Stargazers][stars-shield]][stars-url]
   [![Issues][issues-shield]][issues-url]
-  [![MIT License][license-shield]][license-url]
+  [![GPL3 License][license-shield]][license-url]
 
 </div>
   <p align="center">
@@ -71,7 +68,6 @@ See `engine-interface.txt` for a description of the UCI protocol.
 
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -85,7 +81,6 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 
 <!-- LICENSE -->
 ## License
@@ -114,8 +109,6 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 * [Stockfish](https://github.com/official-stockfish/Stockfish)
 * [Sunfish](https://github.com/thomasahle/sunfish)
 
-
-
 [contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
 [contributors-url]:    https://github.com/colding10/Kingfish/graphs/contributors
 
@@ -130,5 +123,3 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 
 [license-shield]:      https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
 [license-url]:         https://github.com/colding10/Kingfish/blob/master/LICENSE
-
-<!-- Built With -->
