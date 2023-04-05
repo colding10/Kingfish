@@ -11,7 +11,6 @@
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
-#include "transtable.hpp"
 struct Entry {
     int lower = -MATE_UPPER;
     int upper = MATE_UPPER;

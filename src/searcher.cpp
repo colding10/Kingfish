@@ -16,7 +16,6 @@
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
-#include "transtable.hpp"
 
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
