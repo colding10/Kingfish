@@ -122,8 +122,7 @@ int main() {
                         move_str =
                             render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp "
-                                  << score << " pv " << move_str 
-                                  << "\n";
+                                  << score << " pv " << move_str << "\n";
                     }
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {
