@@ -139,6 +139,8 @@ Searcher::search(std::vector<Position> hist, int depth) {
     this->history        = hist;
     // this->tp_score.clear(); // TODO: check if should clear
 
+    auto starting_time = std::chrono::system_clock::now();
+
     std::vector<std::tuple<int, int, Move>> moves;
     int                                     gamma = 0;
     int                                     lower, upper, score;
@@ -157,7 +159,12 @@ Searcher::search(std::vector<Position> hist, int depth) {
             std::make_tuple(gamma, score, this->tp_move[hist.back().hash()]));
         gamma = (lower + upper + 1) / 2;
 
-        std::cout << "info nodes " << this->nodes_searched << "\n"; // TODO: add nps and time
+        auto curr_time = std::chrono::system_clock::now();
+
+        std::cout << "info nodes " << this->nodes_searched << " time "
+                  << std::chrono::duration_cast<std::chrono::milliseconds>(curr_time - starting_time).count()
+                  << "\n"; // TODO: add nps and time
+                  // TODO: include with the pv
     }
 
     return moves;

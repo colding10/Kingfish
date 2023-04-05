@@ -123,7 +123,6 @@ int main() {
                             render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp "
                                   << score << " pv " << move_str 
-
                                   << "\n";
                     }
                     if (move_str.length() &&
