@@ -52,8 +52,10 @@ int main() {
 
         if (args[0] == "uci") {
             std::cout << "id name " << VERSION << "\n";
-            std::cout << "id author Colin D" << "\n";
-            std::cout << "uciok" << "\n";
+            std::cout << "id author Colin D"
+                      << "\n";
+            std::cout << "uciok"
+                      << "\n";
         } else if (args[0] == "isready") {
             std::cout << "readyok"
                       << "\n";
