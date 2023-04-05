@@ -137,7 +137,7 @@ std::vector<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->nodes_searched = 0;
     this->history        = hist;
-    this->tp_score.clear(); // TODO: check if should clear
+    // this->tp_score.clear(); // TODO: check if should clear
 
     std::vector<std::tuple<int, int, Move>> moves;
     int                                     gamma = 0;
@@ -156,6 +156,8 @@ Searcher::search(std::vector<Position> hist, int depth) {
         moves.push_back(
             std::make_tuple(gamma, score, this->tp_move[hist.back().hash()]));
         gamma = (lower + upper + 1) / 2;
+
+        std::cout << "info nodes " << this->nodes_searched << "\n"; // TODO: add nps and time
     }
 
     return moves;
