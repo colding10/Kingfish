@@ -162,9 +162,11 @@ Searcher::search(std::vector<Position> hist, int depth) {
         auto curr_time = std::chrono::system_clock::now();
 
         std::cout << "info nodes " << this->nodes_searched << " time "
-                  << std::chrono::duration_cast<std::chrono::milliseconds>(curr_time - starting_time).count()
+                  << std::chrono::duration_cast<std::chrono::milliseconds>(
+                         curr_time - starting_time)
+                         .count()
                   << "\n"; // TODO: add nps and time
-                  // TODO: include with the pv
+                           // TODO: include with the pv
     }
 
     return moves;
