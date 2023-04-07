@@ -27,10 +27,12 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     }
 
     auto entry = this->tp_score.at(pos.hash());
-    if (entry.lower >= gamma){
-        return entry.lower;}
-    if (entry.upper < gamma){
-        return entry.upper;}
+    if (entry.lower >= gamma) {
+        return entry.lower;
+    }
+    if (entry.upper < gamma) {
+        return entry.upper;
+    }
 
     if (can_null && depth > 0 &&
         std::find(this->history.begin(), this->history.end(), pos) !=

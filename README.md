@@ -1,18 +1,18 @@
 <div align="center">
-  
+
 <h3 align="center">Kingfish</h3>
 
 <div align="center">
 
-  <a href="https://github.com/colding10/Kingfish">
+<a href="https://github.com/colding10/Kingfish">
     <img src="https://raw.githubusercontent.com/colding10/Kingfish/adfcef6b83760c19fe876664bf6e46cd3c141152/images/logo.jpeg" alt="Logo" width="400" height="400">
   </a>
 
-  [![Contributors][contributors-shield]][contributors-url]
-  [![Forks][forks-shield]][forks-url]
-  [![Stargazers][stars-shield]][stars-url]
-  [![Issues][issues-shield]][issues-url]
-  [![GPL3 License][license-shield]][license-url]
+  [Contributors][contributors-url]
+  [Forks][forks-url]
+  [Stargazers][stars-url]
+  [Issues][issues-url]
+  [GPL3 License][license-url]
 
 </div>
   <p align="center">
@@ -29,7 +29,26 @@
   </p>
 </div>
 
+
+  
+    A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
+    
+
+    [**Explore the docs »**](https://github.com/colding10/Kingfish)
+    
+
+    
+
+    [View Demo](https://github.com/colding10/Kingfish)
+    ·
+    [Report Bug](https://github.com/colding10/Kingfish/issues)
+    ·
+    [Request Feature](https://github.com/colding10/Kingfish/issues)
+  
+
+
 <!-- TABLE OF CONTENTS -->
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -45,6 +64,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 `Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. My dream is that this engine can eventually play at levels above 1800 ELO, and will eventually create a [LiChess](lichess.org) account for it to get ranked.
@@ -59,8 +79,8 @@ See `engine-interface.txt` for a description of the UCI protocol.
 
 ## Roadmap
 
-* [x] Convert program (GUI) into library (while still maintaining interface)
-* [x] Implement basic engine interfaces (UCI)
+* [X] Convert program (GUI) into library (while still maintaining interface)
+* [X] Implement basic engine interfaces (UCI)
 * [ ] _Play test games and debug_
 * [ ] Implement all engine interfaces (UCI)
 * [ ] Add advanced search features to improve speed
@@ -69,6 +89,7 @@ See `engine-interface.txt` for a description of the UCI protocol.
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are __greatly appreciated__.
@@ -83,10 +104,11 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## License
 
 Kingfish is free and distributed under the
-[__GNU General Public License version 3__][license-url] (GPL v3). Essentially,
+[GNU General Public License version 3][license-url] (GPL v3). Essentially,
 this means you are free to do almost exactly what you want with the program,
 including distributing it among your friends, making it available for download
 from your website, selling it (either by itself or as part of some bigger
@@ -110,16 +132,12 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 * [Sunfish](https://github.com/thomasahle/sunfish)
 
 [contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
-[contributors-url]:    https://github.com/colding10/Kingfish/graphs/contributors
-
-[forks-shield]:        https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
-[forks-url]:           https://github.com/colding10/Kingfish/network/members
-
-[stars-shield]:        https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
-[stars-url]:           https://github.com/colding10/Kingfish/stargazers
-
-[issues-shield]:       https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
-[issues-url]:          https://github.com/colding10/Kingfish/issues
-
-[license-shield]:      https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
-[license-url]:         https://github.com/colding10/Kingfish/blob/master/LICENSE
+[contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
+[forks-url]: https://github.com/colding10/Kingfish/network/members
+[stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
+[stars-url]: https://github.com/colding10/Kingfish/stargazers
+[issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
+[issues-url]: https://github.com/colding10/Kingfish/issues
+[license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
+[license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE
