@@ -27,10 +27,10 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     }
 
     auto entry = this->tp_score.at(pos.hash());
-    if (entry.lower >= gamma)
-        return entry.lower;
-    if (entry.upper < gamma)
-        return entry.upper;
+    if (entry.lower >= gamma){
+        return entry.lower;}
+    if (entry.upper < gamma){
+        return entry.upper;}
 
     if (can_null && depth > 0 &&
         std::find(this->history.begin(), this->history.end(), pos) !=
@@ -137,7 +137,7 @@ std::vector<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->nodes_searched = 0;
     this->history        = hist;
-    // this->tp_score.clear(); // TODO: check if should clear
+    this->tp_score.clear(); // TODO: check if should clear
 
     auto starting_time = std::chrono::system_clock::now();
 
