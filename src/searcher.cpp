@@ -168,7 +168,7 @@ Searcher::search(std::vector<Position> hist, int depth) {
                          curr_time - starting_time)
                          .count()
                   << std::endl; // TODO: add nps and time
-                           // TODO: include with the pv
+                                // TODO: include with the pv
     }
 
     return moves;

@@ -52,13 +52,10 @@ int main() {
 
         if (args[0] == "uci") {
             std::cout << "id name " << VERSION << std::endl;
-            std::cout << "id author Colin D"
-                      << std::endl;
-            std::cout << "uciok"
-                      << std::endl;
+            std::cout << "id author Colin D" << std::endl;
+            std::cout << "uciok" << std::endl;
         } else if (args[0] == "isready") {
-            std::cout << "readyok"
-                      << std::endl;
+            std::cout << "readyok" << std::endl;
         } else if (args[0] == "quit") {
             break;
         } else if (args[0] == "position" && args[1] == "startpos") {
