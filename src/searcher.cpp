@@ -167,7 +167,7 @@ Searcher::search(std::vector<Position> hist, int depth) {
                   << std::chrono::duration_cast<std::chrono::milliseconds>(
                          curr_time - starting_time)
                          .count()
-                  << "\n"; // TODO: add nps and time
+                  << std::endl; // TODO: add nps and time
                            // TODO: include with the pv
     }
 
