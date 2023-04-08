@@ -3,18 +3,17 @@
 <h3 align="center">Kingfish</h3>
 
 <div align="center">
+  <a href="https://github.com/colding10/Kingfish">
+      <img src="https://raw.githubusercontent.com/colding10/Kingfish/adfcef6b83760c19fe876664bf6e46cd3c141152/images/logo.jpeg" alt="Logo" width="400" height="400">
+  </a>
 
-<a href="https://github.com/colding10/Kingfish">
-    <img src="https://raw.githubusercontent.com/colding10/Kingfish/adfcef6b83760c19fe876664bf6e46cd3c141152/images/logo.jpeg" alt="Logo" width="400" height="400">
-</a>
-
-[Contributors][contributors-url]
-[Forks][forks-url]
-[Stargazers][stars-url]
-[Issues][issues-url]
-[GPL3 License][license-url]
-
+  [![Contributors][contributors-shield]][contributors-url]
+  [![Forks][forks-shield]][forks-url]
+  [![Stargazers][stars-shield]][stars-url]
+  [![Issues][issues-shield]][issues-url]
+  [![MIT License][license-shield]][license-url]
 </div>
+
   <p align="center">
     A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
     <br />
@@ -28,8 +27,6 @@
     <a href="https://github.com/colding10/Kingfish/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 
