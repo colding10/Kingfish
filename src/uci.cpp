@@ -51,14 +51,11 @@ int main() {
         tokenize(line, delim, args);
 
         if (args[0] == "uci") {
-            std::cout << "id name " << VERSION << "\n";
-            std::cout << "id author Colin D"
-                      << "\n";
-            std::cout << "uciok"
-                      << "\n";
+            std::cout << "id name " << VERSION << std::endl;
+            std::cout << "id author Colin D" << std::endl;
+            std::cout << "uciok" << std::endl;
         } else if (args[0] == "isready") {
-            std::cout << "readyok"
-                      << "\n";
+            std::cout << "readyok" << std::endl;
         } else if (args[0] == "quit") {
             break;
         } else if (args[0] == "position" && args[1] == "startpos") {
@@ -122,7 +119,7 @@ int main() {
                         move_str =
                             render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp "
-                                  << score << " pv " << move_str << "\n";
+                                  << score << " pv " << move_str << std::endl;
                     }
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {
@@ -133,11 +130,11 @@ int main() {
             }
 
             std::cout << "bestmove "
-                      << (move_str.length() ? move_str : "(none)") << "\n";
+                      << (move_str.length() ? move_str : "(none)") << std::endl;
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
-                    std::cout << "board:\n" << hist.back().board << "\n";
+                    std::cout << "board:\n" << hist.back().board << std::endl;
                 }
             }
         }
