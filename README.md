@@ -30,21 +30,21 @@
 </div>
 
 
-  
-    A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
-    
 
-    [**Explore the docs »**](https://github.com/colding10/Kingfish)
-    
+A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
 
-    
 
-    [View Demo](https://github.com/colding10/Kingfish)
-    ·
-    [Report Bug](https://github.com/colding10/Kingfish/issues)
-    ·
-    [Request Feature](https://github.com/colding10/Kingfish/issues)
-  
+[**Explore the docs »**](https://github.com/colding10/Kingfish)
+
+
+
+
+[View Demo](https://github.com/colding10/Kingfish)
+·
+[Report Bug](https://github.com/colding10/Kingfish/issues)
+·
+[Request Feature](https://github.com/colding10/Kingfish/issues)
+
 
 
 <!-- TABLE OF CONTENTS -->
