@@ -124,6 +124,7 @@ also be made available under GPL v3.
 ## Contact
 
 Colin Ding - colinding10@gmail.com
+<br/>
 Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding10/Kingfish)
 
 ## Acknowledgments
