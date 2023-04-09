@@ -26,7 +26,7 @@ struct Key {
     int      depth;
     bool     null_move;
 
-    Key() = default;
+    Key() = delete;
     Key(Position _pos, int _depth, bool _null_move)
         : pos(_pos)
         , depth(_depth)
