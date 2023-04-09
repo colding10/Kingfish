@@ -113,6 +113,7 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 * [Stockfish](https://github.com/official-stockfish/Stockfish)
 * [Sunfish](https://github.com/thomasahle/sunfish)
 
+<!-- LINKS -->
 [contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
 [contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
