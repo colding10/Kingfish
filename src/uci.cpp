@@ -17,11 +17,19 @@ int parse(std::string c) {
 }
 
 std::string render(int i) {
-    int rank = (i - A1) / 10;
-    int fil  = ((i - A1) % 10 + 10) % 10;
+    auto modulo = [](int dividend, int divisor) {
+        return (dividend % divisor + divisor) % divisor;
+    };
+    auto floor_division = [](int dividend, int divisor) {
+        int quotient = dividend / divisor;
+        if ((dividend < 0) != (divisor < 0) && (dividend % divisor) != 0) {
+            quotient--;
+        }
+        return quotient;
+    };
 
-    if (rank <= 0)
-        rank -= 1;
+    int rank = floor_division((i - A1), 10);
+    int fil  = modulo((i - A1), 10);
 
     return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
@@ -110,8 +118,6 @@ int main() {
                     std::tie(gamma, score, move) = result;
 
                     if (score >= gamma) {
-                        std::cout << "move.i: " << move.i
-                                  << " move.j: " << move.j << std::endl;
                         int i = move.i, j = move.j;
                         if (hist.size() % 2 == 0) {
                             i = 119 - i, j = 119 - j;
