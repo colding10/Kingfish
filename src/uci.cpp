@@ -23,7 +23,6 @@ std::string render(int i) {
     if (rank <= 0)
         rank -= 1;
 
-    std::cout << "rank is: " << rank << " fil: " << fil << std::endl;
     return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
 
@@ -44,7 +43,6 @@ int main() {
     std::vector<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
-    std::cout << "render(83) = " << render(83) << std::endl;
 
     for (std::string line; std::getline(std::cin, line);) {
         std::vector<std::string> args;
