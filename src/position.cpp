@@ -41,7 +41,7 @@ std::vector<Move> Position::genMoves() {
                             break;
                     }
                     if (A8 <= j && j <= H8) {
-                        for (char prom : {'N', 'B', 'R', 'Q'}) {
+                        for (char prom : "NBRQ") {
                             moves.push_back(Move(i, j, prom));
                         }
                         break;
