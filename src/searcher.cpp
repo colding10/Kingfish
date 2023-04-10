@@ -16,6 +16,7 @@
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
+#include "uci.hpp"
 
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
@@ -139,7 +140,7 @@ std::vector<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->nodes_searched = 0;
     this->history        = hist;
-    this->tp_score.clear(); // TODO: check if should clear
+    this->tp_score.clear(); 
 
     auto starting_time = std::chrono::system_clock::now();
 

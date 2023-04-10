@@ -136,6 +136,13 @@ int main() {
                 if (args[1] == "board") {
                     std::cout << "board:\n" << hist.back().board << std::endl;
                 }
+                if (args[1] == "moves") {
+                    std::cout << "moves: {";
+                    for (Move m : hist.back().genMoves()) {
+                        std::cout << render(m.i) + render(m.j) + m.prom;
+                    }
+                    std::cout << "}" << std::endl;
+                }
             }
         }
     }

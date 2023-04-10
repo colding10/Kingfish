@@ -18,9 +18,16 @@ std::vector<Move> Position::genMoves() {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
+
         if (!isupper(p)) {
             continue;
         }
+        // if (p == 'K' && board[A1] == 'R' && wc.first) {
+        //     moves.push_back(Move(i, i + W + W, ' '));
+        // } else if (p == 'K' && board[H1] == 'R' && wc.second) {
+        //     moves.push_back(Move(i, i + E + E, ' '));
+        // }
+
         for (int d : directions[p]) {
             for (int j = i + d;; j += d) {
                 char q = board[j];
@@ -48,9 +55,11 @@ std::vector<Move> Position::genMoves() {
                     }
                 }
                 moves.push_back(Move(i, j, ' '));
+
                 if (p == 'P' || p == 'N' || p == 'K' || islower(q)) {
                     break;
                 }
+
                 if (i == A1 && board[j + E] == 'K' && wc.first) {
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
