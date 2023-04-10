@@ -140,7 +140,7 @@ std::vector<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->nodes_searched = 0;
     this->history        = hist;
-    this->tp_score.clear(); 
+    this->tp_score.clear();
 
     auto starting_time = std::chrono::system_clock::now();
 

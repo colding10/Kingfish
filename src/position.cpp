@@ -54,12 +54,12 @@ std::vector<Move> Position::genMoves() {
                     break;
                 }
 
-                if (i == A1 &&
-                    board[j + E] == 'K' && this->wc.first) { // TODO: add back castling rights
+                if (i == A1 && board[j + E] == 'K' &&
+                    this->wc.first) { // TODO: add back castling rights
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
-                if (i == H1 &&
-                    board[j + W] == 'K' && this->wc.second) { // TODO: add back castling rights
+                if (i == H1 && board[j + W] == 'K' &&
+                    this->wc.second) { // TODO: add back castling rights
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }
