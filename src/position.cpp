@@ -22,11 +22,6 @@ std::vector<Move> Position::genMoves() {
         if (!isupper(p)) {
             continue;
         }
-        // if (p == 'K' && board[A1] == 'R' && wc.first) {
-        //     moves.push_back(Move(i, i + W + W, ' '));
-        // } else if (p == 'K' && board[H1] == 'R' && wc.second) {
-        //     moves.push_back(Move(i, i + E + E, ' '));
-        // }
 
         for (int d : directions[p]) {
             for (int j = i + d;; j += d) {
@@ -60,10 +55,10 @@ std::vector<Move> Position::genMoves() {
                     break;
                 }
 
-                if (i == A1 && board[j + E] == 'K' && wc.first) {
+                if (i == A1 && board[j + E] == 'K') { // TODO: add back castling rights
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
-                if (i == H1 && board[j + W] == 'K' && wc.second) {
+                if (i == H1 && board[j + W] == 'K') { // TODO: add back castling rights
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }
