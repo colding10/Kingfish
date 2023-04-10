@@ -1,6 +1,5 @@
 #include "position.hpp"
 
-#include <assert.h>
 #include <string.h>
 
 #include <algorithm>
@@ -56,11 +55,11 @@ std::vector<Move> Position::genMoves() {
                 }
 
                 if (i == A1 &&
-                    board[j + E] == 'K') { // TODO: add back castling rights
+                    board[j + E] == 'K' && this->wc.first) { // TODO: add back castling rights
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
                 if (i == H1 &&
-                    board[j + W] == 'K') { // TODO: add back castling rights
+                    board[j + W] == 'K' && this->wc.second) { // TODO: add back castling rights
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }
@@ -88,7 +87,6 @@ Position Position::rotate(bool nullmove) {
 }
 
 Position Position::move(Move move) {
-    assert(board.size() == 120);
     int  i = move.i, j = move.j;
     char prom = move.prom;
     char p    = board[i];
@@ -102,8 +100,8 @@ Position Position::move(Move move) {
     new_board             = put(new_board, i, '.');
     int new_score         = score + value(move);
 
-    std::pair<bool, bool> new_wc;
-    std::pair<bool, bool> new_bc;
+    std::pair<bool, bool> new_wc = this->wc;
+    std::pair<bool, bool> new_bc = this->bc;
 
     int new_kp = 0, new_ep = 0;
 
