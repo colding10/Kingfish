@@ -55,10 +55,12 @@ std::vector<Move> Position::genMoves() {
                     break;
                 }
 
-                if (i == A1 && board[j + E] == 'K') { // TODO: add back castling rights
+                if (i == A1 &&
+                    board[j + E] == 'K') { // TODO: add back castling rights
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
-                if (i == H1 && board[j + W] == 'K') { // TODO: add back castling rights
+                if (i == H1 &&
+                    board[j + W] == 'K') { // TODO: add back castling rights
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }
@@ -100,19 +102,23 @@ Position Position::move(Move move) {
     new_board             = put(new_board, i, '.');
     int new_score         = score + value(move);
 
-    std::pair<bool, bool> new_wc = {false, false};
-    std::pair<bool, bool> new_bc = {false, false};
+    std::pair<bool, bool> new_wc;
+    std::pair<bool, bool> new_bc;
 
     int new_kp = 0, new_ep = 0;
 
-    if (i == A1)
-        new_wc.second = wc.second;
-    if (i == H1)
-        new_wc.second = wc.first;
-    if (j == A8)
-        new_bc.second = bc.first;
-    if (j == H8)
-        new_bc.first = bc.second;
+    if (i == A1) {
+        new_wc = {false, wc.second};
+    }
+    if (i == H1) {
+        new_wc = {wc.first, false};
+    }
+    if (j == A8) {
+        new_bc = {bc.first, false};
+    }
+    if (j == H8) {
+        new_bc = {false, bc.second};
+    }
 
     if (p == 'K') {
         new_wc = {false, false};
