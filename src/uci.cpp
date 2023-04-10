@@ -18,13 +18,12 @@ int parse(std::string c) {
 
 std::string render(int i) {
     int rank = (i - A1) / 10;
-    int fil  = (i - A1) % 10;
+    int fil  = ((i - A1) % 10 + 10) % 10;
 
-    if (fil < 0)
-        fil += 10;
-    if (rank < 0)
+    if (rank <= 0)
         rank -= 1;
 
+    std::cout << "rank is: " << rank << " fil: " << fil << std::endl;
     return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
 
@@ -45,6 +44,7 @@ int main() {
     std::vector<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
     Searcher searcher;
+    std::cout << "render(83) = " << render(83) << std::endl;
 
     for (std::string line; std::getline(std::cin, line);) {
         std::vector<std::string> args;
@@ -112,6 +112,8 @@ int main() {
                     std::tie(gamma, score, move) = result;
 
                     if (score >= gamma) {
+                        std::cout << "move.i: " << move.i
+                                  << " move.j: " << move.j << std::endl;
                         int i = move.i, j = move.j;
                         if (hist.size() % 2 == 0) {
                             i = 119 - i, j = 119 - j;
