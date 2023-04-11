@@ -33,7 +33,7 @@ class Position {
         , bc(bc)
         , ep(ep)
         , kp(kp) {}
-    inline bool operator==(Position other) const {
+    inline bool operator==(const Position &other) const {
         return board == other.board && score == other.score && wc == other.wc &&
                bc == other.bc && ep == other.ep && kp == other.kp;
     }
@@ -61,7 +61,7 @@ class Position {
     Position rotate(bool nullmove = false);
     Position move(const Move &move);
 
-    int value(Move move);
+    int value(const Move &move);
     int hash();
 };
 

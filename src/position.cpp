@@ -144,7 +144,7 @@ Position Position::move(const Move &move) {
     return new_pos.rotate();
 }
 
-int Position::value(Move move) {
+int Position::value(const Move &move) {
     int i = move.i;
     int j = move.j;
 
