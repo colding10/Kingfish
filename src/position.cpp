@@ -22,7 +22,7 @@ std::vector<Move> Position::genMoves() {
             continue;
         }
 
-        for (int d : directions[p]) {
+        for (int d : DIRECTIONS[p]) {
             for (int j = i + d;; j += d) {
                 char q = board[j];
                 if (isspace(q) || isupper(q)) {
@@ -151,36 +151,36 @@ int Position::value(const Move &move) {
     char p = board[i];
     char q = board[j];
 
-    if (piece_square_tables.count(p) == 0) {
+    if (PIECE_SQUARE_TABLES.count(p) == 0) {
         std::cout << "p: " << p << " q: " << q << std::endl;
     }
     int score =
-        piece_square_tables.at(p).at(j) - piece_square_tables.at(p).at(i);
+        PIECE_SQUARE_TABLES.at(p).at(j) - PIECE_SQUARE_TABLES.at(p).at(i);
 
     // Capture
     if (islower(q)) {
-        score += piece_square_tables[toupper(q)][119 - j];
+        score += PIECE_SQUARE_TABLES[toupper(q)][119 - j];
     }
 
     // Castling check detection
     if (abs(j - kp) < 2) {
-        score += piece_square_tables['K'][119 - j];
+        score += PIECE_SQUARE_TABLES['K'][119 - j];
     }
 
     // Castling
     if (p == 'K' && abs(i - j) == 2) {
-        score += piece_square_tables['R'][(i + j) / 2];
-        score -= piece_square_tables['R'][j < i ? A1 : H1];
+        score += PIECE_SQUARE_TABLES['R'][(i + j) / 2];
+        score -= PIECE_SQUARE_TABLES['R'][j < i ? A1 : H1];
     }
 
     // Special pawn stuff
     if (p == 'P') {
         if (A8 <= j && j <= H8) {
             score +=
-                piece_square_tables[move.prom][j] - piece_square_tables['P'][j];
+                PIECE_SQUARE_TABLES[move.prom][j] - PIECE_SQUARE_TABLES['P'][j];
         }
         if (j == ep) {
-            score += piece_square_tables['P'][119 - (j + S)];
+            score += PIECE_SQUARE_TABLES['P'][119 - (j + S)];
         }
     }
 

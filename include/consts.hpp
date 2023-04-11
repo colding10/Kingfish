@@ -12,7 +12,7 @@ typedef int Direction;
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
 const int N = -10, E = 1, S = 10, W = -1;
 
-static std::unordered_map<char, std::vector<Direction>> directions = {
+static std::unordered_map<char, std::vector<Direction>> DIRECTIONS = {
     {'P', {N, N + N, N + W, N + E}},
     {'N',
      {N + N + E,
@@ -28,8 +28,8 @@ static std::unordered_map<char, std::vector<Direction>> directions = {
     {'Q', {N, E, S, W, N + E, S + E, S + W, N + W}},
     {'K', {N, E, S, W, N + E, S + E, S + W, N + W}}};
 
-const int MATE_LOWER = piece_values['K'] - 10 * piece_values['Q'];
-const int MATE_UPPER = piece_values['K'] + 10 * piece_values['Q'];
+const int MATE_LOWER = PIECE_VALUES['K'] - 10 * PIECE_VALUES['Q'];
+const int MATE_UPPER = PIECE_VALUES['K'] + 10 * PIECE_VALUES['Q'];
 
 const int QS             = 35;
 const int EVAL_ROUGHNESS = 15;

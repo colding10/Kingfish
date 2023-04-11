@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-static std::unordered_map<char, std::vector<int>> piece_square_tables = {
+static std::unordered_map<char, std::vector<int>> PIECE_SQUARE_TABLES = {
     {'P',
      {0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   100, 100, 100, 100, 100, 100, 100, 100, 0,
@@ -64,7 +64,7 @@ static std::unordered_map<char, std::vector<int>> piece_square_tables = {
            0, 0,     0,     0,     0,     0,     0,     0,     0,     0,
            0, 0,     0,     0,     0,     0,     0,     0,     0,     0}}};
 
-static std::unordered_map<char, int> piece_values = {
+static std::unordered_map<char, int> PIECE_VALUES = {
     {'P', 100}, {'N', 280}, {'B', 320}, {'R', 429}, {'Q', 929}, {'K', 60000}};
 
 #endif // !PIECES_HPP_INCLUDED
