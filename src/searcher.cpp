@@ -1,7 +1,5 @@
 #include "searcher.hpp"
 
-#include <assert.h>
-
 #include <algorithm>
 #include <chrono>
 #include <climits>
