@@ -9,7 +9,7 @@
 #include "position.hpp"
 #include "searcher.hpp"
 
-int parse(std::string c) {
+int parse(const std::string &c) {
     int fil  = c[0] - 'a';
     int rank = int(c[1] - '0') - 1;
 
