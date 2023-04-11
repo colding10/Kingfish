@@ -86,7 +86,7 @@ Position Position::rotate(bool nullmove) {
                     (kp && !nullmove) ? 119 - kp : 0);
 }
 
-Position Position::move(Move move) {
+Position Position::move(const Move &move) {
     int  i = move.i, j = move.j;
     char prom = move.prom;
     char p    = board[i];

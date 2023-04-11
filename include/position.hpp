@@ -59,7 +59,7 @@ class Position {
     std::vector<Move> genMoves();
 
     Position rotate(bool nullmove = false);
-    Position move(Move move);
+    Position move(const Move &move);
 
     int value(Move move);
     int hash();
