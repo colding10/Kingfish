@@ -151,6 +151,9 @@ int Position::value(const Move &move) {
     char p = board[i];
     char q = board[j];
 
+    if (piece_square_tables.count(p) == 0) {
+        std::cout << "p: " << p << " q: " << q << std::endl;
+    }
     int score =
         piece_square_tables.at(p).at(j) - piece_square_tables.at(p).at(i);
 
