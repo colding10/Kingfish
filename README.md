@@ -62,8 +62,8 @@ See `engine-interface.txt` for a description of the UCI protocol.
 
 * [X] Convert program (GUI) into library (while still maintaining interface)
 * [X] Implement basic engine interfaces (UCI)
-* [ ] _Play test games and debug_
-* [ ] Implement all engine interfaces (UCI)
+* [X] Play test games and debug
+* [ ] _Implement all engine interfaces (UCI)_
 * [ ] Add advanced search features to improve speed
 * [ ] Play engine against other programs to rank ELO
 
