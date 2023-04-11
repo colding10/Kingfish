@@ -34,7 +34,7 @@ std::string render(int i) {
     return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
 
-void tokenize(std::string const        &str,
+void tokenize(const std::string        &str,
               const char                delim,
               std::vector<std::string> &out) {
     std::stringstream ss(str);
