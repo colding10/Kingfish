@@ -52,7 +52,7 @@
 
 The engine supports a few but not all of the common UCI commands. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
 
-__As of right now, it sometimes makes strange moves (blunders) and is still in beta development.__
+__As of right now, it sometimes makes strange moves (blunders) and is still in beta development. It also does not handle checks properly.__
 
 ## Usage
 
