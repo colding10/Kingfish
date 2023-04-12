@@ -4,11 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "assert.h"
 #include "move.hpp"
 #include "pieces.hpp"
-
-typedef int PositionHash;
+#include "types.hpp"
 
 class Position {
   public:

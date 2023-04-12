@@ -6,6 +6,7 @@
 #include <unordered_map>
 
 #include "position.hpp"
+#include "types.hpp"
 
 // sourced from: http://hgm.nubati.net/book_format.html
 
@@ -303,7 +304,6 @@ struct BookMove {
     uint32_t recent;
 };
 
-typedef std::unordered_map<uint64_t, std::vector<BookMove>> Book;
 
 Book readBook(const std::string &filepath);
 bool getBestMove(Book *book, long long int hash, Move &move);
