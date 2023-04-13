@@ -41,9 +41,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         return 0;
     }
 
-    auto moves = [&]() {
-        std::vector<std::pair<Move, int>> all_moves;
-
+    auto moves = [&]() -> generator<std::pair<Move, int>> {
         bool any_of_RBNQ = pos.board.find('R') != std::string::npos ||
                            pos.board.find('B') != std::string::npos ||
                            pos.board.find('N') != std::string::npos ||
@@ -51,16 +49,36 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
         if (can_null && depth > 2 && any_of_RBNQ) {
             Position rot_board = pos.rotate(true);
-            all_moves.push_back(
-                {NULLMOVE, -this->bound(rot_board, 1 - gamma, depth - 3)});
+            co_yield {NULLMOVE, -this->bound(rot_board, 1 - gamma, depth - 3)};
         }
 
         if (depth == 0) {
-            all_moves.push_back({NULLMOVE, pos.score});
-            return all_moves;
+            co_yield {NULLMOVE, pos.score};
         }
 
         int val_lower = (depth == 0 ? QS : -MATE_LOWER);
+
+        // # Look for the strongest ove from last time, the hash-move.
+        // killer = self.tp_move.get(pos)
+
+        // # If there isn't one, try to find one with a more shallow search.
+        // # This is known as Internal Iterative Deepening (IID). We set
+        // # can_null=True, since we want to make sure we actually find a move.
+        // if not killer and depth > 2:
+        //     self.bound(pos, gamma, depth - 3, can_null=False)
+        //     killer = self.tp_move.get(pos)
+
+        // # If depth == 0 we only try moves with high intrinsic score (captures and
+        // # promotions). Otherwise we do all moves. This is called quiescent search.
+        // val_lower = QS if depth == 0 else -MATE_LOWER
+
+        // # Only play the move if it would be included at the current val-limit,
+        // # since otherwise we'd get search instability.
+        // # We will search it again in the main loop below, but the tp will fix
+        // # things for us.
+        // if killer and pos.value(killer) >= val_lower:
+        //     yield killer, -self.bound(pos.move(killer), 1 - gamma, depth - 1)
+
         std::vector<std::pair<int, Move>> rest_moves;
 
         for (auto m : pos.genMoves()) {
@@ -81,20 +99,21 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             }
 
             if (depth <= 1 && pos.score + val < gamma) {
-                all_moves.push_back(
-                    {move, val < MATE_LOWER ? pos.score + val : MATE_UPPER});
+                co_yield {move,
+                          val < MATE_LOWER ? pos.score + val : MATE_UPPER};
                 break;
             }
             Position moved_board = pos.move(move);
-            all_moves.push_back(
-                {move, -this->bound(moved_board, 1 - gamma, depth - 1)});
+            co_yield {move, -this->bound(moved_board, 1 - gamma, depth - 1)};
         }
-
-        return all_moves;
     };
+
     int best = -MATE_UPPER;
 
-    for (auto p : moves()) {
+    auto gen = moves();
+    for (; gen.next();) {
+        auto p = gen.value();
+        
         Move move  = p.first;
         int  score = p.second;
 

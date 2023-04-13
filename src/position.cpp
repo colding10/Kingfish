@@ -43,6 +43,10 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     }
                     if (A8 <= j && j <= H8) {
                         for (char prom : "NBRQ") {
+                            if (prom == '\x00') {
+                                break;
+                            }
+
                             if (check_king &&
                                 this->isValidMove(Move(i, j, prom))) {
                                 moves.push_back(Move(i, j, prom));
@@ -154,10 +158,6 @@ int Position::value(const Move &move) {
     char p = board[i];
     char q = board[j];
 
-    if (PIECE_SQUARE_TABLES.count(p) == 0) {
-        std::cout << "p: " << p << " q: " << q << std::endl;
-    }
-
     int score =
         PIECE_SQUARE_TABLES.at(p).at(j) - PIECE_SQUARE_TABLES.at(p).at(i);
 
@@ -180,8 +180,9 @@ int Position::value(const Move &move) {
     // Special pawn stuff
     if (p == 'P') {
         if (A8 <= j && j <= H8) {
+            std::cerr << move.prom << (int)move.prom << std::endl;
             score +=
-                PIECE_SQUARE_TABLES[move.prom][j] - PIECE_SQUARE_TABLES['P'][j];
+                PIECE_SQUARE_TABLES.at(move.prom)[j] - PIECE_SQUARE_TABLES['P'][j];
         }
         if (j == ep) {
             score += PIECE_SQUARE_TABLES['P'][119 - (j + S)];

@@ -50,8 +50,6 @@ int AI::negamax(
 }
 
 Move AI::findBestMove(Position &node, int depth) {
-    std::cout << "joe" << std::endl;
-
     std::vector<Move> moves = node.genMoves();
     // AI::orderMoves(moves, node);
 

@@ -127,8 +127,6 @@ int main() {
                 }
             }
         } else if (args[0] == "go") {
-            searcher.nodes_searched = 0;
-
             int wtime, btime;
 
             wtime = std::stoi(args[2]);
@@ -149,7 +147,7 @@ int main() {
             std::string move_str = "";
 
             bool flag = false;
-            for (int depth = 1; depth < 5; depth++) {
+            for (int depth = 1; depth < 1000; depth++) {
                 if (flag) {
                     break;
                 }
