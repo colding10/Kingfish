@@ -48,18 +48,18 @@ std::vector<Move> Position::genMoves() {
                         break;
                     }
                 }
-                moves.push_back(Move(i, j, ' '));
+                if (this->isValidMove(Move(i, j, ' '))) {
+                    moves.push_back(Move(i, j, ' '));
+                }
 
                 if (p == 'P' || p == 'N' || p == 'K' || islower(q)) {
                     break;
                 }
 
-                if (i == A1 && board[j + E] == 'K' &&
-                    this->wc.first) { // TODO: add back castling rights
+                if (i == A1 && board[j + E] == 'K' && this->wc.first) {
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
-                if (i == H1 && board[j + W] == 'K' &&
-                    this->wc.second) { // TODO: add back castling rights
+                if (i == H1 && board[j + W] == 'K' && this->wc.second) {
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }
@@ -69,6 +69,16 @@ std::vector<Move> Position::genMoves() {
     return moves;
 }
 
+bool Position::isValidMove(const Move &move) {
+    Position rotated = this->move(move);
+    for (Move m : rotated.genMoves()) {
+        if (rotated.board[m.j] == 'k') {
+            return false;
+        }
+    }
+
+    return true;
+}
 Position Position::rotate(bool nullmove) {
     std::string rotated_board(board.rbegin(), board.rend());
     std::transform(rotated_board.begin(),
@@ -139,7 +149,7 @@ Position Position::move(const Move &move) {
             new_board = put(std::string(new_board), j - S, '.');
         }
     }
-    assert(new_board.size() == 120);
+
     Position new_pos(new_board, new_score, new_wc, new_bc, new_ep, new_kp);
     return new_pos.rotate();
 }

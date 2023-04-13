@@ -145,7 +145,7 @@ int main() {
             std::string move_str = "";
 
             bool flag = false;
-            for (int depth = 1; depth < 1000; depth++) {
+            for (int depth = 4; depth < 5; depth++) {
                 if (flag) {
                     break;
                 }

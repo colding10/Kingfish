@@ -56,6 +56,7 @@ class Position {
     }
     std::vector<Move> genMoves();
 
+    bool     isValidMove(const Move &move);
     Position rotate(bool nullmove = false);
     Position move(const Move &move);
 

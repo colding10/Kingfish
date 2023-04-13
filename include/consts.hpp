@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "pieces.hpp"
+#include "types.hpp"
 
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
 const int N = -10, E = 1, S = 10, W = -1;

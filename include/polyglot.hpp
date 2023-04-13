@@ -304,6 +304,7 @@ struct BookMove {
     uint32_t recent;
 };
 
+typedef std::unordered_map<uint64_t, std::vector<BookMove>> Book;
 
 Book readBook(const std::string &filepath);
 bool getBestMove(Book *book, long long int hash, Move &move);
