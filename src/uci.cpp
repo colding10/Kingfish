@@ -145,7 +145,7 @@ int main() {
             std::string move_str = "";
 
             bool flag = false;
-            for (int depth = 4; depth < 5; depth++) {
+            for (int depth = 1; depth < 5; depth++) {
                 if (flag) {
                     break;
                 }
@@ -155,7 +155,7 @@ int main() {
                 for (auto result : result_moves) {
                     std::tie(gamma, score, move) = result;
 
-                    if (score >= gamma) {
+                    // if (score >= gamma) {
                         int i = move.i, j = move.j;
                         if (hist.size() % 2 == 0) {
                             i = 119 - i, j = 119 - j;
@@ -164,7 +164,7 @@ int main() {
                             render(i) + render(j) + (char)tolower(move.prom);
                         std::cout << "info depth " << depth << " score cp "
                                   << score << " pv " << move_str << std::endl;
-                    }
+                    // }
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {
                         flag = true;
@@ -182,7 +182,7 @@ int main() {
                 }
                 if (args[1] == "moves") {
                     std::cout << "moves: {";
-                    for (Move m : hist.back().genMoves()) {
+                    for (Move m : hist.back().genMoves(true)) {
                         std::cout << render(m.i) + render(m.j) + m.prom;
                     }
                     std::cout << "}" << std::endl;

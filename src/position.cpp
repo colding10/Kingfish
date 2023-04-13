@@ -13,7 +13,7 @@
 #include "consts.hpp"
 #include "move.hpp"
 
-std::vector<Move> Position::genMoves() {
+std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
@@ -43,12 +43,16 @@ std::vector<Move> Position::genMoves() {
                     }
                     if (A8 <= j && j <= H8) {
                         for (char prom : "NBRQ") {
-                            moves.push_back(Move(i, j, prom));
+                            if (check_king &&
+                                this->isValidMove(Move(i, j, prom))) {
+                                moves.push_back(Move(i, j, prom));
+                            }
+                            
                         }
                         break;
                     }
                 }
-                if (this->isValidMove(Move(i, j, ' '))) {
+                if (check_king && this->isValidMove(Move(i, j, ' '))) {
                     moves.push_back(Move(i, j, ' '));
                 }
 
@@ -71,7 +75,7 @@ std::vector<Move> Position::genMoves() {
 
 bool Position::isValidMove(const Move &move) {
     Position rotated = this->move(move);
-    for (Move m : rotated.genMoves()) {
+    for (Move m : rotated.genMoves(false)) {
         if (rotated.board[m.j] == 'k') {
             return false;
         }
