@@ -1,0 +1,138 @@
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "1"]
+[White "Stockfish 15.1"]
+[Black "Kingfish 0.3"]
+[Result "1-0"]
+[BlackTimeControl "40/60"]
+[ECO "C21"]
+[GameDuration "00:00:09"]
+[GameEndTime "2023-04-13T10:50:05.482 EDT"]
+[GameStartTime "2023-04-13T10:49:56.157 EDT"]
+[Opening "center game"]
+[PlyCount "13"]
+[Termination "illegal move"]
+[WhiteTimeControl "40/60"]
+
+1. e4 {+0.18/1 0s} e5 {book} 2. d4 {+0.16/1 0s} exd4 {book} 3. Bc4 {0.00/1 0s}
+c5 {+0.55/4 7.4s} 4. c3 {+0.23/1 0s} Qa5 {+692.90/4 1.9s} 5. Ne2 {+0.81/1 0s}
+dxc3 {+692.90/4 0s} 6. Nexc3 {+1.46/1 0s} d5 {+692.90/4 0s}
+7. Bb5+ {+4.82/1 0s, Black makes an illegal move: d5e4} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "2"]
+[White "Kingfish 0.3"]
+[Black "Stockfish 15.1"]
+[Result "0-1"]
+[BlackTimeControl "40/60"]
+[ECO "C42"]
+[GameDuration "00:01:00"]
+[GameEndTime "2023-04-13T10:51:06.474 EDT"]
+[GameStartTime "2023-04-13T10:50:05.483 EDT"]
+[Opening "Petrov"]
+[PlyCount "18"]
+[Termination "time forfeit"]
+[Variation "Classical attack"]
+[WhiteTimeControl "40/60"]
+
+1. e4 {book} e5 {-0.23/1 0s} 2. Nf3 {book} Nf6 {-0.35/1 0s} 3. Nxe5 {book}
+d6 {-0.31/1 0s} 4. Nf3 {book} Nxe4 {-0.40/1 0s} 5. d4 {book} Bf5 {-0.32/1 0s}
+6. Nc3 {-0.86/4 9.8s} d5 {-0.19/1 0s} 7. Nxe4 {-3.08/4 12s} Qe7 {-0.16/1 0s}
+8. Bb5+ {+0.03/4 9.2s} c6 {-0.26/1 0s} 9. Bxc6+ {-2.48/4 18s}
+bxc6 {+2.18/1 0s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "3"]
+[White "Stockfish 15.1"]
+[Black "Kingfish 0.3"]
+[Result "1-0"]
+[BlackTimeControl "40/60"]
+[ECO "A15"]
+[GameDuration "00:01:05"]
+[GameEndTime "2023-04-13T10:52:11.959 EDT"]
+[GameStartTime "2023-04-13T10:51:06.475 EDT"]
+[Opening "English, 1...Nf6 (Anglo-Indian defense)"]
+[PlyCount "15"]
+[Termination "time forfeit"]
+[WhiteTimeControl "40/60"]
+
+1. c4 {+0.18/1 0s} Nf6 {book} 2. d4 {+0.20/1 0s} e6 {book} 3. a3 {+0.19/1 0s}
+d5 {book} 4. Qa4+ {+0.09/1 0s} c6 {+0.45/4 8.2s} 5. Bf4 {-0.17/1 0s}
+Qa5+ {+692.90/4 2.1s} 6. Qxa5 {+6.06/1 0s} dxc4 {-11.17/4 14s}
+7. Nc3 {+7.61/1 0s} Bxa3 {-11.36/4 20s} 8. Qc7 {+8.72/1 0s, Black loses on time}
+1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "4"]
+[White "Kingfish 0.3"]
+[Black "Stockfish 15.1"]
+[Result "0-1"]
+[BlackTimeControl "40/60"]
+[ECO "C42"]
+[GameDuration "00:01:14"]
+[GameEndTime "2023-04-13T10:53:26.356 EDT"]
+[GameStartTime "2023-04-13T10:52:11.960 EDT"]
+[Opening "Petrov"]
+[PlyCount "14"]
+[Termination "time forfeit"]
+[Variation "Damiano Variation"]
+[WhiteTimeControl "40/60"]
+
+1. e4 {book} e5 {-0.23/1 0s} 2. Nf3 {book} Nf6 {-0.35/1 0s} 3. Nxe5 {book}
+Nxe4 {-0.31/1 0s} 4. Qe2 {book} d6 {-0.30/1 0s} 5. Qxe4 {+2.51/4 16s}
+Qe7 {-0.47/1 0s} 6. d4 {book} Nc6 {-0.68/1 0s} 7. Qh4 {+692.90/4 5.8s}
+Qxh4 {+5.07/1 0.003s, White loses on time} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "5"]
+[White "Stockfish 15.1"]
+[Black "Kingfish 0.3"]
+[Result "1-0"]
+[BlackTimeControl "40/60"]
+[ECO "B23"]
+[GameDuration "00:00:04"]
+[GameEndTime "2023-04-13T10:53:30.361 EDT"]
+[GameStartTime "2023-04-13T10:53:26.357 EDT"]
+[Opening "Sicilian"]
+[PlyCount "15"]
+[Termination "illegal move"]
+[Variation "chameleon Variation"]
+[WhiteTimeControl "40/60"]
+
+1. e4 {+0.18/1 0.003s} c5 {book} 2. Nc3 {+0.23/1 0s} Nc6 {book}
+3. Nge2 {+0.08/1 0s} d6 {book} 4. d4 {+0.18/1 0s} Qa5 {+692.90/4 4.0s}
+5. Be3 {+0.97/1 0s} Nxd4 {+692.90/4 0s} 6. Qd2 {+0.95/1 0s} Nxe2 {+692.90/4 0s}
+7. Bxe2 {+0.06/1 0s} e5 {+692.90/4 0.001s}
+8. Bb5+ {+5.24/1 0s, Black makes an illegal move: g8f6} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2023.04.13"]
+[Round "6"]
+[White "Kingfish 0.3"]
+[Black "Stockfish 15.1"]
+[Result "0-1"]
+[BlackTimeControl "40/60"]
+[ECO "A40"]
+[GameDuration "00:01:14"]
+[GameEndTime "2023-04-13T10:54:45.285 EDT"]
+[GameStartTime "2023-04-13T10:53:30.361 EDT"]
+[Opening "Queen's pawn"]
+[PlyCount "12"]
+[Termination "stalled connection"]
+[Variation "Keres defense"]
+[WhiteTimeControl "40/60"]
+
+1. d4 {book} e6 {-0.28/1 0s} 2. c4 {book} b6 {-0.26/1 0s} 3. e4 {book}
+Bb7 {-0.25/1 0s} 4. Nc3 {book} Bb4 {-0.52/1 0s} 5. f3 {book} Nc6 {-0.16/1 0s}
+6. Bf4 {-3.54/4 46s} Bxc3+ {-0.24/1 0s, White's connection stalls} 0-1
+
