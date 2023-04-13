@@ -49,41 +49,41 @@ int main() {
     // TODO: commands to add
 
     // RECIEVING
-        // debug [on | off]
-        // setoption name <id> [value <x>]
-        // position fen <fenstring>
-        // go
-            // go ponder
-            // go searchmoves
-            // go winc
-            // go binc 
-            // go movestogo
-            // go depth
-            // go nodes
-            // go mate
-            // go movetime
-            // go infinite
-        // stop
-        // ponderhit
-    
+    // debug [on | off]
+    // setoption name <id> [value <x>]
+    // position fen <fenstring>
+    // go
+    // go ponder
+    // go searchmoves
+    // go winc
+    // go binc
+    // go movestogo
+    // go depth
+    // go nodes
+    // go mate
+    // go movetime
+    // go infinite
+    // stop
+    // ponderhit
+
     // SENDING
-        // bestmove <move> ponder <move2>
-        // info
-            // info seldepth
-            // info pv (line)
-            // info multipv <num>
-            // info score cp <x> mate <y> 
-            // info currmove <move>
-            // info currmovenumber <x>
-            // info hashfull <x>
-            // info nps <x>
-            // info tbhits <x>
-            // info sbhits <x>
-            // info cpuload <x>
-            // info currline <cpunr> <move1> ... <movei>
-        // option
-            // option name
-            
+    // bestmove <move> ponder <move2>
+    // info
+    // info seldepth
+    // info pv (line)
+    // info multipv <num>
+    // info score cp <x> mate <y>
+    // info currmove <move>
+    // info currmovenumber <x>
+    // info hashfull <x>
+    // info nps <x>
+    // info tbhits <x>
+    // info sbhits <x>
+    // info cpuload <x>
+    // info currline <cpunr> <move1> ... <movei>
+    // option
+    // option name
+
     const char delim = ' ';
 
     std::vector<Position> hist = {
@@ -102,7 +102,8 @@ int main() {
             std::cout << "readyok" << std::endl;
         } else if (args[0] == "quit") {
             break;
-        } else if ((args[0] == "position" && args[1] == "startpos") || args[0] == "ucinewgame") {
+        } else if ((args[0] == "position" && args[1] == "startpos") ||
+                   args[0] == "ucinewgame") {
             hist = {Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
 
             if (args.size() > 2) {
@@ -155,16 +156,14 @@ int main() {
                 for (auto result : result_moves) {
                     std::tie(gamma, score, move) = result;
 
-                    // if (score >= gamma) {
-                        int i = move.i, j = move.j;
-                        if (hist.size() % 2 == 0) {
-                            i = 119 - i, j = 119 - j;
-                        }
-                        move_str =
-                            render(i) + render(j) + (char)tolower(move.prom);
-                        std::cout << "info depth " << depth << " score cp "
-                                  << score << " pv " << move_str << std::endl;
-                    // }
+                    int i = move.i, j = move.j;
+                    if (hist.size() % 2 == 0) {
+                        i = 119 - i, j = 119 - j;
+                    }
+                    move_str = render(i) + render(j) + (char)tolower(move.prom);
+                    std::cout << "info depth " << depth << " score cp " << score
+                              << " pv " << move_str << std::endl;
+
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {
                         flag = true;
