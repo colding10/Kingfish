@@ -12,7 +12,7 @@
 
 #include "consts.hpp"
 #include "move.hpp"
-
+ // TODO: fix gen move, check, and checkmate`
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
@@ -208,8 +208,9 @@ int Position::value() {
 }
 
 bool Position::isValidMove(const Move &move) {
+    return true;
     Position rotated = this->move(move);
-    if (rotated.isCheck()) {
+    if (rotated.rotate().isCheck()) {
         return false;
     }
     return true;
@@ -227,11 +228,12 @@ bool Position::isCheck() {
 }
 
 bool Position::isCheckmate() {
+    return false;
     if (!this->isCheck()) { // cant be mated while not in check
         return false;
     }
 
-    for (Move m : this->genMoves(true)) {
+    for (Move m : this->genMoves()) {
         if (!this->move(m).isCheck()) { // we can get out of check with a move
             return false;
         }

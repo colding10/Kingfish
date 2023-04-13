@@ -1,7 +1,6 @@
 #include "ai.hpp"
 
 #include <algorithm>
-#include <chrono>
 #include <climits>
 #include <iostream>
 #include <map>
@@ -24,7 +23,6 @@ void AI::orderMoves(std::vector<Move> &moves, Position &node) {
 
 int AI::negamax(
     Position &node, int depth, int alpha, int beta, bool checkmate) {
-
     if (depth <= 0 || checkmate) {
         return node.value();
     }
@@ -51,16 +49,15 @@ int AI::negamax(
     return best_value;
 }
 
-Move AI::findBestMove(Position &node, int depth, int time_limit_ms) {
-    auto start_time = std::chrono::high_resolution_clock::now();
-    auto end_time   = start_time + std::chrono::milliseconds(time_limit_ms);
+Move AI::findBestMove(Position &node, int depth) {
+    std::cout << "joe" << std::endl;
 
     std::vector<Move> moves = node.genMoves();
-    AI::orderMoves(moves, node);
+    // AI::orderMoves(moves, node);
 
     Move bestMove;
     bestMove.value = INT_MIN;
-
+    std::cout << moves.size() << std::endl;
     int move_number = 1;
     for (auto move : moves) {
         std::cout << "[BOT]   "
@@ -78,12 +75,6 @@ Move AI::findBestMove(Position &node, int depth, int time_limit_ms) {
 
         if (move.value > bestMove.value) {
             bestMove = move;
-        }
-
-        // Stop the search if we've exceeded the time limit
-        auto current_time = std::chrono::high_resolution_clock::now();
-        if (current_time > end_time) {
-            break;
         }
     }
 

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "ai.hpp"
 #include "consts.hpp"
 #include "position.hpp"
 #include "searcher.hpp"
@@ -141,7 +142,7 @@ int main() {
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
-            int         gamma, score;
+            int         gamma, score = 0;
             Move        move;
             std::string move_str = "";
 

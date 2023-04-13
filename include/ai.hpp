@@ -13,7 +13,7 @@ namespace AI {
 int negamax(Position &node, int depth, int alpha, int beta, bool checkmate);
 
 void orderMoves(std::vector<Move> &moves, Position &node);
-Move findBestMove(Position &node, int depth, int time_limit_ms);
+Move findBestMove(Position &node, int depth);
 
 } // namespace AI
 
