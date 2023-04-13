@@ -9,7 +9,7 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 INCLUDE_DIRS = -I /usr/local/include -I /usr/include
 LDFLAGS := -pthread
-CPPFLAGS := -g -pg -target arm64-apple-darwin-gnu -I $(INCLUDE_DIR) $(INCLUDE_DIRS) -Wall -Wextra -flto -O3 -march=native
+CPPFLAGS := -g -pg -target arm64-apple-darwin-gnu -std=c++2a -I $(INCLUDE_DIR) $(INCLUDE_DIRS) -Wall -Wextra -flto -O3 -march=native
 
 CPP := clang++
 

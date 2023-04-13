@@ -8,6 +8,7 @@
 
 #include "consts.hpp"
 #include "defaultdict.hpp"
+#include "generator.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
@@ -44,8 +45,8 @@ class Searcher {
     int                   nodes_searched = 0;
 
     int bound(Position &pos, int gamma, int depth, bool can_null);
-    std::vector<std::tuple<int, int, Move>> search(std::vector<Position> hist,
-                                                   int                   depth);
+    generator<std::tuple<int, int, Move>> search(std::vector<Position> hist,
+                                                 int                   depth);
 };
 
 #endif // !SEARCHER_HPP_INCLUDED

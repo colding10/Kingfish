@@ -127,6 +127,8 @@ int main() {
                 }
             }
         } else if (args[0] == "go") {
+            searcher.nodes_searched = 0;
+
             int wtime, btime;
 
             wtime = std::stoi(args[2]);
@@ -152,9 +154,9 @@ int main() {
                     break;
                 }
 
-                std::vector<std::tuple<int, int, Move>> result_moves =
-                    searcher.search(hist, depth);
-                for (auto result : result_moves) {
+                auto result_moves_gen = searcher.search(hist, depth);
+                for (; result_moves_gen.next();) {
+                    auto result                  = result_moves_gen.value();
                     std::tie(gamma, score, move) = result;
 
                     int i = move.i, j = move.j;
@@ -162,8 +164,15 @@ int main() {
                         i = 119 - i, j = 119 - j;
                     }
                     move_str = render(i) + render(j) + (char)tolower(move.prom);
-                    std::cout << "info depth " << depth << " score cp " << score
-                              << " pv " << move_str << std::endl;
+                    std::cout << "info depth " << depth << " nodes "
+                              << searcher.nodes_searched << " time "
+                              << std::chrono::duration_cast<
+                                     std::chrono::milliseconds>(
+                                     std::chrono::high_resolution_clock::now() -
+                                     start_time)
+                                     .count()
+                              << " score cp " << score << " pv " << move_str
+                              << std::endl;
 
                     if (move_str.length() &&
                         std::chrono::high_resolution_clock::now() > end_time) {

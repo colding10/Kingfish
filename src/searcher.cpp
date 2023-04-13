@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <chrono>
 #include <climits>
+#include <coroutine>
 #include <functional>
 #include <iostream>
 #include <map>
@@ -11,6 +12,7 @@
 #include <vector>
 
 #include "consts.hpp"
+#include "generator.hpp"
 #include "move.hpp"
 #include "pieces.hpp"
 #include "position.hpp"
@@ -123,17 +125,14 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     return best;
 }
 
-std::vector<std::tuple<int, int, Move>>
+generator<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->nodes_searched = 0;
     this->history        = hist;
     this->tp_score.clear();
 
-    auto starting_time = std::chrono::system_clock::now();
-
-    std::vector<std::tuple<int, int, Move>> moves;
-    int                                     gamma = 0;
-    int                                     lower, upper, score;
+    int gamma = 0;
+    int lower, upper, score;
 
     lower = -MATE_LOWER, upper = MATE_LOWER;
     while (lower < upper - EVAL_ROUGHNESS) {
@@ -145,19 +144,8 @@ Searcher::search(std::vector<Position> hist, int depth) {
             upper = score;
         }
 
-        moves.push_back(
-            std::make_tuple(gamma, score, this->tp_move[hist.back().hash()]));
+        co_yield std::make_tuple(
+            gamma, score, this->tp_move[hist.back().hash()]);
         gamma = (lower + upper + 1) / 2;
-
-        auto curr_time = std::chrono::system_clock::now();
-
-        std::cout << "info nodes " << this->nodes_searched << " time "
-                  << std::chrono::duration_cast<std::chrono::milliseconds>(
-                         curr_time - starting_time)
-                         .count()
-                  << std::endl; // TODO: add nps and time
-                                // TODO: include with the pv
     }
-
-    return moves;
 }
