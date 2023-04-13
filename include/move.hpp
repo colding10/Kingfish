@@ -7,6 +7,8 @@ struct Move {
     int i;
     int j;
 
+    int value;
+
     char prom;
 
     Move() = default;

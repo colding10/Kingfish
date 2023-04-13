@@ -56,11 +56,15 @@ class Position {
     }
     std::vector<Move> genMoves(bool check_king = true);
 
-    bool     isValidMove(const Move &move);
+    bool isCheckmate();
+    bool isCheck();
+    bool isValidMove(const Move &move);
+
     Position rotate(bool nullmove = false);
     Position move(const Move &move);
 
     int value(const Move &move);
+    int value();
     int hash();
 };
 

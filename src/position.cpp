@@ -47,7 +47,6 @@ std::vector<Move> Position::genMoves(bool check_king) {
                                 this->isValidMove(Move(i, j, prom))) {
                                 moves.push_back(Move(i, j, prom));
                             }
-                            
                         }
                         break;
                     }
@@ -73,16 +72,6 @@ std::vector<Move> Position::genMoves(bool check_king) {
     return moves;
 }
 
-bool Position::isValidMove(const Move &move) {
-    Position rotated = this->move(move);
-    for (Move m : rotated.genMoves(false)) {
-        if (rotated.board[m.j] == 'k') {
-            return false;
-        }
-    }
-
-    return true;
-}
 Position Position::rotate(bool nullmove) {
     std::string rotated_board(board.rbegin(), board.rend());
     std::transform(rotated_board.begin(),
@@ -168,6 +157,7 @@ int Position::value(const Move &move) {
     if (PIECE_SQUARE_TABLES.count(p) == 0) {
         std::cout << "p: " << p << " q: " << q << std::endl;
     }
+
     int score =
         PIECE_SQUARE_TABLES.at(p).at(j) - PIECE_SQUARE_TABLES.at(p).at(i);
 
@@ -199,6 +189,55 @@ int Position::value(const Move &move) {
     }
 
     return score;
+}
+
+int Position::value() {
+    int score = 0;
+
+    for (int i = H1; i <= A8; i++) {
+        char c = this->board[i];
+
+        if (islower(c) || isspace(c) || c == '.') {
+            continue;
+        }
+
+        score += PIECE_SQUARE_TABLES[c][i];
+    }
+
+    return score;
+}
+
+bool Position::isValidMove(const Move &move) {
+    Position rotated = this->move(move);
+    if (rotated.isCheck()) {
+        return false;
+    }
+    return true;
+}
+
+bool Position::isCheck() {
+    Position rotated = this->rotate();
+    for (Move m : rotated.genMoves(false)) {
+        if (rotated.board[m.j] == 'k') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool Position::isCheckmate() {
+    if (!this->isCheck()) { // cant be mated while not in check
+        return false;
+    }
+
+    for (Move m : this->genMoves(true)) {
+        if (!this->move(m).isCheck()) { // we can get out of check with a move
+            return false;
+        }
+    }
+
+    return true; // we are mated
 }
 
 int Position::hash() {
