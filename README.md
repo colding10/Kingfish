@@ -10,6 +10,10 @@
   [![Contributors][contributors-shield]][contributors-url]
   [![Forks][forks-shield]][forks-url]
   [![Stargazers][stars-shield]][stars-url]
+  <br/>
+  [![Release][release-badge]][release-link]
+  [![Commits][commits-badge]][commits-link]
+  <br/>
   [![Issues][issues-shield]][issues-url]
   [![MIT License][license-shield]][license-url]
 </div>
@@ -126,3 +130,8 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [issues-url]: https://github.com/colding10/Kingfish/issues
 [license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
 [license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE
+
+[release-badge]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
+[commits-badge]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
+[release-link]:       https://github.com/colding10/Kingfish/releases/latest
+[commits-link]:       https://github.com/colding10/Kingfish/commits/master
