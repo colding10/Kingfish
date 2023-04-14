@@ -15,7 +15,7 @@
 </div>
 
   <p align="center">
-    A C++ implementation of a playable chess game. This turned into my own chess engine that I am continuously improving.
+    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on [chess.com](chess.com).
     <br />
     <a href="https://github.com/colding10/Kingfish"><strong>Explore the docs »</strong></a>
     <br />
@@ -48,15 +48,15 @@
 
 ## About The Project
 
-`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. My dream is that this engine can eventually play at levels above 1800 ELO, and will eventually create a [LiChess](lichess.org) account for it to get ranked.
+`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](chess.com) Stockfish ELO estimator, and I will eventually create a [LiChess](lichess.org) account for it to get ranked.
 
-The engine supports a few but not all of the common UCI commands. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
+The engine supports __most but not all of the common UCI commands__. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
 
-__As of right now, it sometimes makes strange moves (blunders) and is still in beta development. It also does not handle checks properly.__
+__The engine plays a very capable and competitive game of chess. It blunders once in a while however, and there are a few kinks to be worked out.__
 
 ## Usage
 
-See `engine-interface.txt` for a description of the UCI protocol.
+Kingfish speaks UCI, a protocol for chess engines. See `engine-interface.txt` for a description of the UCI protocol.
 
 ## Roadmap
 
