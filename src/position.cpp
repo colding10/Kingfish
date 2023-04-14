@@ -12,7 +12,7 @@
 
 #include "consts.hpp"
 #include "move.hpp"
- // TODO: fix gen move, check, and checkmate`
+// TODO: fix gen move, check, and checkmate`
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
@@ -47,15 +47,22 @@ std::vector<Move> Position::genMoves(bool check_king) {
                                 break;
                             }
 
-                            if (check_king &&
-                                this->isValidMove(Move(i, j, prom))) {
+                            if (check_king) {
+                                if (this->isValidMove(Move(i, j, prom))) {
+                                    moves.push_back(Move(i, j, prom));
+                                }
+                            } else {
                                 moves.push_back(Move(i, j, prom));
                             }
                         }
                         break;
                     }
                 }
-                if (check_king && this->isValidMove(Move(i, j, ' '))) {
+                if (check_king) {
+                    if (this->isValidMove(Move(i, j, ' '))) {
+                        moves.push_back(Move(i, j, ' '));
+                    }
+                } else {
                     moves.push_back(Move(i, j, ' '));
                 }
 
@@ -180,8 +187,8 @@ int Position::value(const Move &move) {
     // Special pawn stuff
     if (p == 'P') {
         if (A8 <= j && j <= H8) {
-            score +=
-                PIECE_SQUARE_TABLES.at(move.prom)[j] - PIECE_SQUARE_TABLES['P'][j];
+            score += PIECE_SQUARE_TABLES.at(move.prom)[j] -
+                     PIECE_SQUARE_TABLES['P'][j];
         }
         if (j == ep) {
             score += PIECE_SQUARE_TABLES['P'][119 - (j + S)];
@@ -208,7 +215,6 @@ int Position::value() {
 }
 
 bool Position::isValidMove(const Move &move) {
-    return true;
     Position rotated = this->move(move);
     if (rotated.rotate().isCheck()) {
         return false;
@@ -220,15 +226,14 @@ bool Position::isCheck() {
     Position rotated = this->rotate();
     for (Move m : rotated.genMoves(false)) {
         if (rotated.board[m.j] == 'k') {
-            return false;
+            return true;
         }
     }
 
-    return true;
+    return false;
 }
 
 bool Position::isCheckmate() {
-    return false;
     if (!this->isCheck()) { // cant be mated while not in check
         return false;
     }

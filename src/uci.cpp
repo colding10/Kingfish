@@ -126,6 +126,7 @@ int main() {
                 }
             }
         } else if (args[0] == "go") {
+            searcher.nodes_searched = 0;
             int wtime, btime;
 
             wtime = std::stoi(args[2]);

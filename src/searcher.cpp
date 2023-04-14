@@ -58,7 +58,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
         int val_lower = (depth == 0 ? QS : -MATE_LOWER);
 
-        // # Look for the strongest ove from last time, the hash-move.
+        // # Look for the strongest move from last time, the hash-move.
         // killer = self.tp_move.get(pos)
 
         // # If there isn't one, try to find one with a more shallow search.
@@ -146,9 +146,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
 generator<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
-    this->nodes_searched = 0;
     this->history        = hist;
-    this->tp_score.clear();
 
     int gamma = 0;
     int lower, upper, score;
