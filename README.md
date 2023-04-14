@@ -19,7 +19,7 @@
 </div>
 
   <p align="center">
-    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on <a href="https://chess.com">chess.com</a>.
+    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on <a href="https://lichess.org/@/KingfishBot">lichess.org</a>.
     <br />
     <a href="https://github.com/colding10/Kingfish"><strong>Explore the docs »</strong></a>
     <br />
@@ -52,7 +52,7 @@
 
 ## About The Project
 
-`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](chess.com) Stockfish ELO estimator to about 2000 ELO.
+`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](chess.com) Stockfish ELO estimator to about 2000 ELO. Additionally, on [lichess.org](lichess.org), [it's rating](https://lichess.org/@/KingfishBot) is about 1900-2000 ELO.
 
 > __I created a lichess account! Play Kingfish here: https://lichess.org/@/KingfishBot.__
 
