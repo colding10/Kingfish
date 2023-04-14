@@ -56,6 +56,8 @@ __The engine plays a very capable and competitive game of chess. It blunders onc
 
 ## Usage
 
+Kingfish is a software program designed for playing chess on a computer. However, it lacks a graphical user interface (GUI) which is necessary to visually display a chessboard and to facilitate the input of moves. Third-party developers have created separate GUIs that can be found online. To use Kingfish with a particular GUI, consult the documentation provided with that GUI for instructions on integrating the two applications.
+
 Kingfish speaks UCI, a protocol for chess engines. See `engine-interface.txt` for a description of the UCI protocol.
 
 ## Roadmap
