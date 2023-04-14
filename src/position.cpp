@@ -180,7 +180,6 @@ int Position::value(const Move &move) {
     // Special pawn stuff
     if (p == 'P') {
         if (A8 <= j && j <= H8) {
-            std::cerr << move.prom << (int)move.prom << std::endl;
             score +=
                 PIECE_SQUARE_TABLES.at(move.prom)[j] - PIECE_SQUARE_TABLES['P'][j];
         }

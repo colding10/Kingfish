@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 
-#include "ai.hpp"
 #include "consts.hpp"
 #include "position.hpp"
 #include "searcher.hpp"
