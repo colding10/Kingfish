@@ -13,7 +13,7 @@
 
 int getSearchTime(const std::vector<std::string> &args,
                   const std::vector<Position>        &hist) {
-    int wtime = 0, btime = 0, winc = 1, binc = 1;
+    int wtime = 0, btime = 0, winc = 0, binc = 0;
 
     // Parse time control options
     for (size_t i = 1; i < args.size(); i++) {
