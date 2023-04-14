@@ -12,7 +12,7 @@
 #include "searcher.hpp"
 
 int getSearchTime(const std::vector<std::string> &args,
-                  const std::vector<Position>        &hist) {
+                  const std::vector<Position>    &hist) {
     int wtime = 0, btime = 0, winc = 0, binc = 0;
 
     // Parse time control options
@@ -30,15 +30,17 @@ int getSearchTime(const std::vector<std::string> &args,
 
     // Determine remaining time for current player
     int remaining_time;
+    int moves_left = (40 - (int)hist.size() / 2);
     if (hist.size() % 2 == 0) {
-        remaining_time = wtime + winc * (40 - (int)hist.size() / 2);
+        remaining_time = wtime + winc * moves_left;
     } else {
-        remaining_time = btime + binc * (40 - (int)hist.size() / 2);
+        remaining_time = btime + binc * moves_left;
     }
+    std::cout << "remaining time: " << remaining_time << std::endl;
 
     // Calculate time to allocate for searching (75% of remaining time)
-    float think_time  = remaining_time / 70.0;
-    int   search_time = static_cast<int>(think_time * 0.75 * 1000);
+    int move_time   = remaining_time / moves_left;
+    int search_time = static_cast<int>(move_time * 0.75);
 
     // Cap search time to 10s to prevent the engine from hanging
     search_time = std::min(search_time, 10000);
@@ -164,6 +166,7 @@ int main() {
             // Determine search time from time control options
             int ms_time = getSearchTime(args, hist);
 
+            std::cout << "time allocated: " << ms_time << std::endl;
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
