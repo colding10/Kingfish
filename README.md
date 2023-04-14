@@ -71,7 +71,6 @@ Kingfish speaks UCI, a protocol for chess engines. See `engine-interface.txt` fo
 * [X] Play test games and debug
 * [ ] _Implement all engine interfaces (UCI)_
 * [ ] Add advanced search features to improve speed
-* [ ] Play engine against other programs to rank ELO
 
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
