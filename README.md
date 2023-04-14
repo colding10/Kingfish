@@ -120,18 +120,19 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 * [Sunfish](https://github.com/thomasahle/sunfish)
 
 <!-- LINKS -->
-[contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
 [contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
 [forks-url]: https://github.com/colding10/Kingfish/network/members
-[stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
 [stars-url]: https://github.com/colding10/Kingfish/stargazers
-[issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
 [issues-url]: https://github.com/colding10/Kingfish/issues
-[license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
 [license-url]: https://github.com/colding10/Kingfish/blob/master/LICENSE
 
-[release-badge]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
+[contributors-shield]: https://img.shields.io/github/contributors/colding10/Kingfish.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/colding10/Kingfish.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge
+
+[release-badge]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release&color=success
 [commits-badge]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
 [release-link]:       https://github.com/colding10/Kingfish/releases/latest
 [commits-link]:       https://github.com/colding10/Kingfish/commits/master
