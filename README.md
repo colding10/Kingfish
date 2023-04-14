@@ -54,7 +54,7 @@
 
 `Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](chess.com) Stockfish ELO estimator to about 2000 ELO.
 
-__I created a lichess account! Play Kingfish here: https://lichess.org/@/KingfishBot.
+> __I created a lichess account! Play Kingfish here: https://lichess.org/@/KingfishBot.__
 
 The engine supports __most but not all of the common UCI commands__. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
 
