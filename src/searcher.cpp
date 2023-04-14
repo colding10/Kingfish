@@ -113,7 +113,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     auto gen = moves();
     for (; gen.next();) {
         auto p = gen.value();
-        
+
         Move move  = p.first;
         int  score = p.second;
 
@@ -146,7 +146,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
 generator<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
-    this->history        = hist;
+    this->history = hist;
 
     int gamma = 0;
     int lower, upper, score;
@@ -165,4 +165,36 @@ Searcher::search(std::vector<Position> hist, int depth) {
             gamma, score, this->tp_move[hist.back().hash()]);
         gamma = (lower + upper + 1) / 2;
     }
+}
+
+void Searcher::searchInfinite(std::vector<Position> &hist) {
+    std::string move_str;
+    this->stop_search = false;
+    for (int depth = 1; !stop_search; depth++) {
+        for (auto result_moves_gen = search(hist, depth);
+             result_moves_gen.next();) {
+            if (stop_search) {
+                break;
+            }
+            auto result = result_moves_gen.value();
+            int  gamma, score;
+            Move move;
+            std::tie(gamma, score, move) = result;
+
+            int i = move.i, j = move.j;
+            if (hist.size() % 2 == 0) {
+                i = 119 - i, j = 119 - j;
+            }
+            move_str = render(i) + render(j) + (char)tolower(move.prom);
+            std::cout << "info depth " << depth << " nodes " << nodes_searched
+                      << " score cp " << score << " pv " << move_str
+                      << std::endl;
+        }
+    }
+    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
+              << std::endl;
+}
+
+void Searcher::stopInfiniteSearch() {
+    this->stop_search = true;
 }

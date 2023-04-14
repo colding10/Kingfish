@@ -5,6 +5,7 @@
 #include <set>
 #include <string>
 #include <tuple>
+#include <vector>
 
 #include "consts.hpp"
 #include "defaultdict.hpp"
@@ -47,6 +48,12 @@ class Searcher {
     int bound(Position &pos, int gamma, int depth, bool can_null);
     generator<std::tuple<int, int, Move>> search(std::vector<Position> hist,
                                                  int                   depth);
+
+    void searchInfinite(std::vector<Position> &hist);
+    void stopInfiniteSearch();
+
+  private:
+    bool stop_search = false;
 };
 
 #endif // !SEARCHER_HPP_INCLUDED

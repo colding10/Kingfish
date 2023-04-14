@@ -1,13 +1,50 @@
 #include <algorithm>
 #include <chrono>
+#include <future>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "consts.hpp"
 #include "position.hpp"
 #include "searcher.hpp"
+
+int getSearchTime(const std::vector<std::string> &args,
+                  const std::vector<Position>        &hist) {
+    int wtime = 0, btime = 0, winc = 0, binc = 0;
+
+    // Parse time control options
+    for (size_t i = 1; i < args.size(); i++) {
+        if (args[i] == "wtime") {
+            wtime = std::stoi(args[i + 1]);
+        } else if (args[i] == "btime") {
+            btime = std::stoi(args[i + 1]);
+        } else if (args[i] == "winc") {
+            winc = std::stoi(args[i + 1]);
+        } else if (args[i] == "binc") {
+            binc = std::stoi(args[i + 1]);
+        }
+    }
+
+    // Determine remaining time for current player
+    int remaining_time;
+    if (hist.size() % 2 == 0) {
+        remaining_time = wtime + winc * (40 - (int)hist.size() / 2);
+    } else {
+        remaining_time = btime + binc * (40 - (int)hist.size() / 2);
+    }
+
+    // Calculate time to allocate for searching (75% of remaining time)
+    float think_time  = remaining_time / 70.0;
+    int   search_time = static_cast<int>(think_time * 0.75 * 1000);
+
+    // Cap search time to 10s to prevent the engine from hanging
+    search_time = std::min(search_time, 10000);
+
+    return search_time;
+}
 
 int parse(const std::string &c) {
     int fil  = c[0] - 'a';
@@ -49,26 +86,21 @@ int main() {
     // TODO: commands to add
 
     // RECIEVING
-    // debug [on | off]
     // setoption name <id> [value <x>]
     // position fen <fenstring>
     // go
     // go ponder
     // go searchmoves
-    // go winc
-    // go binc
     // go movestogo
     // go depth
     // go nodes
     // go mate
     // go movetime
-    // go infinite
-    // stop
     // ponderhit
 
     // SENDING
     // bestmove <move> ponder <move2>
-    // info
+
     // info seldepth
     // info pv (line)
     // info multipv <num>
@@ -127,17 +159,10 @@ int main() {
             }
         } else if (args[0] == "go") {
             searcher.nodes_searched = 0;
-            int wtime, btime;
+            bool infinite           = false;
 
-            wtime = std::stoi(args[2]);
-            btime = std::stoi(args[4]);
-
-            if (hist.size() % 2 == 0) {
-                wtime = btime;
-            }
-
-            float think   = wtime / 70;
-            int   ms_time = think * 0.8;
+            // Determine search time from time control options
+            int ms_time = getSearchTime(args, hist);
 
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
@@ -145,43 +170,66 @@ int main() {
             int         gamma, score = 0;
             Move        move;
             std::string move_str = "";
+            if (!infinite) {
+                std::future<void> search_result =
+                    std::async(std::launch::async, [&]() {
+                        bool flag = false;
+                        for (int depth = 1; depth < 1000; depth++) {
+                            if (flag) {
+                                break;
+                            }
 
-            bool flag = false;
-            for (int depth = 1; depth < 1000; depth++) {
-                if (flag) {
-                    break;
+                            auto result_moves_gen =
+                                searcher.search(hist, depth);
+                            for (; result_moves_gen.next();) {
+                                auto result = result_moves_gen.value();
+                                std::tie(gamma, score, move) = result;
+
+                                int i = move.i, j = move.j;
+                                if (hist.size() % 2 == 0) {
+                                    i = 119 - i, j = 119 - j;
+                                }
+                                move_str = render(i) + render(j) +
+                                           (char)tolower(move.prom);
+                                std::cout
+                                    << "info depth " << depth << " nodes "
+                                    << searcher.nodes_searched << " time "
+                                    << std::chrono::duration_cast<
+                                           std::chrono::milliseconds>(
+                                           std::chrono::high_resolution_clock::
+                                               now() -
+                                           start_time)
+                                           .count()
+                                    << " score cp " << score << " pv "
+                                    << move_str << std::endl;
+
+                                if (move_str.length() &&
+                                    std::chrono::high_resolution_clock::now() >
+                                        end_time) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                        }
+                        std::cout << "bestmove "
+                                  << (move_str.length() ? move_str : "(none)")
+                                  << std::endl;
+                    });
+
+                // Wait for the search to complete
+                search_result.wait();
+            } else {
+                std::thread infinite_thread(
+                    std::mem_fn(&Searcher::searchInfinite),
+                    &searcher,
+                    std::ref(hist));
+
+                while (std::getline(std::cin, line) && line != "stop") {
+                    // Keep reading input until the "stop" command is received.
                 }
-
-                auto result_moves_gen = searcher.search(hist, depth);
-                for (; result_moves_gen.next();) {
-                    auto result                  = result_moves_gen.value();
-                    std::tie(gamma, score, move) = result;
-
-                    int i = move.i, j = move.j;
-                    if (hist.size() % 2 == 0) {
-                        i = 119 - i, j = 119 - j;
-                    }
-                    move_str = render(i) + render(j) + (char)tolower(move.prom);
-                    std::cout << "info depth " << depth << " nodes "
-                              << searcher.nodes_searched << " time "
-                              << std::chrono::duration_cast<
-                                     std::chrono::milliseconds>(
-                                     std::chrono::high_resolution_clock::now() -
-                                     start_time)
-                                     .count()
-                              << " score cp " << score << " pv " << move_str
-                              << std::endl;
-
-                    if (move_str.length() &&
-                        std::chrono::high_resolution_clock::now() > end_time) {
-                        flag = true;
-                        break;
-                    }
-                }
+                searcher.stopInfiniteSearch();
+                infinite_thread.join();
             }
-
-            std::cout << "bestmove "
-                      << (move_str.length() ? move_str : "(none)") << std::endl;
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
