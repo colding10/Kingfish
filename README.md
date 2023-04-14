@@ -15,7 +15,7 @@
 </div>
 
   <p align="center">
-    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on [chess.com](chess.com).
+    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on <a href="https://chess.com">chess.com</a>.
     <br />
     <a href="https://github.com/colding10/Kingfish"><strong>Explore the docs »</strong></a>
     <br />
