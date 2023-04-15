@@ -31,7 +31,7 @@ int getSearchTime(const std::vector<std::string> &args,
     // Determine remaining time for current player
     int remaining_time;
     int moves_left = (40 - (int)hist.size() / 2);
-    if (hist.size() % 2 == 0) {
+    if (hist.size() % 2 == 1) {
         remaining_time = wtime + winc * moves_left;
     } else {
         remaining_time = btime + binc * moves_left;
