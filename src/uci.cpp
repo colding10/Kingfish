@@ -42,9 +42,6 @@ int getSearchTime(const std::vector<std::string> &args,
     int move_time   = remaining_time / moves_left;
     int search_time = static_cast<int>(move_time * 0.75);
 
-    // Cap search time to 10s to prevent the engine from hanging
-    search_time = std::min(search_time, 10000);
-
     return search_time;
 }
 
