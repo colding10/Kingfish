@@ -11,8 +11,8 @@
   [![Forks][forks-shield]][forks-url]
   [![Stargazers][stars-shield]][stars-url]
   <br/>
-  [![Release][release-badge]][release-link]
-  [![Commits][commits-badge]][commits-link]
+  [![Release][release-shield]][release-link]
+  [![Commits][commits-shield]][commits-link]
   <br/>
   [![Issues][issues-shield]][issues-url]
   [![MIT License][license-shield]][license-url]
