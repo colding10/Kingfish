@@ -132,7 +132,7 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge&color=success
 [issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge&color=success
 [license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge&color=success
-[release-shield]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release?
+[release-shield]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
 [commits-shield]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
 
 [release-link]:       https://github.com/colding10/Kingfish/releases/latest
