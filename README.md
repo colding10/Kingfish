@@ -11,8 +11,8 @@
   [![Forks][forks-shield]][forks-url]
   [![Stargazers][stars-shield]][stars-url]
   <br/>
-  [![Release][release-badge]][release-link]
-  [![Commits][commits-badge]][commits-link]
+  [![Release][release-shield]][release-link]
+  [![Commits][commits-shield]][commits-link]
   <br/>
   [![Issues][issues-shield]][issues-url]
   [![MIT License][license-shield]][license-url]
@@ -132,8 +132,8 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [stars-shield]: https://img.shields.io/github/stars/colding10/Kingfish.svg?style=for-the-badge&color=success
 [issues-shield]: https://img.shields.io/github/issues/colding10/Kingfish.svg?style=for-the-badge&color=success
 [license-shield]: https://img.shields.io/github/license/colding10/Kingfish.svg?style=for-the-badge&color=success
+[release-shield]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
+[commits-shield]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
 
-[release-badge]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
-[commits-badge]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
 [release-link]:       https://github.com/colding10/Kingfish/releases/latest
 [commits-link]:       https://github.com/colding10/Kingfish/commits/master
