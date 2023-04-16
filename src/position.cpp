@@ -1,7 +1,5 @@
 #include "position.hpp"
 
-#include <string.h>
-
 #include <algorithm>
 #include <array>
 #include <cstring>
@@ -18,14 +16,14 @@ std::vector<Move> Position::genMoves(bool check_king) {
     for (int i = 0; i < (int)board.size(); ++i) {
         char p = this->board[i];
 
-        if (!isupper(p)) {
+        if (!std::isupper(p)) {
             continue;
         }
 
         for (int d : DIRECTIONS[p]) {
             for (int j = i + d;; j += d) {
                 char q = board[j];
-                if (isspace(q) || isupper(q)) {
+                if (std::isspace(q) || std::isupper(q)) {
                     break;
                 }
                 if (p == 'P') {
@@ -169,8 +167,8 @@ int Position::value(const Move &move) {
         PIECE_SQUARE_TABLES.at(p).at(j) - PIECE_SQUARE_TABLES.at(p).at(i);
 
     // Capture
-    if (islower(q)) {
-        score += PIECE_SQUARE_TABLES[toupper(q)][119 - j];
+    if (std::islower(q)) {
+        score += PIECE_SQUARE_TABLES[std::toupper(q)][119 - j];
     }
 
     // Castling check detection
