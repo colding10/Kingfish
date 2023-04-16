@@ -19,7 +19,7 @@ class Position {
     int ep;            // the en passant square
     int kp;            // the king passant square
 
-    Position(std::string           board,
+    Position(const std::string    &board,
              int                   score,
              std::pair<bool, bool> wc,
              std::pair<bool, bool> bc,
