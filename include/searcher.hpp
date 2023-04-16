@@ -29,7 +29,7 @@ struct Key {
     bool     null_move;
 
     Key() = delete;
-    Key(Position _pos, int _depth, bool _null_move)
+    Key(const Position &_pos, int _depth, bool _null_move)
         : pos(_pos)
         , depth(_depth)
         , null_move(_null_move) {}
