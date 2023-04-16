@@ -41,7 +41,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         return 0;
     }
 
-    auto moves = [&]() -> generator<std::pair<Move, int>> {
+    auto moves = [&]() -> Generator<std::pair<Move, int>> {
         bool any_of_RBNQ = pos.board.find('R') != std::string::npos ||
                            pos.board.find('B') != std::string::npos ||
                            pos.board.find('N') != std::string::npos ||
@@ -143,7 +143,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     return best;
 }
 
-generator<std::tuple<int, int, Move>>
+Generator<std::tuple<int, int, Move>>
 Searcher::search(std::vector<Position> hist, int depth) {
     this->history = hist;
 

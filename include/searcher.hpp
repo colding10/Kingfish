@@ -46,7 +46,7 @@ class Searcher {
     int                   nodes_searched = 0;
 
     int bound(Position &pos, int gamma, int depth, bool can_null);
-    generator<std::tuple<int, int, Move>> search(std::vector<Position> hist,
+    Generator<std::tuple<int, int, Move>> search(std::vector<Position> hist,
                                                  int                   depth);
 
     void searchInfinite(std::vector<Position> &hist);
