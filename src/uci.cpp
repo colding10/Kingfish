@@ -31,7 +31,8 @@ int getSearchTime(const std::vector<std::string> &args,
     // Determine remaining time for current player
     // assume 50 move games
     int remaining_time;
-    int moves_left = std::max(0, 50 - (int)hist.size() / 2); // don't go negative
+    int moves_left =
+        std::max(0, 50 - (int)hist.size() / 2); // don't go negative
     if (hist.size() % 2 == 1) {
         remaining_time = wtime + winc * moves_left;
     } else {
@@ -159,7 +160,8 @@ int main() {
             }
         } else if (args[0] == "go") {
             searcher.nodes_searched = 0;
-            bool infinite           = false;
+            bool infinite =
+                std::find(args.begin(), args.end(), "infinite") != args.end();
 
             // Determine search time from time control options
             int ms_time = getSearchTime(args, hist);
@@ -168,13 +170,15 @@ int main() {
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
-            int         gamma, score = 0;
-            Move        move;
-            std::string move_str = "";
+            Move move;
+
             if (!infinite) {
                 std::future<void> search_result =
                     std::async(std::launch::async, [&]() {
-                        bool flag = false;
+                        int         gamma, score = 0;
+                        bool        flag     = false;
+                        std::string move_str = "";
+
                         for (int depth = 1; depth < 1000; depth++) {
                             if (flag) {
                                 break;
