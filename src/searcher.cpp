@@ -89,9 +89,8 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
                   rest_moves.end(),
                   std::greater<std::pair<int, Move>>());
 
-        int val;
         for (std::pair<int, Move> m_pair : rest_moves) {
-            val       = m_pair.first;
+            int val       = m_pair.first;
             Move move = m_pair.second;
 
             if (val < val_lower) {
