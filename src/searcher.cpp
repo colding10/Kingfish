@@ -148,11 +148,11 @@ Searcher::search(std::vector<Position> hist, int depth) {
     this->history = hist;
 
     int gamma = 0;
-    int lower, upper, score;
+    int lower, upper;
 
     lower = -MATE_LOWER, upper = MATE_LOWER;
     while (lower < upper - EVAL_ROUGHNESS) {
-        score = this->bound(hist.back(), gamma, depth, false);
+        int score = this->bound(hist.back(), gamma, depth, false);
         if (score >= gamma) {
             lower = score;
         }
