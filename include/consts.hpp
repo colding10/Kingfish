@@ -30,9 +30,9 @@ static std::unordered_map<char, std::vector<Direction>> DIRECTIONS = {
 const int MATE_LOWER = PIECE_VALUES['K'] - 10 * PIECE_VALUES['Q'];
 const int MATE_UPPER = PIECE_VALUES['K'] + 10 * PIECE_VALUES['Q'];
 
-const int          QS             = 35;
-const int          EVAL_ROUGHNESS = 15;
-const unsigned int NULLMOVE_DEPTH = 2;
+const int QS             = 35;
+const int EVAL_ROUGHNESS = 15;
+const int NULLMOVE_DEPTH = 2;
 
 const std::string VERSION = "Kingfish 1.0.1";
 const std::string INITIAL = ("         \n" //   0 -  9
