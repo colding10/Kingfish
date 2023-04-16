@@ -12,7 +12,7 @@
 
 #include "consts.hpp"
 #include "move.hpp"
-// TODO: fix gen move, check, and checkmate`
+
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); ++i) {
