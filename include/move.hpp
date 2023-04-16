@@ -4,12 +4,12 @@
 #include "pieces.hpp"
 
 struct Move {
-    int i;
-    int j;
+    int i = 0;
+    int j = 0;
 
-    int value;
+    int value = 0;
 
-    char prom;
+    char prom = ' ';
 
     Move() = default;
     Move(int _i, int _j, char _prom)
