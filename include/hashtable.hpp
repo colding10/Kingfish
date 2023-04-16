@@ -1,8 +1,11 @@
-#include <algorithm>
+#ifndef HASHTABLE_HPP_INCLUDED
+#define HASHTABLE_HPP_INCLUDED
+
+#include <iostream>
+#include <unordered_map>
 #include <utility>
 
 #include "consts.hpp"
-#include "types.hpp"
 
 struct Entry {
     int lower = -MATE_UPPER;
@@ -49,18 +52,22 @@ struct KeyHasher {
     }
 };
 
-template <typename kT, typename eT>
+template <typename T>
 class FixedSizeHashTable {
   public:
-    explicit FixedSizeHashTable(int size_in_MB, eT default_value)
-        : default_value_(std::move(default_value)) {
-        const int num_entries = size_in_MB * 1024 * 1024 / sizeof(Node);
-        table_.reserve(num_entries);
+    explicit FixedSizeHashTable(int size_in_MB, T default_value)
+        : default_value_(std::move(default_value))
+        , num_entries_(0) {
+        const int num_nodes = size_in_MB * 1024 * 1024 / sizeof(Node);
+        table_.reserve(num_nodes);
     }
 
-    void insert(const kT &key, const eT &value) { table_[key] = value; }
+    void insert(const Key &key, const T &value) {
+        table_[key] = value;
+        ++num_entries_;
+    }
 
-    const eT &operator[](const Key &key) const {
+    const T &operator[](const Key &key) const {
         const auto it = table_.find(key);
         if (it == table_.end()) {
             return default_value_;
@@ -69,17 +76,35 @@ class FixedSizeHashTable {
         }
     }
 
+    int size() const { return table_.size(); }
+
+    int capacity() const { return table_.max_size(); }
+
+    int num_entries() const { return num_entries_; }
+
+    int fill_ratio_permill() const {
+        const int max_entries = table_.max_size();
+        if (max_entries == 0) {
+            return 0;
+        } else {
+            return num_entries_ * 1000 / max_entries;
+        }
+    }
+
   private:
     struct Node {
-        kT key;
-        eT value;
+        Key key;
+        T   value;
 
         Node() = default;
-        Node(const kT &_key, const eT &_value)
+        Node(const Key &_key, const T &_value)
             : key(_key)
             , value(_value) {}
     };
 
-    std::unordered_map<kT, eT, KeyHasher> table_;
-    eT                                    default_value_;
+    std::unordered_map<Key, T, KeyHasher> table_;
+    T                                     default_value_;
+    int                                   num_entries_;
 };
+
+#endif
