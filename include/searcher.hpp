@@ -1,6 +1,7 @@
 #ifndef SEARCHER_HPP_INCLUDED
 #define SEARCHER_HPP_INCLUDED
 
+#include <functional>
 #include <map>
 #include <tuple>
 #include <vector>
@@ -22,23 +23,46 @@ struct Entry {
 };
 
 struct Key {
-    Position pos;
-    int      depth;
-    bool     null_move;
+    PositionHash pos_hash;
+    int          depth;
+    bool         null_move;
 
     Key() = delete;
-    Key(const Position &_pos, int _depth, bool _null_move)
-        : pos(_pos)
+    Key(PositionHash _pos_hash, int _depth, bool _null_move)
+        : pos_hash(_pos_hash)
         , depth(_depth)
         , null_move(_null_move) {}
+
+    bool operator==(const Key &other) const {
+        return pos_hash == other.pos_hash && depth == other.depth &&
+               null_move == other.null_move;
+    }
+};
+
+struct KeyHasher {
+    std::size_t operator()(const Key &key) const noexcept {
+        std::size_t             seed = 0;
+        std::hash<PositionHash> pos_hash_hasher;
+        std::hash<int>          depth_hasher;
+        std::hash<bool>         null_move_hasher;
+
+        seed ^= pos_hash_hasher(key.pos_hash) + 0x9e3779b9 + (seed << 6) +
+                (seed >> 2);
+        seed ^=
+            depth_hasher(key.depth) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        seed ^= null_move_hasher(key.null_move) + 0x9e3779b9 + (seed << 6) +
+                (seed >> 2);
+
+        return seed;
+    }
 };
 
 class Searcher {
   public:
     Searcher()
         : tp_score{Entry(-MATE_UPPER, MATE_UPPER)} {}
-    DefaultDict<PositionHash, Entry> tp_score;
-    std::map<PositionHash, Move>     tp_move;
+    DefaultDict<Key, Entry, KeyHasher> tp_score;
+    std::map<PositionHash, Move>       tp_move;
 
     std::vector<Position> history;
     int                   nodes_searched = 0;

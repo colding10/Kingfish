@@ -27,7 +27,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         return -MATE_UPPER;
     }
 
-    auto entry = this->tp_score.at(pos.hash());
+    auto entry = this->tp_score.at(Key(pos.hash(), depth, can_null));
     if (entry.lower >= gamma) {
         return entry.lower;
     }
@@ -42,10 +42,14 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     }
 
     auto moves = [&]() -> Generator<std::pair<Move, int>> {
-        bool any_of_RBNQ = pos.board.find('R') != std::string::npos ||
-                           pos.board.find('B') != std::string::npos ||
-                           pos.board.find('N') != std::string::npos ||
-                           pos.board.find('Q') != std::string::npos;
+        bool any_of_RBNQ = std::find(pos.board.begin(), pos.board.end(), 'R') !=
+                               pos.board.end() ||
+                           std::find(pos.board.begin(), pos.board.end(), 'B') !=
+                               pos.board.end() ||
+                           std::find(pos.board.begin(), pos.board.end(), 'N') !=
+                               pos.board.end() ||
+                           std::find(pos.board.begin(), pos.board.end(), 'Q') !=
+                               pos.board.end();
 
         if (can_null && depth > NULLMOVE_DEPTH && any_of_RBNQ) {
             Position rot_board = pos.rotate(true);
@@ -66,9 +70,8 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
                 if (pos.value(killer) >= val_lower) {
                     Position moved = pos.move(killer);
-                    co_yield {
-                        killer,
-                        -this->bound(moved, 1 - gamma, depth - 1)};
+                    co_yield {killer,
+                              -this->bound(moved, 1 - gamma, depth - 1)};
                 }
             }
         }
@@ -126,12 +129,12 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         best          = in_check ? -MATE_LOWER : 0;
 
         if (best >= gamma) {
-            this->tp_score[pos.hash()] = Entry(best, entry.upper);
+            this->tp_score[Key(pos.hash(), depth, can_null)] =
+                Entry(best, entry.upper);
         }
         if (best < gamma) {
-            this->tp_score[pos.hash()] =
-                Entry(entry.lower, best); // TODO: check if should be including
-                                          // other flags. THINK SHOULD
+            this->tp_score[Key(pos.hash(), depth, can_null)] =
+                Entry(entry.lower, best);
         }
     }
     return best;

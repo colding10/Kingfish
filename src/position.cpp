@@ -23,7 +23,7 @@ std::vector<Move> Position::genMoves(bool check_king) {
 
         for (int d : DIRECTIONS[p]) {
             for (int j = i + d;; j += d) {
-                char q = board[j];
+                char q = this->board[j];
                 if (std::isspace(q) || std::isupper(q)) {
                     break;
                 }
@@ -32,7 +32,7 @@ std::vector<Move> Position::genMoves(bool check_king) {
                         break;
                     }
                     if (d == N + N) {
-                        if (i < A1 + N || board[i + N] != '.')
+                        if (i < A1 + N || this->board[i + N] != '.')
                             break;
                     }
                     if (d == N + W || d == N + E) {
@@ -65,14 +65,14 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     moves.push_back(Move(i, j, ' '));
                 }
 
-                if (p == 'P' || p == 'N' || p == 'K' || islower(q)) {
+                if (p == 'P' || p == 'N' || p == 'K' || std::islower(q)) {
                     break;
                 }
 
-                if (i == A1 && board[j + E] == 'K' && this->wc.first) {
+                if (i == A1 && this->board[j + E] == 'K' && this->wc.first) {
                     moves.push_back(Move(j + E, j + W, ' '));
                 }
-                if (i == H1 && board[j + W] == 'K' && this->wc.second) {
+                if (i == H1 && this->board[j + W] == 'K' && this->wc.second) {
                     moves.push_back(Move(j + W, j + E, ' '));
                 }
             }

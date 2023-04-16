@@ -8,7 +8,7 @@
 #include "pieces.hpp"
 #include "types.hpp"
 
-class Position {
+class Position {       // Uses 40 bytes
   public:
     std::string board; // 120 char representation of the board
     int         score; // the board evaluation score
