@@ -2,8 +2,6 @@
 #define SEARCHER_HPP_INCLUDED
 
 #include <map>
-#include <set>
-#include <string>
 #include <tuple>
 #include <vector>
 
@@ -11,8 +9,8 @@
 #include "defaultdict.hpp"
 #include "generator.hpp"
 #include "move.hpp"
-#include "pieces.hpp"
 #include "position.hpp"
+
 struct Entry {
     int lower = -MATE_UPPER;
     int upper = MATE_UPPER;
