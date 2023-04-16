@@ -11,6 +11,9 @@
 #include "position.hpp"
 #include "searcher.hpp"
 
+// TODO: move search time into own file (timemanager)
+// TODO: create uci options dict, then export to make global
+
 int getSearchTime(const std::vector<std::string> &args,
                   const std::vector<Position>    &hist) {
     int wtime = 0, btime = 0, winc = 0, binc = 0;
