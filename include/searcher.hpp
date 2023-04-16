@@ -10,13 +10,13 @@
 #include <vector>
 
 #include "consts.hpp"
-#include "defaultdict.hpp"
 #include "generator.hpp"
 #include "hashtable.hpp"
 #include "move.hpp"
 #include "position.hpp"
 
-const int mb_size = 100;
+const int mb_size = 100; // TODO: move the mb_size to the UCI options
+
 class Searcher {
   public:
     Searcher()
