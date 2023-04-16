@@ -60,7 +60,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
         Move killer;
         if (this->tp_move.find(pos.hash()) != this->tp_move.end()) {
-            if (depth > NULLMOVE_DEPTH) {
+            if (depth > 2) {
                 this->bound(pos, gamma, depth - 3, false);
                 killer = tp_move.at(pos.hash());
 
@@ -72,7 +72,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
                 }
             }
         }
-        
+
         std::vector<std::pair<int, Move>> rest_moves;
 
         for (auto m : pos.genMoves()) {
