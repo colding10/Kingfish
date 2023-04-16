@@ -223,14 +223,12 @@ bool Position::isValidMove(const Move &move) {
 }
 
 bool Position::isCheck() {
-    Position rotated = this->rotate();
-    for (Move m : rotated.genMoves(false)) {
-        if (rotated.board[m.j] == 'k') {
-            return true;
-        }
-    }
+    Position          rotated = this->rotate();
+    std::vector<Move> moves   = rotated.genMoves(false);
 
-    return false;
+    return std::any_of(moves.cbegin(), moves.cend(), [&rotated](const Move &m) {
+        return rotated.board[m.j] == 'k';
+    });
 }
 
 bool Position::isCheckmate() {
