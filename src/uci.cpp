@@ -84,6 +84,23 @@ void tokenize(const std::string        &str,
 }
 
 int main() {
+    // TESTING HASH SIZES
+        // Key: 12 bytes
+        // Entry: 8 bytes
+        // Hashed Entry: 8 bytes
+
+        // I need 20 bytes to store one pair
+        // I can only store 6.4 million pairs w/ 128 MB
+
+        // That's alr
+
+        // std::cout << sizeof(Key) << std::endl;
+        // std::cout << sizeof(std::size_t) << std::endl;
+        // std::cout << sizeof(Entry) << std::endl;
+        // return 0;
+
+
+
     // TODO: commands to add
 
     // RECIEVING
