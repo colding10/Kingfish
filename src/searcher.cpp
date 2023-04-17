@@ -161,7 +161,7 @@ Searcher::search(std::vector<Position> hist, int depth) {
             gamma, score, this->tp_move[hist.back().hash()]);
         gamma = (lower + upper + 1) / 2;
         std::cout << "info hashfull " << this->tp_score.getPermillFull()
-                  << "\n";
+                  << std::endl;
     }
 }
 
@@ -186,11 +186,11 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
             move_str = render(i) + render(j) + (char)tolower(move.prom);
             std::cout << "info depth " << depth << " nodes " << nodes_searched
                       << " score cp " << score << " pv " << move_str
-                      << "\n";
+                      << std::endl;
         }
     }
     std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
-              << "\n";
+              << std::endl;
 }
 
 void Searcher::stopInfiniteSearch() {

@@ -41,7 +41,7 @@ int getSearchTime(const std::vector<std::string> &args,
     } else {
         remaining_time = btime + binc * moves_left;
     }
-    std::cout << "remaining time: " << remaining_time << "\n";
+    std::cout << "remaining time: " << remaining_time << std::endl;
 
     // Calculate time to allocate for searching (75% of remaining time)
     int move_time   = remaining_time / moves_left;
@@ -97,9 +97,9 @@ int main() {
 
     // That's alr
 
-    // std::cout << sizeof(Key) << "\n";
-    // std::cout << sizeof(std::size_t) << "\n";
-    // std::cout << sizeof(Entry) << "\n";
+    // std::cout << sizeof(Key) << std::endl;
+    // std::cout << sizeof(std::size_t) << std::endl;
+    // std::cout << sizeof(Entry) << std::endl;
     // return 0;
 
     // TODO: commands to add
@@ -146,11 +146,11 @@ int main() {
         tokenize(line, delim, args);
 
         if (args[0] == "uci") {
-            std::cout << "id name " << VERSION << "\n";
-            std::cout << "id author Colin D" << "\n";
-            std::cout << "uciok" << "\n";
+            std::cout << "id name " << VERSION << std::endl;
+            std::cout << "id author Colin D" << std::endl;
+            std::cout << "uciok" << std::endl;
         } else if (args[0] == "isready") {
-            std::cout << "readyok" << "\n";
+            std::cout << "readyok" << std::endl;
         } else if (args[0] == "quit") {
             break;
         } else if ((args[0] == "position" && args[1] == "startpos") ||
@@ -184,7 +184,7 @@ int main() {
             // Determine search time from time control options
             int ms_time = getSearchTime(args, hist);
 
-            std::cout << "time allocated: " << ms_time << "\n";
+            std::cout << "time allocated: " << ms_time << std::endl;
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
@@ -224,7 +224,7 @@ int main() {
                                            start_time)
                                            .count()
                                     << " score cp " << score << " pv "
-                                    << move_str << "\n";
+                                    << move_str << std::endl;
 
                                 if (move_str.length() &&
                                     std::chrono::high_resolution_clock::now() >
@@ -236,7 +236,7 @@ int main() {
                         }
                         std::cout << "bestmove "
                                   << (move_str.length() ? move_str : "(none)")
-                                  << "\n";
+                                  << std::endl;
                     });
 
                 // Wait for the search to complete
@@ -256,14 +256,14 @@ int main() {
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
-                    std::cout << "board:\n" << hist.back().board << "\n";
+                    std::cout << "board:\n" << hist.back().board << std::endl;
                 }
                 if (args[1] == "moves") {
                     std::cout << "moves: {";
                     for (Move m : hist.back().genMoves(true)) {
                         std::cout << render(m.i) + render(m.j) + m.prom;
                     }
-                    std::cout << "}" << "\n";
+                    std::cout << "}" << std::endl;
                 }
             }
         }
