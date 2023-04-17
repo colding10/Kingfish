@@ -110,8 +110,6 @@ int main() {
     // info score cp <x> mate <y>
     // info currmove <move>
     // info currmovenumber <x>
-    // info hashfull <x>
-    // info nps <x>
     // info tbhits <x>
     // info sbhits <x>
     // info cpuload <x>
