@@ -2,6 +2,7 @@
 #define HASHTABLE_HPP_INCLUDED
 
 #include <iostream>
+#include <list>
 #include <unordered_map>
 #include <utility>
 
@@ -28,14 +29,14 @@ struct Key {
         , depth(_depth)
         , null_move(_null_move) {}
 
-    bool operator==(const Key &other) const {
+    bool operator==(const Key& other) const {
         return pos_hash == other.pos_hash && depth == other.depth &&
                null_move == other.null_move;
     }
 };
 
 struct KeyHasher {
-    std::size_t operator()(const Key &key) const noexcept {
+    std::size_t operator()(const Key& key) const noexcept {
         std::size_t     seed = 0;
         std::hash<int>  pos_hash_hasher;
         std::hash<int>  depth_hasher;
@@ -52,59 +53,64 @@ struct KeyHasher {
     }
 };
 
-template <typename T>
+constexpr size_t MB = 1024 * 1024;
+
+template <typename K, typename V>
 class FixedSizeHashTable {
   public:
-    explicit FixedSizeHashTable(int size_in_MB, T default_value)
-        : default_value_(std::move(default_value))
-        , num_entries_(0) {
-        const int num_nodes = size_in_MB * 1024 * 1024 / sizeof(Node);
-        table_.reserve(num_nodes);
+    using key_type    = K;
+    using mapped_type = V;
+    using value_type  = std::pair<const K, V>;
+
+    FixedSizeHashTable(size_t max_size_MB, const V& default_value)
+        : max_size_(max_size_MB * MB / sizeof(value_type))
+        , default_value_(default_value) {}
+
+    void set(const K& key, const V& value) {
+        auto it = hash_table_.find(key);
+        if (it != hash_table_.end()) {
+            // key already exists in hash table
+            // move it to the front of the LRU list
+            lru_list_.splice(lru_list_.begin(), lru_list_, it->second);
+            it->second->second = value;
+        } else {
+            // key does not exist in hash table
+            // create a new entry and add it to the hash table and LRU list
+            if (hash_table_.size() >= max_size_) {
+                // hash table is full, remove the least recently used item
+                hash_table_.erase(lru_list_.back().first);
+                lru_list_.pop_back();
+            }
+            lru_list_.emplace_front(key, value);
+            hash_table_[key] = lru_list_.begin();
+        }
     }
 
-    void insert(const Key &key, const T &value) {
-        table_[key] = value;
-        ++num_entries_;
-    }
-
-    const T &operator[](const Key &key) const {
-        const auto it = table_.find(key);
-        if (it == table_.end()) {
+    const V& get(const K& key) const {
+        auto it = hash_table_.find(key);
+        if (it != hash_table_.end()) {
+            // key exists in hash table
+            // move it to the front of the LRU list
+            lru_list_.splice(lru_list_.begin(), lru_list_, it->second);
+            return it->second->second;
+        } else {
+            // key does not exist in hash table
+            // return default value
             return default_value_;
-        } else {
-            return it->second;
         }
     }
 
-    int size() const { return table_.size(); }
-
-    int capacity() const { return table_.max_size(); }
-
-    int num_entries() const { return num_entries_; }
-
-    int fill_ratio_permill() const {
-        const int max_entries = table_.max_size();
-        if (max_entries == 0) {
-            return 0;
-        } else {
-            return num_entries_ * 1000 / max_entries;
-        }
+    int getPermillFull() const {
+        // std::cout << "size is: " << hash_table_.size() << " maxsize: " <<max_size_ << std::endl;
+        return (hash_table_.size() * 1000 / max_size_);
     }
 
   private:
-    struct Node {
-        Key key;
-        T   value;
-
-        Node() = default;
-        Node(const Key &_key, const T &_value)
-            : key(_key)
-            , value(_value) {}
-    };
-
-    std::unordered_map<Key, T, KeyHasher> table_;
-    T                                     default_value_;
-    int                                   num_entries_;
+    std::unordered_map<K, typename std::list<value_type>::iterator, KeyHasher>
+                                  hash_table_;
+    mutable std::list<value_type> lru_list_;
+    size_t                        max_size_;
+    V                             default_value_;
 };
 
 #endif

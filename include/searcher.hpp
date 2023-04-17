@@ -15,7 +15,7 @@
 #include "move.hpp"
 #include "position.hpp"
 
-const int mb_size = 100; // TODO: move the mb_size to the UCI options
+const int mb_size = 16; // TODO: move the mb_size to the UCI options
 
 class Searcher {
   public:
