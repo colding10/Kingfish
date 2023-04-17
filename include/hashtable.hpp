@@ -101,7 +101,6 @@ class FixedSizeHashTable {
     }
 
     int getPermillFull() const {
-        // std::cout << "size is: " << hash_table_.size() << " maxsize: " <<max_size_ << std::endl;
         return (hash_table_.size() * 1000 / max_size_);
     }
 

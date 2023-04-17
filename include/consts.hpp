@@ -34,7 +34,7 @@ const int QS             = 35;
 const int EVAL_ROUGHNESS = 15;
 const int NULLMOVE_DEPTH = 2;
 
-const std::string VERSION = "Kingfish 1.1.0";
+const std::string VERSION = "Kingfish 1.2.0";
 const std::string INITIAL = ("         \n" //   0 -  9
                              "         \n" //  10 - 19
                              " rnbqkbnr\n" //  20 - 29
