@@ -41,7 +41,7 @@ int getSearchTime(const std::vector<std::string> &args,
     } else {
         remaining_time = btime + binc * moves_left;
     }
-    std::cout << "remaining time: " << remaining_time << std::endl;
+    std::cout << "remaining time: " << remaining_time << "\n";
 
     // Calculate time to allocate for searching (75% of remaining time)
     int move_time   = remaining_time / moves_left;
@@ -88,21 +88,19 @@ void tokenize(const std::string        &str,
 
 int main() {
     // TESTING HASH SIZES
-        // Key: 12 bytes
-        // Entry: 8 bytes
-        // Hashed Entry: 8 bytes
+    // Key: 12 bytes
+    // Entry: 8 bytes
+    // Hashed Entry: 8 bytes
 
-        // I need 20 bytes to store one pair
-        // I can only store 6.4 million pairs w/ 128 MB
+    // I need 20 bytes to store one pair
+    // I can only store 6.4 million pairs w/ 128 MB
 
-        // That's alr
+    // That's alr
 
-        // std::cout << sizeof(Key) << std::endl;
-        // std::cout << sizeof(std::size_t) << std::endl;
-        // std::cout << sizeof(Entry) << std::endl;
-        // return 0;
-
-
+    // std::cout << sizeof(Key) << "\n";
+    // std::cout << sizeof(std::size_t) << "\n";
+    // std::cout << sizeof(Entry) << "\n";
+    // return 0;
 
     // TODO: commands to add
 
@@ -138,6 +136,7 @@ int main() {
     // option name
 
     const char delim = ' ';
+    std::cout.setf(std::ios::unitbuf);
 
     std::vector<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
@@ -148,11 +147,11 @@ int main() {
         tokenize(line, delim, args);
 
         if (args[0] == "uci") {
-            std::cout << "id name " << VERSION << std::endl;
-            std::cout << "id author Colin D" << std::endl;
-            std::cout << "uciok" << std::endl;
+            std::cout << "id name " << VERSION << "\n";
+            std::cout << "id author Colin D" << "\n";
+            std::cout << "uciok" << "\n";
         } else if (args[0] == "isready") {
-            std::cout << "readyok" << std::endl;
+            std::cout << "readyok" << "\n";
         } else if (args[0] == "quit") {
             break;
         } else if ((args[0] == "position" && args[1] == "startpos") ||
@@ -186,7 +185,7 @@ int main() {
             // Determine search time from time control options
             int ms_time = getSearchTime(args, hist);
 
-            std::cout << "time allocated: " << ms_time << std::endl;
+            std::cout << "time allocated: " << ms_time << "\n";
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
@@ -226,7 +225,7 @@ int main() {
                                            start_time)
                                            .count()
                                     << " score cp " << score << " pv "
-                                    << move_str << std::endl;
+                                    << move_str << "\n";
 
                                 if (move_str.length() &&
                                     std::chrono::high_resolution_clock::now() >
@@ -238,7 +237,7 @@ int main() {
                         }
                         std::cout << "bestmove "
                                   << (move_str.length() ? move_str : "(none)")
-                                  << std::endl;
+                                  << "\n";
                     });
 
                 // Wait for the search to complete
@@ -258,14 +257,14 @@ int main() {
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
-                    std::cout << "board:\n" << hist.back().board << std::endl;
+                    std::cout << "board:\n" << hist.back().board << "\n";
                 }
                 if (args[1] == "moves") {
                     std::cout << "moves: {";
                     for (Move m : hist.back().genMoves(true)) {
                         std::cout << render(m.i) + render(m.j) + m.prom;
                     }
-                    std::cout << "}" << std::endl;
+                    std::cout << "}" << "\n";
                 }
             }
         }
