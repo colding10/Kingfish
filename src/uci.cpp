@@ -196,16 +196,19 @@ int main() {
                         }
                         move_str =
                             render(i) + render(j) + (char)tolower(move.prom);
-                        std::cout
-                            << "info depth " << depth << " nodes "
-                            << searcher.nodes_searched << " time "
-                            << std::chrono::duration_cast<
-                                   std::chrono::milliseconds>(
-                                   std::chrono::high_resolution_clock::now() -
-                                   start_time)
-                                   .count()
-                            << " score cp " << score << " pv " << move_str
-                            << std::endl;
+                        int time =
+                            std::chrono::duration_cast<
+                                std::chrono::milliseconds>(
+                                std::chrono::high_resolution_clock::now() -
+                                start_time)
+                                .count();
+                        std::cout << "info depth " << depth << " score cp "
+                                  << score << " nodes "
+                                  << " nps " << (time * 1000) / time
+                                  << " hashfull "
+                                  << searcher.tp_score.getPermillFull()
+                                  << searcher.nodes_searched << " time " << time
+                                  << " pv " << move_str << std::endl;
 
                         if (move_str.length() &&
                             std::chrono::high_resolution_clock::now() >

@@ -160,8 +160,6 @@ Searcher::search(std::vector<Position> hist, int depth) {
         co_yield std::make_tuple(
             gamma, score, this->tp_move[hist.back().hash()]);
         gamma = (lower + upper + 1) / 2;
-        std::cout << "info hashfull " << this->tp_score.getPermillFull()
-                  << std::endl;
     }
 }
 
