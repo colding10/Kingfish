@@ -87,21 +87,6 @@ void tokenize(const std::string        &str,
 }
 
 int main() {
-    // TESTING HASH SIZES
-    // Key: 12 bytes
-    // Entry: 8 bytes
-    // Hashed Entry: 8 bytes
-
-    // I need 20 bytes to store one pair
-    // I can only store 6.4 million pairs w/ 128 MB
-
-    // That's alr
-
-    // std::cout << sizeof(Key) << std::endl;
-    // std::cout << sizeof(std::size_t) << std::endl;
-    // std::cout << sizeof(Entry) << std::endl;
-    // return 0;
-
     // TODO: commands to add
 
     // RECIEVING
@@ -191,56 +176,49 @@ int main() {
             Move move;
 
             if (!infinite) {
-                std::future<void> search_result =
-                    std::async(std::launch::async, [&]() {
-                        int         gamma, score = 0;
-                        bool        flag     = false;
-                        std::string move_str = "";
+                int         gamma, score = 0;
+                bool        flag     = false;
+                std::string move_str = "";
 
-                        for (int depth = 1; depth < 1000; depth++) {
-                            if (flag) {
-                                break;
-                            }
+                for (int depth = 1; depth < 1000; depth++) {
+                    if (flag) {
+                        break;
+                    }
 
-                            auto result_moves_gen =
-                                searcher.search(hist, depth);
-                            for (; result_moves_gen.next();) {
-                                auto result = result_moves_gen.value();
-                                std::tie(gamma, score, move) = result;
+                    auto result_moves_gen = searcher.search(hist, depth);
+                    for (; result_moves_gen.next();) {
+                        auto result                  = result_moves_gen.value();
+                        std::tie(gamma, score, move) = result;
 
-                                int i = move.i, j = move.j;
-                                if (hist.size() % 2 == 0) {
-                                    i = 119 - i, j = 119 - j;
-                                }
-                                move_str = render(i) + render(j) +
-                                           (char)tolower(move.prom);
-                                std::cout
-                                    << "info depth " << depth << " nodes "
-                                    << searcher.nodes_searched << " time "
-                                    << std::chrono::duration_cast<
-                                           std::chrono::milliseconds>(
-                                           std::chrono::high_resolution_clock::
-                                               now() -
-                                           start_time)
-                                           .count()
-                                    << " score cp " << score << " pv "
-                                    << move_str << std::endl;
-
-                                if (move_str.length() &&
-                                    std::chrono::high_resolution_clock::now() >
-                                        end_time) {
-                                    flag = true;
-                                    break;
-                                }
-                            }
+                        int i = move.i, j = move.j;
+                        if (hist.size() % 2 == 0) {
+                            i = 119 - i, j = 119 - j;
                         }
-                        std::cout << "bestmove "
-                                  << (move_str.length() ? move_str : "(none)")
-                                  << std::endl;
-                    });
+                        move_str =
+                            render(i) + render(j) + (char)tolower(move.prom);
+                        std::cout
+                            << "info depth " << depth << " nodes "
+                            << searcher.nodes_searched << " time "
+                            << std::chrono::duration_cast<
+                                   std::chrono::milliseconds>(
+                                   std::chrono::high_resolution_clock::now() -
+                                   start_time)
+                                   .count()
+                            << " score cp " << score << " pv " << move_str
+                            << std::endl;
 
-                // Wait for the search to complete
-                search_result.wait();
+                        if (move_str.length() &&
+                            std::chrono::high_resolution_clock::now() >
+                                end_time) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+                std::cout << "bestmove "
+                          << (move_str.length() ? move_str : "(none)")
+                          << std::endl;
+
             } else {
                 std::thread infinite_thread(
                     std::mem_fn(&Searcher::searchInfinite),
