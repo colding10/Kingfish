@@ -27,7 +27,7 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
         return -MATE_UPPER;
     }
 
-    auto entry = this->tp_score[Key(pos.hash(), depth, can_null)];
+    auto entry = this->tp_score.get(Key(pos.hash(), depth, can_null));
     if (entry.lower >= gamma) {
         return entry.lower;
     }
@@ -127,15 +127,15 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
 
         bool in_check = this->bound(flipped, MATE_UPPER, 0, true) == MATE_UPPER;
         best          = in_check ? -MATE_LOWER : 0;
+    }
 
-        if (best >= gamma) {
-            this->tp_score.insert(Key(pos.hash(), depth, can_null),
-                                  Entry(best, entry.upper));
-        }
-        if (best < gamma) {
-            this->tp_score.insert(Key(pos.hash(), depth, can_null),
-                                  Entry(entry.lower, best));
-        }
+    if (best >= gamma) {
+        this->tp_score.set(Key(pos.hash(), depth, can_null),
+                           Entry(best, entry.upper));
+    }
+    if (best < gamma) {
+        this->tp_score.set(Key(pos.hash(), depth, can_null),
+                           Entry(entry.lower, best));
     }
     return best;
 }
@@ -160,6 +160,8 @@ Searcher::search(std::vector<Position> hist, int depth) {
         co_yield std::make_tuple(
             gamma, score, this->tp_move[hist.back().hash()]);
         gamma = (lower + upper + 1) / 2;
+        std::cout << "info hashfull " << this->tp_score.getPermillFull()
+                  << std::endl;
     }
 }
 
