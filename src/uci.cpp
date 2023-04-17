@@ -41,7 +41,6 @@ int getSearchTime(const std::vector<std::string> &args,
     } else {
         remaining_time = btime + binc * moves_left;
     }
-    std::cout << "remaining time: " << remaining_time << std::endl;
 
     // Calculate time to allocate for searching (75% of remaining time)
     int move_time   = remaining_time / moves_left;
@@ -166,10 +165,8 @@ int main() {
             bool infinite =
                 std::find(args.begin(), args.end(), "infinite") != args.end();
 
-            // Determine search time from time control options
             int ms_time = getSearchTime(args, hist);
 
-            std::cout << "time allocated: " << ms_time << std::endl;
             auto start_time = std::chrono::high_resolution_clock::now();
             auto end_time   = start_time + std::chrono::milliseconds(ms_time);
 
@@ -202,13 +199,12 @@ int main() {
                                 std::chrono::high_resolution_clock::now() -
                                 start_time)
                                 .count();
-                        std::cout << "info depth " << depth << " score cp "
-                                  << score << " nodes "
-                                  << " nps " << (time * 1000) / time
-                                  << " hashfull "
-                                  << searcher.tp_score.getPermillFull()
-                                  << searcher.nodes_searched << " time " << time
-                                  << " pv " << move_str << std::endl;
+                        std::cout
+                            << "info depth " << depth << " score cp " << score
+                            << " nodes " << searcher.nodes_searched << " nps "
+                            << (time * 1000) / time << " hashfull "
+                            << searcher.tp_score.getPermillFull() << " time "
+                            << time << " pv " << move_str << std::endl;
 
                         if (move_str.length() &&
                             std::chrono::high_resolution_clock::now() >
