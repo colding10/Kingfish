@@ -136,7 +136,6 @@ int main() {
     // option name
 
     const char delim = ' ';
-    std::cout.setf(std::ios::unitbuf);
 
     std::vector<Position> hist = {
         Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
