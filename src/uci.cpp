@@ -32,19 +32,31 @@ int getSearchTime(const std::vector<std::string> &args,
     }
 
     // Determine remaining time for current player
-    // assume 50 move games
     int remaining_time;
     int moves_left =
         std::max(1, 50 - (int)hist.size() / 2); // don't go negative
+
     if (hist.size() % 2 == 1) {
         remaining_time = wtime + winc * moves_left;
+        if (remaining_time <=
+            10000) { // less than or equal to 10 seconds remaining
+            moves_left     = 10;
+            remaining_time = wtime + winc;
+        }
     } else {
         remaining_time = btime + binc * moves_left;
+        if (remaining_time <=
+            10000) { // less than or equal to 10 seconds remaining
+            moves_left     = 10;
+            remaining_time = btime + binc;
+        }
     }
 
     // Calculate time to allocate for searching (75% of remaining time)
     int move_time   = remaining_time / moves_left;
     int search_time = static_cast<int>(move_time * 0.75);
+
+    std::cout << "info string remaining time: " << remaining_time << " time allocated: " << search_time << std::endl;
 
     return search_time;
 }
@@ -200,7 +212,7 @@ int main() {
                         std::cout
                             << "info depth " << depth << " score cp " << score
                             << " nodes " << searcher.nodes_searched << " nps "
-                            << (time * 1000) / time << " hashfull "
+                            << (searcher.nodes_searched * 1000) / time << " hashfull "
                             << searcher.tp_score.getPermillFull() << " time "
                             << time << " pv " << move_str << std::endl;
 
