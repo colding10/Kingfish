@@ -7,5 +7,6 @@ project(Kingfish
 )
 
 add_executable(kingfish
-    src/main.cpp
-    src/add.cpp)
+    src/polyglot.cpp,
+    src/searcher.cpp
+    src/uci.cpp)
