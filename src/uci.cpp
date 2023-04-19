@@ -103,7 +103,7 @@ int main() {
     // RECIEVING
     // setoption name <id> [value <x>]
     // position fen <fenstring>
-    // go
+
     // go ponder
     // go searchmoves
     // go movestogo
