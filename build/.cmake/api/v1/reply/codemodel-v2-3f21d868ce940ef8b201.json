@@ -12,7 +12,11 @@
 						"string" : "3.17"
 					},
 					"projectIndex" : 0,
-					"source" : "."
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
 			"name" : "Debug",
@@ -23,10 +27,23 @@
 					[
 						0
 					],
-					"name" : "Kingfish"
+					"name" : "Kingfish",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
-			"targets" : []
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "kingfish::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-kingfish-Debug-3f5b576838817957e56b.json",
+					"name" : "kingfish",
+					"projectIndex" : 0
+				}
+			]
 		}
 	],
 	"kind" : "codemodel",

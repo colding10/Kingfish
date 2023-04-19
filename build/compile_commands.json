@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/colin/Projects/Kingfish/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/uci.cpp.o -c /Users/colin/Projects/Kingfish/src/uci.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/uci.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/uci.cpp.o"
+},
+{
+  "directory": "/Users/colin/Projects/Kingfish/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/polyglot.cpp.o -c /Users/colin/Projects/Kingfish/src/polyglot.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/polyglot.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/polyglot.cpp.o"
+},
+{
+  "directory": "/Users/colin/Projects/Kingfish/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/searcher.cpp.o -c /Users/colin/Projects/Kingfish/src/searcher.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/searcher.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/searcher.cpp.o"
+}
+]

@@ -116,6 +116,91 @@ depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
+#=============================================================================
+# Target rules for targets named kingfish
+
+# Build rule for target.
+kingfish: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 kingfish
+.PHONY : kingfish
+
+# fast build rule for target.
+kingfish/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/build
+.PHONY : kingfish/fast
+
+src/polyglot.o: src/polyglot.cpp.o
+.PHONY : src/polyglot.o
+
+# target to build an object file
+src/polyglot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.o
+.PHONY : src/polyglot.cpp.o
+
+src/polyglot.i: src/polyglot.cpp.i
+.PHONY : src/polyglot.i
+
+# target to preprocess a source file
+src/polyglot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.i
+.PHONY : src/polyglot.cpp.i
+
+src/polyglot.s: src/polyglot.cpp.s
+.PHONY : src/polyglot.s
+
+# target to generate assembly for a file
+src/polyglot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.s
+.PHONY : src/polyglot.cpp.s
+
+src/searcher.o: src/searcher.cpp.o
+.PHONY : src/searcher.o
+
+# target to build an object file
+src/searcher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.o
+.PHONY : src/searcher.cpp.o
+
+src/searcher.i: src/searcher.cpp.i
+.PHONY : src/searcher.i
+
+# target to preprocess a source file
+src/searcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.i
+.PHONY : src/searcher.cpp.i
+
+src/searcher.s: src/searcher.cpp.s
+.PHONY : src/searcher.s
+
+# target to generate assembly for a file
+src/searcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.s
+.PHONY : src/searcher.cpp.s
+
+src/uci.o: src/uci.cpp.o
+.PHONY : src/uci.o
+
+# target to build an object file
+src/uci.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.o
+.PHONY : src/uci.cpp.o
+
+src/uci.i: src/uci.cpp.i
+.PHONY : src/uci.i
+
+# target to preprocess a source file
+src/uci.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.i
+.PHONY : src/uci.cpp.i
+
+src/uci.s: src/uci.cpp.s
+.PHONY : src/uci.s
+
+# target to generate assembly for a file
+src/uci.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.s
+.PHONY : src/uci.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -124,6 +209,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... kingfish"
+	@echo "... src/polyglot.o"
+	@echo "... src/polyglot.i"
+	@echo "... src/polyglot.s"
+	@echo "... src/searcher.o"
+	@echo "... src/searcher.i"
+	@echo "... src/searcher.s"
+	@echo "... src/uci.o"
+	@echo "... src/uci.i"
+	@echo "... src/uci.s"
 .PHONY : help
 
 
