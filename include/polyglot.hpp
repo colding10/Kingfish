@@ -279,7 +279,7 @@ const unsigned long long int ZOBRIST_KEYS[781] = {
 // RandomEnPassant (offset: 772, length:   8)
 // RandomTurn      (offset: 780, length:   1)
 
-std::unordered_map<char, int> KIND_OF_PIECE = {{'p', 0},
+static std::unordered_map<char, int> KIND_OF_PIECE = {{'p', 0},
                                                {'P', 1},
                                                {'n', 2},
                                                {'N', 3},
