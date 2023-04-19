@@ -44,7 +44,6 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -114,11 +113,6 @@ also be made available under GPL v3.
 Colin Ding - colinding10@gmail.com
 <br/>
 Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding10/Kingfish)
-
-## Acknowledgments
-
-* [Stockfish](https://github.com/official-stockfish/Stockfish)
-* [Sunfish](https://github.com/thomasahle/sunfish)
 
 <!-- LINKS -->
 [contributors-url]: https://github.com/colding10/Kingfish/graphs/contributors
