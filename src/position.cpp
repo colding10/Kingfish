@@ -11,6 +11,7 @@
 
 #include "consts.hpp"
 #include "move.hpp"
+#include "polyglot.hpp"
 
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
@@ -245,10 +246,5 @@ bool Position::isCheckmate() {
 }
 
 int Position::hash() {
-    auto str_hasher = std::hash<std::string>();
-    auto int_hasher = std::hash<int>();
-
-    return (str_hasher(board) ^ int_hasher(score) ^ int_hasher(wc.first) ^
-            int_hasher(wc.second) ^ int_hasher(bc.first) ^
-            int_hasher(bc.second) ^ int_hasher(ep) ^ int_hasher(kp));
+    return zobristHash(*this, true);
 }
