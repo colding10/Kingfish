@@ -1,15 +1,13 @@
 # ========== PROJECT PROPERTIES ==========
 BIN_DIR = bin
-INCLUDE_DIR = ./include
-SRC_DIR := ./src
+SRC_DIR := src
 OBJ_DIR := obj
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-INCLUDE_DIRS = -I /usr/local/include -I /usr/include
 LDFLAGS := -pthread
-CPPFLAGS := -g -pg -target arm64-apple-darwin-gnu -std=c++2a -I $(INCLUDE_DIR) $(INCLUDE_DIRS) -Wall -Wextra -flto -O3 -march=native
+CPPFLAGS := -g -pg -target arm64-apple-darwin-gnu -std=c++2a -Wall -Wextra -flto -O3 -march=native
 
 CPP := clang++
 
@@ -21,9 +19,9 @@ $(BIN_DIR)/kingfish: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
-format: $(SRC_DIR) $(INCLUDE_DIR)
+format: $(SRC_DIR)
 	clang-format -i --style=file $(SRC_DIR)/*.cpp
-	clang-format -i --style=file $(INCLUDE_DIR)/*.hpp
+	clang-format -i --style=file $(SRC_DIR)/*.hpp
 
 clean: 
 	rm -f $(OBJ_DIR)/*.o
