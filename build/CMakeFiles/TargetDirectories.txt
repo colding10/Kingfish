@@ -1,3 +1,0 @@
-/Users/colin/Projects/Kingfish/build/CMakeFiles/kingfish.dir
-/Users/colin/Projects/Kingfish/build/CMakeFiles/edit_cache.dir
-/Users/colin/Projects/Kingfish/build/CMakeFiles/rebuild_cache.dir
