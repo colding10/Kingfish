@@ -1,5 +1,5 @@
-#ifndef OPTIONS_h_INCLUDED
-#define OPTIONS_h_INCLUDED
+#ifndef KINGFISH_OPTIONS_H
+#define KINGFISH_OPTIONS_H
 
 #include <iostream>
 #include <map>

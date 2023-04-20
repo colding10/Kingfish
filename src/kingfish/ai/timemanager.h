@@ -1,0 +1,4 @@
+#ifndef KINGFISH_TIMEMANAGER_H
+#define KINGFISH_TIMEMANAGER_H
+
+#endif

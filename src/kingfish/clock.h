@@ -1,5 +1,5 @@
-#ifndef KINGFISH_CLOCK_H_INCLUDED
-#define KINGFISH_CLOCK_H_INCLUDED
+#ifndef KINGFISH_CLOCK_H
+#define KINGFISH_CLOCK_H
 
 #include <chrono>
 
@@ -14,4 +14,4 @@ inline i64 deltaMs(TimePoint later, TimePoint earlier) {
         .count();
 }
 
-#endif // KINGFISH_CLOCK_H_INCLUDED
+#endif // KINGFISH_CLOCK_H

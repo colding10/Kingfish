@@ -1,5 +1,5 @@
-#ifndef CONSTS_h_INCLUDED
-#define CONSTS_h_INCLUDED
+#ifndef KINGFISH_CONSTS_H
+#define KINGFISH_CONSTS_H
 
 #include <string>
 #include <unordered_map>
@@ -49,4 +49,4 @@ const std::string INITIAL = ("         \n" //   0 -  9
                              "         \n" // 110 -119
 );
 
-#endif // !CONSTS_h_INCLUDED
+#endif // !KINGFISH_CONSTS_H

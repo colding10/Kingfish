@@ -1,5 +1,5 @@
-#ifndef TYPES_H_INCLUDED
-#define TYPES_H_INCLUDED
+#ifndef KINGFISH_TYPES_H
+#define KINGFISH_TYPES_H
 
 #include <cstdint>
 

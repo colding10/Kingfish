@@ -86,7 +86,7 @@ Book readBook(const std::string& filepath) {
 }
 
 bool getBestMove(Book* book, long long int hash, Move& move) {
-    auto     it = book->find(hash);
+    auto it = book->find(hash);
 
     if (it != book->end()) {
         std::vector<BookMove>& moves = it->second;

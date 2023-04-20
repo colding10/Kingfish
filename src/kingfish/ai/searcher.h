@@ -1,5 +1,5 @@
-#ifndef SEARCHER_H_INCLUDED
-#define SEARCHER_H_INCLUDED
+#ifndef KINGFISH_SEARCHER_H
+#define KINGFISH_SEARCHER_H
 
 #include <functional>
 #include <iostream>
@@ -38,4 +38,4 @@ class Searcher {
     bool stop_search = false;
 };
 
-#endif // !SEARCHER_H_INCLUDED
+#endif // !KINGFISH_SEARCHER_H

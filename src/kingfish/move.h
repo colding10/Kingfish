@@ -1,5 +1,5 @@
-#ifndef MOVE_h_INCLUDED
-#define MOVE_h_INCLUDED
+#ifndef KINGFISH_MOVE_H
+#define KINGFISH_MOVE_H
 
 #include "pieces.h"
 
@@ -33,4 +33,4 @@ struct Move {
 
 const Move NULLMOVE = Move(-1, -1, ' ');
 
-#endif // !MOVE_h_INCLUDED
+#endif // !KINGFISH_MOVE_H
