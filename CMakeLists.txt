@@ -24,33 +24,41 @@ set(CMAKE_CXX_STANDARD 20)
 # Source code
 # #
 add_library(kingfish STATIC
-    src/kingfish/types.cpp
-    src/kingfish/bitboard.cpp
-    src/kingfish/chessgame.cpp
-    src/kingfish/endgame.cpp
-    src/kingfish/piece.cpp
-    src/kingfish/position.cpp
-    src/kingfish/zobrist.cpp
-    src/kingfish/square.cpp
-    src/kingfish/move.cpp
-    src/kingfish/perft.cpp
-    src/kingfish/kingfishchess.cpp
-    src/kingfish/debug.cpp
-    src/kingfish/posutils.cpp
-    src/kingfish/strutils.cpp
-    src/kingfish/ai/classiceval/hotmap.cpp
-    src/kingfish/ai/timemanager.cpp
-    src/kingfish/ai/classiceval/classicevaluator.cpp
-    src/kingfish/ai/search.cpp
-    src/kingfish/ai/transpositiontable.cpp
-    src/kingfish/ai/aimovefactory.cpp
-    src/kingfish/ai/classiceval/aibitboards.cpp
-    src/kingfish/ai/quiescevaluator.cpp
-    src/kingfish/utils.cpp
-    src/kingfish/endgame.cpp
-    src/kingfish/endgame.h
-    src/kingfish/openingbook.cpp
-    src/kingfish/openingbook.h)
+    src/kingfish/uci.cpp
+
+    src/kingfish/ai/searcher.cpp
+
+    src/kingfish/board/bitboard.cpp
+    src/kingfish/board/position.cpp
+    src/kingfish/book/zobrist.cpp
+
+    # src/kingfish/types.cpp
+
+    # src/kingfish/chessgame.cpp
+    # src/kingfish/endgame.cpp
+    # src/kingfish/piece.cpp
+
+    # src/kingfish/square.cpp
+    # src/kingfish/move.cpp
+    # src/kingfish/perft.cpp
+    # src/kingfish/kingfishchess.cpp
+    # src/kingfish/debug.cpp
+    # src/kingfish/posutils.cpp
+    # src/kingfish/strutils.cpp
+    # src/kingfish/ai/classiceval/hotmap.cpp
+    # src/kingfish/ai/timemanager.cpp
+    # src/kingfish/ai/classiceval/classicevaluator.cpp
+    # src/kingfish/ai/search.cpp
+    # src/kingfish/ai/transpositiontable.cpp
+    # src/kingfish/ai/aimovefactory.cpp
+    # src/kingfish/ai/classiceval/aibitboards.cpp
+    # src/kingfish/ai/quiescevaluator.cpp
+    # src/kingfish/utils.cpp
+    # src/kingfish/endgame.cpp
+    # src/kingfish/endgame.h
+    # src/kingfish/openingbook.cpp
+    # src/kingfish/openingbook.h
+)
 
 # add_executable(kingfishcli
 # src/kingfishcli/main.cpp

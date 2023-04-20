@@ -129,77 +129,125 @@ kingfish/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/build
 .PHONY : kingfish/fast
 
-src/polyglot.o: src/polyglot.cpp.o
-.PHONY : src/polyglot.o
+src/kingfish/ai/searcher.o: src/kingfish/ai/searcher.cpp.o
+.PHONY : src/kingfish/ai/searcher.o
 
 # target to build an object file
-src/polyglot.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.o
-.PHONY : src/polyglot.cpp.o
+src/kingfish/ai/searcher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o
+.PHONY : src/kingfish/ai/searcher.cpp.o
 
-src/polyglot.i: src/polyglot.cpp.i
-.PHONY : src/polyglot.i
+src/kingfish/ai/searcher.i: src/kingfish/ai/searcher.cpp.i
+.PHONY : src/kingfish/ai/searcher.i
 
 # target to preprocess a source file
-src/polyglot.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.i
-.PHONY : src/polyglot.cpp.i
+src/kingfish/ai/searcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.i
+.PHONY : src/kingfish/ai/searcher.cpp.i
 
-src/polyglot.s: src/polyglot.cpp.s
-.PHONY : src/polyglot.s
+src/kingfish/ai/searcher.s: src/kingfish/ai/searcher.cpp.s
+.PHONY : src/kingfish/ai/searcher.s
 
 # target to generate assembly for a file
-src/polyglot.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/polyglot.cpp.s
-.PHONY : src/polyglot.cpp.s
+src/kingfish/ai/searcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.s
+.PHONY : src/kingfish/ai/searcher.cpp.s
 
-src/searcher.o: src/searcher.cpp.o
-.PHONY : src/searcher.o
+src/kingfish/board/bitboard.o: src/kingfish/board/bitboard.cpp.o
+.PHONY : src/kingfish/board/bitboard.o
 
 # target to build an object file
-src/searcher.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.o
-.PHONY : src/searcher.cpp.o
+src/kingfish/board/bitboard.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o
+.PHONY : src/kingfish/board/bitboard.cpp.o
 
-src/searcher.i: src/searcher.cpp.i
-.PHONY : src/searcher.i
+src/kingfish/board/bitboard.i: src/kingfish/board/bitboard.cpp.i
+.PHONY : src/kingfish/board/bitboard.i
 
 # target to preprocess a source file
-src/searcher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.i
-.PHONY : src/searcher.cpp.i
+src/kingfish/board/bitboard.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.i
+.PHONY : src/kingfish/board/bitboard.cpp.i
 
-src/searcher.s: src/searcher.cpp.s
-.PHONY : src/searcher.s
+src/kingfish/board/bitboard.s: src/kingfish/board/bitboard.cpp.s
+.PHONY : src/kingfish/board/bitboard.s
 
 # target to generate assembly for a file
-src/searcher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/searcher.cpp.s
-.PHONY : src/searcher.cpp.s
+src/kingfish/board/bitboard.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.s
+.PHONY : src/kingfish/board/bitboard.cpp.s
 
-src/uci.o: src/uci.cpp.o
-.PHONY : src/uci.o
+src/kingfish/board/position.o: src/kingfish/board/position.cpp.o
+.PHONY : src/kingfish/board/position.o
 
 # target to build an object file
-src/uci.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.o
-.PHONY : src/uci.cpp.o
+src/kingfish/board/position.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o
+.PHONY : src/kingfish/board/position.cpp.o
 
-src/uci.i: src/uci.cpp.i
-.PHONY : src/uci.i
+src/kingfish/board/position.i: src/kingfish/board/position.cpp.i
+.PHONY : src/kingfish/board/position.i
 
 # target to preprocess a source file
-src/uci.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.i
-.PHONY : src/uci.cpp.i
+src/kingfish/board/position.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.i
+.PHONY : src/kingfish/board/position.cpp.i
 
-src/uci.s: src/uci.cpp.s
-.PHONY : src/uci.s
+src/kingfish/board/position.s: src/kingfish/board/position.cpp.s
+.PHONY : src/kingfish/board/position.s
 
 # target to generate assembly for a file
-src/uci.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/uci.cpp.s
-.PHONY : src/uci.cpp.s
+src/kingfish/board/position.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.s
+.PHONY : src/kingfish/board/position.cpp.s
+
+src/kingfish/book/zobrist.o: src/kingfish/book/zobrist.cpp.o
+.PHONY : src/kingfish/book/zobrist.o
+
+# target to build an object file
+src/kingfish/book/zobrist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o
+.PHONY : src/kingfish/book/zobrist.cpp.o
+
+src/kingfish/book/zobrist.i: src/kingfish/book/zobrist.cpp.i
+.PHONY : src/kingfish/book/zobrist.i
+
+# target to preprocess a source file
+src/kingfish/book/zobrist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.i
+.PHONY : src/kingfish/book/zobrist.cpp.i
+
+src/kingfish/book/zobrist.s: src/kingfish/book/zobrist.cpp.s
+.PHONY : src/kingfish/book/zobrist.s
+
+# target to generate assembly for a file
+src/kingfish/book/zobrist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.s
+.PHONY : src/kingfish/book/zobrist.cpp.s
+
+src/kingfish/uci.o: src/kingfish/uci.cpp.o
+.PHONY : src/kingfish/uci.o
+
+# target to build an object file
+src/kingfish/uci.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o
+.PHONY : src/kingfish/uci.cpp.o
+
+src/kingfish/uci.i: src/kingfish/uci.cpp.i
+.PHONY : src/kingfish/uci.i
+
+# target to preprocess a source file
+src/kingfish/uci.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.i
+.PHONY : src/kingfish/uci.cpp.i
+
+src/kingfish/uci.s: src/kingfish/uci.cpp.s
+.PHONY : src/kingfish/uci.s
+
+# target to generate assembly for a file
+src/kingfish/uci.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.s
+.PHONY : src/kingfish/uci.cpp.s
 
 # Help Target
 help:
@@ -210,15 +258,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... kingfish"
-	@echo "... src/polyglot.o"
-	@echo "... src/polyglot.i"
-	@echo "... src/polyglot.s"
-	@echo "... src/searcher.o"
-	@echo "... src/searcher.i"
-	@echo "... src/searcher.s"
-	@echo "... src/uci.o"
-	@echo "... src/uci.i"
-	@echo "... src/uci.s"
+	@echo "... src/kingfish/ai/searcher.o"
+	@echo "... src/kingfish/ai/searcher.i"
+	@echo "... src/kingfish/ai/searcher.s"
+	@echo "... src/kingfish/board/bitboard.o"
+	@echo "... src/kingfish/board/bitboard.i"
+	@echo "... src/kingfish/board/bitboard.s"
+	@echo "... src/kingfish/board/position.o"
+	@echo "... src/kingfish/board/position.i"
+	@echo "... src/kingfish/board/position.s"
+	@echo "... src/kingfish/book/zobrist.o"
+	@echo "... src/kingfish/book/zobrist.i"
+	@echo "... src/kingfish/book/zobrist.s"
+	@echo "... src/kingfish/uci.o"
+	@echo "... src/kingfish/uci.i"
+	@echo "... src/kingfish/uci.s"
 .PHONY : help
 
 

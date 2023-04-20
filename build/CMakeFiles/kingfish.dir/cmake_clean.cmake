@@ -1,12 +1,16 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/kingfish.dir/src/polyglot.cpp.o"
-  "CMakeFiles/kingfish.dir/src/polyglot.cpp.o.d"
-  "CMakeFiles/kingfish.dir/src/searcher.cpp.o"
-  "CMakeFiles/kingfish.dir/src/searcher.cpp.o.d"
-  "CMakeFiles/kingfish.dir/src/uci.cpp.o"
-  "CMakeFiles/kingfish.dir/src/uci.cpp.o.d"
-  "kingfish"
-  "kingfish.pdb"
+  "CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o"
+  "CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o.d"
+  "CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o"
+  "CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o.d"
+  "CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o"
+  "CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o.d"
+  "CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o"
+  "CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o.d"
+  "CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o"
+  "CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o.d"
+  "libkingfish_1.2.0.a"
+  "libkingfish_1.2.0.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

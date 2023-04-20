@@ -69,67 +69,100 @@ include CMakeFiles/kingfish.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/kingfish.dir/flags.make
 
-CMakeFiles/kingfish.dir/src/uci.cpp.o: CMakeFiles/kingfish.dir/flags.make
-CMakeFiles/kingfish.dir/src/uci.cpp.o: /Users/colin/Projects/Kingfish/src/uci.cpp
-CMakeFiles/kingfish.dir/src/uci.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/kingfish.dir/src/uci.cpp.o"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/uci.cpp.o -MF CMakeFiles/kingfish.dir/src/uci.cpp.o.d -o CMakeFiles/kingfish.dir/src/uci.cpp.o -c /Users/colin/Projects/Kingfish/src/uci.cpp
+CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: CMakeFiles/kingfish.dir/flags.make
+CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: /Users/colin/Projects/Kingfish/src/kingfish/uci.cpp
+CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o -MF CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o.d -o CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/uci.cpp
 
-CMakeFiles/kingfish.dir/src/uci.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/uci.cpp.i"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/uci.cpp > CMakeFiles/kingfish.dir/src/uci.cpp.i
+CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.i"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/kingfish/uci.cpp > CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.i
 
-CMakeFiles/kingfish.dir/src/uci.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/uci.cpp.s"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/uci.cpp -o CMakeFiles/kingfish.dir/src/uci.cpp.s
+CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.s"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/kingfish/uci.cpp -o CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.s
 
-CMakeFiles/kingfish.dir/src/polyglot.cpp.o: CMakeFiles/kingfish.dir/flags.make
-CMakeFiles/kingfish.dir/src/polyglot.cpp.o: /Users/colin/Projects/Kingfish/src/polyglot.cpp
-CMakeFiles/kingfish.dir/src/polyglot.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/kingfish.dir/src/polyglot.cpp.o"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/polyglot.cpp.o -MF CMakeFiles/kingfish.dir/src/polyglot.cpp.o.d -o CMakeFiles/kingfish.dir/src/polyglot.cpp.o -c /Users/colin/Projects/Kingfish/src/polyglot.cpp
+CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o: CMakeFiles/kingfish.dir/flags.make
+CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o: /Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp
+CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o -MF CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o.d -o CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp
 
-CMakeFiles/kingfish.dir/src/polyglot.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/polyglot.cpp.i"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/polyglot.cpp > CMakeFiles/kingfish.dir/src/polyglot.cpp.i
+CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.i"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp > CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.i
 
-CMakeFiles/kingfish.dir/src/polyglot.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/polyglot.cpp.s"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/polyglot.cpp -o CMakeFiles/kingfish.dir/src/polyglot.cpp.s
+CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.s"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp -o CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.s
 
-CMakeFiles/kingfish.dir/src/searcher.cpp.o: CMakeFiles/kingfish.dir/flags.make
-CMakeFiles/kingfish.dir/src/searcher.cpp.o: /Users/colin/Projects/Kingfish/src/searcher.cpp
-CMakeFiles/kingfish.dir/src/searcher.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/kingfish.dir/src/searcher.cpp.o"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/searcher.cpp.o -MF CMakeFiles/kingfish.dir/src/searcher.cpp.o.d -o CMakeFiles/kingfish.dir/src/searcher.cpp.o -c /Users/colin/Projects/Kingfish/src/searcher.cpp
+CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o: CMakeFiles/kingfish.dir/flags.make
+CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o: /Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp
+CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o -MF CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o.d -o CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp
 
-CMakeFiles/kingfish.dir/src/searcher.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/searcher.cpp.i"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/searcher.cpp > CMakeFiles/kingfish.dir/src/searcher.cpp.i
+CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.i"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp > CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.i
 
-CMakeFiles/kingfish.dir/src/searcher.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/searcher.cpp.s"
-	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/searcher.cpp -o CMakeFiles/kingfish.dir/src/searcher.cpp.s
+CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.s"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp -o CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.s
+
+CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o: CMakeFiles/kingfish.dir/flags.make
+CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o: /Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp
+CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o -MF CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o.d -o CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp
+
+CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.i"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp > CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.i
+
+CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.s"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp -o CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.s
+
+CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o: CMakeFiles/kingfish.dir/flags.make
+CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o: /Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp
+CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o: CMakeFiles/kingfish.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o -MF CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o.d -o CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp
+
+CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.i"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp > CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.i
+
+CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.s"
+	/opt/homebrew/opt/llvm/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp -o CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.s
 
 # Object files for target kingfish
 kingfish_OBJECTS = \
-"CMakeFiles/kingfish.dir/src/uci.cpp.o" \
-"CMakeFiles/kingfish.dir/src/polyglot.cpp.o" \
-"CMakeFiles/kingfish.dir/src/searcher.cpp.o"
+"CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o" \
+"CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o" \
+"CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o" \
+"CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o" \
+"CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o"
 
 # External object files for target kingfish
 kingfish_EXTERNAL_OBJECTS =
 
-kingfish: CMakeFiles/kingfish.dir/src/uci.cpp.o
-kingfish: CMakeFiles/kingfish.dir/src/polyglot.cpp.o
-kingfish: CMakeFiles/kingfish.dir/src/searcher.cpp.o
-kingfish: CMakeFiles/kingfish.dir/build.make
-kingfish: CMakeFiles/kingfish.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable kingfish"
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/build.make
+libkingfish_1.2.0.a: CMakeFiles/kingfish.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libkingfish_1.2.0.a"
+	$(CMAKE_COMMAND) -P CMakeFiles/kingfish.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/kingfish.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/kingfish.dir/build: kingfish
+CMakeFiles/kingfish.dir/build: libkingfish_1.2.0.a
 .PHONY : CMakeFiles/kingfish.dir/build
 
 CMakeFiles/kingfish.dir/clean:

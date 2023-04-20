@@ -1,20 +1,32 @@
 [
 {
   "directory": "/Users/colin/Projects/Kingfish/build",
-  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/uci.cpp.o -c /Users/colin/Projects/Kingfish/src/uci.cpp",
-  "file": "/Users/colin/Projects/Kingfish/src/uci.cpp",
-  "output": "CMakeFiles/kingfish.dir/src/uci.cpp.o"
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/uci.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/kingfish/uci.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o"
 },
 {
   "directory": "/Users/colin/Projects/Kingfish/build",
-  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/polyglot.cpp.o -c /Users/colin/Projects/Kingfish/src/polyglot.cpp",
-  "file": "/Users/colin/Projects/Kingfish/src/polyglot.cpp",
-  "output": "CMakeFiles/kingfish.dir/src/polyglot.cpp.o"
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/kingfish/ai/searcher.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/kingfish/ai/searcher.cpp.o"
 },
 {
   "directory": "/Users/colin/Projects/Kingfish/build",
-  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/searcher.cpp.o -c /Users/colin/Projects/Kingfish/src/searcher.cpp",
-  "file": "/Users/colin/Projects/Kingfish/src/searcher.cpp",
-  "output": "CMakeFiles/kingfish.dir/src/searcher.cpp.o"
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/kingfish/board/bitboard.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/kingfish/board/bitboard.cpp.o"
+},
+{
+  "directory": "/Users/colin/Projects/Kingfish/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/kingfish/board/position.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/kingfish/board/position.cpp.o"
+},
+{
+  "directory": "/Users/colin/Projects/Kingfish/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o -c /Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp",
+  "file": "/Users/colin/Projects/Kingfish/src/kingfish/book/zobrist.cpp",
+  "output": "CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o"
 }
 ]

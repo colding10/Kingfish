@@ -81,12 +81,12 @@ clean: CMakeFiles/kingfish.dir/clean
 CMakeFiles/kingfish.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kingfish.dir/build.make CMakeFiles/kingfish.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=1,2,3,4 "Built target kingfish"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/colin/Projects/Kingfish/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target kingfish"
 .PHONY : CMakeFiles/kingfish.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/kingfish.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/colin/Projects/Kingfish/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/colin/Projects/Kingfish/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/kingfish.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/colin/Projects/Kingfish/build/CMakeFiles 0
 .PHONY : CMakeFiles/kingfish.dir/rule
