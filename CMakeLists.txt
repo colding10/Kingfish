@@ -84,7 +84,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
     target_link_libraries(kingfish PUBLIC stdc++)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "-pthread -O3 -flto -Wall -Wextra -march=native")
     target_link_libraries(kingfish PUBLIC stdc++)
 endif()
 

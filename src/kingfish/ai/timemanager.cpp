@@ -1,5 +1,7 @@
 #include "timemanager.h"
 
+#include <iostream>
+
 #include "../board/position.h"
 
 int getSearchTime(const std::vector<std::string> &args,
