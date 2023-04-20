@@ -27,6 +27,7 @@ add_executable(kingfish
     src/kingfish/uci.cpp
 
     src/kingfish/ai/searcher.cpp
+    src/kingfish/ai/timemanager.cpp
 
     src/kingfish/board/bitboard.cpp
     src/kingfish/board/position.cpp
