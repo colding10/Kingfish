@@ -3052,22 +3052,19 @@ CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: /Users/colin/Projects/Kingfish/s
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/weak_result_type.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__memory/allocator_destructor.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__memory/uses_allocator_construction.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/chrono \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/calendar.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/convert_to_tm.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/day.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/hh_mm_ss.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/month.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/month_weekday.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/weekday.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/monthday.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/statically_widen.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__format/concepts.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_fwd.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_parse_context.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_error.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/string_view \
-  /opt/homebrew/opt/llvm/include/c++/v1/__fwd/string_view.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/future \
+  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/strip_signature.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/mutex \
+  /opt/homebrew/opt/llvm/include/c++/v1/__mutex_base \
+  /opt/homebrew/opt/llvm/include/c++/v1/system_error \
+  /opt/homebrew/opt/llvm/include/c++/v1/__errc \
+  /opt/homebrew/opt/llvm/include/c++/v1/cerrno \
+  /opt/homebrew/opt/llvm/include/c++/v1/string \
+  /opt/homebrew/opt/llvm/include/c++/v1/__format/enable_insertable.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__ios/fpos.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__memory/swap_allocator.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__memory_resource/polymorphic_allocator.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__memory_resource/memory_resource.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__string/char_traits.h \
   /opt/homebrew/opt/llvm/include/c++/v1/cstdio \
   /opt/homebrew/opt/llvm/include/c++/v1/cwchar \
@@ -3076,6 +3073,11 @@ CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: /Users/colin/Projects/Kingfish/s
   /opt/homebrew/opt/llvm/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/_types/_wctrans_t.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__string/extern_template_lists.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/is_allocator.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/noexcept_move_assign_container.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/string_view \
+  /opt/homebrew/opt/llvm/include/c++/v1/__fwd/string_view.h \
   /opt/homebrew/opt/llvm/include/c++/v1/functional \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/binary_negate.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/bind.h \
@@ -3089,45 +3091,24 @@ CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: /Users/colin/Projects/Kingfish/s
   /opt/homebrew/opt/llvm/include/c++/v1/unordered_map \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/is_transparent.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__hash_table \
-  /opt/homebrew/opt/llvm/include/c++/v1/__memory/swap_allocator.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__memory_resource/polymorphic_allocator.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__memory_resource/memory_resource.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__node_handle \
   /opt/homebrew/opt/llvm/include/c++/v1/optional \
-  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/is_allocator.h \
   /opt/homebrew/opt/llvm/include/c++/v1/vector \
   /opt/homebrew/opt/llvm/include/c++/v1/__bit_reference \
-  /opt/homebrew/opt/llvm/include/c++/v1/__format/enable_insertable.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__format/formatter.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_fwd.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__memory/temp_value.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__split_buffer \
-  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/noexcept_move_assign_container.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/compose.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/default_searcher.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/function.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__memory/builtin_new_allocator.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__type_traits/strip_signature.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/mem_fn.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/mem_fun_ref.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/not_fn.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/pointer_to_binary_function.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/pointer_to_unary_function.h \
   /opt/homebrew/opt/llvm/include/c++/v1/__functional/unary_negate.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month_day.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month_weekday.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/file_clock.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/literals.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/future \
-  /opt/homebrew/opt/llvm/include/c++/v1/mutex \
-  /opt/homebrew/opt/llvm/include/c++/v1/__mutex_base \
-  /opt/homebrew/opt/llvm/include/c++/v1/system_error \
-  /opt/homebrew/opt/llvm/include/c++/v1/__errc \
-  /opt/homebrew/opt/llvm/include/c++/v1/cerrno \
-  /opt/homebrew/opt/llvm/include/c++/v1/string \
-  /opt/homebrew/opt/llvm/include/c++/v1/__ios/fpos.h \
-  /opt/homebrew/opt/llvm/include/c++/v1/__string/extern_template_lists.h \
   /opt/homebrew/opt/llvm/include/c++/v1/thread \
   /opt/homebrew/opt/llvm/include/c++/v1/iostream \
   /opt/homebrew/opt/llvm/include/c++/v1/ios \
@@ -3201,8 +3182,30 @@ CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o: /Users/colin/Projects/Kingfish/s
   /opt/homebrew/opt/llvm/include/c++/v1/list \
   /Users/colin/Projects/Kingfish/src/kingfish/consts.h \
   /Users/colin/Projects/Kingfish/src/kingfish/board/position.h \
+  /Users/colin/Projects/Kingfish/src/kingfish/clock.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/chrono \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/calendar.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/convert_to_tm.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/day.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/hh_mm_ss.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/month.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/month_weekday.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/weekday.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/monthday.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/statically_widen.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__format/concepts.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_parse_context.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__format/format_error.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month_day.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/year_month_weekday.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/file_clock.h \
+  /opt/homebrew/opt/llvm/include/c++/v1/__chrono/literals.h \
   /Users/colin/Projects/Kingfish/src/kingfish/consts.h
 
+
+/Users/colin/Projects/Kingfish/src/kingfish/clock.h:
 
 /opt/homebrew/opt/llvm/include/c++/v1/sstream:
 
