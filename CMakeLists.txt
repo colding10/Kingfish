@@ -18,7 +18,7 @@ set(KINGFISH_OUT_NAME "kingfish_${KINGFISH_VERSION_MAJOR}.${KINGFISH_VERSION_MIN
 # #
 # Project settings
 # #
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 # #
 # Source code
@@ -30,7 +30,7 @@ add_executable(kingfish
 
     src/kingfish/board/bitboard.cpp
     src/kingfish/board/position.cpp
-    
+
     src/kingfish/book/zobrist.cpp
 
     # src/kingfish/types.cpp
@@ -78,7 +78,6 @@ set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
 # #
 # Add external dependencies
 # #
-message("${CMAKE_CXX_COMPILER_ID}")
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
