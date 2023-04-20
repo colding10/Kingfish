@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "../move.h"
-#include "../pieces.h"
-#include "../types.h"
+#include "move.h"
+#include "pieces.h"
+#include "types.h"
 
 class Position {       // Uses 40 bytes
   public:

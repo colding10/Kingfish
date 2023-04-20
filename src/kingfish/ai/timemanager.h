@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "../board/position.h"
+#include "../position.h"
 
 int getSearchTime(const std::vector<std::string> &args,
                   const std::vector<Position>    &hist);

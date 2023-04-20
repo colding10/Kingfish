@@ -6,11 +6,11 @@
 #include <thread>
 #include <vector>
 
-#include "./ai/searcher.h"
-#include "./ai/timemanager.h"
-#include "./board/position.h"
-#include "./clock.h"
-#include "./consts.h"
+#include "ai/searcher.h"
+#include "ai/timemanager.h"
+#include "position.h"
+#include "clock.h"
+#include "consts.h"
 
 // TODO: create uci options dict, then export to make global
 

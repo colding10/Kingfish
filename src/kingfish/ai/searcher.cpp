@@ -11,7 +11,7 @@
 #include <tuple>
 #include <vector>
 
-#include "../board/position.h"
+#include "../position.h"
 #include "../consts.h"
 #include "../move.h"
 #include "../pieces.h"

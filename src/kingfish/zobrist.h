@@ -5,7 +5,7 @@
 
 #include <unordered_map>
 
-#include "../board/position.h"
+#include "position.h"
 
 // sourced from: http://hgm.nubati.net/book_format.html
 

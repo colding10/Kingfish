@@ -9,9 +9,9 @@
 #include <utility>
 #include <vector>
 
-#include "../book/zobrist.h"
-#include "../consts.h"
-#include "../move.h"
+#include "zobrist.h"
+#include "consts.h"
+#include "move.h"
 
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
