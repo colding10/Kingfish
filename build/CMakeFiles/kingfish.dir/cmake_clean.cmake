@@ -9,8 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kingfish.dir/src/kingfish/book/zobrist.cpp.o.d"
   "CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o"
   "CMakeFiles/kingfish.dir/src/kingfish/uci.cpp.o.d"
-  "libkingfish_1.2.0.a"
-  "libkingfish_1.2.0.pdb"
+  "kingfish_1.2.0"
+  "kingfish_1.2.0.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

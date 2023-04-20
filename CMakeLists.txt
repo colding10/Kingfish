@@ -23,7 +23,7 @@ set(CMAKE_CXX_STANDARD 20)
 # #
 # Source code
 # #
-add_library(kingfish STATIC
+add_executable(kingfish
     src/kingfish/uci.cpp
 
     src/kingfish/ai/searcher.cpp
@@ -77,12 +77,14 @@ set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
 # #
 # Add external dependencies
 # #
+message("${CMAKE_CXX_COMPILER_ID}")
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # GCC requires some flags in order for threads and <filesystem> to work.
-    set(CMAKE_CXX_FLAGS "-pthread -static-libstdc++ -static-libgcc")
-    target_link_libraries(kingfish PUBLIC stdc++fs)
-else()
-    target_link_libraries(kingfish PUBLIC nlohmann_json)
+    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
+    target_link_libraries(kingfish PUBLIC stdc++)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra")
+    target_link_libraries(kingfish PUBLIC stdc++)
 endif()
 
 # target_link_libraries(kingfishcli PRIVATE kingfish)
