@@ -1,5 +1,5 @@
-#ifndef GENERATOR_HPP_INCLUDED
-#define GENERATOR_HPP_INCLUDED
+#ifndef GENERATOR_h_INCLUDED
+#define GENERATOR_h_INCLUDED
 
 #include <coroutine>
 

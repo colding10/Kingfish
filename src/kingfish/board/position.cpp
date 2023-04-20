@@ -1,4 +1,4 @@
-#include "position.hpp"
+#include "./position.h"
 
 #include <algorithm>
 #include <array>
@@ -9,9 +9,9 @@
 #include <utility>
 #include <vector>
 
-#include "consts.hpp"
-#include "move.hpp"
-#include "polyglot.hpp"
+#include "../book/zobrist.h"
+#include "../consts.h"
+#include "../move.h"
 
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;

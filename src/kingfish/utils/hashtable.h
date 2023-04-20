@@ -1,12 +1,12 @@
-#ifndef HASHTABLE_HPP_INCLUDED
-#define HASHTABLE_HPP_INCLUDED
+#ifndef HASHTABLE_h_INCLUDED
+#define HASHTABLE_h_INCLUDED
 
 #include <iostream>
 #include <list>
 #include <unordered_map>
 #include <utility>
 
-#include "consts.hpp"
+#include "../consts.h"
 
 struct Entry {
     int lower = -MATE_UPPER;

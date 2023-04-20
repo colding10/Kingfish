@@ -1,5 +1,5 @@
-#ifndef OPTIONS_HPP_INCLUDED
-#define OPTIONS_HPP_INCLUDED
+#ifndef OPTIONS_h_INCLUDED
+#define OPTIONS_h_INCLUDED
 
 #include <iostream>
 #include <map>

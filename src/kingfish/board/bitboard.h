@@ -1,7 +1,7 @@
-#ifndef BITBOARD_HPP_INCLUDED
-#define BITBOARD_HPP_INCLUDED
+#ifndef BITBOARD_h_INCLUDED
+#define BITBOARD_h_INCLUDED
 
-#include "types.hpp"
+#include "types.h"
 
 // bit manipulation macros
 #define get_bit(bitboard, index) (bitboard & (1ULL << index))

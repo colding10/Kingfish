@@ -1,11 +1,11 @@
-#ifndef POLYGLOT_HPP_INCLUDED
-#define POLYGLOT_HPP_INCLUDED
+#ifndef POLYGLOT_h_INCLUDED
+#define POLYGLOT_h_INCLUDED
 
 #define U64(u) (u##ULL)
 
 #include <unordered_map>
 
-#include "position.hpp"
+#include "../board/position.h"
 
 // sourced from: http://hgm.nubati.net/book_format.html
 
@@ -280,17 +280,17 @@ const unsigned long long int ZOBRIST_KEYS[781] = {
 // RandomTurn      (offset: 780, length:   1)
 
 static std::unordered_map<char, int> KIND_OF_PIECE = {{'p', 0},
-                                               {'P', 1},
-                                               {'n', 2},
-                                               {'N', 3},
-                                               {'b', 4},
-                                               {'B', 5},
-                                               {'r', 6},
-                                               {'R', 7},
-                                               {'q', 8},
-                                               {'Q', 9},
-                                               {'k', 10},
-                                               {'K', 11}};
+                                                      {'P', 1},
+                                                      {'n', 2},
+                                                      {'N', 3},
+                                                      {'b', 4},
+                                                      {'B', 5},
+                                                      {'r', 6},
+                                                      {'R', 7},
+                                                      {'q', 8},
+                                                      {'Q', 9},
+                                                      {'k', 10},
+                                                      {'K', 11}};
 
 long long int zobristHash(const Position &pos, bool white_turn);
 long long int getPieceOffset(char piece, int row, int file);
@@ -309,4 +309,4 @@ Book readBook(const std::string &filepath);
 bool getBestMove(Book *book, long long int hash, Move &move);
 Move parseMove(std::uint16_t *move_bytes);
 
-#endif // !POLYGLOT_HPP_INCLUDED
+#endif // !POLYGLOT_h_INCLUDED

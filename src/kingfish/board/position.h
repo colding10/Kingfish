@@ -1,12 +1,12 @@
-#ifndef POSITION_HPP_INCLUDED
-#define POSITION_HPP_INCLUDED
+#ifndef POSITION_H_INCLUDED
+#define POSITION_H_INCLUDED
 
 #include <string>
 #include <vector>
 
-#include "move.hpp"
-#include "pieces.hpp"
-#include "types.hpp"
+#include "../move.h"
+#include "../pieces.h"
+#include "../types.h"
 
 class Position {       // Uses 40 bytes
   public:
@@ -68,4 +68,4 @@ class Position {       // Uses 40 bytes
     int hash();
 };
 
-#endif // !POSITION_HPP_INCLUDED
+#endif // !POSITION_H_INCLUDED

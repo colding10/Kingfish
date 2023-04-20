@@ -1,7 +1,7 @@
-#ifndef MOVE_HPP_INCLUDED
-#define MOVE_HPP_INCLUDED
+#ifndef MOVE_h_INCLUDED
+#define MOVE_h_INCLUDED
 
-#include "pieces.hpp"
+#include "pieces.h"
 
 struct Move {
     int i = 0;
@@ -33,4 +33,4 @@ struct Move {
 
 const Move NULLMOVE = Move(-1, -1, ' ');
 
-#endif // !MOVE_HPP_INCLUDED
+#endif // !MOVE_h_INCLUDED

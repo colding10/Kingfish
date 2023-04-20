@@ -1,4 +1,4 @@
-#include "searcher.hpp"
+#include "searcher.h"
 
 #include <algorithm>
 #include <chrono>
@@ -11,12 +11,12 @@
 #include <tuple>
 #include <vector>
 
-#include "consts.hpp"
-#include "generator.hpp"
-#include "move.hpp"
-#include "pieces.hpp"
-#include "position.hpp"
-#include "uci.hpp"
+#include "../board/position.h"
+#include "../consts.h"
+#include "../move.h"
+#include "../pieces.h"
+#include "../uci.h"
+#include "../utils/generator.h"
 
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;

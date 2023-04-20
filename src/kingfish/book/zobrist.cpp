@@ -1,12 +1,12 @@
-#include "polyglot.hpp"
+#include "zobrist.h"
 
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <unordered_map>
 
-#include "position.hpp"
-#include "uci.hpp"
+#include "../board/position.h"
+#include "../uci.h"
 
 long long int zobristHash(const Position& pos, bool white_turn) {
     // key=piece^castle^enpassant^turn;

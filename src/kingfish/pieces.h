@@ -1,5 +1,5 @@
-#ifndef PIECES_HPP_INCLUDED
-#define PIECES_HPP_INCLUDED
+#ifndef PIECES_h_INCLUDED
+#define PIECES_h_INCLUDED
 
 #include <unordered_map>
 #include <vector>
@@ -88,4 +88,4 @@ static std::unordered_map<char, std::vector<int>> PIECE_SQUARE_TABLES = {
 static std::unordered_map<char, int> PIECE_VALUES = {
     {'P', 100}, {'N', 280}, {'B', 320}, {'R', 429}, {'Q', 929}, {'K', 60000}};
 
-#endif // !PIECES_HPP_INCLUDED
+#endif // !PIECES_h_INCLUDED

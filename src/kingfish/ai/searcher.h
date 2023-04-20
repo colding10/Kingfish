@@ -1,5 +1,5 @@
-#ifndef SEARCHER_HPP_INCLUDED
-#define SEARCHER_HPP_INCLUDED
+#ifndef SEARCHER_H_INCLUDED
+#define SEARCHER_H_INCLUDED
 
 #include <functional>
 #include <iostream>
@@ -9,11 +9,11 @@
 #include <utility>
 #include <vector>
 
-#include "consts.hpp"
-#include "generator.hpp"
-#include "hashtable.hpp"
-#include "move.hpp"
-#include "position.hpp"
+#include "../board/position.h"
+#include "../consts.h"
+#include "../move.h"
+#include "../utils/generator.h"
+#include "../utils/hashtable.h"
 
 const int mb_size = 16; // TODO: move the mb_size to the UCI options
 
@@ -38,4 +38,4 @@ class Searcher {
     bool stop_search = false;
 };
 
-#endif // !SEARCHER_HPP_INCLUDED
+#endif // !SEARCHER_H_INCLUDED

@@ -7,9 +7,9 @@
 #include <thread>
 #include <vector>
 
-#include "consts.hpp"
-#include "position.hpp"
-#include "searcher.hpp"
+#include "./ai/searcher.h"
+#include "./board/position.h"
+#include "./consts.h"
 
 // TODO: move search time into own file (timemanager)
 // TODO: create uci options dict, then export to make global
@@ -56,7 +56,8 @@ int getSearchTime(const std::vector<std::string> &args,
     int move_time   = remaining_time / moves_left;
     int search_time = static_cast<int>(move_time * 0.75);
 
-    std::cout << "info string remaining time: " << remaining_time << " time allocated: " << search_time << std::endl;
+    std::cout << "info string remaining time: " << remaining_time
+              << " time allocated: " << search_time << std::endl;
 
     return search_time;
 }
@@ -212,7 +213,8 @@ int main() {
                         std::cout
                             << "info depth " << depth << " score cp " << score
                             << " nodes " << searcher.nodes_searched << " nps "
-                            << (searcher.nodes_searched * 1000) / time << " hashfull "
+                            << (searcher.nodes_searched * 1000) / time
+                            << " hashfull "
                             << searcher.tp_score.getPermillFull() << " time "
                             << time << " pv " << move_str << std::endl;
 

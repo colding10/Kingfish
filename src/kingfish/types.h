@@ -1,5 +1,5 @@
-#ifndef TYPES_HPP_INCLUDED
-#define TYPES_HPP_INCLUDED
+#ifndef TYPES_h_INCLUDED
+#define TYPES_h_INCLUDED
 
 using PositionHash = int;
 using Direction    = int;

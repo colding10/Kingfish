@@ -1,12 +1,12 @@
-#ifndef CONSTS_HPP_INCLUDED
-#define CONSTS_HPP_INCLUDED
+#ifndef CONSTS_h_INCLUDED
+#define CONSTS_h_INCLUDED
 
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-#include "pieces.hpp"
-#include "types.hpp"
+#include "pieces.h"
+#include "types.h"
 
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
 const int N = -10, E = 1, S = 10, W = -1;
@@ -49,4 +49,4 @@ const std::string INITIAL = ("         \n" //   0 -  9
                              "         \n" // 110 -119
 );
 
-#endif // !CONSTS_HPP_INCLUDED
+#endif // !CONSTS_h_INCLUDED
