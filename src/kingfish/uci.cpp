@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <chrono>
 #include <future>
 #include <iostream>
 #include <sstream>
@@ -9,6 +8,7 @@
 
 #include "./ai/searcher.h"
 #include "./board/position.h"
+#include "./clock.h"
 #include "./consts.h"
 
 // TODO: move search time into own file (timemanager)
@@ -178,8 +178,7 @@ int main() {
 
             int ms_time = getSearchTime(args, hist);
 
-            auto start_time = std::chrono::high_resolution_clock::now();
-            auto end_time   = start_time + std::chrono::milliseconds(ms_time);
+            auto start_time = Clock::now();
 
             Move move;
 
@@ -219,8 +218,8 @@ int main() {
                             << time << " pv " << move_str << std::endl;
 
                         if (move_str.length() &&
-                            std::chrono::high_resolution_clock::now() >
-                                end_time) {
+                            deltaMs(std::chrono::high_resolution_clock::now(),
+                                    start_time) > ms_time) {
                             flag = true;
                             break;
                         }

@@ -30,6 +30,7 @@ add_executable(kingfish
 
     src/kingfish/board/bitboard.cpp
     src/kingfish/board/position.cpp
+    
     src/kingfish/book/zobrist.cpp
 
     # src/kingfish/types.cpp
