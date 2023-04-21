@@ -51,7 +51,7 @@
 
 ## About The Project
 
-`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](http://chess.com) Stockfish ELO estimator to about 2000 ELO. Additionally, on [lichess.org](http://lichess.org), [it's rating](https://lichess.org/@/KingfishBot) is about 1900-2000 ELO.
+`Kingfish` is a UCI chess engine built in C++. It was written from scratch, however it was inspired by Stockfish and Sunfish, two very popular chess engines. The engine was roughly estimated via the [chess.com](http://chess.com) Stockfish ELO estimator to about 2000 ELO. Additionally, on [lichess.org](http://lichess.org), [it's rating](https://lichess.org/@/KingfishBot) is about 2000 ELO.
 
 > __I created a lichess account! Play Kingfish here: https://lichess.org/@/KingfishBot.__
 
@@ -67,11 +67,15 @@ Kingfish speaks UCI, a protocol for chess engines. See `engine-interface.txt` fo
 
 ## Roadmap
 
-* [X] Convert program (GUI) into library (while still maintaining interface)
+* [X] Convert program (GUI) into CLI
 * [X] Implement basic engine interfaces (UCI)
 * [X] Play test games and debug
-* [ ] _Implement all engine interfaces (UCI)_
-* [ ] Add advanced search features to improve speed
+* [ ] _Improve engine_
+  * [ ] Add bitboards
+  * [ ] Bitwise storage of moves and pieces
+  * [ ] Avoid copying positions
+  * [ ] Threading
+* [ ] Implement all engine interfaces (UCI)
 
 See the [open issues](https://github.com/colding10/Kingfish/issues) for a full list of proposed features (and known issues).
 
