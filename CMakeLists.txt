@@ -24,6 +24,7 @@ set(CMAKE_CXX_STANDARD 23)
 # Source code
 # #
 add_executable(kingfish
+    src/kingfish/main.cpp
     src/kingfish/uci.cpp
 
     src/kingfish/ai/searcher.cpp
@@ -79,7 +80,6 @@ set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
 # #
 # Add external dependencies
 # #
-
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
     target_link_libraries(kingfish PUBLIC stdc++)
