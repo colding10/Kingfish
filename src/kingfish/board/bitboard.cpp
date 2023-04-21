@@ -132,7 +132,7 @@ Bitboard maskKingAttacks(Square square) {
 }
 
 // mask bishop attacks
-Bitboard mask_bishop_attacks(int square) {
+Bitboard maskBishopAttacks(int square) {
     // attack bitboard
     Bitboard attacks = 0;
 
@@ -158,7 +158,7 @@ Bitboard mask_bishop_attacks(int square) {
 }
 
 // mask rook attacks
-Bitboard mask_rook_attacks(int square) {
+Bitboard maskRookAttacks(int square) {
     // attacks bitboard
     Bitboard attacks = 0ULL;
 
@@ -184,7 +184,7 @@ Bitboard mask_rook_attacks(int square) {
 }
 
 // bishop attacks
-Bitboard bishop_attacks_on_the_fly(int square, Bitboard block) {
+Bitboard bishopAttacks(int square, Bitboard block) {
     // attack bitboard
     Bitboard attacks = 0;
 
@@ -225,7 +225,7 @@ Bitboard bishop_attacks_on_the_fly(int square, Bitboard block) {
 }
 
 // rook attacks
-Bitboard rook_attacks_on_the_fly(int square, Bitboard block) {
+Bitboard rookAttacks(int square, Bitboard block) {
     // attacks bitboard
     Bitboard attacks = 0ULL;
 
