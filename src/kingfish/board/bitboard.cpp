@@ -6,40 +6,21 @@ namespace BBS {
 void printBitboard(Bitboard bitboard) {
     std::cout << std::endl;
 
-    for (int rank = 0; rank < 8; rank++) {
-        for (int file = 0; file < 8; file++) {
+    for (BoardRank rank = 0; rank < 8; rank++) {
+        std::cout << "  " << 8 - rank;
+        for (BoardFile file = 0; file < 8; file++) {
             Square square = rank * 8 + file;
-
-            // print ranks
-            if (!file) {
-                std::cout << "  " << 8 - rank;
-            }
-
-            // print bit at the current square
             std::cout << " " << (get_bit(bitboard, square) ? 1 : 0);
         }
-
         std::cout << std::endl;
     }
 
-    // print files
-    std::cout << "\n     a b c d e f g h\n\n";
-
-    // print bitboard as decimal number
+    std::cout << "    a b c d e f g h\n\n";
     std::cout << "     bitboard:  " << bitboard << "\n\n";
 }
 
-Bitboard not_a_file  = 18374403900871474942ULL;
-Bitboard not_h_file  = 9187201950435737471ULL;
-Bitboard not_hg_file = 4557430888798830399ULL;
-Bitboard not_ab_file = 18229723555195321596ULL;
-
-Bitboard pawn_attacks[2][64]; // pawn attacks array [side][square]
-Bitboard knight_attacks[64];
-Bitboard king_attacks[64];
-
 // mask pawn attacks
-Bitboard maskPawnAttacks(Color side, int square) {
+Bitboard maskPawnAttacks(Color side, Square square) {
     Bitboard attacks  = 0;
     Bitboard bitboard = 0;
 
@@ -132,7 +113,7 @@ Bitboard maskKingAttacks(Square square) {
 }
 
 // mask bishop attacks
-Bitboard maskBishopAttacks(int square) {
+Bitboard maskBishopAttacks(Square square) {
     // attack bitboard
     Bitboard attacks = 0;
 
@@ -158,7 +139,7 @@ Bitboard maskBishopAttacks(int square) {
 }
 
 // mask rook attacks
-Bitboard maskRookAttacks(int square) {
+Bitboard maskRookAttacks(Square square) {
     // attacks bitboard
     Bitboard attacks = 0ULL;
 
@@ -184,7 +165,7 @@ Bitboard maskRookAttacks(int square) {
 }
 
 // bishop attacks
-Bitboard bishopAttacks(int square, Bitboard block) {
+Bitboard bishopAttacks(Square square, Bitboard block) {
     // attack bitboard
     Bitboard attacks = 0;
 
@@ -225,7 +206,7 @@ Bitboard bishopAttacks(int square, Bitboard block) {
 }
 
 // rook attacks
-Bitboard rookAttacks(int square, Bitboard block) {
+Bitboard rookAttacks(Square square, Bitboard block) {
     // attacks bitboard
     Bitboard attacks = 0ULL;
 

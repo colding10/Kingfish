@@ -1,11 +1,11 @@
 #ifndef KINGFISH_PIECES_H
 #define KINGFISH_PIECES_H
 
+#include <array>
 #include <unordered_map>
-#include <vector>
 
 // clang-format off
-static std::unordered_map<char, std::vector<int>> PIECE_SQUARE_TABLES = {
+static std::unordered_map<char, std::array<int, 120>> PIECE_SQUARE_TABLES = {
     {'P',
      {0,    0,   0,   0,   0,   0,   0,   0,   0,   0,
       0,    0,   0,   0,   0,   0,   0,   0,   0,   0,

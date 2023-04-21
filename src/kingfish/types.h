@@ -55,14 +55,14 @@ enum Sides {
 
 enum Directions {
 
-    DIR_NORTH     = 8,
-    DIR_SOUTH     = -8,
-    DIR_EAST      = 1,
-    DIR_WEST      = -1,
-    DIR_NORTHWEST = 7,
-    DIR_NORTHEAST = 9,
-    DIR_SOUTHWEST = -9,
-    DIR_SOUTHEAST = -7,
+    DIR_NORTH     = -10,
+    DIR_SOUTH     = 10,
+    DIR_EAST      = -1,
+    DIR_WEST      = 1,
+    DIR_NORTHWEST = -9,
+    DIR_NORTHEAST = -11,
+    DIR_SOUTHWEST = 11,
+    DIR_SOUTHEAST = 9,
 
     DIR_COUNT = 8
 
@@ -112,84 +112,21 @@ enum PieceTypes {
 
 };
 
+// clang-format off
 enum Squares {
-
-    SQ_A1 = 00,
-    SQ_B1 = 01,
-    SQ_C1 = 02,
-    SQ_D1 = 03,
-    SQ_E1 = 04,
-    SQ_F1 = 05,
-    SQ_G1 = 06,
-    SQ_H1 = 07,
-
-    SQ_A2 = 010,
-    SQ_B2 = 011,
-    SQ_C2 = 012,
-    SQ_D2 = 013,
-    SQ_E2 = 014,
-    SQ_F2 = 015,
-    SQ_G2 = 016,
-    SQ_H2 = 017,
-
-    SQ_A3 = 020,
-    SQ_B3 = 021,
-    SQ_C3 = 022,
-    SQ_D3 = 023,
-    SQ_E3 = 024,
-    SQ_F3 = 025,
-    SQ_G3 = 026,
-    SQ_H3 = 027,
-
-    SQ_A4 = 030,
-    SQ_B4 = 031,
-    SQ_C4 = 032,
-    SQ_D4 = 033,
-    SQ_E4 = 034,
-    SQ_F4 = 035,
-    SQ_G4 = 036,
-    SQ_H4 = 037,
-
-    SQ_A5 = 040,
-    SQ_B5 = 041,
-    SQ_C5 = 042,
-    SQ_D5 = 043,
-    SQ_E5 = 044,
-    SQ_F5 = 045,
-    SQ_G5 = 046,
-    SQ_H5 = 047,
-
-    SQ_A6 = 050,
-    SQ_B6 = 051,
-    SQ_C6 = 052,
-    SQ_D6 = 053,
-    SQ_E6 = 054,
-    SQ_F6 = 055,
-    SQ_G6 = 056,
-    SQ_H6 = 057,
-
-    SQ_A7 = 060,
-    SQ_B7 = 061,
-    SQ_C7 = 062,
-    SQ_D7 = 063,
-    SQ_E7 = 064,
-    SQ_F7 = 065,
-    SQ_G7 = 066,
-    SQ_H7 = 067,
-
-    SQ_A8 = 070,
-    SQ_B8 = 071,
-    SQ_C8 = 072,
-    SQ_D8 = 073,
-    SQ_E8 = 074,
-    SQ_F8 = 075,
-    SQ_G8 = 076,
-    SQ_H8 = 077,
+    SQ_A8, SQ_B8, SQ_C8, SQ_D8, SQ_E8, SQ_F8, SQ_G8, SQ_H8,
+    SQ_A7, SQ_B7, SQ_C7, SQ_D7, SQ_E7, SQ_F7, SQ_G7, SQ_H7,
+    SQ_A6, SQ_B6, SQ_C6, SQ_D6, SQ_E6, SQ_F6, SQ_G6, SQ_H6,
+    SQ_A5, SQ_B5, SQ_C5, SQ_D5, SQ_E5, SQ_F5, SQ_G5, SQ_H5,
+    SQ_A4, SQ_B4, SQ_C4, SQ_D4, SQ_E4, SQ_F4, SQ_G4, SQ_H4,
+    SQ_A3, SQ_B3, SQ_C3, SQ_D3, SQ_E3, SQ_F3, SQ_G3, SQ_H3,
+    SQ_A2, SQ_B2, SQ_C2, SQ_D2, SQ_E2, SQ_F2, SQ_G2, SQ_H2,
+    SQ_A1, SQ_B1, SQ_C1, SQ_D1, SQ_E1, SQ_F1, SQ_G1, SQ_H1,
 
     SQ_INVALID = SQ_H8 + 1,
     SQ_COUNT   = 64
-
 };
+// clang-format on
 
 enum CastlingRightsMask {
 
@@ -208,56 +145,6 @@ enum CastlingRightsMask {
 
 inline constexpr Color getOppositeColor(Color c) {
     return c ^ 1;
-}
-
-template <Color C>
-constexpr Direction PAWN_STEP_DIR = C == CL_WHITE ? DIR_NORTH : DIR_SOUTH;
-
-inline constexpr Direction getPawnStepDir(Color c) {
-    constexpr Direction STEP_DIRS[]{PAWN_STEP_DIR<CL_WHITE>,
-                                    PAWN_STEP_DIR<CL_BLACK>};
-
-    return STEP_DIRS[c];
-}
-
-template <Color C>
-constexpr Direction PAWN_CAPT_LEFT_DIR =
-    C == CL_WHITE ? DIR_NORTHWEST : DIR_SOUTHWEST;
-
-template <Color C>
-constexpr Direction PAWN_CAPT_RIGHT_DIR =
-    C == CL_WHITE ? DIR_NORTHEAST : DIR_SOUTHEAST;
-
-inline constexpr Direction getPawnLeftCaptureDir(Color c) {
-    constexpr Direction CAPT_DIR[CL_COUNT]{PAWN_CAPT_LEFT_DIR<CL_WHITE>,
-                                           PAWN_CAPT_LEFT_DIR<CL_BLACK>};
-
-    return CAPT_DIR[c];
-}
-
-inline constexpr Direction getPawnRightCaptureDir(Color c) {
-    constexpr Direction CAPT_DIR[CL_COUNT]{PAWN_CAPT_RIGHT_DIR<CL_WHITE>,
-                                           PAWN_CAPT_RIGHT_DIR<CL_BLACK>};
-
-    return CAPT_DIR[c];
-}
-
-template <Color C>
-constexpr BoardRank PAWN_PROMOTION_RANK = C == CL_WHITE ? RANK_8 : RANK_1;
-
-inline constexpr BoardRank getPromotionRank(Color c) {
-    constexpr BoardRank PROM_RANKS[] = {PAWN_PROMOTION_RANK<CL_WHITE>,
-                                        PAWN_PROMOTION_RANK<CL_BLACK>};
-    return PROM_RANKS[c];
-}
-
-template <Color C>
-constexpr BoardRank PAWN_INITIAL_RANK = C == CL_WHITE ? RANK_2 : RANK_7;
-
-inline constexpr BoardRank getPawnInitialRanks(Color c) {
-    constexpr BoardRank INIT_RANKS[] = {PAWN_INITIAL_RANK<CL_WHITE>,
-                                        PAWN_INITIAL_RANK<CL_BLACK>};
-    return INIT_RANKS[c];
 }
 
 inline char getRankIdentifier(BoardRank r) {
@@ -279,10 +166,6 @@ inline constexpr BoardRank getRank(Square s) {
 inline constexpr Square getSquare(BoardFile file, BoardRank rank) {
     return static_cast<Square>(static_cast<int>(rank * 8) +
                                static_cast<int>(file));
-}
-
-inline constexpr Square getPromotionSquare(Color c, BoardFile f) {
-    return getSquare(f, getPromotionRank(c));
 }
 
 #endif
