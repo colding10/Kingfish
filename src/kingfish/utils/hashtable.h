@@ -8,6 +8,7 @@
 
 #include "../consts.h"
 
+namespace kingfish {
 struct Entry {
     int lower = -MATE_UPPER;
     int upper = MATE_UPPER;
@@ -112,4 +113,5 @@ class FixedSizeHashTable {
     V                             default_value_;
 };
 
+} // namespace kingfish
 #endif

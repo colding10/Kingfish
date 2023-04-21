@@ -1,21 +1,14 @@
 #ifndef KINGFISH_BITBOARD_H
 #define KINGFISH_BITBOARD_H
 
-#include <initializer_list>
-#include <ostream>
+#include <cstdint>
 
-#include "piece.h"
+#include "bits.h"
 #include "types.h"
-
 namespace kingfish {
-
 namespace bbs {
 void generatePopCount();
 }
-
-/**
-    Abstraction for uint64s that can be used as bitsets for squares on a chessboard.
-*/
 class Bitboard {
   public:
     inline constexpr operator ui64() const { return m_BB; }
@@ -39,11 +32,7 @@ class Bitboard {
         return *this;
     }
 
-#if 0
-    inline constexpr Bitboard operator~() const {
-        return ~m_BB;
-    }
-
+    inline constexpr Bitboard operator~() const { return ~m_BB; }
 
     /** Union of bbs. */
     inline constexpr Bitboard operator|(Bitboard other) const {
@@ -51,28 +40,24 @@ class Bitboard {
     }
 
     /** Intersection of bbs. */
-    inline constexpr Bitboard operator&(Bitboard other) const  {
+    inline constexpr Bitboard operator&(Bitboard other) const {
         return m_BB & other.m_BB;
     }
 
-    inline constexpr Bitboard operator<<(int n) const {
-        return m_BB << n;
-    }
+    inline constexpr Bitboard operator<<(int n) const { return m_BB << n; }
 
     inline Bitboard& operator<<=(int n) {
         m_BB <<= n;
         return *this;
     }
 
-    inline constexpr Bitboard operator>>(int n) const  {
-        return m_BB >> n;
-    }
+    inline constexpr Bitboard operator>>(int n) const { return m_BB >> n; }
 
     inline Bitboard& operator>>=(int n) {
         m_BB >>= n;
         return *this;
     }
-#endif
+
     /** Sets the bit of the specified square to zero. */
     inline void remove(Square sq) { m_BB &= ~(C64(1) << sq); }
 
@@ -463,64 +448,5 @@ inline Bitboard getPieceAttacks(Square s, Bitboard occ, Piece piece) {
     }
 }
 
-/**
- * The castling path for a given color and board side.
- * This bitboard represents the squares that cannot
- * be occupied by any pieces if a king wants
- * to castle on that specific side.
- *
- * @param color The color of the king.
- * @param side The side of castling.
- * @return The castling path bitboard, as described above.
- */
-inline constexpr Bitboard getInnerCastlePath(Color color, Side side) {
-    constexpr Bitboard CASTLE_PATHS[CL_COUNT][SIDE_COUNT]{
-        {0x60, 0xe},                            // White
-        {0x6000000000000000, 0xe00000000000000} // Black
-    };
-
-    return CASTLE_PATHS[color][side];
-}
-
-/**
- * The bitboard of squares that cannot be attacked by opponent pieces
- * if a king wants to castle on that specific side.
- */
-inline constexpr Bitboard getKingCastlePath(Color color, Side side) {
-    constexpr Bitboard KING_CASTLE_PATHS[CL_COUNT][SIDE_COUNT]{
-        {0x70, 0x1c},                            // White
-        {0x7000000000000000, 0x1c00000000000000} // Black
-    };
-
-    return KING_CASTLE_PATHS[color][side];
-}
-
-void initialize();
-
-} // namespace bbs
-
-template <Direction D>
-inline Bitboard Bitboard::shifted() const {
-    ui64 ret = m_BB;
-
-    // Do the shift
-    if constexpr (D > 0) {
-        ret <<= D;
-    } else if constexpr (D < 0) {
-        ret >>= -D;
-    }
-
-    // Apply mask for horizontal directional shifts
-    if constexpr (D == DIR_WEST || D == DIR_SOUTHWEST || D == DIR_NORTHWEST) {
-        ret &= ~(bbs::getFileBitboard(FL_H));
-    } else if constexpr (D == DIR_EAST || D == DIR_SOUTHEAST ||
-                         D == DIR_NORTHEAST) {
-        ret &= ~(bbs::getFileBitboard(FL_A));
-    }
-
-    return ret;
-}
-
-} // namespace lunachess
-
+} // namespace kingfish
 #endif // KINGFISH_BITBOARD_H

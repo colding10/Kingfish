@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "bits.h"
+#include "types.h"
 
 //#define USE_INTRIN_POPCOUNT
 

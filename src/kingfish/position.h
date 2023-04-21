@@ -1,71 +1,46 @@
-#ifndef POSITION_H_INCLUDED
-#define POSITION_H_INCLUDED
+#ifndef KINGFISH_POSITION_H
+#define KINGFISH_POSITION_H
 
 #include <string>
 #include <vector>
 
+#include "bitboard.h"
 #include "move.h"
-#include "pieces.h"
 #include "types.h"
 
-class Position {       // Uses 40 bytes
+namespace kingfish {
+class Position {
   public:
-    std::string board; // 120 char representation of the board
-    int         score; // the board evaluation score
-    std::pair<bool, bool>
-        wc;            // the castling rights, [west/queen side, east/king side]
-    std::pair<bool, bool>
-        bc;            // the opponent rights, [west/king side, east/queen side]
-    int ep;            // the en passant square
-    int kp;            // the king passant square
+    Bitboard pieces[2][6];
+    // a array of 6 bboards (piece types) for each color (white/black)
 
-    Position(const std::string    &board,
-             int                   score,
-             std::pair<bool, bool> wc,
-             std::pair<bool, bool> bc,
-             int                   ep,
-             int                   kp)
-        : board(board)
-        , score(score)
-        , wc(wc)
-        , bc(bc)
-        , ep(ep)
-        , kp(kp) {}
-    inline bool operator==(const Position &other) const {
-        return board == other.board && score == other.score && wc == other.wc &&
-               bc == other.bc && ep == other.ep && kp == other.kp;
-    }
-    inline bool operator>(const Position &other) const {
-        if (score > other.score) {
-            return true;
-        } else if (score == other.score) {
-            return board > other.board;
-        } else {
-            return false;
-        }
-    }
+    std::pair<bool, bool> wc;
+    // the castling rights, [west/queen side, east/king side]
+    std::pair<bool, bool> bc;
+    // the opponent rights, [west/king side, east/queen side]
+    Square en_passant;
+    int    score;
 
-    inline bool operator<(const Position &other) const {
-        if (score < other.score) {
-            return true;
-        } else if (score == other.score) {
-            return board < other.board;
-        } else {
-            return false;
-        }
-    }
-    std::vector<Move> genMoves(bool check_king = true);
+    Position(const std::string &fen_str = "a"); // TODO: fix
 
-    bool isCheckmate();
-    bool isCheck();
-    bool isValidMove(const Move &move);
+    inline bool operator==(const Position &other) const;
+    inline bool operator<(const Position &other) const;
+    inline bool operator>(const Position &other) const;
 
-    Position rotate(bool nullmove = false);
-    Position move(const Move &move);
+    Piece getPieceAt(Square square);
+    void  setPieceAt(Square square, Piece val);
+    void  clearPieceAt(Square square);
 
-    int value(const Move &move);
-    int value();
-    int hash();
+    std::vector<Move> genMoves(bool check_king = true) const;
+    bool              isCheckmate() const;
+    bool              isCheck() const;
+    bool              isValidMove(const Move &move) const;
+
+    Position move(const Move &move) const;
+
+    int value(const Move &move) const;
+    int value() const;
+    int hash() const;
 };
-
-#endif // !POSITION_H_INCLUDED
+} // namespace kingfish
+#endif // !KINGFISH_POSITION_H

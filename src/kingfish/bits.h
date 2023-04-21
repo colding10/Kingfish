@@ -1,5 +1,5 @@
-#ifndef LUNA_BITS_H
-#define LUNA_BITS_H
+#ifndef KINGFISH_BITS_H
+#define KINGFISH_BITS_H
 
 #include "types.h"
 
@@ -85,4 +85,4 @@ inline i8 bitScanR(ui64 n) {
 
 } // namespace kingfish::bits
 
-#endif // LUNA_BITS_H
+#endif // KINGFISH_BITS_H

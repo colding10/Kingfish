@@ -6,19 +6,19 @@
 template <class T>
 struct Generator {
     struct promise_type;
-    using coro_handle = std::coroutine_handle<promise_type>;
+    using coro_handle = ::std::coroutine_handle<promise_type>;
 
     struct promise_type {
         T    current_value;
         auto get_return_object() {
             return Generator{coro_handle::from_promise(*this)};
         }
-        auto initial_suspend() { return std::suspend_always{}; }
-        auto final_suspend() noexcept { return std::suspend_always{}; }
-        void unhandled_exception() { std::terminate(); }
+        auto initial_suspend() { return ::std::suspend_always{}; }
+        auto final_suspend() noexcept { return ::std::suspend_always{}; }
+        void unhandled_exception() { ::std::terminate(); }
         auto yield_value(T value) {
             current_value = value;
-            return std::suspend_always{};
+            return ::std::suspend_always{};
         }
     };
 

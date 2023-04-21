@@ -74,7 +74,7 @@ Book readBook(const std::string& filepath) {
     uint64_t              key;
     std::vector<BookMove> moves;
     while (file.read(reinterpret_cast<char*>(&key), sizeof(key))) {
-        uint16_t move_count;
+        ui16 move_count;
         file.read(reinterpret_cast<char*>(&move_count), sizeof(move_count));
         moves.resize(move_count);
         file.read(reinterpret_cast<char*>(moves.data()),
@@ -103,7 +103,7 @@ bool getBestMove(Book* book, long long int hash, Move& move) {
     return false;
 }
 
-Move parseMove(std::uint16_t* move_bytes) {
+Move parseMove(std::ui16* move_bytes) {
     int starting_square = move_bytes[0];
     int ending_square   = move_bytes[1];
 

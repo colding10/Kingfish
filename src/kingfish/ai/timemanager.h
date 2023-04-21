@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "../position.h"
-
+namespace kingfish {
 int getSearchTime(const std::vector<std::string> &args,
                   const std::vector<Position>    &hist);
-
+}
 #endif

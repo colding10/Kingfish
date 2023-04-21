@@ -1,7 +1,6 @@
 #ifndef KINGFISH_SEARCHER_H
 #define KINGFISH_SEARCHER_H
 
-#include <functional>
 #include <iostream>
 #include <map>
 #include <tuple>
@@ -9,12 +8,13 @@
 #include <utility>
 #include <vector>
 
-#include "../position.h"
 #include "../consts.h"
 #include "../move.h"
+#include "../position.h"
 #include "../utils/generator.h"
 #include "../utils/hashtable.h"
 
+namespace kingfish {
 const int mb_size = 16; // TODO: move the mb_size to the UCI options
 
 class Searcher {
@@ -38,4 +38,5 @@ class Searcher {
     bool stop_search = false;
 };
 
+} // namespace kingfish
 #endif // !KINGFISH_SEARCHER_H

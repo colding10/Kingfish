@@ -4,6 +4,7 @@
 
 #include "../position.h"
 
+namespace kingfish {
 int getSearchTime(const std::vector<std::string> &args,
                   const std::vector<Position>    &hist) {
     int wtime = 0, btime = 0, winc = 0, binc = 0;
@@ -50,4 +51,5 @@ int getSearchTime(const std::vector<std::string> &args,
               << " time allocated: " << search_time << std::endl;
 
     return search_time;
+}
 }

@@ -1,5 +1,7 @@
-#ifndef LUNA_PIECE_H
-#define LUNA_PIECE_H
+#ifndef KINGFISH_PIECE_H
+#define KINGFISH_PIECE_H
+
+#include <ostream>
 
 #include "bits.h"
 #include "types.h"
@@ -73,4 +75,4 @@ inline std::ostream& operator<<(std::ostream& stream, Piece p) {
 
 } // namespace kingfish
 
-#endif // LUNA_PIECE_H
+#endif // KINGFISH_PIECE_H
