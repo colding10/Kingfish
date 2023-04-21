@@ -1,19 +1,16 @@
 #ifndef KINGFISH_BITBOARD_H
 #define KINGFISH_BITBOARD_H
 
+#include <iostream>
+
 #include "../types.h"
+#include "bitboard.h"
 
 // bit manipulation macros
 #define get_bit(bitboard, index) (bitboard & (1ULL << index))
 #define set_bit(bitboard, index) (bitboard |= (1ULL << index))
 #define pop_bit(bitboard, index) \
     (get_bit(bitboard, index) ? bitboard ^= (1ULL << index) : 0)
-
-typedef ui64 Bitboard;
-
-#include <iostream>
-
-#include "bitboard.h"
 
 namespace BBS {
 void printBitboard(Bitboard bitboard);
@@ -36,7 +33,6 @@ Bitboard maskRookAttacks(int square);
 Bitboard bishopAttacks(int square, Bitboard block);
 Bitboard rookAttacks(int square, Bitboard block);
 
-// init pre-calculated attack tables for leaper pieces (pawns, knights, kings)
 void initLeaperAttacks();
 } // namespace BBS
 

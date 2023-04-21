@@ -21,7 +21,8 @@ typedef std::uint64_t ui64;
 //
 // Chess types
 //
-typedef i64 PositionHash;
+typedef i64  PositionHash;
+typedef ui64 Bitboard;
 
 typedef i8 Square;
 typedef i8 PieceType;
@@ -100,7 +101,6 @@ enum BoardRanks {
 
 enum PieceTypes {
 
-    PT_NONE,
     PT_PAWN,
     PT_KNIGHT,
     PT_BISHOP,
@@ -108,7 +108,8 @@ enum PieceTypes {
     PT_QUEEN,
     PT_KING,
 
-    PT_COUNT = 7
+    PT_NONE = PT_KING + 1,
+    PT_COUNT = 6
 
 };
 

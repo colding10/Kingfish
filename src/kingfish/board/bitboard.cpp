@@ -19,24 +19,19 @@ void printBitboard(Bitboard bitboard) {
     std::cout << "     bitboard:  " << bitboard << "\n\n";
 }
 
-// mask pawn attacks
 Bitboard maskPawnAttacks(Color side, Square square) {
     Bitboard attacks  = 0;
     Bitboard bitboard = 0;
 
     set_bit(bitboard, square);
 
-    // white pawn attacks
-    if (!side) {
+    if (side == CL_WHITE) {
         // make sure attack is on board
         if ((bitboard >> 7) & not_a_file)
             attacks |= (bitboard >> 7);
         if ((bitboard >> 9) & not_h_file)
             attacks |= (bitboard >> 9);
-    }
-
-    // black pawn atacks
-    else {
+    } else {
         // make sure attack is on board
         if ((bitboard << 7) & not_h_file)
             attacks |= (bitboard << 7);
@@ -44,21 +39,15 @@ Bitboard maskPawnAttacks(Color side, Square square) {
             attacks |= (bitboard << 9);
     }
 
-    // return attack map for pawn on a given square
     return attacks;
 }
 
 Bitboard maskKnightAttacks(Square square) {
-    // attack bitboard
-    Bitboard attacks = 0;
-
-    // piece bitboard
+    Bitboard attacks  = 0;
     Bitboard bitboard = 0;
 
-    // set piece on bitboard
-    set_bit(bitboard, square);
+    set_bit(bitboard, square); // set piece on bitboard
 
-    // generate knight
     if ((bitboard >> 17) & not_h_file)
         attacks |= (bitboard >> 17);
     if ((bitboard >> 15) & not_a_file)
@@ -81,16 +70,11 @@ Bitboard maskKnightAttacks(Square square) {
 }
 
 Bitboard maskKingAttacks(Square square) {
-    // attack bitboard
-    Bitboard attacks = 0;
+    Bitboard attacks  = 0;     // attack bitboard
+    Bitboard bitboard = 0;     // piece bitboard
 
-    // piece bitboard
-    Bitboard bitboard = 0;
+    set_bit(bitboard, square); // set piece on bitboard
 
-    // set piece on bitboard
-    set_bit(bitboard, square);
-
-    // generate king attacks
     if (bitboard >> 8)
         attacks |= (bitboard >> 8);
     if (bitboard << 8)
@@ -108,23 +92,17 @@ Bitboard maskKingAttacks(Square square) {
     if ((bitboard << 7) & not_h_file)
         attacks |= (bitboard << 7);
 
-    // return attack map for king on a given square
     return attacks;
 }
 
-// mask bishop attacks
 Bitboard maskBishopAttacks(Square square) {
-    // attack bitboard
     Bitboard attacks = 0;
 
-    // init files & ranks
     int f, r;
 
-    // init target files & ranks
     int tr = square / 8;
     int tf = square % 8;
 
-    // generate attacks
     for (r = tr + 1, f = tf + 1; r <= 6 && f <= 6; r++, f++)
         attacks |= (1ULL << (r * 8 + f));
     for (r = tr + 1, f = tf - 1; r <= 6 && f >= 1; r++, f--)
@@ -134,23 +112,17 @@ Bitboard maskBishopAttacks(Square square) {
     for (r = tr - 1, f = tf - 1; r >= 1 && f >= 1; r--, f--)
         attacks |= (1ULL << (r * 8 + f));
 
-    // return attack map for bishop on a given square
     return attacks;
 }
 
-// mask rook attacks
 Bitboard maskRookAttacks(Square square) {
-    // attacks bitboard
     Bitboard attacks = 0ULL;
 
-    // init files & ranks
     int f, r;
 
-    // init target files & ranks
     int tr = square / 8;
     int tf = square % 8;
 
-    // generate attacks
     for (r = tr + 1; r <= 6; r++)
         attacks |= (1ULL << (r * 8 + tf));
     for (r = tr - 1; r >= 1; r--)
@@ -160,23 +132,17 @@ Bitboard maskRookAttacks(Square square) {
     for (f = tf - 1; f >= 1; f--)
         attacks |= (1ULL << (tr * 8 + f));
 
-    // return attack map for bishop on a given square
     return attacks;
 }
 
-// bishop attacks
 Bitboard bishopAttacks(Square square, Bitboard block) {
-    // attack bitboard
     Bitboard attacks = 0;
 
-    // init files & ranks
     int f, r;
 
-    // init target files & ranks
     int tr = square / 8;
     int tf = square % 8;
 
-    // generate attacks
     for (r = tr + 1, f = tf + 1; r <= 7 && f <= 7; r++, f++) {
         attacks |= (1ULL << (r * 8 + f));
         if (block & (1ULL << (r * 8 + f)))
@@ -201,23 +167,17 @@ Bitboard bishopAttacks(Square square, Bitboard block) {
             break;
     }
 
-    // return attack map for bishop on a given square
     return attacks;
 }
 
-// rook attacks
 Bitboard rookAttacks(Square square, Bitboard block) {
-    // attacks bitboard
     Bitboard attacks = 0ULL;
 
-    // init files & ranks
     int f, r;
 
-    // init target files & ranks
     int tr = square / 8;
     int tf = square % 8;
 
-    // generate attacks
     for (r = tr + 1; r <= 7; r++) {
         attacks |= (1ULL << (r * 8 + tf));
         if (block & (1ULL << (r * 8 + tf)))
@@ -242,15 +202,11 @@ Bitboard rookAttacks(Square square, Bitboard block) {
             break;
     }
 
-    // return attack map for bishop on a given square
     return attacks;
 }
 
-// init pre-calculated attack tables for leaper pieces (pawns, knights, kings)
 void initLeaperAttacks() {
-    // loop over 64 board squares
-    for (Square square = 0; square < 64; square++) {
-        // init leaper attacks
+    for (Square square = 0; square < SQ_COUNT; square++) {
         pawn_attacks[CL_WHITE][square] = maskPawnAttacks(CL_WHITE, square);
         pawn_attacks[CL_BLACK][square] = maskPawnAttacks(CL_BLACK, square);
         knight_attacks[square]         = maskKnightAttacks(square);

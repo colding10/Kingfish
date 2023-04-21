@@ -15,7 +15,7 @@
 
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
-    for (int i = 0; i < (int)board.size(); ++i) {
+    for (int i = 0; i < (int)board.size(); i++) {
         char p = this->board[i];
 
         if (!std::isupper(p)) {
@@ -29,14 +29,14 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     break;
                 }
                 if (p == 'P') {
-                    if ((d == N || d == N + N) && q != '.') {
+                    if ((d == DIR_NORTH || d == DIR_NORTH + DIR_NORTH) && q != '.') {
                         break;
                     }
-                    if (d == N + N) {
-                        if (i < A1 + N || this->board[i + N] != '.')
+                    if (d == DIR_NORTH + DIR_NORTH) {
+                        if (i < A1 + DIR_NORTH || this->board[i + DIR_NORTH] != '.')
                             break;
                     }
-                    if (d == N + W || d == N + E) {
+                    if (d == DIR_NORTH + DIR_WEST || d == DIR_NORTH + DIR_EAST) {
                         if (q == '.' && j != ep && j != kp && j != kp - 1 &&
                             j != kp + 1)
                             break;
@@ -70,11 +70,11 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     break;
                 }
 
-                if (i == A1 && this->board[j + E] == 'K' && this->wc.first) {
-                    moves.push_back(Move(j + E, j + W, ' '));
+                if (i == A1 && this->board[j + DIR_EAST] == 'K' && this->wc.first) {
+                    moves.push_back(Move(j + DIR_EAST, j + DIR_WEST, ' '));
                 }
-                if (i == H1 && this->board[j + W] == 'K' && this->wc.second) {
-                    moves.push_back(Move(j + W, j + E, ' '));
+                if (i == H1 && this->board[j + DIR_WEST] == 'K' && this->wc.second) {
+                    moves.push_back(Move(j + DIR_WEST, j + DIR_EAST, ' '));
                 }
             }
         }
@@ -146,11 +146,11 @@ Position Position::move(const Move &move) {
         if (A8 <= j && j <= H8) {
             new_board = put(new_board, j, prom);
         }
-        if (j - i == 2 * N) {
-            new_ep = i + N;
+        if (j - i == 2 * DIR_NORTH) {
+            new_ep = i + DIR_NORTH;
         }
         if (j == ep) {
-            new_board = put(std::string(new_board), j - S, '.');
+            new_board = put(std::string(new_board), j - DIR_SOUTH, '.');
         }
     }
 
@@ -191,7 +191,7 @@ int Position::value(const Move &move) {
                      PIECE_SQUARE_TABLES['P'][j];
         }
         if (j == ep) {
-            score += PIECE_SQUARE_TABLES['P'][119 - (j + S)];
+            score += PIECE_SQUARE_TABLES['P'][119 - (j + DIR_SOUTH)];
         }
     }
 

@@ -7,9 +7,12 @@
 #include "../move.h"
 #include "../pieces.h"
 #include "../types.h"
+#include "bitboard.h"
 
-class Position {       // Uses 40 bytes
+class Position { // Uses 40 bytes
   public:
+    Bitboard piece_bitboards[CL_COUNT][PT_COUNT];
+
     std::string board; // 120 char representation of the board
     int         score; // the board evaluation score
     std::pair<bool, bool>

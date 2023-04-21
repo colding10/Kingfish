@@ -9,23 +9,38 @@
 #include "types.h"
 
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
-const int N = -10, E = 1, S = 10, W = -1;
 
 static std::unordered_map<char, std::vector<Direction>> DIRECTIONS = {
-    {'P', {N, N + N, N + W, N + E}},
+    {'P', {DIR_NORTH, DIR_NORTH * 2, DIR_NORTHWEST, DIR_NORTHEAST}},
     {'N',
-     {N + N + E,
-      E + N + E,
-      E + S + E,
-      S + S + E,
-      S + S + W,
-      W + S + W,
-      W + N + W,
-      N + N + W}},
-    {'B', {N + E, S + E, S + W, N + W}},
-    {'R', {N, E, S, W}},
-    {'Q', {N, E, S, W, N + E, S + E, S + W, N + W}},
-    {'K', {N, E, S, W, N + E, S + E, S + W, N + W}}};
+     {DIR_NORTH + DIR_NORTHEAST,
+      DIR_EAST + DIR_NORTHEAST,
+      DIR_EAST + DIR_SOUTHEAST,
+      DIR_SOUTH + DIR_SOUTHEAST,
+      DIR_SOUTH + DIR_SOUTHWEST,
+      DIR_WEST + DIR_SOUTHWEST,
+      DIR_WEST + DIR_NORTHWEST,
+      DIR_NORTH + DIR_NORTHWEST}},
+    {'B', {DIR_NORTHEAST, DIR_SOUTHEAST, DIR_SOUTHWEST, DIR_NORTHWEST}},
+    {'R', {DIR_NORTH, DIR_NORTH, DIR_SOUTH, DIR_WEST}},
+    {'Q',
+     {DIR_NORTH,
+      DIR_EAST,
+      DIR_SOUTH,
+      DIR_WEST,
+      DIR_NORTHEAST,
+      DIR_SOUTHEAST,
+      DIR_SOUTHWEST,
+      DIR_NORTHWEST}},
+    {'K',
+     {DIR_NORTH,
+      DIR_EAST,
+      DIR_SOUTH,
+      DIR_WEST,
+      DIR_NORTHEAST,
+      DIR_SOUTHEAST,
+      DIR_SOUTHWEST,
+      DIR_NORTHWEST}}};
 
 const int MATE_LOWER = PIECE_VALUES['K'] - 10 * PIECE_VALUES['Q'];
 const int MATE_UPPER = PIECE_VALUES['K'] + 10 * PIECE_VALUES['Q'];
