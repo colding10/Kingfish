@@ -50,7 +50,7 @@ void tokenize(const std::string        &str,
     }
 }
 
-int main() {
+int uciMainLoop() {
     // TODO: commands to add
 
     // RECIEVING
