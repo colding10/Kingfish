@@ -135,6 +135,18 @@ Bitboard maskRookAttacks(Square square) {
     return attacks;
 }
 
+Bitboard pawnAttacks(Color side, Square square) {
+    return pawn_attacks[side][square];
+}
+
+Bitboard knightAttacks(Square square) {
+    return knight_attacks[square];
+}
+
+Bitboard kingAttacks(Square square) {
+    return king_attacks[square];
+}
+
 Bitboard bishopAttacks(Square square, Bitboard block) {
     Bitboard attacks = 0;
 
@@ -205,8 +217,12 @@ Bitboard rookAttacks(Square square, Bitboard block) {
     return attacks;
 }
 
+Bitboard queenAttacks(Square square, Bitboard block) {
+    return bishopAttacks(square, block) | rookAttacks(square, block);
+}
+
 void initLeaperAttacks() {
-    for (Square square = 0; square < SQ_COUNT; square++) {
+    for (Square square = SQ_A8; square < SQ_COUNT; square++) {
         pawn_attacks[CL_WHITE][square] = maskPawnAttacks(CL_WHITE, square);
         pawn_attacks[CL_BLACK][square] = maskPawnAttacks(CL_BLACK, square);
         knight_attacks[square]         = maskKnightAttacks(square);

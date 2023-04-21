@@ -245,6 +245,6 @@ bool Position::isCheckmate() {
     return true; // we are mated
 }
 
-int Position::hash() {
+PositionHash Position::hash() {
     return zobristHash(*this, true);
 }

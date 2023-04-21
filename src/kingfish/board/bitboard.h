@@ -24,14 +24,19 @@ static Bitboard pawn_attacks[2][64]; // pawn attacks array [side][square]
 static Bitboard knight_attacks[64];
 static Bitboard king_attacks[64];
 
-Bitboard maskPawnAttacks(Color side, int square);
+Bitboard maskPawnAttacks(Color side, Square square);
 Bitboard maskKnightAttacks(Square square);
 Bitboard maskKingAttacks(Square square);
-Bitboard maskBishopAttacks(int square);
-Bitboard maskRookAttacks(int square);
+Bitboard maskBishopAttacks(Square square);
+Bitboard maskRookAttacks(Square square);
 
-Bitboard bishopAttacks(int square, Bitboard block);
-Bitboard rookAttacks(int square, Bitboard block);
+Bitboard pawnAttacks(Color side, Square square);
+Bitboard knightAttacks(Square square);
+Bitboard kingAttacks(Square square);
+
+Bitboard bishopAttacks(Square square, Bitboard block);
+Bitboard rookAttacks(Square square, Bitboard block);
+Bitboard queenAttacks(Square square, Bitboard block);
 
 void initLeaperAttacks();
 } // namespace BBS

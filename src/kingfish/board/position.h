@@ -1,6 +1,7 @@
 #ifndef POSITION_H_INCLUDED
 #define POSITION_H_INCLUDED
 
+#include <stack>
 #include <string>
 #include <vector>
 
@@ -9,18 +10,29 @@
 #include "../types.h"
 #include "bitboard.h"
 
+struct Status {
+    Move last_move;
+};
+
 class Position { // Uses 40 bytes
   public:
     Bitboard piece_bitboards[CL_COUNT][PT_COUNT];
+    Bitboard occupied_bitboards[CL_COUNT];
+
+    CastlingRightsMask wc_rights;
+    CastlingRightsMask bc_rights;
+
+    Color turn;
 
     std::string board; // 120 char representation of the board
     int         score; // the board evaluation score
+
     std::pair<bool, bool>
-        wc;            // the castling rights, [west/queen side, east/king side]
+        wc; // the castling rights, [west/queen side, east/king side]
     std::pair<bool, bool>
-        bc;            // the opponent rights, [west/king side, east/queen side]
-    int ep;            // the en passant square
-    int kp;            // the king passant square
+        bc; // the opponent rights, [west/king side, east/queen side]
+    int ep; // the en passant square
+    int kp; // the king passant square
 
     Position(const std::string    &board,
              int                   score,
@@ -47,7 +59,6 @@ class Position { // Uses 40 bytes
             return false;
         }
     }
-
     inline bool operator<(const Position &other) const {
         if (score < other.score) {
             return true;
@@ -57,18 +68,22 @@ class Position { // Uses 40 bytes
             return false;
         }
     }
+
     std::vector<Move> genMoves(bool check_king = true);
 
     bool isCheckmate();
     bool isCheck();
     bool isValidMove(const Move &move);
 
-    Position rotate(bool nullmove = false);
     Position move(const Move &move);
+    Position rotate(bool nullmove = false);
 
-    int value(const Move &move);
-    int value();
-    int hash();
+    int          value(const Move &move);
+    int          value();
+    PositionHash hash();
+
+  private:
+    std::stack<Status> status_history;
 };
 
 #endif // !POSITION_H_INCLUDED

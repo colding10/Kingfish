@@ -3,7 +3,7 @@
 
 int main() {
     BBS::initLeaperAttacks();
-    // // blocker bitboard
+    // // // blocker bitboard
     // Bitboard block = 0ULL;
 
     // // init blockers
@@ -14,7 +14,7 @@ int main() {
 
     // BBS::printBitboard(block);
     // BBS::printBitboard(BBS::rookAttacks(SQ_D4, block));
-
+    // BBS::printBitboard(BBS::knightAttacks(SQ_B2));
     // return 0;
     uciMainLoop();
 }
