@@ -5,7 +5,7 @@
 
 #include <unordered_map>
 
-#include "position.h"
+#include "../board/position.h"
 
 // sourced from: http://hgm.nubati.net/book_format.html
 
@@ -297,16 +297,16 @@ long long int getPieceOffset(char piece, int row, int file);
 int           encodeCastle(const Position &pos);
 
 struct BookMove {
-    ui16 move;
-    ui16 weight;
-    ui32 learn;
-    ui32 recent;
+    uint16_t move;
+    uint16_t weight;
+    uint32_t learn;
+    uint32_t recent;
 };
 
 typedef std::unordered_map<uint64_t, std::vector<BookMove>> Book;
 
 Book readBook(const std::string &filepath);
 bool getBestMove(Book *book, long long int hash, Move &move);
-Move parseMove(ui16 *move_bytes);
+Move parseMove(std::uint16_t *move_bytes);
 
 #endif // !POLYGLOT_h_INCLUDED

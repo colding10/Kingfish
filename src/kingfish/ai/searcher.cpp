@@ -11,14 +11,13 @@
 #include <tuple>
 #include <vector>
 
+#include "../board/position.h"
 #include "../consts.h"
 #include "../move.h"
 #include "../pieces.h"
-#include "../position.h"
 #include "../uci.h"
 #include "../utils/generator.h"
 
-namespace kingfish {
 int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
     this->nodes_searched += 1;
 
@@ -83,12 +82,9 @@ int Searcher::bound(Position &pos, int gamma, int depth, bool can_null = true) {
             rest_moves.push_back({pos.value(m), m});
         }
 
-        std::sort(
-            rest_moves.begin(),
-            rest_moves.end(),
-            [](const std::pair<int, Move> &p1, const std::pair<int, Move> &p2) {
-                return p1.first > p2.first;
-            });
+        std::sort(rest_moves.begin(),
+                  rest_moves.end(),
+                  std::greater<std::pair<int, Move>>());
 
         for (std::pair<int, Move> m_pair : rest_moves) {
             int  val  = m_pair.first;
@@ -181,12 +177,11 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
             Move move;
             std::tie(gamma, score, move) = result;
 
-            int i = move.getSource(), j = move.getDest();
+            int i = move.i, j = move.j;
             if (hist.size() % 2 == 0) {
-                i = 119 - i, j = 119 - j; // TODO: fix later
+                i = 119 - i, j = 119 - j;
             }
-            move_str =
-                render(i) + render(j) + (char)tolower(move.getPromotionPiece());
+            move_str = render(i) + render(j) + (char)tolower(move.prom);
             std::cout << "info depth " << depth << " nodes " << nodes_searched
                       << " score cp " << score << " pv " << move_str
                       << std::endl;
@@ -199,4 +194,3 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
 void Searcher::stopInfiniteSearch() {
     this->stop_search = true;
 }
-} // namespace kingfish

@@ -6,14 +6,12 @@
 #include <thread>
 #include <vector>
 
-#include "ai/searcher.h"
-#include "ai/timemanager.h"
-#include "clock.h"
-#include "consts.h"
-#include "position.h"
-#include "types.h"
+#include "./ai/searcher.h"
+#include "./ai/timemanager.h"
+#include "./board/position.h"
+#include "./clock.h"
+#include "./consts.h"
 
-namespace kingfish {
 // TODO: create uci options dict, then export to make global
 
 int parse(const std::string &c) {
@@ -110,18 +108,18 @@ int main() {
                 for (int ply = 0; ply < (int)args.size() - 3; ply++) {
                     std::string move = args[ply + 3];
 
-                    // int i = parse(move.substr(0, 2));
-                    // int j = parse(move.substr(2, 2));
+                    int i = parse(move.substr(0, 2));
+                    int j = parse(move.substr(2, 2));
 
-                    // std::string prom = move.substr(4);
-                    // std::transform(
-                    //     prom.begin(), prom.end(), prom.begin(), ::toupper);
+                    std::string prom = move.substr(4);
+                    std::transform(
+                        prom.begin(), prom.end(), prom.begin(), ::toupper);
 
-                    // if (ply % 2 == 1) {
-                    //     i = 119 - i;
-                    //     j = 119 - j;
-                    // }
-                    Position to_add = hist.back().move(Move(hist.back(), move));
+                    if (ply % 2 == 1) {
+                        i = 119 - i;
+                        j = 119 - j;
+                    }
+                    Position to_add = hist.back().move(Move(i, j, prom[0]));
                     hist.push_back(to_add);
                 }
             }
@@ -151,14 +149,12 @@ int main() {
                         auto result                  = result_moves_gen.value();
                         std::tie(gamma, score, move) = result;
 
-                        Square i = move.getSource(), j = move.getDest();
+                        int i = move.i, j = move.j;
                         if (hist.size() % 2 == 0) {
-                            i = 119 - i,
-                            j = 119 - j; // TODO: update values from 119
+                            i = 119 - i, j = 119 - j;
                         }
-
-                        move_str = render(i) + render(j) +
-                                   (char)tolower(move.getPromotionPiece());
+                        move_str =
+                            render(i) + render(j) + (char)tolower(move.prom);
                         int time =
                             std::chrono::duration_cast<
                                 std::chrono::milliseconds>(
@@ -205,9 +201,7 @@ int main() {
                 if (args[1] == "moves") {
                     std::cout << "moves: {";
                     for (Move m : hist.back().genMoves(true)) {
-                        std::cout << render(m.getSource()) +
-                                         render(m.getDest()) +
-                                         (char)m.getPromotionPiece();
+                        std::cout << render(m.i) + render(m.j) + m.prom;
                     }
                     std::cout << "}" << std::endl;
                 }
@@ -217,4 +211,3 @@ int main() {
 
     return 0;
 }
-} // namespace kingfish

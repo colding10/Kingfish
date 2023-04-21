@@ -25,16 +25,14 @@ set(CMAKE_CXX_STANDARD 23)
 # #
 add_executable(kingfish
     src/kingfish/uci.cpp
-    src/kingfish/piece.cpp
-
 
     src/kingfish/ai/searcher.cpp
     src/kingfish/ai/timemanager.cpp
 
-    src/kingfish/bitboard.cpp
-    src/kingfish/position.cpp
+    src/kingfish/board/bitboard.cpp
+    src/kingfish/board/position.cpp
 
-    src/kingfish/zobrist.cpp
+    src/kingfish/book/zobrist.cpp
 
     # src/kingfish/types.cpp
 
@@ -77,18 +75,16 @@ add_executable(kingfish
 # Compilation settings
 # #
 set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -pg")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto")
 
 # #
 # Add external dependencies
 # #
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
     target_link_libraries(kingfish PUBLIC stdc++)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "-pthread -O3 -flto -Wall -Wextra -march=native -target arm64-apple-darwin-gnu")
+    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra")
     target_link_libraries(kingfish PUBLIC stdc++)
 endif()
 

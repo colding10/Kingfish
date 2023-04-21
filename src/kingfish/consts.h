@@ -5,11 +5,9 @@
 #include <unordered_map>
 #include <vector>
 
-#include "move.h"
 #include "pieces.h"
 #include "types.h"
 
-namespace kingfish {
 const int A1 = 91, H1 = 98, A8 = 21, H8 = 28;
 const int N = -10, E = 1, S = 10, W = -1;
 
@@ -32,10 +30,9 @@ static std::unordered_map<char, std::vector<Direction>> DIRECTIONS = {
 const int MATE_LOWER = PIECE_VALUES['K'] - 10 * PIECE_VALUES['Q'];
 const int MATE_UPPER = PIECE_VALUES['K'] + 10 * PIECE_VALUES['Q'];
 
-const int  QS             = 35;
-const int  EVAL_ROUGHNESS = 15;
-const int  NULLMOVE_DEPTH = 2;
-const Move NULLMOVE       = Move();
+const int QS             = 35;
+const int EVAL_ROUGHNESS = 15;
+const int NULLMOVE_DEPTH = 2;
 
 const std::string VERSION = "Kingfish 1.2.0";
 const std::string INITIAL = ("         \n" //   0 -  9
@@ -51,7 +48,5 @@ const std::string INITIAL = ("         \n" //   0 -  9
                              "         \n" // 100 -109
                              "         \n" // 110 -119
 );
-
-} // namespace kingfish
 
 #endif // !KINGFISH_CONSTS_H
