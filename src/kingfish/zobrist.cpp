@@ -5,8 +5,8 @@
 #include <string>
 #include <unordered_map>
 
-#include "../board/position.h"
-#include "../uci.h"
+#include "position.h"
+#include "uci.h"
 
 long long int zobristHash(const Position& pos, bool white_turn) {
     // key=piece^castle^enpassant^turn;

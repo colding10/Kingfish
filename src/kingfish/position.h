@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 
-#include "../move.h"
-#include "../piece.h"
-#include "../pieces.h"
-#include "../types.h"
+#include "move.h"
+#include "piece.h"
+#include "pieces.h"
+#include "types.h"
 #include "bitboard.h"
 
 struct Status {

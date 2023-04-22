@@ -8,9 +8,9 @@
 
 #include "./ai/searcher.h"
 #include "./ai/timemanager.h"
-#include "./board/position.h"
 #include "./clock.h"
 #include "./consts.h"
+#include "position.h"
 
 // TODO: create uci options dict, then export to make global
 

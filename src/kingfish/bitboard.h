@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../types.h"
+#include "types.h"
 #include "bitboard.h"
 
 // bit manipulation macros

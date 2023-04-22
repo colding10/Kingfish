@@ -11,10 +11,11 @@
 #include <tuple>
 #include <vector>
 
-#include "../board/position.h"
+#include "../clock.h"
 #include "../consts.h"
 #include "../move.h"
 #include "../pieces.h"
+#include "../position.h"
 #include "../uci.h"
 #include "../utils/generator.h"
 
@@ -166,6 +167,8 @@ Searcher::search(std::vector<Position> hist, int depth) {
 void Searcher::searchInfinite(std::vector<Position> &hist) {
     std::string move_str;
     this->stop_search = false;
+    auto start_time   = Clock::now();
+    
     for (int depth = 1; !stop_search; depth++) {
         for (auto result_moves_gen = search(hist, depth);
              result_moves_gen.next();) {
@@ -182,9 +185,15 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
                 i = 119 - i, j = 119 - j;
             }
             move_str = render(i) + render(j) + (char)tolower(move.prom);
-            std::cout << "info depth " << depth << " nodes " << nodes_searched
-                      << " score cp " << score << " pv " << move_str
-                      << std::endl;
+            int time =
+                std::chrono::duration_cast<std::chrono::milliseconds>(
+                    std::chrono::high_resolution_clock::now() - start_time)
+                    .count();
+            std::cout << "info depth " << depth << " score cp " << score
+                      << " nodes " << this->nodes_searched << " nps "
+                      << (this->nodes_searched * 1000) / time << " hashfull "
+                      << this->tp_score.getPermillFull() << " time " << time
+                      << " pv " << move_str << std::endl;
         }
     }
     std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")

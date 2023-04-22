@@ -9,9 +9,9 @@
 #include <utility>
 #include <vector>
 
-#include "../book/zobrist.h"
-#include "../consts.h"
-#include "../move.h"
+#include "zobrist.h"
+#include "consts.h"
+#include "move.h"
 
 std::vector<Move> Position::genMoves(bool check_king) {
     std::vector<Move> moves;
@@ -45,11 +45,7 @@ std::vector<Move> Position::genMoves(bool check_king) {
                             break;
                     }
                     if (A8 <= j && j <= H8) {
-                        for (char prom : "NBRQ") {
-                            if (prom == '\x00') {
-                                break;
-                            }
-
+                        for (char prom : {'N', 'B', 'R', 'Q'}) {
                             if (check_king) {
                                 if (this->isValidMove(Move(i, j, prom))) {
                                     moves.push_back(Move(i, j, prom));
@@ -241,7 +237,7 @@ bool Position::isCheckmate() {
         return false;
     }
 
-    std::vector<Move> moves = rotated.genMoves(false);
+    std::vector<Move> moves = this->rotate().genMoves(false);
 
     return !std::any_of(moves.cbegin(), moves.cend(), [this](const Move &m) {
         return !this->move(m).isCheck();

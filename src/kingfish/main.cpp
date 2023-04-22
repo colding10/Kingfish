@@ -1,4 +1,4 @@
-#include "board/bitboard.h"
+#include "bitboard.h"
 #include "uci.h"
 
 int main() {
