@@ -12,7 +12,9 @@
 #include "types.h"
 
 struct Status {
-    Move last_move;
+    Color turn;
+    Move  last_move;
+    i64   zobrist_hash;
 };
 
 class Position { // Uses 40 bytes

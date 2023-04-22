@@ -26,21 +26,20 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(kingfish
     src/kingfish/main.cpp
     src/kingfish/uci.cpp
+    src/kingfish/piece.cpp
 
     src/kingfish/ai/searcher.cpp
     src/kingfish/ai/timemanager.cpp
 
-    src/kingfish/board/bitboard.cpp
-    src/kingfish/board/position.cpp
+    src/kingfish/bitboard.cpp
+    src/kingfish/position.cpp
 
-    src/kingfish/book/zobrist.cpp
+    src/kingfish/zobrist.cpp
 
     # src/kingfish/types.cpp
-
     # src/kingfish/chessgame.cpp
     # src/kingfish/endgame.cpp
     # src/kingfish/piece.cpp
-
     # src/kingfish/square.cpp
     # src/kingfish/move.cpp
     # src/kingfish/perft.cpp
