@@ -9,11 +9,63 @@
 #include <utility>
 #include <vector>
 
-#include "zobrist.h"
 #include "consts.h"
 #include "move.h"
+#include "zobrist.h"
 
-std::vector<Move> Position::genMoves(bool check_king) {
+void Position::printBBoards() const {
+    for (Color c : {CL_WHITE, CL_BLACK}) {
+        for (PieceType p :
+             {PT_PAWN, PT_KNIGHT, PT_BISHOP, PT_ROOK, PT_QUEEN, PT_KING}) {
+            std::cout << "COLOR: " << (int)c << " PTYPE: " << (int)p
+                      << std::endl;
+            BBS::printBitboard(this->piece_bitboards[c][p]);
+        }
+    }
+}
+
+Piece Position::getPieceAt(Square square) const {
+    if (!this->hasPieceAt(square)) {
+        return PIECE_NONE;
+    }
+
+    for (Color c = CL_WHITE; c < CL_COUNT; c++) {
+        for (PieceType p = PT_PAWN; p < PT_COUNT; p++) {
+            if (get_bit(this->piece_bitboards[c][p], square)) {
+                return Piece(c, p);
+            }
+        }
+    }
+
+    return PIECE_NONE;
+}
+
+bool Position::hasPieceAt(Square square) const {
+    for (Color c = CL_WHITE; c < CL_COUNT; c++) {
+        for (PieceType p = PT_PAWN; p < PT_COUNT; p++) {
+            if (get_bit(this->piece_bitboards[c][p], square)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+void Position::setPieceAt(Square square, Piece piece) {
+    this->popPieceAt(square);
+    set_bit(this->piece_bitboards[piece.getColor()][piece.getType()], square);
+}
+
+void Position::popPieceAt(Square square) {
+    for (Color c = CL_WHITE; c < CL_COUNT; c++) {
+        for (PieceType p = PT_PAWN; p < PT_COUNT; p++) {
+            pop_bit(this->piece_bitboards[c][p], square);
+        }
+    }
+}
+
+std::vector<Move> Position::genMoves(bool check_king) const {
     std::vector<Move> moves;
     for (int i = 0; i < (int)board.size(); i++) {
         char p = this->board[i];
@@ -84,7 +136,7 @@ std::vector<Move> Position::genMoves(bool check_king) {
     return moves;
 }
 
-Position Position::rotate(bool nullmove) {
+Position Position::rotate(bool nullmove) const {
     std::string rotated_board(board.rbegin(), board.rend());
     std::transform(rotated_board.begin(),
                    rotated_board.end(),
@@ -101,7 +153,7 @@ Position Position::rotate(bool nullmove) {
                     (kp && !nullmove) ? 119 - kp : 0);
 }
 
-Position Position::move(const Move &move) {
+Position Position::move(const Move &move) const {
     int  i = move.i, j = move.j;
     char prom = move.prom;
     char p    = board[i];
@@ -159,7 +211,7 @@ Position Position::move(const Move &move) {
     return new_pos.rotate();
 }
 
-int Position::value(const Move &move) {
+int Position::value(const Move &move) const {
     int i = move.i;
     int j = move.j;
 
@@ -199,7 +251,7 @@ int Position::value(const Move &move) {
     return score;
 }
 
-int Position::value() {
+int Position::value() const {
     int score = 0;
 
     for (int i = H1; i <= A8; i++) {
@@ -215,7 +267,7 @@ int Position::value() {
     return score;
 }
 
-bool Position::isValidMove(const Move &move) {
+bool Position::isValidMove(const Move &move) const {
     Position rotated = this->move(move);
     if (rotated.rotate().isCheck()) {
         return false;
@@ -223,7 +275,7 @@ bool Position::isValidMove(const Move &move) {
     return true;
 }
 
-bool Position::isCheck() {
+bool Position::isCheck() const {
     Position          rotated = this->rotate();
     std::vector<Move> moves   = rotated.genMoves(false);
 
@@ -232,7 +284,7 @@ bool Position::isCheck() {
     });
 }
 
-bool Position::isCheckmate() {
+bool Position::isCheckmate() const {
     if (!this->isCheck()) { // cant be mated while not in check
         return false;
     }
@@ -244,6 +296,6 @@ bool Position::isCheckmate() {
     });
 }
 
-PositionHash Position::hash() {
+PositionHash Position::hash() const {
     return zobristHash(*this, true);
 }

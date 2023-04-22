@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
+#include "bitboard.h"
 #include "move.h"
 #include "piece.h"
 #include "pieces.h"
 #include "types.h"
-#include "bitboard.h"
 
 struct Status {
     Move last_move;
@@ -70,25 +70,25 @@ class Position { // Uses 40 bytes
         }
     }
 
-    std::vector<Move> genMoves(bool check_king = true);
+    std::vector<Move> genMoves(bool check_king = true) const;
 
-    Piece getPieceAt(Square square);
-    bool  hasPieceAt(Square square);
+    Piece getPieceAt(Square square) const;
+    bool  hasPieceAt(Square square) const;
     void  popPieceAt(Square square);
     void  setPieceAt(Square square, Piece p);
 
-    bool isCheckmate();
-    bool isCheck();
-    bool isValidMove(const Move &move);
+    bool isCheckmate() const;
+    bool isCheck() const;
+    bool isValidMove(const Move &move) const;
 
-    Position move(const Move &move);
-    Position rotate(bool nullmove = false);
+    Position move(const Move &move) const;
+    Position rotate(bool nullmove = false) const;
 
-    int          value(const Move &move);
-    int          value();
-    PositionHash hash();
+    int          value(const Move &move) const;
+    int          value() const;
+    PositionHash hash() const;
 
-    void printBBoards();
+    void printBBoards() const;
 
   private:
     std::stack<Status> status_history;
