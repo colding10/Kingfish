@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../move.h"
+#include "../piece.h"
 #include "../pieces.h"
 #include "../types.h"
 #include "bitboard.h"
@@ -16,13 +17,13 @@ struct Status {
 
 class Position { // Uses 40 bytes
   public:
-    Bitboard piece_bitboards[CL_COUNT][PT_COUNT];
-    Bitboard occupied_bitboards[CL_COUNT];
+    Bitboard piece_bitboards[CL_COUNT][PT_COUNT] = {};
+    Bitboard occupied_bitboards[CL_COUNT]        = {};
 
     CastlingRightsMask wc_rights;
     CastlingRightsMask bc_rights;
 
-    Color turn;
+    Color turn = CL_WHITE;
 
     std::string board; // 120 char representation of the board
     int         score; // the board evaluation score
@@ -71,6 +72,11 @@ class Position { // Uses 40 bytes
 
     std::vector<Move> genMoves(bool check_king = true);
 
+    Piece getPieceAt(Square square);
+    bool  hasPieceAt(Square square);
+    void  popPieceAt(Square square);
+    void  setPieceAt(Square square, Piece p);
+
     bool isCheckmate();
     bool isCheck();
     bool isValidMove(const Move &move);
@@ -81,6 +87,8 @@ class Position { // Uses 40 bytes
     int          value(const Move &move);
     int          value();
     PositionHash hash();
+
+    void printBBoards();
 
   private:
     std::stack<Status> status_history;

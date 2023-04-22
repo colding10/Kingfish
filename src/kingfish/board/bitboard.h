@@ -12,6 +12,7 @@
 #define pop_bit(bitboard, index) \
     (get_bit(bitboard, index) ? bitboard ^= (1ULL << index) : 0)
 
+
 namespace BBS {
 void printBitboard(Bitboard bitboard);
 
