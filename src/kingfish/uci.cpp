@@ -18,7 +18,7 @@ int parse(const std::string &c) {
     int fil  = c[0] - 'a';
     int rank = int(c[1] - '0') - 1;
 
-    return SQ_A1 + fil - 10 * rank;
+    return A1 + fil - 10 * rank;
 }
 
 std::string render(int i) {
@@ -33,8 +33,8 @@ std::string render(int i) {
         return quotient;
     };
 
-    int rank = floor_division((i - SQ_A1), 8);
-    int fil  = modulo((i - SQ_A1), 8);
+    int rank = floor_division((i - A1), 10);
+    int fil  = modulo((i - A1), 10);
 
     return (char)(fil + 'a') + std::to_string(-rank + 1);
 }
@@ -196,12 +196,12 @@ int uciMainLoop() {
         } else if (args[0] == "debug") {
             if (args.size() > 1) {
                 if (args[1] == "board") {
-                    hist.back().printBBoards();
+                    std::cout << "board:\n" << hist.back().board << std::endl;
                 }
                 if (args[1] == "moves") {
                     std::cout << "moves: {";
                     for (Move m : hist.back().genMoves(true)) {
-                        std::cout << render(m.i) + render(m.j) + m.prom << " ";
+                        std::cout << render(m.i) + render(m.j) + m.prom;
                     }
                     std::cout << "}" << std::endl;
                 }

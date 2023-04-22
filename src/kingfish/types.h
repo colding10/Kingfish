@@ -54,32 +54,31 @@ enum Sides {
 
 };
 
-enum Directions { // TODO: directions are now off because of 64 board
+enum Directions {
 
-    DIR_NORTH = -10,
-    DIR_SOUTH = 10,
-    DIR_EAST  = -1,
-    DIR_WEST  = 1,
+    DIR_NORTH     = -10,
+    DIR_SOUTH     = 10,
+    DIR_EAST      = -1,
+    DIR_WEST      = 1,
+    DIR_NORTHWEST = -9,
+    DIR_NORTHEAST = -11,
+    DIR_SOUTHWEST = 11,
+    DIR_SOUTHEAST = 9,
 
-    DIR_NORTHEAST = DIR_NORTH + DIR_EAST,
-    DIR_NORTHWEST = DIR_NORTH + DIR_WEST,
-    DIR_SOUTHEAST = DIR_SOUTH + DIR_EAST,
-    DIR_SOUTHWEST = DIR_SOUTH + DIR_WEST,
-
-    DIR_COUNT = 4
+    DIR_COUNT = 8
 
 };
 
 enum BoardFiles {
 
-    FL_H,
-    FL_G,
-    FL_F,
-    FL_E,
-    FL_D,
-    FL_C,
-    FL_B,
     FL_A,
+    FL_B,
+    FL_C,
+    FL_D,
+    FL_E,
+    FL_F,
+    FL_G,
+    FL_H,
 
     FL_COUNT = 8
 
@@ -109,91 +108,25 @@ enum PieceTypes {
     PT_QUEEN,
     PT_KING,
 
-    PT_NONE  = PT_KING + 1,
+    PT_NONE = PT_KING + 1,
     PT_COUNT = 7
 
 };
 
 // clang-format off
 enum Squares {
+    SQ_A8, SQ_B8, SQ_C8, SQ_D8, SQ_E8, SQ_F8, SQ_G8, SQ_H8,
+    SQ_A7, SQ_B7, SQ_C7, SQ_D7, SQ_E7, SQ_F7, SQ_G7, SQ_H7,
+    SQ_A6, SQ_B6, SQ_C6, SQ_D6, SQ_E6, SQ_F6, SQ_G6, SQ_H6,
+    SQ_A5, SQ_B5, SQ_C5, SQ_D5, SQ_E5, SQ_F5, SQ_G5, SQ_H5,
+    SQ_A4, SQ_B4, SQ_C4, SQ_D4, SQ_E4, SQ_F4, SQ_G4, SQ_H4,
+    SQ_A3, SQ_B3, SQ_C3, SQ_D3, SQ_E3, SQ_F3, SQ_G3, SQ_H3,
+    SQ_A2, SQ_B2, SQ_C2, SQ_D2, SQ_E2, SQ_F2, SQ_G2, SQ_H2,
+    SQ_A1, SQ_B1, SQ_C1, SQ_D1, SQ_E1, SQ_F1, SQ_G1, SQ_H1,
 
-	SQ_A1 = 00,
-	SQ_B1 = 01,
-	SQ_C1 = 02,
-	SQ_D1 = 03,
-	SQ_E1 = 04,
-	SQ_F1 = 05,
-	SQ_G1 = 06,
-	SQ_H1 = 07,
-
-	SQ_A2 = 010,
-	SQ_B2 = 011,
-	SQ_C2 = 012,
-	SQ_D2 = 013,
-	SQ_E2 = 014,
-	SQ_F2 = 015,
-	SQ_G2 = 016,
-	SQ_H2 = 017,
-
-	SQ_A3 = 020,
-	SQ_B3 = 021,
-	SQ_C3 = 022,
-	SQ_D3 = 023,
-	SQ_E3 = 024,
-	SQ_F3 = 025,
-	SQ_G3 = 026,
-	SQ_H3 = 027,
-
-	SQ_A4 = 030,
-	SQ_B4 = 031,
-	SQ_C4 = 032,
-	SQ_D4 = 033,
-	SQ_E4 = 034,
-	SQ_F4 = 035,
-	SQ_G4 = 036,
-	SQ_H4 = 037,
-
-	SQ_A5 = 040,
-	SQ_B5 = 041,
-	SQ_C5 = 042,
-	SQ_D5 = 043,
-	SQ_E5 = 044,
-	SQ_F5 = 045,
-	SQ_G5 = 046,
-	SQ_H5 = 047,
-
-	SQ_A6 = 050,
-	SQ_B6 = 051,
-	SQ_C6 = 052,
-	SQ_D6 = 053,
-	SQ_E6 = 054,
-	SQ_F6 = 055,
-	SQ_G6 = 056,
-	SQ_H6 = 057,
-
-	SQ_A7 = 060,
-	SQ_B7 = 061,
-	SQ_C7 = 062,
-	SQ_D7 = 063,
-	SQ_E7 = 064,
-	SQ_F7 = 065,
-	SQ_G7 = 066,
-	SQ_H7 = 067,
-
-	SQ_A8 = 070,
-	SQ_B8 = 071,
-	SQ_C8 = 072,
-	SQ_D8 = 073,
-	SQ_E8 = 074,
-	SQ_F8 = 075,
-	SQ_G8 = 076,
-	SQ_H8 = 077,
-
-	SQ_INVALID = SQ_H8 + 1,
-	SQ_COUNT = 64
-
+    SQ_INVALID = SQ_H8 + 1,
+    SQ_COUNT   = 64
 };
-
 // clang-format on
 
 enum CastlingRightsMask {
@@ -211,10 +144,6 @@ enum CastlingRightsMask {
 
 };
 
-inline constexpr bool isValidSquare(Square s) {
-    return s & 0x88;
-}
-
 inline constexpr Color getOppositeColor(Color c) {
     return c ^ 1;
 }
@@ -228,26 +157,16 @@ inline char getRankIdentifier(BoardRank r) {
 }
 
 inline constexpr BoardFile getFile(Square s) {
-    return static_cast<BoardFile>(s & 7);
+    return static_cast<BoardFile>(s % 8);
 }
 
 inline constexpr BoardRank getRank(Square s) {
-    return static_cast<BoardRank>(s >> 4);
+    return static_cast<BoardRank>(s / 8);
 }
 
-inline constexpr Square get0x88Square(BoardFile file, BoardRank rank) {
-    return static_cast<Square>(static_cast<int>(rank * 16) +
+inline constexpr Square getSquare(BoardFile file, BoardRank rank) {
+    return static_cast<Square>(static_cast<int>(rank * 8) +
                                static_cast<int>(file));
 }
-
-inline constexpr Square get0x88Square(Square square_8x8) {
-    return square_8x8 + (square_8x8 & ~7);
-}
-
-inline constexpr Square get8x8Square(Square square_0x88) {
-    return (square_0x88 + (square_0x88 & 7)) >> 1;
-}
-
-Square getSquare(std::string_view str);
 
 #endif
