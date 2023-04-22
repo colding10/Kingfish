@@ -108,7 +108,7 @@ enum PieceTypes {
     PT_QUEEN,
     PT_KING,
 
-    PT_NONE = PT_KING + 1,
+    PT_NONE  = PT_KING + 1,
     PT_COUNT = 7
 
 };

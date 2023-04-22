@@ -31,6 +31,6 @@ struct Move {
     }
 };
 
-const Move NULLMOVE = Move(-1, -1, ' ');
+const Move NULLMOVE = Move(0, 0, ' ');
 
 #endif // !KINGFISH_MOVE_H

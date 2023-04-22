@@ -29,14 +29,17 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     break;
                 }
                 if (p == 'P') {
-                    if ((d == DIR_NORTH || d == DIR_NORTH + DIR_NORTH) && q != '.') {
+                    if ((d == DIR_NORTH || d == DIR_NORTH + DIR_NORTH) &&
+                        q != '.') {
                         break;
                     }
                     if (d == DIR_NORTH + DIR_NORTH) {
-                        if (i < A1 + DIR_NORTH || this->board[i + DIR_NORTH] != '.')
+                        if (i < A1 + DIR_NORTH ||
+                            this->board[i + DIR_NORTH] != '.')
                             break;
                     }
-                    if (d == DIR_NORTH + DIR_WEST || d == DIR_NORTH + DIR_EAST) {
+                    if (d == DIR_NORTH + DIR_WEST ||
+                        d == DIR_NORTH + DIR_EAST) {
                         if (q == '.' && j != ep && j != kp && j != kp - 1 &&
                             j != kp + 1)
                             break;
@@ -70,10 +73,12 @@ std::vector<Move> Position::genMoves(bool check_king) {
                     break;
                 }
 
-                if (i == A1 && this->board[j + DIR_EAST] == 'K' && this->wc.first) {
+                if (i == A1 && this->board[j + DIR_EAST] == 'K' &&
+                    this->wc.first) {
                     moves.push_back(Move(j + DIR_EAST, j + DIR_WEST, ' '));
                 }
-                if (i == H1 && this->board[j + DIR_WEST] == 'K' && this->wc.second) {
+                if (i == H1 && this->board[j + DIR_WEST] == 'K' &&
+                    this->wc.second) {
                     moves.push_back(Move(j + DIR_WEST, j + DIR_EAST, ' '));
                 }
             }
@@ -236,13 +241,11 @@ bool Position::isCheckmate() {
         return false;
     }
 
-    for (Move m : this->genMoves()) {
-        if (!this->move(m).isCheck()) { // we can get out of check with a move
-            return false;
-        }
-    }
+    std::vector<Move> moves = rotated.genMoves(false);
 
-    return true; // we are mated
+    return !std::any_of(moves.cbegin(), moves.cend(), [this](const Move &m) {
+        return !this->move(m).isCheck();
+    });
 }
 
 PositionHash Position::hash() {
