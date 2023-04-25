@@ -79,11 +79,12 @@ set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
 # #
 # Add external dependencies
 # #
+set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -pthread -O3 -Wall -Wextra")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
     target_link_libraries(kingfish PUBLIC stdc++)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra")
+    set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -fprofile-instr-use=code.profdata -pthread -O3 -Wall -Wextra")
     target_link_libraries(kingfish PUBLIC stdc++)
 endif()
 
