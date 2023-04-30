@@ -133,5 +133,8 @@ Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding
 [release-shield]:      https://img.shields.io/github/v/release/colding10/Kingfish?style=for-the-badge&label=official%20release
 [commits-shield]:      https://img.shields.io/github/commits-since/colding10/Kingfish/latest?style=for-the-badge
 
+[build-link]:         https://github.com/colding10/Kingfish/actions/workflows/cmake.yml
+[build-badge]:        https://img.shields.io/github/actions/workflow/status/colding10/Kingfish/cmake.yml?branch=master&style=for-the-badge&label=kingfish&logo=github
+
 [release-link]:       https://github.com/colding10/Kingfish/releases/latest
 [commits-link]:       https://github.com/colding10/Kingfish/commits/master
