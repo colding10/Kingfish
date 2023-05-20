@@ -164,7 +164,7 @@ int uciMainLoop() {
                         std::cout
                             << "info depth " << depth << " score cp " << score
                             << " nodes " << searcher.nodes_searched << " nps "
-                            << (searcher.nodes_searched * 1000) / time
+                            << (searcher.nodes_searched * 1000) / std::max(time, 1)
                             << " hashfull "
                             << searcher.tp_score.getPermillFull() << " time "
                             << time << " pv " << move_str << std::endl;
