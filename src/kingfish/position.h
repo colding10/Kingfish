@@ -5,10 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "bitboard.h"
 #include "move.h"
 #include "piece.h"
-#include "pieces.h"
 #include "types.h"
 
 struct Status {
