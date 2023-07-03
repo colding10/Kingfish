@@ -44,7 +44,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
@@ -113,10 +112,6 @@ where the source code can be found) to generate the exact binary you are
 distributing. If you make any changes to the source code, these changes must
 also be made available under GPL v3.
 
-## Contact
-
-Colin Ding - colinding10@gmail.com
-<br/>
 Project Link: [https://github.com/colding10/Kingfish](https://github.com/colding10/Kingfish)
 
 <!-- LINKS -->
