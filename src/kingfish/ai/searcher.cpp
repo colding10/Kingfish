@@ -164,11 +164,59 @@ Searcher::search(std::vector<Position> hist, int depth) {
     }
 }
 
+void Searcher::searchTimed(std::vector<Position> &hist, int ms_time) {
+    std::string move_str = "";
+    this->stop_search    = false;
+    auto start_time      = Clock::now();
+
+    for (int depth = 1; depth < 1000; depth++) {
+        if (stop_search) {
+            break;
+        }
+
+        auto result_moves_gen = search(hist, depth);
+        for (; result_moves_gen.next();) {
+            if (stop_search) {
+                break;
+            }
+
+            int  gamma, score;
+            Move move;
+
+            auto result                  = result_moves_gen.value();
+            std::tie(gamma, score, move) = result;
+
+            int i = move.i, j = move.j;
+            if (hist.size() % 2 == 0) {
+                i = 119 - i, j = 119 - j;
+            }
+            move_str = render(i) + render(j) + (char)tolower(move.prom);
+            int time =
+                std::chrono::duration_cast<std::chrono::milliseconds>(
+                    std::chrono::high_resolution_clock::now() - start_time)
+                    .count();
+            std::cout << "info depth " << depth << " score cp " << score
+                      << " nodes " << this->nodes_searched << " nps "
+                      << (this->nodes_searched * 1000) / std::max(time, 1)
+                      << " hashfull " << this->tp_score.getPermillFull()
+                      << " time " << time << " pv " << move_str << std::endl;
+
+            if (move_str.length() &&
+                deltaMs(std::chrono::high_resolution_clock::now(), start_time) >
+                    ms_time) {
+                stop_search = true;
+                break;
+            }
+        }
+    }
+    std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
+              << std::endl;
+}
 void Searcher::searchInfinite(std::vector<Position> &hist) {
     std::string move_str;
     this->stop_search = false;
     auto start_time   = Clock::now();
-    
+
     for (int depth = 1; !stop_search; depth++) {
         for (auto result_moves_gen = search(hist, depth);
              result_moves_gen.next();) {
@@ -200,6 +248,6 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
               << std::endl;
 }
 
-void Searcher::stopInfiniteSearch() {
+void Searcher::stopSearch() {
     this->stop_search = true;
 }

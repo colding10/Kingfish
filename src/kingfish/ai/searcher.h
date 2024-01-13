@@ -1,6 +1,7 @@
 #ifndef KINGFISH_SEARCHER_H
 #define KINGFISH_SEARCHER_H
 
+#include <atomic>
 #include <functional>
 #include <iostream>
 #include <map>
@@ -9,9 +10,9 @@
 #include <utility>
 #include <vector>
 
-#include "../position.h"
 #include "../consts.h"
 #include "../move.h"
+#include "../position.h"
 #include "../utils/generator.h"
 #include "../utils/hashtable.h"
 
@@ -31,11 +32,11 @@ class Searcher {
     Generator<std::tuple<int, int, Move>> search(std::vector<Position> hist,
                                                  int                   depth);
 
+    void searchTimed(std::vector<Position> &hist, int ms_time);
     void searchInfinite(std::vector<Position> &hist);
-    void stopInfiniteSearch();
+    void stopSearch();
 
-  private:
-    bool stop_search = false;
+    std::atomic<bool> stop_search;
 };
 
 #endif // !KINGFISH_SEARCHER_H

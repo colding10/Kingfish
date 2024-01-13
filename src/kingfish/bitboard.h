@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "types.h"
-#include "bitboard.h"
 
 // bit manipulation macros
 #define get_bit(bitboard, index) (bitboard & (1ULL << index))

@@ -67,7 +67,15 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "list": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "hash_map": "cpp",
+        "*.tcc": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "utility": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

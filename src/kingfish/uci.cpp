@@ -105,8 +105,8 @@ int uciMainLoop() {
             hist = {Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
 
             if (args.size() > 2) {
-                for (int ply = 0; ply < (int)args.size() - 3; ply++) {
-                    std::string move = args[ply + 3];
+                for (int ply = 3; ply < (int)args.size(); ply++) {
+                    std::string move = args[ply];
 
                     int i = parse(move.substr(0, 2));
                     int j = parse(move.substr(2, 2));
@@ -115,7 +115,7 @@ int uciMainLoop() {
                     std::transform(
                         prom.begin(), prom.end(), prom.begin(), ::toupper);
 
-                    if (ply % 2 == 1) {
+                    if (ply % 2 == 0) {
                         i = 119 - i;
                         j = 119 - j;
                     }
@@ -130,67 +130,28 @@ int uciMainLoop() {
 
             int ms_time = getSearchTime(args, hist);
 
-            auto start_time = Clock::now();
-
-            Move move;
-
             if (!infinite) {
-                int         gamma, score = 0;
-                bool        flag     = false;
-                std::string move_str = "";
+                 std::thread infinite_thread(
+                    std::mem_fn(&Searcher::searchTimed),
+                    &searcher,
+                    std::ref(hist),
+                    ms_time);
 
-                for (int depth = 1; depth < 1000; depth++) {
-                    if (flag) {
-                        break;
-                    }
-
-                    auto result_moves_gen = searcher.search(hist, depth);
-                    for (; result_moves_gen.next();) {
-                        auto result                  = result_moves_gen.value();
-                        std::tie(gamma, score, move) = result;
-
-                        int i = move.i, j = move.j;
-                        if (hist.size() % 2 == 0) {
-                            i = 119 - i, j = 119 - j;
-                        }
-                        move_str =
-                            render(i) + render(j) + (char)tolower(move.prom);
-                        int time =
-                            std::chrono::duration_cast<
-                                std::chrono::milliseconds>(
-                                std::chrono::high_resolution_clock::now() -
-                                start_time)
-                                .count();
-                        std::cout
-                            << "info depth " << depth << " score cp " << score
-                            << " nodes " << searcher.nodes_searched << " nps "
-                            << (searcher.nodes_searched * 1000) / std::max(time, 1)
-                            << " hashfull "
-                            << searcher.tp_score.getPermillFull() << " time "
-                            << time << " pv " << move_str << std::endl;
-
-                        if (move_str.length() &&
-                            deltaMs(std::chrono::high_resolution_clock::now(),
-                                    start_time) > ms_time) {
-                            flag = true;
-                            break;
-                        }
-                    }
+                while (std::getline(std::cin, line) && line != "stop" && !searcher.stop_search) {
+                    // Keep reading input until the "stop" command is received. Or searcher stops the search
                 }
-                std::cout << "bestmove "
-                          << (move_str.length() ? move_str : "(none)")
-                          << std::endl;
-
+                searcher.stopSearch();
+                infinite_thread.join();
             } else {
                 std::thread infinite_thread(
                     std::mem_fn(&Searcher::searchInfinite),
                     &searcher,
                     std::ref(hist));
 
-                while (std::getline(std::cin, line) && line != "stop") {
-                    // Keep reading input until the "stop" command is received.
+                while (std::getline(std::cin, line) && line != "stop" && !searcher.stop_search) {
+                    // Keep reading input until the "stop" command is received.Or searcher stops the search
                 }
-                searcher.stopInfiniteSearch();
+                searcher.stopSearch();
                 infinite_thread.join();
             }
         } else if (args[0] == "debug") {

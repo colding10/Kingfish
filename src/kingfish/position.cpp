@@ -12,6 +12,7 @@
 #include "consts.h"
 #include "move.h"
 #include "zobrist.h"
+#include "bitboard.h"
 
 void Position::printBBoards() const {
     for (Color c : {CL_WHITE, CL_BLACK}) {
