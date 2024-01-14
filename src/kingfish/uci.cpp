@@ -102,6 +102,7 @@ int uciMainLoop() {
             break;
         } else if ((args[0] == "position" && args[1] == "startpos") ||
                    args[0] == "ucinewgame") {
+            hist.clear();
             hist = {Position(INITIAL, 0, {true, true}, {true, true}, 0, 0)};
 
             if (args.size() > 2) {
@@ -115,9 +116,8 @@ int uciMainLoop() {
                     std::transform(
                         prom.begin(), prom.end(), prom.begin(), ::toupper);
 
-                    if (ply % 2 == 0) {
-                        i = 119 - i;
-                        j = 119 - j;
+                    if (hist.size() % 2 == 0) {
+                        i = 119 - i, j = 119 - j;
                     }
                     Position to_add = hist.back().move(Move(i, j, prom[0]));
                     hist.push_back(to_add);

@@ -36,6 +36,12 @@ class Searcher {
     void searchInfinite(std::vector<Position> &hist);
     void stopSearch();
 
+    void printPvInfo(Move                                  move,
+                     int                                   depth,
+                     int                                   score,
+                     std::chrono::steady_clock::time_point start_time,
+                     bool                                  flip_side);
+
     std::atomic<bool> stop_search;
 };
 

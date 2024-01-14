@@ -165,10 +165,10 @@ Searcher::search(std::vector<Position> hist, int depth) {
 }
 
 void Searcher::searchTimed(std::vector<Position> &hist, int ms_time) {
-    std::string move_str = "";
-    this->stop_search    = false;
-    auto start_time      = Clock::now();
-
+    this->stop_search      = false;
+    auto        start_time = Clock::now();
+    std::string move_str;
+    bool        flip_side = !hist.size() % 2;
     for (int depth = 1; depth < 1000; depth++) {
         if (stop_search) {
             break;
@@ -185,37 +185,30 @@ void Searcher::searchTimed(std::vector<Position> &hist, int ms_time) {
 
             auto result                  = result_moves_gen.value();
             std::tie(gamma, score, move) = result;
+            move_str =
+                render(move.i) + render(move.j) +
+                (move.prom != ' ' ? (const char *)tolower(move.prom) : "");
 
-            int i = move.i, j = move.j;
-            if (hist.size() % 2 == 0) {
-                i = 119 - i, j = 119 - j;
-            }
-            move_str = render(i) + render(j) + (char)tolower(move.prom);
-            int time =
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::high_resolution_clock::now() - start_time)
-                    .count();
-            std::cout << "info depth " << depth << " score cp " << score
-                      << " nodes " << this->nodes_searched << " nps "
-                      << (this->nodes_searched * 1000) / std::max(time, 1)
-                      << " hashfull " << this->tp_score.getPermillFull()
-                      << " time " << time << " pv " << move_str << std::endl;
+            printPvInfo(move, depth, score, start_time, flip_side);
 
-            if (move_str.length() &&
-                deltaMs(std::chrono::high_resolution_clock::now(), start_time) >
-                    ms_time) {
+            if (deltaMs(std::chrono::high_resolution_clock::now(), start_time) >
+                ms_time) {
                 stop_search = true;
                 break;
             }
         }
     }
+
     std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
               << std::endl;
 }
+
 void Searcher::searchInfinite(std::vector<Position> &hist) {
     std::string move_str;
     this->stop_search = false;
     auto start_time   = Clock::now();
+
+    bool flip_side = !hist.size() % 2;
 
     for (int depth = 1; !stop_search; depth++) {
         for (auto result_moves_gen = search(hist, depth);
@@ -228,24 +221,35 @@ void Searcher::searchInfinite(std::vector<Position> &hist) {
             Move move;
             std::tie(gamma, score, move) = result;
 
-            int i = move.i, j = move.j;
-            if (hist.size() % 2 == 0) {
-                i = 119 - i, j = 119 - j;
-            }
-            move_str = render(i) + render(j) + (char)tolower(move.prom);
-            int time =
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::high_resolution_clock::now() - start_time)
-                    .count();
-            std::cout << "info depth " << depth << " score cp " << score
-                      << " nodes " << this->nodes_searched << " nps "
-                      << (this->nodes_searched * 1000) / time << " hashfull "
-                      << this->tp_score.getPermillFull() << " time " << time
-                      << " pv " << move_str << std::endl;
+            printPvInfo(move, depth, score, start_time, flip_side);
         }
     }
     std::cout << "bestmove " << (move_str.length() ? move_str : "(none)")
               << std::endl;
+}
+
+void Searcher::printPvInfo(Move                                  move,
+                           int                                   depth,
+                           int                                   score,
+                           std::chrono::steady_clock::time_point start_time,
+                           bool                                  flip_side) {
+    int i = move.i, j = move.j;
+    if (flip_side) {
+        i = 119 - i, j = 119 - j;
+    }
+    std::string move_str =
+        render(i) + render(j) +
+        (move.prom != ' ' ? (const char *)tolower(move.prom) : "");
+
+    int time = std::chrono::duration_cast<std::chrono::milliseconds>(
+                   std::chrono::high_resolution_clock::now() - start_time)
+                   .count();
+
+    std::cout << "info depth " << depth << " score cp " << score << " nodes "
+              << this->nodes_searched << " nps "
+              << (this->nodes_searched * 1000) / time << " hashfull "
+              << this->tp_score.getPermillFull() << " time " << time << " pv "
+              << move_str << std::endl;
 }
 
 void Searcher::stopSearch() {

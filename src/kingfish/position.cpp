@@ -219,6 +219,11 @@ int Position::value(const Move &move) const {
     char p = board[i];
     char q = board[j];
 
+    if (p == '.') {
+        return -1;
+    }
+
+    // std::cout << "p: " << p << " i: " << i<<" j: " <<j << std::endl;
     int score =
         PIECE_SQUARE_TABLES.at(p).at(j) - PIECE_SQUARE_TABLES.at(p).at(i);
 
