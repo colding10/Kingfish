@@ -15,6 +15,7 @@
 // TODO: create uci options dict, then export to make global
 
 int parse(const std::string &c) {
+    // parses a string of algebraic notation (a1d4) into an integer
     int fil  = c[0] - 'a';
     int rank = int(c[1] - '0') - 1;
 
@@ -22,6 +23,7 @@ int parse(const std::string &c) {
 }
 
 std::string render(int i) {
+    // renders a integer into algebraic notation
     auto modulo = [](int dividend, int divisor) {
         return (dividend % divisor + divisor) % divisor;
     };

@@ -2,7 +2,7 @@
 #include "uci.h"
 
 int main() {
-    BBS::initLeaperAttacks();
+    BBS::initLeaperAttacks(); // set up bitboard magic
     // // // blocker bitboard
     // Bitboard block = 0ULL;
 
@@ -15,5 +15,5 @@ int main() {
     // BBS::printBitboard(block);
     // BBS::printBitboard(BBS::rookAttacks(SQ_D4, block));
     // return 0;
-    uciMainLoop();
+    uciMainLoop(); // run the UCI main loop (uci.h)
 }
