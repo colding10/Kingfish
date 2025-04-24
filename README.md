@@ -20,7 +20,7 @@
 </div>
 
   <p align="center">
-    A C++ UCI-speaking chess engine. Kingfish is rated at ~2000 ELO on <a href="https://lichess.org/@/KingfishBot">lichess.org</a>.
+    A C++ UCI-speaking chess engine. Kingfish is rated at ~3000 ELO on <a href="https://lichess.org/@/KingfishBot">lichess.org</a>.
     <br />
     <a href="https://github.com/colding10/Kingfish"><strong>Explore the docs »</strong></a>
     <br />
@@ -56,8 +56,6 @@
 > __I created a lichess account! Play Kingfish here: https://lichess.org/@/KingfishBot.__
 
 The engine supports __most but not all of the common UCI commands__. It is tailored to work with Cute Chess, an application for playing UCI chess engines.
-
-__The engine plays a very capable and competitive game of chess. It blunders once in a while however, and there are a few kinks to be worked out.__
 
 ## Usage
 
