@@ -2,6 +2,7 @@
 #define GENERATOR_h_INCLUDED
 
 #include <coroutine>
+#include <exception>
 
 template <class T>
 struct Generator {

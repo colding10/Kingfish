@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 4.0.0)
 project(kingfish)
 
 # #
@@ -32,6 +32,7 @@ add_executable(kingfish
     src/kingfish/ai/timemanager.cpp
 
     src/kingfish/bitboard.cpp
+    src/kingfish/magic.cpp
     src/kingfish/position.cpp
 
     src/kingfish/zobrist.cpp
@@ -79,12 +80,12 @@ set_target_properties(kingfish PROPERTIES OUTPUT_NAME ${KINGFISH_OUT_NAME})
 # #
 # Add external dependencies
 # #
-set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -pthread -O3 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -pthread -O3 -Wall -Wextra -fcoroutines")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc")
+    set(CMAKE_CXX_FLAGS "-pthread -O3 -Wall -Wextra -static-libstdc++ -static-libgcc -fcoroutines")
     target_link_libraries(kingfish PUBLIC stdc++)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -fprofile-instr-use=code.profdata -pthread -O3 -Wall -Wextra")
+    set(CMAKE_CXX_FLAGS " -pg -fprofile-instr-generate -fprofile-instr-use=code.profdata -pthread -O3 -Wall -Wextra -fcoroutines")
     target_link_libraries(kingfish PUBLIC stdc++)
 endif()
 

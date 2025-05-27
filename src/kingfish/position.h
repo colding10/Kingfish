@@ -8,6 +8,7 @@
 #include "move.h"
 #include "piece.h"
 #include "types.h"
+#include "magic.h"
 
 struct Status {
     Color turn;
@@ -19,6 +20,7 @@ class Position { // Uses 40 bytes
   public:
     Bitboard piece_bitboards[CL_COUNT][PT_COUNT] = {};
     Bitboard occupied_bitboards[CL_COUNT]        = {};
+    Bitboard all_pieces = 0ULL;  // Combined bitboard of all pieces
 
     CastlingRightsMask wc_rights;
     CastlingRightsMask bc_rights;
@@ -46,7 +48,10 @@ class Position { // Uses 40 bytes
         , wc(wc)
         , bc(bc)
         , ep(ep)
-        , kp(kp) {}
+        , kp(kp) {
+        update_bitboards();
+    }
+
     inline bool operator==(const Position &other) const {
         return board == other.board && score == other.score && wc == other.wc &&
                bc == other.bc && ep == other.ep && kp == other.kp;
@@ -71,11 +76,17 @@ class Position { // Uses 40 bytes
     }
 
     std::vector<Move> genMoves(bool check_king = true) const;
+    std::vector<Move> genPawnMoves(Square square) const;
+    std::vector<Move> genKnightMoves(Square square) const;
+    std::vector<Move> genBishopMoves(Square square) const;
+    std::vector<Move> genRookMoves(Square square) const;
+    std::vector<Move> genQueenMoves(Square square) const;
+    std::vector<Move> genKingMoves(Square square) const;
 
-    Piece getPieceAt(Square square) const;
+    i8 getPieceAt(Square square) const;
     bool  hasPieceAt(Square square) const;
     void  popPieceAt(Square square);
-    void  setPieceAt(Square square, Piece p);
+    void  setPieceAt(Square square, i8 piece);
 
     bool isCheckmate() const;
     bool isCheck() const;
@@ -92,6 +103,18 @@ class Position { // Uses 40 bytes
 
   private:
     std::stack<Status> status_history;
+    
+    // Update all bitboards based on the board string
+    void update_bitboards();
+    
+    // Get attack bitboard for a piece
+    Bitboard get_attacks(Square square, i8 piece) const;
+    
+    // Get all attacks for a side
+    Bitboard get_side_attacks(Color side) const;
+    
+    // Check if a square is under attack
+    bool is_square_attacked(Square square, Color by_side) const;
 };
 
 #endif // !POSITION_H_INCLUDED

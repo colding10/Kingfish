@@ -187,7 +187,7 @@ void Searcher::searchTimed(std::vector<Position> &hist, int ms_time) {
             std::tie(gamma, score, move) = result;
             move_str =
                 render(move.i) + render(move.j) +
-                (move.prom != ' ' ? (const char *)tolower(move.prom) : "");
+                (move.prom != ' ' ? std::string(1, tolower(move.prom)) : "");
 
             printPvInfo(move, depth, score, start_time, flip_side);
 
@@ -239,7 +239,7 @@ void Searcher::printPvInfo(Move                                  move,
     }
     std::string move_str =
         render(i) + render(j) +
-        (move.prom != ' ' ? (const char *)tolower(move.prom) : "");
+        (move.prom != ' ' ? std::string(1, tolower(move.prom)) : "");
 
     int time = std::chrono::duration_cast<std::chrono::milliseconds>(
                    std::chrono::high_resolution_clock::now() - start_time)
