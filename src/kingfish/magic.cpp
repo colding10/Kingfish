@@ -97,7 +97,7 @@ namespace Magic {
         for (int random_count = 0; random_count < 100000000; random_count++) {
             Bitboard magic_number = random_uint64() & random_uint64() & random_uint64();
             
-            if (count_bits((attack_mask * magic_number) & 0xFF00000000000000ULL) < 6)
+            if (BBS::count_bits((attack_mask * magic_number) & 0xFF00000000000000ULL) < 6)
                 continue;
                 
             memset(used_attacks, 0ULL, sizeof(used_attacks));

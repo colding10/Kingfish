@@ -16,9 +16,16 @@
 
 int parse(const std::string &c) {
     // parses a string of algebraic notation (a1d4) into an integer
-    int fil  = c[0] - 'a';
+    if (c.length() < 2) return -1;
+    
+    int fil = c[0] - 'a';
     int rank = int(c[1] - '0') - 1;
-
+    
+    // Validate coordinates
+    if (fil < 0 || fil > 7 || rank < 0 || rank > 7) {
+        return -1;
+    }
+    
     return A1 + fil - 10 * rank;
 }
 
@@ -110,9 +117,18 @@ int uciMainLoop() {
             if (args.size() > 2) {
                 for (int ply = 3; ply < (int)args.size(); ply++) {
                     std::string move = args[ply];
+                    if (move.length() < 4) {
+                        std::cerr << "info string Invalid move format: " << move << std::endl;
+                        break;
+                    }
 
                     int i = parse(move.substr(0, 2));
                     int j = parse(move.substr(2, 2));
+                    
+                    if (i == -1 || j == -1) {
+                        std::cerr << "info string Invalid coordinates in move: " << move << std::endl;
+                        break;
+                    }
 
                     std::string prom = move.substr(4);
                     std::transform(
@@ -121,8 +137,18 @@ int uciMainLoop() {
                     if (hist.size() % 2 == 0) {
                         i = 119 - i, j = 119 - j;
                     }
-                    Position to_add = hist.back().move(Move(i, j, prom[0]));
-                    hist.push_back(to_add);
+                    
+                    // Create the move and validate it
+                    Move proposed_move(i, j, prom[0]);
+                    std::vector<Move> legal_moves = hist.back().genMoves(true);
+                    if (std::find(legal_moves.begin(), legal_moves.end(), proposed_move) != legal_moves.end()) {
+                        Position to_add = hist.back().move(proposed_move);
+                        hist.push_back(to_add);
+                    } else {
+                        // If move is illegal, break the loop
+                        std::cerr << "info string Illegal move: " << move << std::endl;
+                        break;
+                    }
                 }
             }
         } else if (args[0] == "go") {

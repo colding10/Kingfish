@@ -1,27 +1,41 @@
 #include "piece.h"
+#include "consts.h"
 
-
-
-char Piece::getIdentifier() const {
-    return PIECE_IDENTIFIER[getColor()][getType()];
+char get_piece_identifier(i8 piece) {
+    if (!is_piece(piece)) return '.';
+    
+    Color color = piece_color(piece);
+    PieceType type = piece_type(piece);
+    
+    char base = 'P';
+    switch (type) {
+        case PT_PAWN: base = 'P'; break;
+        case PT_KNIGHT: base = 'N'; break;
+        case PT_BISHOP: base = 'B'; break;
+        case PT_ROOK: base = 'R'; break;
+        case PT_QUEEN: base = 'Q'; break;
+        case PT_KING: base = 'K'; break;
+        default: return '.';
+    }
+    
+    return color == CL_WHITE ? base : std::tolower(base);
 }
 
-Piece Piece::fromIdentifier(char ident) {
-    switch (ident) {
-        case 'P': return WHITE_PAWN;
-        case 'N': return WHITE_KNIGHT;
-        case 'B': return WHITE_BISHOP;
-        case 'R': return WHITE_ROOK;
-        case 'Q': return WHITE_QUEEN;
-        case 'K': return WHITE_KING;
-
-        case 'p': return BLACK_PAWN;
-        case 'n': return BLACK_KNIGHT;
-        case 'b': return BLACK_BISHOP;
-        case 'r': return BLACK_ROOK;
-        case 'q': return BLACK_QUEEN;
-        case 'k': return BLACK_KING;
-
-        default: return PIECE_NONE;
+i8 piece_from_identifier(char ident) {
+    if (ident == '.' || ident == ' ') return NO_PIECE;
+    
+    Color color = std::isupper(ident) ? CL_WHITE : CL_BLACK;
+    PieceType type;
+    
+    switch (std::toupper(ident)) {
+        case 'P': type = PT_PAWN; break;
+        case 'N': type = PT_KNIGHT; break;
+        case 'B': type = PT_BISHOP; break;
+        case 'R': type = PT_ROOK; break;
+        case 'Q': type = PT_QUEEN; break;
+        case 'K': type = PT_KING; break;
+        default: return NO_PIECE;
     }
+    
+    return make_piece(color, type);
 }

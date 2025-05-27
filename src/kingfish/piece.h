@@ -2,6 +2,7 @@
 #define KINGFISH_PIECE_H
 
 #include "types.h"
+#include <cctype>
 
 // Piece constants
 constexpr i8 NO_PIECE = 0;
@@ -62,5 +63,9 @@ inline bool is_sliding_piece(i8 piece) {
 inline bool is_piece_color_type(i8 piece, Color color, PieceType type) {
     return piece == make_piece(color, type);
 }
+
+// Piece string conversion functions
+char get_piece_identifier(i8 piece);
+i8 piece_from_identifier(char ident);
 
 #endif
